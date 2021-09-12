@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from './router/AppRouter';
 import reportWebVitals from './reportWebVitals';
-import 'style/reset.css';
+import './style/reset.scss';
 
 ReactDOM.render(
   <React.StrictMode>
