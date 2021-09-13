@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap');
+
+.main {
+  margin: 0 auto;
+  text-align: center;
+  color: #333;
+  font-family: 'Noto Sans JP', sans-serif;
+
+  .font-m {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+.image.top {
+  margin: 31px auto 30px;
+  width: 524px;
+  max-width: calc(100% - 60px);
+
+  img {
+    width: 100%;
+  }
+}
+.main-description {
+  padding: 0 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .title {
+    margin-bottom: 40px;
+  }
+}
+.image.sign {
+  margin: 30px 60px;
+  width: 160px;
+  
+  img {
+    width: 100%;
+  }
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import './AboutPage.scss';
 // image
 // import '../../public/image/about-blog1.webp'
 // import '../../public/image/about-blog2.webp'
@@ -15,7 +16,7 @@ import React from 'react';
 const AboutPage = () => {
   return(
     <div className='main'>
-      <div className='image'>
+      <div className='image top'>
         <img src={`${process.env.PUBLIC_URL}/image/about-top.webp`} alt='top' />
       </div>
       <div className='main-description'>
@@ -50,14 +51,14 @@ const AboutPage = () => {
             想いに共感頂けた開拓者であるそこのあなた <br/>
             一緒に　けもの道を　笑顔で歩んで行きましょう <br/>
           </p>
-          <div className='image'>
+          <div className='image sign'>
             <img src={`${process.env.PUBLIC_URL}/image/about-sign.webp`} alt='sign' />
           </div>
         </div>
       </div>
       <div className='main-about'>
         <div className='about'>
-          <h1>ABOUT</h1>
+          <h1 className='font-m'>ABOUT</h1>
           <h3>Takuya "Shimotaku" Shimomura</h3>
           <p>Lraough LLC. Founder/CEO</p>
           <p>大阪府出身。立命館大学卒。
