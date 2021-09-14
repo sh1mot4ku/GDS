@@ -9,7 +9,7 @@ const TopPage = () => {
       name: "Taichi",
     }).then(() => {
       console.log('Hello, Firebase!');
-      // concole.log()
+      // It's test
     })
   }, []);
 
