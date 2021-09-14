@@ -9,6 +9,11 @@
   .font-m {
     font-family: 'Montserrat', sans-serif;
   }
+
+  .description p {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }
 .image.top {
   margin: 31px auto 30px;
@@ -17,6 +22,8 @@
 
   img {
     width: 100%;
+    height: 440px;
+    object-fit: cover;
   }
 }
 .main-description {
@@ -28,9 +35,12 @@
   .title {
     margin-bottom: 40px;
   }
+  .bottom_space {
+    padding-bottom: 24px;
+  }
 }
 .image.sign {
-  margin: 30px 60px;
+  margin: 30px auto;
   width: 160px;
   
   img {
