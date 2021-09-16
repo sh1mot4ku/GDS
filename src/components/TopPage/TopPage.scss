@@ -1,3 +1,5 @@
+@import '../../style/color.scss';
+
 .top-wrapper {
   width: 1070px;
   margin: 30px auto;
@@ -33,14 +35,22 @@
         align-items: center;
 
         .round-button {
+          border: 1.8px solid $color_primary;
           border-radius: 100px;
           padding: 16px 74px;
+          font-weight: 700;
         }
       } 
     }
-
-    .tech-logos {
-      width: 1000px;
+    .subscribe-logos {
+      margin-right: calc(50% - 50vw);
+      margin-left: calc(50% - 50vw);
+      
+      .tech-logos {
+        display: block;
+        width: 100%;
+        height: auto;
+      }  
     }
   }
 
@@ -48,18 +58,25 @@
     text-align: center;
 
     .for-recruiter-header-container {
-      margin-bottom: 30px;
+      margin-bottom: 60px;
     }
 
     .for-recruiter-header {
+      font-weight: bold;
       color: #1E40F6;
+      font-size: 56px;
+    }
+
+    .for-recruiter-subheader {
+      color: $gray;
+      font-weight: bold;
     }
 
     .for-recruiter-describe-box {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 190px;
+      margin-bottom: 150px;
     }
 
     #describe-reverse {
@@ -74,7 +91,7 @@
       margin-left: 25px;
 
       .describe-photo-content {
-        width: 430px;
+        width: 500px;
       }  
     }
   
@@ -85,19 +102,19 @@
       .describe-header {
         margin-bottom: 20px;
         font-weight: 700px;
-        font-size: 27px;
+        font-size: 28px;
       }
       .describe-div {
         line-height: 32px;
         letter-spacing: 1.4px;
         margin-bottom: 30px;
-        font-size: 15px;
+        font-size: 16px;
       }
       .describe-lines {
         list-style: none;
         line-height: 32px;
         letter-spacing: 1.4px;
-        font-size: 15px;
+        font-size: 16px;
       }
     }  
   }
@@ -109,23 +126,32 @@
     width: 750px;
     margin: 0 auto;
 
-    .subscribe-button {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      width: 325px;   
-      padding: 20px 0; 
+    .subscribe-button-wrapper {
+      border-radius: 12px;
       
-      .subscribe-user-icon {
-        width: 50px;
-        display: block;
-        margin-bottom: 4px;
-      }
+      .subscribe-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 325px;   
+        padding: 20px 0; 
+        font-weight: 700;
+        
+        .subscribe-user-icon {
+          width: 50px;
+          display: block;
+          margin-bottom: 4px;
+        }
 
-      .subscribe-text {
-        font-size: 23px;
+        .subscribe-text {
+          font-size: 23px;
+        }
       }
     }
+  }
+  .background-white {
+    background-color: white;
+    color: $color_primary;
   }
 }

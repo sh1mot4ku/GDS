@@ -22,9 +22,8 @@ const TopPage = () => {
           <div className="subscribe-buttons-top">
             <Button
               onClick={developerSubscribe}
-              variant="outlined"
-              color="primary"
-              className="round-button"
+              variant="contained"
+              className="round-button background-white"
             >
               無料会員登録
             </Button>
@@ -45,7 +44,7 @@ const TopPage = () => {
       <div className="for-recruiter-wrapper">
         <div className="for-recruiter-header-container">
           <h1 className="for-recruiter-header">FOR RECRUITER</h1>
-          <div>採用担当者の方へ</div>
+          <div className="for-recruiter-subheader">採用担当者の方へ</div>
         </div>
         <div className="for-recruiter-describe-box">
           <div className="describe-photo">
@@ -106,13 +105,13 @@ const TopPage = () => {
         </div>
       </div>
       <div className="subscribe-buttons-buttom">
-        <Button variant="outlined" color="primary">
+        <Button variant="outlined" color="primary" className="subscribe-button-wrapper">
           <div className="subscribe-button" id="for-developer">
             <img src="/photos/icon-user.png" alt="icon-user" className="subscribe-user-icon" />
             <span className="subscribe-text">求人をお探しの方はコチラ</span>
           </div>
         </Button>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" className="subscribe-button-wrapper">
           <div className="subscribe-button" id="for-recruiter">
             <img src="/photos/users 1.png" alt="users" className="subscribe-user-icon" />
             <span className="subscribe-text">求職者をお探しの方はコチラ</span>
