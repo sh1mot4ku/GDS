@@ -1,18 +1,8 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './TopPage.css';
-import database from '../../firebase/firebase';
 
 const TopPage = () => {
-  useEffect(() => {
-    database.ref('/user').set({
-      name: "Taichi",
-    }).then(() => {
-      console.log('Hello, Firebase!');
-      // It's test
-    })
-  }, []);
-
   const developerSubscribe = () => {
     // move to page of subscribing for developer
     console.log('go to developer subscribe');
