@@ -62,9 +62,9 @@ const AboutPage = () => {
         </div>
         <div className='profile_links'>
           <h3>LINKS</h3>
-          <a href='#'>LinkedIn</a>
-          <a href='#'>Youtube</a>
-          <a href='#'>Facebook</a>
+          <a href='https://www.linkedin.com/in/shimotaku/' target='_blank'>LinkedIn</a>
+          <a href='https://www.youtube.com/channel/UCldoAQ3qyeC8wsho-4DcUIw' target='_blank'>Youtube</a>
+          <a href='https://www.facebook.com/takuya.shimomura' target='_blank'>Facebook</a>
         </div>
       </div>
       {/* <div className='main-about'>

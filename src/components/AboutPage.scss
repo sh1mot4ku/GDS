@@ -1,6 +1,7 @@
 $color_primary: #2146f5;
 $color_black: #000000;
 $color_sub_text: #a0a0a0;
+$color_line: #F5F5F5;
 
 // @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap');
 
@@ -34,6 +35,9 @@ $color_sub_text: #a0a0a0;
   .description_contents {
     text-align: left;
     
+    table, td, th {
+      border-bottom: 1px solid $color_line;
+    }
     th {
       width: 180px;
     }
@@ -50,16 +54,38 @@ $color_sub_text: #a0a0a0;
     text-align: center;
     
   img {
-    object-fit: cover;
-    height: 240px;
     width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 8px;
   }
 }
 
 .profile {
+  margin: 28px auto;
+  font-size: 16px;
+
   h2 {
     font-weight: bold;
     font-size: 26px;
+  }
+
+  &_detail {
+    margin-top: 20px;
+
+    h3 {
+      font-weight: bold;
+    }
+  }
+
+  &_skills, &_links {
+    margin-top: 36px;
+
+    a {
+      color: $color_primary;
+      border-bottom: 1px solid $color_primary;
+      margin-right: 10px;
+    }
   }
 }
 
