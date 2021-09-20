@@ -89,6 +89,70 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
+      <div className='interviews'>
+        <h2>Interviews</h2>
+        <div className='interviews_contents'>
+          <div className='interviews_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-interview1.webp`} alt='interview1' />
+          </div>
+          <div className='interviews_contents_item'>
+            <h3>カリフォルニア・LA在住の起業家 下村拓哉（しもたく）さんが語るリクルーティングに必要な「人間力」について</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
+        </div>
+        <div className='border'></div>
+        <div className='interviews_contents'>
+          <div className='interviews_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-interview2.webp`} alt='interview2' />
+          </div>
+          <div className='interviews_contents_item'>
+            <h3>Bizreach ダイレクトリクルーティングアワード　最優秀ダイレクト・リクルーター賞受賞</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
+        </div>
+        <div className='border'></div>
+        <div className='interviews_contents'>
+          <div className='interviews_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-interview3.webp`} alt='interview3' />
+          </div>
+          <div className='interviews_contents_item'>
+            <h3>30歳を境に感じた強烈な危機感。DeNA下村拓哉がシンガポールでチャレンジするワケ</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
+        </div>
+      </div>
+      <div className='blog'>
+        <h2>blog</h2>
+        <div className='blog_contents'>
+          <div className='blog_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-blog1.webp`} alt='blog1' />
+          </div>
+          <div className='blog_contents_item'>
+            <h3>カリフォルニア・LA在住の起業家 下村拓哉（しもたく）さんが語るリクルーティングに必要な「人間力」について</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
+        </div>
+        <div className='border'></div>
+        <div className='blog_contents'>
+          <div className='blog_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-blog2.webp`} alt='blog2' />
+          </div>
+          <div className='blog_contents_item'>
+            <h3>Bizreach ダイレクトリクルーティングアワード　最優秀ダイレクト・リクルーター賞受賞</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
+        </div>
+        <div className='border'></div>
+        <div className='blog_contents'>
+          <div className='blog_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-blog3.webp`} alt='blog3' />
+          </div>
+          <div className='blog_contents_item'>
+            <h3>30歳を境に感じた強烈な危機感。DeNA下村拓哉がシンガポールでチャレンジするワケ</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
+        </div>
+      </div>
       {/* <div className='main-about'>
         <div className='about'>
           <h1 className='font-m'>ABOUT</h1>
