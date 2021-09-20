@@ -11,48 +11,49 @@ $color_line: #F5F5F5;
   color: $color_black;
   font-size: 16px;
   font-family: 'Noto Sans JP', sans-serif;
+}
 
-  .title {
-    margin: 36px;
-    text-align: center;
-    font-weight: bold;
+.title {
+  margin: 36px;
+  text-align: center;
+  font-weight: bold;
 
-    h2 {
-      font-size: 56px;
-      color: $color_primary;
-    }
-    
-    p {
-      color: $color_sub_text;
-    }
-  }
-
-  table {
-    width: 100%;
-    margin: 20px auto;
-    line-height: 94px;
-  }
-  .description_contents {
-    text-align: left;
-    
-    table, td, th {
-      border-bottom: 1px solid $color_line;
-    }
-    th {
-      width: 180px;
-    }
-    th>span {
-      margin-right: 36px;
-    }
-    td {
-      color: $color_sub_text;
-      margin-right: 30px;
-    }
+  h2 {
+    font-size: 56px;
+    color: $color_primary;
   }
   
-  .image.top {
-    text-align: center;
-    
+  p {
+    color: $color_sub_text;
+  }
+}
+
+table {
+  width: 100%;
+  margin: 20px auto;
+  line-height: 94px;
+}
+.description_contents {
+  text-align: left;
+  
+  table, td, th {
+    border-bottom: 1px solid $color_line;
+  }
+  th {
+    width: 180px;
+  }
+  th>span {
+    margin-right: 36px;
+  }
+  td {
+    color: $color_sub_text;
+    margin-right: 30px;
+  }
+}
+
+.image.top {
+  text-align: center;
+  
   img {
     width: 100%;
     height: 240px;
@@ -89,26 +90,33 @@ $color_line: #F5F5F5;
   }
 }
 
+.works {
+  h2 {
+    margin: 100px auto 28px;
+  }
+
+  .border {
+    margin: 10px auto 14px;
+    border-bottom: 1px solid $color_line;
+  }
+
+  &_contents {
+    display: flex;
+
+    &_image {
+      margin-right: 10px;
+
+      img {
+        width: 208px;
+        height: 127px;
+      }
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+    p {
+      font-size: 14px;
+    }
+  }
 }
-
-// .main-description {
-  //   padding: 0 80px;
-  //   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-
-//   .title {
-//     margin-bottom: 40px;
-//   }
-//   .bottom_space {
-//     padding-bottom: 24px;
-//   }
-// }
-// .image.sign {
-  //   margin: 30px auto;
-  //   width: 160px;
-  
-//   img {
-//     width: 100%;
-//   }
-// }

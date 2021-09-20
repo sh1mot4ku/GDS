@@ -57,14 +57,36 @@ const AboutPage = () => {
           <p>大学在学中から海外を旅して人の繋がりの大切さを知る。2年で脱サラ→イギリスで起業した後日本で廃業。結婚を機に某検索大手G社の中でリクルーターとして働き、メガベンチャーや大手企業の本社と海外子会社で人事として従事。3ヵ国（イギリス・シンガポール・アメリカ）10年間の海外経験とTech/Recruitingを武器に、2021年Lraoughをカリフォルニア@LAで創業。現在は「面白い人と人を繋ぐ」天職を生業としている。</p>
         </div>
         <div className='profile_skills'>
-          <h3>SKILLS</h3>
+          <h3>Skills</h3>
           <p>Direct Recruiting / Sourcing / HR Consulting / Tech Recruiting / STUDIO / Figma</p>
         </div>
         <div className='profile_links'>
-          <h3>LINKS</h3>
-          <a href='https://www.linkedin.com/in/shimotaku/' target='_blank'>LinkedIn</a>
-          <a href='https://www.youtube.com/channel/UCldoAQ3qyeC8wsho-4DcUIw' target='_blank'>Youtube</a>
-          <a href='https://www.facebook.com/takuya.shimomura' target='_blank'>Facebook</a>
+          <h3>Links</h3>
+          <a href='https://www.linkedin.com/in/shimotaku/' target='_blank' rel="noreferrer">LinkedIn</a>
+          <a href='https://www.youtube.com/channel/UCldoAQ3qyeC8wsho-4DcUIw' target='_blank' rel="noreferrer">Youtube</a>
+          <a href='https://www.facebook.com/takuya.shimomura' target='_blank' rel="noreferrer">Facebook</a>
+        </div>
+      </div>
+      <div className='works'>
+        <h2>Works</h2>
+        <div className='works_contents'>
+          <div className='works_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-works1.webp`} alt='work1' />
+          </div>
+          <div className='works_contents_item'>
+            <h3>ラフなしもたくの海外転職RADIO</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
+        </div>
+        <div className='border'></div>
+        <div className='works_contents'>
+          <div className='works_contents_image'>
+            <img src={`${process.env.PUBLIC_URL}/image/about-works2.webp`} alt='work2' />
+          </div>
+          <div className='works_contents_item'>
+            <h3>【無料PDF配布】グローバル企業のリクルーターからLinkedInでスカウトを待つ時に設定すべき7つの項目</h3>
+            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+          </div>
         </div>
       </div>
       {/* <div className='main-about'>
