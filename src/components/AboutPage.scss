@@ -31,10 +31,10 @@ $color_line: #F5F5F5;
 table {
   width: 100%;
   margin: 20px auto;
-  line-height: 94px;
 }
 .description_contents {
   text-align: left;
+  line-height: 94px;
   
   table, td, th {
     border-bottom: 1px solid $color_line;
@@ -48,11 +48,13 @@ table {
   td {
     color: $color_sub_text;
     margin-right: 30px;
+    line-height: 32px;
   }
 }
 
 .image.top {
   text-align: center;
+  margin-top: 48px;
   
   img {
     width: 100%;
@@ -96,7 +98,7 @@ table {
   }
 
   .border {
-    margin: 10px auto 14px;
+    margin: 16px auto 24px;
     border-bottom: 1px solid $color_line;
   }
 

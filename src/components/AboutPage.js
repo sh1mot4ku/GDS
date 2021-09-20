@@ -37,11 +37,11 @@ const AboutPage = () => {
             </tr>
             <tr className='description_contents'>
               <th><span>所在地</span></th>
-              <td><span>テキストテキストテキストテキストテキスト</span></td>
+              <td><span className='description_contents_text'>テキストテキストテキストテキストテキスト</span></td>
             </tr>
             <tr className='description_contents'>
               <th><span>事業内容</span></th>
-              <td><span>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</span></td>
+              <td><span className='description_contents_text'>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</span></td>
             </tr>
           </tbody>
         </table>
