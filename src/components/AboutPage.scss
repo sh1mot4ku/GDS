@@ -53,6 +53,7 @@ table {
     // mobile
     @media screen and (max-width: 768px) {
         color: $color_sub_text;
+        width: 100px;
     }
   }
   th>span {
@@ -80,7 +81,6 @@ table {
     border-radius: 8px;
     // mobile
     @media screen and (max-width: 768px) {
-        width: 335px;
         height: 140px;
     }
   }
@@ -124,6 +124,10 @@ table {
       font-size: 14px;
       line-height: 16px;
       letter-spacing: 0.02em;
+
+      h3 {
+        margin-bottom: 14px;
+      }
     }
     
     a {
