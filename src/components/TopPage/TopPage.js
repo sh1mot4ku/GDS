@@ -2,9 +2,11 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import './TopPage.scss';
 import Button from '@material-ui/core/Button';
-// import logo from '/photos/logo-global-developers.svg';
+import useMedia from 'use-media';
 
 const TopPage = () => {
+  const isMobile = useMedia({ maxWidth: '768px' });
+
   const developerSubscribe = () => {
     // move to page of subscribing for developer
     console.log('go to developer subscribe');
@@ -13,12 +15,17 @@ const TopPage = () => {
     // move to page of subscribing for recruiter
     console.log('go to recruiter subscribe');
   };
+
   return (
     <div className="top-wrapper">
       <div className="subscribe-wrapper">
         <div className="subscribe-container" style={{ backgroundImage: "url(/photos/logo-global-developers.svg)" }} >
           <h1 className="subscribe-header">厳選されたグローバルな開発者と共に<br />プロダクトやサービスを世界へ</h1>
-          <div className="subscribe-header2">想いに共感頂けた開拓者であるそこのあなた<br />一緒にけもの道を笑顔で歩んで行きましょう</div>
+          <div className="subscribe-header2">
+            想いに共感頂けた開拓者であるそこのあなた
+            {!isMobile && <br />}
+            一緒にけもの道を笑顔で歩んで行きましょう
+          </div>
           <div className="subscribe-buttons-top">
             <Button
               onClick={developerSubscribe}
