@@ -7,8 +7,6 @@ const AppRouter = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/" component={TopPage} exact={true} />
-    </Switch>
-    <Switch>
       <Route path="/about" component={AboutPage} exact={true} />
     </Switch>
   </BrowserRouter>
