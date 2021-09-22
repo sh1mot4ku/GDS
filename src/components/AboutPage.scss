@@ -3,7 +3,6 @@ $color_black: #000000;
 $color_sub_text: #a0a0a0;
 $color_line: #F5F5F5;
 
-// @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@100;300;400;500;700&display=swap');
 
 .main {
   margin: 72px auto;
@@ -163,7 +162,11 @@ WORKS
   }
 
   &_contents {
+    cursor: pointer;
     display: flex;
+    &:hover {
+      opacity: 0.5;
+    }
 
     &_image {
       margin-right: 10px;
@@ -215,7 +218,11 @@ INTERVIEWS
   }
 
   &_contents {
+    cursor: pointer;
     display: flex;
+    &:hover {
+      opacity: 0.5;
+    }
 
     &_image {
       margin-right: 10px;
@@ -267,7 +274,11 @@ BLOG
   }
 
   &_contents {
+    cursor: pointer;
     display: flex;
+    &:hover {
+      opacity: 0.5;
+    }
 
     &_image {
       margin-right: 10px;
