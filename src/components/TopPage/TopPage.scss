@@ -7,7 +7,7 @@
   font-family: "Roboto";
 
   @include mobile {
-    width: 90vw;
+    width: 80vw;
   }
 
   .subscribe-wrapper {
@@ -214,6 +214,7 @@
       @include mobile {
         padding: 25px 0;
         margin-bottom: 20px;
+        min-width: 50%;
       }
       
       .subscribe-button {
