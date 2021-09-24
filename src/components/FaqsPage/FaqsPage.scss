@@ -37,8 +37,19 @@ $color_line: #F5F5F5;
 
 .content {
   text-align: left;
+  margin-bottom: 25px;
 
   h3 {
     line-height: 48px;
+  }
+
+  @media screen and (max-width: 768px) {
+    h3 {
+      font-size: 16px;
+    }
+
+  p {
+    font-size: 14px;
+  }
   }
 }
