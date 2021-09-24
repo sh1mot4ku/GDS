@@ -1,13 +1,18 @@
+import { React, useState } from 'react';
 import './FaqsPage.scss';
 import Faq from './Faq';
 
 const FaqsPage = () => {
-  // const title = {
-  //   01: '質問タイトルが入ります - 01',
-  //   02: '質問タイトルが入ります - 02',
-  //   03: '質問タイトルが入ります - 03',
-  //   04: '質問タイトルが入ります - 04',
-  // }
+  const [question, setQuestion] = useState([
+    {
+      'title': 'test1',
+      'content': 'aaa'
+      },
+    {
+      'title': 'test2',
+      'content': 'bbb'
+    },
+  ])
   return (
     <div className='main'>
       <div className='title'>
@@ -16,9 +21,9 @@ const FaqsPage = () => {
       </div>
       <div className='contents'>
         <Faq />
-        {/* <Faq title={title[1]} />
-        <Faq title={title[2]} />
-        <Faq title={title[3]} />
+        <Faq question={question[0]} />
+        <Faq question={question[1]} />
+        {/* <Faq title={title[3]} />
         <Faq title={title[4]} /> */}
       </div>
     </div>
