@@ -1,0 +1,44 @@
+$color_primary: #2146f5;
+$color_black: #000000;
+$color_sub_text: #a0a0a0;
+$color_line: #F5F5F5;
+
+.main {
+  margin: 72px auto;
+  width: 45%;
+  color: $color_black;
+  font-size: 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+
+  // mobile
+  @media screen and (max-width: 768px) {
+      width: 90%;
+  }
+}
+
+.title {
+  margin: 36px;
+  text-align: center;
+  font-weight: bold;
+
+  h2 {
+    font-size: 48px;
+    color: $color_primary;
+    // mobile
+    @media screen and (max-width: 768px) {
+        font-size: 32px;
+    }
+  }
+  
+  p {
+    color: $color_sub_text;
+  }
+}
+
+.content {
+  text-align: left;
+
+  h3 {
+    line-height: 48px;
+  }
+}
