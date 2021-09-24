@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import './PostJobList.scss';
+import './PostJobListings.scss';
 import database from '../../firebase/firebase';
 
-const PostJobList = () => {
+const PostJobListings = () => {
   const [jobTitle, setJobTitle] = useState(null);
   const [companyName, setCompanyName] = useState(null);
   const [workPlacePolicy, setWorkPlacePolicy] = useState(null);
@@ -130,4 +130,4 @@ const PostJobList = () => {
   )
 }
 
-export default PostJobList
+export default PostJobListings

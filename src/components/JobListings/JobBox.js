@@ -22,7 +22,7 @@ const JobBox = ({
 
   return (
     <div>
-      <Link to="/">
+      <Link to={`/joblistings/${id}`}>
         <div>{jobTitle}</div>
         <div>{companyName}</div>
         <div>{employeeLocation}</div>

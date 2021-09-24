@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import JobBox from './JobBox';
 import database from '../../firebase/firebase';
 import useJobListingsContext from '../../context/jobListing-context';
 
 const JobListings = () => {
   const { jobListings, dispatchJobListings } = useJobListingsContext();
-  const [list, setList] = useState(jobListings);
 
   useEffect(() => {
     if (dispatchJobListings) {
@@ -21,13 +20,12 @@ const JobListings = () => {
           type: 'SET_JOB_LISTINGS',
           jobListings: jobListingsArray
         });
-        setList(jobListingsArray);
       })
     }
   }, [dispatchJobListings]);
 
   useEffect(() => {
-    jobListings && console.log(jobListings[0]);
+    jobListings && console.log(jobListings);
   }, [jobListings])
 
   return (
