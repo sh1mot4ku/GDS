@@ -1,17 +1,20 @@
+import React, { useEffect } from 'react';
 // import Accordion from '@mui/material/Accordion';
 // import AccordionSummary from '@mui/material/AccordionSummary';
 // import AccordionDetails from '@mui/material/AccordionDetails';
+
 const Faq = (props) => {
-  console.log(props)
+
+  useEffect(() => {
+    console.log(props.question)
+  }, [props.question])
+
   return (
     <>
-      {props.length !== 0 && (
+      {props.question && (
         <div className='content'>
-          <h3>{props.title}</h3>
-          <p>{props.content}</p>
-          <h3>質問タイトルが入ります</h3>
-          <p>人が一般的には進まない道を歩むことを「けもの道を行く」と表現します。未開の地を目指した先人が創り上げた道により、その場は大きく発展していきます。
-          Tech業界でのチャレンジとは「現代のけもの道」です。今までの常識を見直し　より便利なものを世に届ける。そんな現場で活躍する人達と切磋琢磨しながらここアメリカまでやってきました。</p>
+          <h3>{props.question.title}</h3>
+          <p>{props.question.content}</p>
 
           {/* <Accordion disabled>
             <AccordionSummary

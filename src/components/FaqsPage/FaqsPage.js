@@ -35,8 +35,8 @@ const FaqsPage = () => {
         <Faq />
         <Faq question={question[0]} />
         <Faq question={question[1]} />
+        <Faq question={question[2]} />
         <Faq question={question[3]} />
-        <Faq question={question[4]} />
       </div>
     </div>
   )
