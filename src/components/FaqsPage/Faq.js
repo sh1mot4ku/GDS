@@ -1,37 +1,51 @@
 import React, { useEffect } from 'react';
-// import Accordion from '@mui/material/Accordion';
-// import AccordionSummary from '@mui/material/AccordionSummary';
-// import AccordionDetails from '@mui/material/AccordionDetails';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, styled } from '@material-ui/core';
+import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';
+
+// const AccordionSummary = styled((prop) => (
+//   <MuiAccordionSummary
+//     expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+//     {...props}
+//   />
+//   ))(({ theme }) => ({
+//     backgroundColor:
+//       theme.palette.mode === 'dark'
+//         ? 'rgba(255, 255, 255, .05)'
+//         : 'rgba(0, 0, 0, .03)',
+//     flexDirection: 'row-reverse',
+//     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+//       transform: 'rotate(90deg)',
+//     },
+//     '& .MuiAccordionSummary-content': {
+//       marginLeft: theme.spacing(1),
+//     },
+// }));
 
 const Faq = ({question}) => {
-// const Faq = (props) => {
 
   useEffect(() => {
     console.log(question)
   }, [question])
-  // useEffect(() => {
-  //   // console.log(props.question)
-  // }, [props.question])
 
   return (
     <>
       {question && (
-      // {props.question && (
         <div className='content'>
-          <h3>{question.title}</h3>
-          <p>{question.content}</p>
-          {/* <h3>{props.question.title}</h3>
-          <p>{props.question.content}</p> */}
 
-          {/* <Accordion disabled>
+          <Accordion>
             <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel3a-content"
-              id="panel3a-header"
+              expandIcon={<ArrowForwardIosSharpIcon />}
+              aria-controls={`panel${question.id}d-content`}
+              id={`panel${question.id}d-header`}
             >
-              <Typography>Disabled Accordion</Typography>
+              <Typography>{question.title}</Typography>
             </AccordionSummary>
-          </Accordion> */}
+            <AccordionDetails>
+              <Typography>
+                {question.content}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
         </div>
       )}
     </>
