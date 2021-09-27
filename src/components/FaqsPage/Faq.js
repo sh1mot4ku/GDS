@@ -3,18 +3,25 @@ import React, { useEffect } from 'react';
 // import AccordionSummary from '@mui/material/AccordionSummary';
 // import AccordionDetails from '@mui/material/AccordionDetails';
 
-const Faq = (props) => {
+const Faq = ({question}) => {
+// const Faq = (props) => {
 
   useEffect(() => {
-    console.log(props.question)
-  }, [props.question])
+    console.log(question)
+  }, [question])
+  // useEffect(() => {
+  //   // console.log(props.question)
+  // }, [props.question])
 
   return (
     <>
-      {props.question && (
+      {question && (
+      // {props.question && (
         <div className='content'>
-          <h3>{props.question.title}</h3>
-          <p>{props.question.content}</p>
+          <h3>{question.title}</h3>
+          <p>{question.content}</p>
+          {/* <h3>{props.question.title}</h3>
+          <p>{props.question.content}</p> */}
 
           {/* <Accordion disabled>
             <AccordionSummary
