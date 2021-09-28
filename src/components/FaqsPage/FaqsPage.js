@@ -3,7 +3,7 @@ import './FaqsPage.scss';
 import Faq from './Faq';
 
 const FaqsPage = () => {
-  const [question, setQuestion] = useState([
+  const [question] = useState([
     {
       'id': 1,
       'title': '質問タイトルが入ります - 01',
