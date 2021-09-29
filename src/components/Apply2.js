@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   FormControl,
@@ -47,7 +48,7 @@ function Apply() {
           alignItems="center"
           className="rightBox"
         >
-          <h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
+          <h2>JOIN AS A GLOBAL DEVELOPER</h2>
 
           <FormControl component="fieldset">
             <InputText
