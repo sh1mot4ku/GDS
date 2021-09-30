@@ -2,7 +2,7 @@ import React from 'react'
 import { FormLabel, TextField } from "@material-ui/core"
 import "./Apply.scss"
 
-const InputText = ({ label, placeholder, type }) => {
+const InputText = ({ label, placeholder, type, onChange }) => {
 	return (
 		<React.Fragment>
 			<FormLabel component="legend" required>
@@ -14,6 +14,7 @@ const InputText = ({ label, placeholder, type }) => {
 				margin="normal"
 				className="input"
 				type={type}
+				onChange={onChange}
 			/>
 		</React.Fragment>
 	)

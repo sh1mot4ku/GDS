@@ -3,7 +3,7 @@ import { FormLabel, RadioGroup, FormControlLabel, Radio } from "@material-ui/cor
 import "./Apply.scss"
 
 
-const RadioForm = ({value, handleChange, label, options}) => {
+const RadioForm = ({value, onChange, label, options}) => {
 	console.log("hhhh:", label);
 	return (
 		<React.Fragment>
@@ -11,7 +11,7 @@ const RadioForm = ({value, handleChange, label, options}) => {
 				aria-label="radio"
 				name="radio"
 				value={value}
-				onChange={handleChange}
+				onChange={onChange}
 				className="radio"
 			>
 				<FormLabel component="legend" required>
