@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import './PostJobListings.scss';
 import database from '../../firebase/firebase';
+import { WithContext as ReactTags } from 'react-tag-input';
+
+const SUGGESTIONS = [
+  { id: 'React', text: 'React' },
+  { id: 'Sass', text: 'Sass' },
+  { id: 'TypeScript', text: 'TypeScript' }
+]
 
 const PostJobListings = () => {
   const [jobTitle, setJobTitle] = useState(null);
@@ -11,9 +18,13 @@ const PostJobListings = () => {
   const [employeeLocation, setEmployeeLocation] = useState(null);
   const [employmentType, setEmploymentType] = useState(null);
   const [jobDescription, setJobDescription] = useState(null);
-  const [skills, setSkills] = useState(null);
   const [annualSalaly, setAnnualSalaly] = useState(null);
-  // const [errorMsg, setErrorMsg] = useState(null);
+  const [tags, setTags] = useState([]);
+  const [suggestions, setSuggestions] = useState(SUGGESTIONS);
+
+  useEffect(() => {
+    tags && console.log(tags);
+  }, [tags])
 
   const onSubmit = e => {
     e.preventDefault();
@@ -24,12 +35,18 @@ const PostJobListings = () => {
       employeeLocation,
       employmentType,
       jobDescription,
-      skills,
       annualSalaly,
     }
     database.ref(`/jobListings`).push(postingInfo).then(() => {
       console.log('Posted!');
     })
+  }
+
+  const handleAddition = newTag => {
+    setTags([...tags, newTag])
+  };
+  const handleDelete = tagIndex => {
+    setTags(tags.filter((_, i) => i !== tagIndex))
   }
 
   return (
@@ -109,13 +126,12 @@ const PostJobListings = () => {
             />
           </div>
           <div className="input-block">
-            <TextField
-              label="スキル"
-              id="outlined-basic"
-              variant="outlined"
-              onChange={e => setSkills(e.target.value)}
-              className="text-field"
-              required
+            <ReactTags
+              tags={tags}
+              suggestions={suggestions}
+              handleAddition={handleAddition}
+              handleDelete={handleDelete}
+              placeholderText="スキル"
             />
           </div>
           {/* { errorMsg ? (
