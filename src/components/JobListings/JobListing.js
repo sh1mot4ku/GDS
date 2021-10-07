@@ -5,16 +5,16 @@ import useJobListingsContext from '../../context/jobListing-context';
 const JobListing = () => {
   const { jobListings, dispatchJobListings } = useJobListingsContext();
   const [job, setJob] = useState(null);
-  const idParam = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
-    if (jobListings && idParam) {
-      const matchedJob = jobListings.filter(job => job.id === idParam);
+    if (jobListings && id) {
+      const matchedJob = jobListings.filter(job => job.id === id);
       if (matchedJob.length === 1) {
         setJob(matchedJob[0]);
       }
     }
-  }, [jobListings, idParam])
+  }, [jobListings, id])
 
   return (
     <div>

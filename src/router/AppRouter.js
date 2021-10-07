@@ -11,7 +11,7 @@ const AppRouter = () => (
       <Route path="/" component={TopPage} exact={true} />
       <Route path="/post_joblistings" component={PostJobListings} />
       <Route path="/joblistings" component={JobListings} />
-      <Route path="/joblistings/:id" component={JobListing} />
+      <Route path="/joblisting/:id" component={JobListing} />
     </Switch>
   </BrowserRouter>
 )
