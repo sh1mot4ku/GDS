@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles }  from '@material-ui/core/styles';
 
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
@@ -14,8 +14,8 @@ const useStyles = makeStyles({
 
 const Faq = ({question}) => {
 
-  const [expanded, setExpanded] = React.useState('panel1');
-  const [clicked, setClicked] = useState<boolean>(false);
+  const [expanded, setExpanded] = useState('panel1');
+  const [clicked, setClicked] = useState(false);
   
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
