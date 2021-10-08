@@ -57,9 +57,12 @@
   .ReactTags__tagInput input.ReactTags__tagInputField:focus {
     height: 31px;
     margin: 0;
-    font-size: 12px;
-    border: 1px solid #eee;
+    // font-size: 12px;
+    border: 1px solid #333;
+    // border: 1px solid #eee;
     min-width: 150px;
+    box-sizing: border-box;
+    padding: 18.5px 14px;
   }
 
   .ReactTags__editInput {
@@ -75,7 +78,7 @@
     border: 1px solid #ddd;
     background: #63bcfd;
     color: white;
-    font-size: 12px;
+    // font-size: 12px;
     display: inline-block;
     padding: 5px;
     margin: 0 5px;
@@ -93,13 +96,14 @@
   /* Styles for suggestions */
   .ReactTags__suggestions {
     position: absolute;
-    top:60px;
+    top:40px;
   }
   .ReactTags__suggestions ul {
     list-style-type: none;
-    box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
+    box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.5);
     background: white;
     width: 200px;
+    z-index: 100;
   }
   .ReactTags__suggestions li {
     border-bottom: 1px solid #ddd;

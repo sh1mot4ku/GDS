@@ -5,6 +5,7 @@ import './PostJobListings.scss';
 import database from '../../firebase/firebase';
 import { WithContext as ReactTags } from 'react-tag-input';
 
+// APIなどから取得？
 const SUGGESTIONS = [
   { id: 'React', text: 'React' },
   { id: 'Sass', text: 'Sass' },
@@ -17,25 +18,42 @@ const PostJobListings = () => {
   const [workPlacePolicy, setWorkPlacePolicy] = useState(null);
   const [employeeLocation, setEmployeeLocation] = useState(null);
   const [employmentType, setEmploymentType] = useState(null);
+  const [jobListing, setJobListing] = useState(null);
   const [jobDescription, setJobDescription] = useState(null);
   const [annualSalaly, setAnnualSalaly] = useState(null);
+  const [must, setMust] = useState(null);
+  const [welcome, setWelcome] = useState(null);
+  const [workingHours, setWorkingHours] = useState(null);
+  const [leaves, setLeaves] = useState(null);
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState(SUGGESTIONS);
+  // いつ掲載されたかの情報も登録する
 
-  useEffect(() => {
-    tags && console.log(tags);
-  }, [tags])
+  // useEffect(() => {
+  //   tags && console.log(tags);
+  //   const skills = tags.map(tag => tag.text);
+  //   console.log(`skills:`);
+  //   console.log(skills);
+  // }, [tags])
 
   const onSubmit = e => {
     e.preventDefault();
+    const skills = tags.map(tag => tag.text);
+    console.log(skills);
     const postingInfo = {
       jobTitle,
       companyName,
       workPlacePolicy,
       employeeLocation,
       employmentType,
+      jobListing,
       jobDescription,
       annualSalaly,
+      skills,
+      must,
+      welcome,
+      workingHours,
+      leaves,
     }
     database.ref(`/jobListings`).push(postingInfo).then(() => {
       console.log('Posted!');
@@ -105,17 +123,19 @@ const PostJobListings = () => {
           </div>
           <div className="input-block">
             <TextField
-              label="年収"
-              id="outlined-basic"
+              label="求人内容"
+              id="outlined-multiline-static"
               variant="outlined"
-              onChange={e => setAnnualSalaly(e.target.value)}
+              multiline
+              rows={5}
+              onChange={e => setJobListing(e.target.value)}
               className="text-field"
               required
             />
           </div>
           <div className="input-block">
             <TextField
-              label="職務内容"
+              label="業務内容"
               id="outlined-multiline-static"
               variant="outlined"
               multiline
@@ -131,7 +151,67 @@ const PostJobListings = () => {
               suggestions={suggestions}
               handleAddition={handleAddition}
               handleDelete={handleDelete}
-              placeholderText="スキル"
+              placeholder="スキル*"
+            />
+          </div>
+          <div className="input-block">
+            <TextField
+              label="年収"
+              id="outlined-basic"
+              variant="outlined"
+              onChange={e => setAnnualSalaly(e.target.value)}
+              className="text-field"
+              required
+            />
+          </div>
+          <div className="input-block">
+            <TextField
+              label="年収"
+              id="outlined-basic"
+              variant="outlined"
+              onChange={e => setAnnualSalaly(e.target.value)}
+              className="text-field"
+              required
+            />
+          </div>
+          <div className="input-block">
+            <TextField
+              label="必須条件"
+              id="outlined-basic"
+              variant="outlined"
+              onChange={e => setMust(e.target.value)}
+              className="text-field"
+              required
+            />
+          </div>
+          <div className="input-block">
+            <TextField
+              label="歓迎条件"
+              id="outlined-basic"
+              variant="outlined"
+              onChange={e => setWelcome(e.target.value)}
+              className="text-field"
+              required
+            />
+          </div>
+          <div className="input-block">
+            <TextField
+              label="勤務時間"
+              id="outlined-basic"
+              variant="outlined"
+              onChange={e => setWorkingHours(e.target.value)}
+              className="text-field"
+              required
+            />
+          </div>
+          <div className="input-block">
+            <TextField
+              label="休日・休暇"
+              id="outlined-basic"
+              variant="outlined"
+              onChange={e => setLeaves(e.target.value)}
+              className="text-field"
+              required
             />
           </div>
           {/* { errorMsg ? (

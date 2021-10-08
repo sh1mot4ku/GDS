@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import JobBox from './JobBox';
 import database from '../../firebase/firebase';
 import useJobListingsContext from '../../context/jobListing-context';
+import './JobListings.scss';
 
 const JobListings = () => {
   const { jobListings, dispatchJobListings } = useJobListingsContext();
@@ -29,7 +30,7 @@ const JobListings = () => {
   }, [jobListings])
 
   return (
-    <div>
+    <div className="joblisting-wrapper">
       {jobListings.length === 0 ? (
         <div>Loading...</div>
       ) : (
