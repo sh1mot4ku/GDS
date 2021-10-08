@@ -6,8 +6,8 @@ import ArrowForwardIosSharpIcon from '@material-ui/icons/ArrowForwardIosSharp';
 
 
 const useStyles = makeStyles({
-  arrow: {
-    transform: 'rotate(90deg)'
+  'arrow:active': {
+    transform: 'rotate(180deg)'
   }
 });
 
@@ -31,7 +31,7 @@ const Faq = ({question}) => {
           <Accordion expanded={expanded === `panel${question.id}`} onChange={handleChange(`panel${question.id}`)}>
             <AccordionSummary
               expandIcon={<ArrowForwardIosSharpIcon />}
-              // className={classes.arrow}
+              className={classes.arrow}
               aria-controls={`panel${question.id}d-content`}
               id={`panel${question.id}d-header`}
             >
