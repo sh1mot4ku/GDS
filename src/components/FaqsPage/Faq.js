@@ -15,11 +15,12 @@ const useStyles = makeStyles({
 const Faq = ({question}) => {
 
   const [expanded, setExpanded] = React.useState('panel1');
+  const [clicked, setClicked] = useState<boolean>(false);
   
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-  const classes = useStyles();
+  // const classes = useStyles();
 
   useEffect(() => {
   }, [question])
@@ -31,9 +32,12 @@ const Faq = ({question}) => {
           <Accordion expanded={expanded === `panel${question.id}`} onChange={handleChange(`panel${question.id}`)}>
             <AccordionSummary
               expandIcon={<ArrowForwardIosSharpIcon />}
-              className={classes.arrow}
               aria-controls={`panel${question.id}d-content`}
               id={`panel${question.id}d-header`}
+              onMouseDown={() => {
+                //クリック実施時に色変更
+                setClicked(true);
+              }}
             >
               <Typography>{question.title}</Typography>
             </AccordionSummary>
