@@ -1,7 +1,8 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/analytics';
 import 'firebase/compat/database';
-// import 'firebase/compat/auth';
+import 'firebase/compat/auth';
+import 'firebase/compat/storage';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -15,8 +16,9 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
 
+const database = firebase.database();
+const storage = firebase.storage();
 // const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 // googleAuthProvider.setCustomParameters({    
@@ -24,4 +26,4 @@ const database = firebase.database();
 // });
 
 // export { firebase, googleAuthProvider, database as default };
-export { firebase, database as default };
+export { firebase, storage, database as default };

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import './PostJobListings.scss';
-import database from '../../firebase/firebase';
+import database, { firebase, storage } from '../../firebase/firebase';
 import { WithContext as ReactTags } from 'react-tag-input';
+import TrimModal from './TrimModal';
 
 // APIなどから取得？
 const SUGGESTIONS = [
@@ -11,6 +12,14 @@ const SUGGESTIONS = [
   { id: 'Sass', text: 'Sass' },
   { id: 'TypeScript', text: 'TypeScript' }
 ]
+
+const readFile = (file) => {
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => resolve(reader.result), false);
+    reader.readAsDataURL(file);
+  })
+}
 
 const PostJobListings = () => {
   const [jobTitle, setJobTitle] = useState(null);
@@ -27,20 +36,60 @@ const PostJobListings = () => {
   const [leaves, setLeaves] = useState(null);
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState(SUGGESTIONS);
+  const [photoBlob, setPhotoBlob] = useState(null);
+  const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState("");
+  // const [photoUrl, setPhotoUrl] = useState(props.profile.photoUrl || defaultPhoto);
+
   // いつ掲載されたかの情報も登録する
 
-  // useEffect(() => {
-  //   tags && console.log(tags);
-  //   const skills = tags.map(tag => tag.text);
-  //   console.log(`skills:`);
-  //   console.log(skills);
-  // }, [tags])
+  useEffect(() => {
+    if (photoBlob){
+      // const uploadTask = storage.ref(`photos/${props.id}`).put(photoBlob);
+      const uploadTask = storage.ref(`photos/kari`).put(photoBlob);
+      const unsubscribe = uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        null,
+        error,
+        complete
+      );
+      return () => {
+        unsubscribe();
+      }
+    }
+  }, [photoBlob]);
+
+  const error = (error) => {
+    console.log(`Error occured : ${error}`);
+  };
+
+  const complete = () => {
+    // storage.ref("photos").child(props.id).getDownloadURL().then((url) => {
+    storage.ref("photos").child("kari").getDownloadURL().then((url) => {
+      setPhotoUrl(url);
+    })
+  }
+
+  const onPhotoChange = async (e) => {
+    // 同じ画像を選んだ時も動くようにしておく
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const photoDataUrl = await readFile(file);
+      setOriginPhotoSrc(photoDataUrl);
+      e.target.value = "";
+    }
+  }
+
+  const onClose = () => {
+    setOriginPhotoSrc(null);
+  };
 
   const onSubmit = e => {
     e.preventDefault();
     const skills = tags.map(tag => tag.text);
     console.log(skills);
     const postingInfo = {
+      photoUrl,
       jobTitle,
       companyName,
       workPlacePolicy,
@@ -90,6 +139,22 @@ const PostJobListings = () => {
               className="text-field"
               required
             />
+          </div>
+          <div className="input-block">
+            <img src={photoUrl} alt="profile-photo" className="profile-photo"></img>
+            <div className="photo-buttons">
+              <label>
+                <div className="button--photo">Change photo</div>
+                <input
+                  type="file"
+                  onChange={onPhotoChange}
+                  className="change-photo"
+                  accept="image/*"
+                >
+                </input>
+              </label>
+              <div className="button--photo" onClick={() => setPhotoUrl("")}>Remove photo</div>
+            </div>
           </div>
           <div className="input-block">
             <TextField
@@ -166,16 +231,6 @@ const PostJobListings = () => {
           </div>
           <div className="input-block">
             <TextField
-              label="年収"
-              id="outlined-basic"
-              variant="outlined"
-              onChange={e => setAnnualSalaly(e.target.value)}
-              className="text-field"
-              required
-            />
-          </div>
-          <div className="input-block">
-            <TextField
               label="必須条件"
               id="outlined-basic"
               variant="outlined"
@@ -221,6 +276,13 @@ const PostJobListings = () => {
           )} */}
           <Button variant="contained" color="primary" type="submit">投稿</Button>
         </form>
+        { originPhotoSrc && (
+          <TrimModal
+            originPhotoSrc={originPhotoSrc}
+            setPhotoBlob={setPhotoBlob}
+            onClose={onClose}
+          />        
+        ) }
       </div>
     </div>
   )
