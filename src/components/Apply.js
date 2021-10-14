@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Grid, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import "./Apply.scss";
 import RadioForm from "./RadioForm.jsx";
@@ -28,8 +28,6 @@ function Apply() {
     };
 
     setUser(postingInfo);
-    console.log(postingInfo);
-
     insertUser(postingInfo);
   };
 
@@ -60,31 +58,15 @@ function Apply() {
 
   return (
     <>
-      <Grid container direction="row" className="main">
-        <Grid
-          item
-          xs={4}
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          className="leftBox"
-        >
+      <div className="main">
+        <div className="leftBox">
           <img alt="" src="/image/logo-white 1.png" className="logo" />
           <img alt="" src="/image/remoteStack.png" className="remoteStack" />
-        </Grid>
-        <Grid
-          item
-          xs={8}
-          container
-          direction="column"
-          justifyContent="center"
-          alignItems="center"
-          className="rightBox"
-        >
-          <h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
+        </div>
+        <div className="rightBox">
+          <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>
 
-          <form component="fieldset" onSubmit={onSubmit}>
+          <form onSubmit={onSubmit} className="form">
             <InputTextAndLabel
               label="FULL NAME"
               placeholder="YOUR NAME"
@@ -125,8 +107,8 @@ function Apply() {
               </Button>
             </div>
           </form>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </>
   );
 }

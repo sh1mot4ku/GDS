@@ -13,6 +13,7 @@ const InputTextAndLabel = ({ label, placeholder, type, onChange }) => {
 				variant="outlined"
 				margin="normal"
 				className="input"
+        size="small"
 				type={type}
 				onChange={onChange}
 			/>
