@@ -1,24 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Grid,
   Button,
 } from "@material-ui/core";
-import InputText from "./InputText.jsx";
+import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import "./Apply.scss";
 import RadioForm from "./RadioForm.jsx";
-// import database from "../firebase/firebase"
 import { v4 as uuidv4 } from 'uuid';
 import {insertUser} from '../API/dbutils';
+import { UserContext } from "../context"
 
 function Apply() {
+  const [user, setUser] = useContext(UserContext);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
   const [lookingFor, setLookingFor] = useState("");
-  // const uuid = uuidv4();
 
-  // .ref(`/${uuid}`)
   const USER_TYPE_CLIENT = "client";
 
   const onSubmit = e => {
@@ -31,6 +30,10 @@ function Apply() {
       lookingFor,
       userType: USER_TYPE_CLIENT,
     }
+
+    setUser(postingInfo)
+    console.log(postingInfo);
+
     insertUser(postingInfo)
     // database.ref(`/user/${uuid}`).set(postingInfo).then(() => {
     //   console.log(postingInfo);
@@ -72,37 +75,37 @@ function Apply() {
           <h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
 
           <form component="fieldset" onSubmit={onSubmit}>
-            <InputText
-              label={"FULL NAME"}
-              placeholder={"YOUR NAME"}
-              type={"text"}
+            <InputTextAndLabel
+              label="FULL NAME"
+              placeholder="YOUR NAME"
+              type="text"
               onChange={e => setFullName(e.target.value)}
             />
-            <InputText
-              label={"EMAIL"}
-              placeholder={"Email Address"}
-              type={"email"}
+            <InputTextAndLabel
+              label="EMAIL"
+              placeholder="Email Address"
+              type="email"
               onChange={e => setEmail(e.target.value)}
             />
-            <InputText
-              label={"PASSWORD"}
-              placeholder={"Password"}
-              type={"password"}
+            <InputTextAndLabel
+              label="PASSWORD"
+              placeholder="Password"
+              type="password"
               onChange={e => setPassword(e.target.value)}
             />
-            <InputText
-              label={"LOCATION"}
-              placeholder={"Location"}
-              type={"text"}
+            <InputTextAndLabel
+              label="LOCATION"
+              placeholder="Location"
+              type="text"
               onChange={e => setLocation(e.target.value)}
             />
             <RadioForm
-              label={"LOOKING FOR"}
+              label="LOOKING FOR"
               options={optionData.userLookingFor}
               onChange={e => setLookingFor(e.target.value)}
             />
             <div className="buttonContainer">
-              <Button color="primary" variant="contained" className="button" type="submit">
+              <Button color="primary" variant="contained" className="button" type="submit" >
                 next
               </Button>
             </div>
@@ -114,3 +117,7 @@ function Apply() {
 }
 
 export default Apply;
+
+
+
+

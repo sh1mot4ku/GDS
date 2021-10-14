@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import TopPage from "../components/TopPage";
 import Apply from "../components/Apply";
+import Apply2 from "../components/Apply2";
+
 import { UserContext, BusinessUserContext, initialUser, initialBusinessUser } from "../context";
 
 

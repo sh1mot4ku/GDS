@@ -1,20 +1,42 @@
-
-import React from "react";
+import React, { useState } from "react";
 import {
-  FormControl,
   Grid,
   Button,
 } from "@material-ui/core";
+import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import InputText from "./InputText.jsx";
 import "./Apply.scss";
 import RadioForm from "./RadioForm.jsx";
+// import database from "../firebase/firebase"
+import { v4 as uuidv4 } from 'uuid';
+import {insertUser} from '../API/dbutils';
 
 function Apply() {
-  const [value, setValue] = React.useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [lookingFor, setLookingFor] = useState("");
+  // const uuid = uuidv4();
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  // .ref(`/${uuid}`)
+  const USER_TYPE_CLIENT = "client";
+
+  const onSubmit = e => {
+    e.preventDefault();
+    const postingInfo = {
+      fullName,
+      email,
+      password,
+      location,
+      lookingFor,
+      userType: USER_TYPE_CLIENT,
+    }
+    insertUser(postingInfo)
+    // database.ref(`/user/${uuid}`).set(postingInfo).then(() => {
+    //   console.log(postingInfo);
+    // })
+  }
 
   const optionData = {
     userLookingFor: ["FULL-TIME EMPLOYMENT", "CONTRACT / FREELANCE JOBS", "BOTH PERMANENT AND CONTRACT"],
@@ -48,41 +70,42 @@ function Apply() {
           alignItems="center"
           className="rightBox"
         >
-          <h2>JOIN AS A GLOBAL DEVELOPER</h2>
+          <h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
 
-          <FormControl component="fieldset">
-            <InputText
-              label={"FULL NAME"}
-              placeholder={"YOUR NAME"}
-              type={"text"}
+          <form component="fieldset" onSubmit={onSubmit}>
+            <InputTextAndLabel
+              label="YOUR PROFILE (LinkedIn / GitHub / Website)"
+              placeholder="https://www.linkedin.com/in/example"
+              type="text"
+              onChange={e => setFullName(e.target.value)}
             />
             <InputText
-              label={"EMAIL"}
-              placeholder={"Email Address"}
-              type={"email"}
+              placeholder="https://github.com/example"
+              type="text"
+              onChange={e => setEmail(e.target.value)}
             />
             <InputText
-              label={"PASSWORD"}
-              placeholder={"Password"}
-              type={"password"}
+              placeholder="https://lraough.com/"
+              type="text"
+              onChange={e => setPassword(e.target.value)}
             />
-            <InputText
-              label={"LOCATION"}
-              placeholder={"Location"}
-              type={"text"}
+            <InputTextAndLabel
+              label="YOUR ENGLISH LEVEL"
+              placeholder="ご自身の英語レベルについて教えてください"
+              type="text"
+              onChange={e => setLocation(e.target.value)}
             />
             <RadioForm
-              value={value}
-              handleChange={handleChange}
-              label={"LOOKING FOR"}
-              options={optionData.userLookingFor}
+              label="LOOKING FOR"
+              options={optionData.userDescription}
+              onChange={e => setLookingFor(e.target.value)}
             />
             <div className="buttonContainer">
-              <Button color="primary" variant="contained" className="button">
+              <Button color="primary" variant="contained" className="button" type="submit">
                 next
               </Button>
             </div>
-          </FormControl>
+          </form>
         </Grid>
       </Grid>
     </>
