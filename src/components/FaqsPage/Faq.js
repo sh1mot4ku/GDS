@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-// import { makeStyles }  from '@material-ui/core/styles';
-import { makeStyles } from '@mui/styles';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -19,6 +17,9 @@ const Accordion = styled((props) => (
   '&:before': {
     display: 'none',
   },
+  '& .MuiAccordionSummary-root :hover': {
+    color: 'rgba(0, 0, 0, .7)'
+  },
 }));
 
 const AccordionSummary = styled((props) => (
@@ -30,8 +31,8 @@ const AccordionSummary = styled((props) => (
   backgroundColor:
     theme.palette.mode === 'dark'
       ? 'rgba(255, 255, 255, .05)'
-      : 'rgba(0, 0, 0, .03)',
-  flexDirection: 'row-reverse',
+      : 'rgba(0, 0, 0, .0)',
+  flexDirection: 'row',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
   },
@@ -47,26 +48,18 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 
 const Faq = ({question}) => {
+  const [expanded, setExpanded] = useState('');
 
-  const [expanded, setExpanded] = useState('panel1');
-  
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
-
-  useEffect(() => {
-  }, [question])
 
   return (
     <>
       {question && (
         <div className='content'>
           <Accordion expanded={expanded === `panel${question.id}`} onChange={handleChange(`panel${question.id}`)}>
-            <AccordionSummary
-              // expandIcon={<ArrowForwardIosSharpIcon />}
-              aria-controls={`panel${question.id}d-content`}
-              id={`panel${question.id}d-header`}
-            >
+            <AccordionSummary aria-controls={`panel${question.id}d-content`} id={`panel${question.id}d-header`}>
               <Typography>{question.title}</Typography>
             </AccordionSummary>
             <AccordionDetails>
