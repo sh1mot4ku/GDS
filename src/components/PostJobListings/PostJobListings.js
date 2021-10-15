@@ -5,6 +5,7 @@ import './PostJobListings.scss';
 import database, { firebase, storage } from '../../firebase/firebase';
 import { WithContext as ReactTags } from 'react-tag-input';
 import TrimModal from './TrimModal';
+import { v4 as uuid } from 'uuid';
 
 // APIなどから取得？
 const SUGGESTIONS = [
@@ -45,8 +46,9 @@ const PostJobListings = () => {
 
   useEffect(() => {
     if (photoBlob){
+      const uid = uuid(); // 仮にユーザーIDをuuidで設定
       // const uploadTask = storage.ref(`photos/${props.id}`).put(photoBlob);
-      const uploadTask = storage.ref(`photos/kari`).put(photoBlob);
+      const uploadTask = storage.ref(`photos/${uid}`).put(photoBlob);
       const unsubscribe = uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
         null,
@@ -119,7 +121,7 @@ const PostJobListings = () => {
   return (
     <div className="form-wrapper">
       <div className="form-container">
-        <form className="joblist-form" onSubmit={onSubmit}>
+        <form className="joblist-form">
           <div className="input-block">
             <TextField
               label="職種"
@@ -144,7 +146,7 @@ const PostJobListings = () => {
             <img src={photoUrl} alt="profile-photo" className="profile-photo"></img>
             <div className="photo-buttons">
               <label>
-                <div className="button--photo">Change photo</div>
+                <div variant="contained" className="button--photo">背景画像の設定</div>
                 <input
                   type="file"
                   onChange={onPhotoChange}
@@ -153,7 +155,7 @@ const PostJobListings = () => {
                 >
                 </input>
               </label>
-              <div className="button--photo" onClick={() => setPhotoUrl("")}>Remove photo</div>
+              <div variant="contained" className="button--photo" onClick={() => setPhotoUrl("")}>画像を削除</div>
             </div>
           </div>
           <div className="input-block">
@@ -274,7 +276,7 @@ const PostJobListings = () => {
           ) : (
 
           )} */}
-          <Button variant="contained" color="primary" type="submit">投稿</Button>
+          <Button onClick={onSubmit} variant="contained" color="primary" type="submit">投稿</Button>
         </form>
         { originPhotoSrc && (
           <TrimModal

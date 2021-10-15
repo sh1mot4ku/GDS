@@ -1,3 +1,5 @@
+@import '../../sass_config/color';
+
 .form-wrapper {
   width: 1000px;
   margin: 60px auto;
@@ -13,6 +15,31 @@
   
       .input-block {
         margin-bottom: 24px;
+
+        .profile-photo {
+          width: 100%;
+        }
+
+        .change-photo {
+          display: none;
+        }
+
+        .photo-buttons {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          width: 60%;
+          margin: 16px auto 0;
+
+          .button--photo {
+            border: 1px solid $color-line;
+            background: $gray;
+            border-radius: 4px;
+            padding: 4px 8px; 
+            color: white;
+          }
+        }
 
         .text-field {
           width: 100%;

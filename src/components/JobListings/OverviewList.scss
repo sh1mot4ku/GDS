@@ -1,0 +1,12 @@
+@import '../../sass_config/color';
+
+.overview-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+
+  .overview-title {
+    color: $color-sub-text;
+  }
+}

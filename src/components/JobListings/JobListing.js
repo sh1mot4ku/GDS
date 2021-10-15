@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useJobListingsContext from '../../context/jobListing-context';
 import JobBox from './JobBox';
+import OverviewList from './OverviewList';
+import Button from '@material-ui/core/Button';
 import "./JobListing.scss";
 
 const JobListing = () => {
@@ -37,16 +39,31 @@ const JobListing = () => {
         workingHours,
         leaves
       } = job;
-      setOverview({
-        業務内容: jobDescription,
-        必須条件: must,
-        歓迎条件: welcome,
-        勤務地: employeeLocation,
-        雇用形態: employmentType,
-        想定年収: annualSalaly,
-        勤務時間: workingHours,
-        休日休暇: leaves
-      });
+      setOverview([{
+        key: "業務内容",
+        value: jobDescription
+      }, {
+        key: "必須条件",
+        value: must
+      }, {
+        key: "歓迎条件",
+        value: welcome
+      }, {
+        key: "勤務地",
+        value: employeeLocation
+      }, {
+        key: "雇用形態",
+        value: employmentType
+      }, {
+        key: "想定年収",
+        value: annualSalaly
+      }, {
+        key: "勤務時間",
+        value: workingHours
+      }, {
+        key: "休日休暇",
+        value: leaves
+      }]);
     } 
   }, [job])
 
@@ -59,20 +76,18 @@ const JobListing = () => {
             <h2>求人内容</h2>
             <span>{ job.jobDescription }</span>
           </div>
-          <div>
-            <h2>概要</h2>
-            {
-              
+          <div className="overview">
+            <h2 className="overview-header">概要</h2>
+            { overview && (
+              overview.map(element => (
+                <OverviewList title={element.key} text={element.value} key={element.key} />
+              ))
+            )
             }
-            {/* <OverviewList title={ 業務内容 }/> */}
           </div>
-        {/* // <React.Fragment>
-        //   <div>{job.jobTitle}</div>
-        //   <div>{job.companyName}</div>
-        //   <div>{job.employeeLocation}</div>
-        //   <div>{job.skills}</div>
-        //   <div>{job.jobDescription}</div>
-        // </React.Fragment> */}
+          <div className="oubo-wrapper">
+            <Button variant="contained" color="primary">応募する</Button>
+          </div>
         </>
       ) : (
         <div>

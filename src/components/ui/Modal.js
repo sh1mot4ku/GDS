@@ -1,4 +1,5 @@
 import React from 'react';
+import './Modal.scss';
 
 const Modal = ({ children, onClose }) => (
   <div onClick={onClose} id="overlay">

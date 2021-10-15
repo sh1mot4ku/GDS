@@ -5,6 +5,7 @@ import "./JobBox.scss";
 const MAX_LENGTH_OF_JD = 100;
 
 const JobBox = ({
+  photoUrl,
   jobTitle,
   companyName,
   workPlacePolicy,
@@ -25,6 +26,9 @@ const JobBox = ({
   return (
     <div className="job-box">
       <Link to={`/joblisting/${id}`}>
+        <div className="job-img-wrapper">
+          <img src={photoUrl} className="job-img"></img>
+        </div>
         <div className="job-box-content">
           <span className="job-title">{jobTitle}</span>
         </div>

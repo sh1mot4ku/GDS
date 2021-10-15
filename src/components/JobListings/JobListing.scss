@@ -1,5 +1,22 @@
 @import "./JobListings";
+@import '../../sass_config/color';
 
 .joblisting-details-wrapper {
-  @extend .joblisting-wrapper
+  @extend .joblisting-wrapper;
+
+  .job-description {
+    margin-bottom: 32px;
+  }
+  .overview-wrapper {
+    padding: 16px 0;
+    border-bottom: 1px solid $color-line; 
+  }
+  .overview-header {
+    margin-bottom: 16px;
+  }
+  .oubo-wrapper {
+    width: 33%;
+    margin: 16px auto;
+    border-radius: 16px;
+  }
 }
