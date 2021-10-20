@@ -78,7 +78,7 @@ function Apply() {
     setStep(newStep);
     // setValue("");
     console.log(e.target.value);
-    console.log(`val: ${value}`);
+    // console.log(`val: ${value}`);
 
   };
 
