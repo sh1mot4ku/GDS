@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { BrowserRouter, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Apply from "../components/Apply";
+import TopPage from '../components/TopPage/TopPage';
+
 
 import {
   UserContext,
@@ -18,7 +20,7 @@ const AppRouter = () => {
       <UserContext.Provider value={[user, setUser]}>
         <BusinessUserContext.Provider value={[business, setBusiness]}>
           <Switch>
-
+          {/* <Route path="/" component={TopPage} exact={true} /> */}
           </Switch>
           <Apply />
         </BusinessUserContext.Provider>

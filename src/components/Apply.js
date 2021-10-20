@@ -12,7 +12,6 @@ function Apply() {
 
   const [user, setUser] = useContext(UserContext);
   const [step, setStep] = useState(0);
-  const [value, setValue] = useState("");
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,7 +43,6 @@ function Apply() {
 
     setUser(postingInfo);
     insertUser(postingInfo);
-    // setValue("");
   };
 
   const optionData = {
@@ -76,10 +74,7 @@ function Apply() {
     e.preventDefault();
     info[step] = userInfo;
     setStep(newStep);
-    // setValue("");
     console.log(e.target.value);
-    // console.log(`val: ${value}`);
-
   };
 
   let contents = <></>;
@@ -92,26 +87,29 @@ function Apply() {
             label="FULL NAME"
             placeholder="YOUR NAME"
             type="text"
-            value={value}
             onChange={(e) => setFullName(e.target.value)}
+            value={fullName}
           />
           <InputTextAndLabel
             label="EMAIL"
             placeholder="Email Address"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
           <InputTextAndLabel
             label="PASSWORD"
             placeholder="Password"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
           <InputTextAndLabel
             label="LOCATION"
             placeholder="Location"
             type="text"
             onChange={(e) => setLocation(e.target.value)}
+            value={location}
           />
           <RadioForm
             label="LOOKING FOR"
@@ -130,22 +128,25 @@ function Apply() {
             placeholder="https://www.linkedin.com/in/example"
             type="text"
             onChange={(e) => setLinkedin(e.target.value)}
+            value={linkedin}
           />
           <InputText
             placeholder="https://github.com/example"
             type="text"
             onChange={(e) => setGithub(e.target.value)}
+            value={github}
           />
           <InputText
             placeholder="https://lraough.com/"
             type="text"
-            onChange={(e) => setWebsite(e.target.value)}
+            onChange={(e) => setWebsite(e.target.value)}            value={website}
           />
           <InputTextAndLabel
             label="YOUR ENGLISH LEVEL"
             placeholder="ご自身の英語レベルについて教えてください"
             type="text"
             onChange={(e) => setEnglishLevel(e.target.value)}
+            value={englishLevel}
           />
           <RadioForm
             label="LOOKING FOR"
@@ -182,7 +183,7 @@ function Apply() {
               variant="contained"
               className="button"
               type="submit"
-              onClick={() => setValue("")}
+              // onClick={() => setValue("")}
             >
               next
             </Button>

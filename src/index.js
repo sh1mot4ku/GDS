@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AppRouter from './router/AppRouter';
+import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import './style/reset.scss';
+import './sass_config/reset.scss';
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import AppRouter from './router/AppRouter';
 
 const theme = createTheme({
   palette: {
@@ -17,6 +18,8 @@ ReactDOM.render(
   <React.StrictMode>
 		<ThemeProvider theme={theme} >
     <AppRouter />
+    <App />
+
 		</ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
