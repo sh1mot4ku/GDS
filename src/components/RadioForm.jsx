@@ -4,7 +4,6 @@ import "./Apply.scss"
 
 
 const RadioForm = ({value, onChange, label, options}) => {
-	console.log("hhhh:", label);
 	return (
 		<React.Fragment>
 			<RadioGroup
