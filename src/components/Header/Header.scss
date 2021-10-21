@@ -1,35 +1,42 @@
 @import "../../sass_config/color.scss";
 @import "../../sass_config/mixin.scss";
-
-.header-container {
+.header {
   height: 108px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  .company-logo {
-    height: 60px;
-  }
-  .nav-bar {
+  .header-container {
+    height: 108px;
+    width: 80vw;
+    margin: auto;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .company-logo {
+      height: 60px;
+      cursor: pointer;
+    }
+    .nav-bar {
+      display: flex;
 
-    .menu {
-      .menu-item {
-        display: inline-block;
-        list-style: none;
-        padding: 12px;
+      .menu {
+        margin-right: 8px;
+        .menu-item {
+          display: inline-block;
+          list-style: none;
+          margin: 8px;
+          cursor: pointer;
+        }
       }
-    }
-    .round-button {
-      border: 1.8px solid $color_primary;
-      border-radius: 100px;
-      padding: 8px 32px;
-      margin: 0 4px;
-      font-weight: 700;
-    }
-    .background-white {
-      background-color: white;
-      color: $color_primary;
+      .round-button {
+        border: 1.8px solid $color_primary;
+        border-radius: 100px;
+        padding: 8px 32px;
+        margin: 0 4px;
+        font-weight: 700;
+      }
+      .background-white {
+        background-color: white;
+        color: $color_primary;
+      }
     }
   }
 }

@@ -7,7 +7,6 @@ const Wrapper = ({ children }) => (
   <>
     <Header />
     <section className="main">
-      <h1>this is wrapper component</h1>
       <div className="main__wrapper">{children}</div>
     </section>
     <Footer />
