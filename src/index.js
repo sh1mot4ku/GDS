@@ -15,13 +15,12 @@ const theme = createTheme({
 });
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
 		<ThemeProvider theme={theme} >
     <AppRouter />
     <App />
-
 		</ThemeProvider>
-  </React.StrictMode>,
+  </>,
   document.getElementById('root')
 );
 

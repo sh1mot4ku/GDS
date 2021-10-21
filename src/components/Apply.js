@@ -6,16 +6,16 @@ import "./Apply.scss";
 import RadioForm from "./RadioForm.jsx";
 import { insertUser } from "../API/dbutils";
 import { UserContext } from "../context";
+import InputSelect from "./InputSelect.jsx";
 const info = {};
 
 function Apply() {
-
   const [user, setUser] = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("Japan");
   const [lookingFor, setLookingFor] = useState("");
   const [linkedin, setLinkedin] = useState("");
   const [github, setGithub] = useState("");
@@ -70,17 +70,51 @@ function Apply() {
     ],
   };
 
+  const countries = [
+    {
+      value: "Japan",
+    },
+    {
+      value: "USA",
+    },
+    {
+      value: "Canada",
+    },
+    {
+      value: "Korea",
+    },
+    {
+      value: "Chinese",
+    },
+  ];
+
+  const levelOfEnglish = [
+    {
+      value: "旅行、買い物レベル",
+    },
+    {
+      value: "日常会話、旅行トラブル対応レベル",
+    },
+    {
+      value: "ビジネス会話、プレゼンレベル",
+    },
+    {
+      value: "簡単通訳、ディスカッションレベル",
+    },
+    {
+      value: "ネイティブレベル",
+    },
+  ];
+
   const handleClick = (e, newStep, userInfo) => {
     e.preventDefault();
     info[step] = userInfo;
     setStep(newStep);
-    console.log(e.target.value);
   };
 
   let contents = <></>;
   switch (step) {
     case 0:
-      console.log("RUN1");
       contents = (
         <>
           <InputTextAndLabel
@@ -104,12 +138,12 @@ function Apply() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <InputTextAndLabel
+          <InputSelect
             label="LOCATION"
             placeholder="Location"
-            type="text"
             onChange={(e) => setLocation(e.target.value)}
             value={location}
+            options={countries}
           />
           <RadioForm
             label="LOOKING FOR"
@@ -120,7 +154,6 @@ function Apply() {
       );
       break;
     case 1:
-      console.log("RUN2");
       contents = (
         <>
           <InputTextAndLabel
@@ -139,14 +172,16 @@ function Apply() {
           <InputText
             placeholder="https://lraough.com/"
             type="text"
-            onChange={(e) => setWebsite(e.target.value)}            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            value={website}
           />
-          <InputTextAndLabel
+          <InputSelect
             label="YOUR ENGLISH LEVEL"
             placeholder="ご自身の英語レベルについて教えてください"
             type="text"
             onChange={(e) => setEnglishLevel(e.target.value)}
             value={englishLevel}
+            options={levelOfEnglish}
           />
           <RadioForm
             label="LOOKING FOR"
@@ -183,7 +218,6 @@ function Apply() {
               variant="contained"
               className="button"
               type="submit"
-              // onClick={() => setValue("")}
             >
               next
             </Button>
