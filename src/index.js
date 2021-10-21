@@ -5,9 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import './sass_config/reset.scss';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <App />
-  </React.StrictMode>,
+    {/* <AppRouter /> */}
+  </>,
   document.getElementById('root')
 );
 
