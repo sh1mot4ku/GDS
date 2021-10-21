@@ -7,6 +7,8 @@ import RadioForm from "./RadioForm.jsx";
 import { insertUser } from "../API/dbutils";
 import { UserContext } from "../context";
 import InputSelect from "./InputSelect.jsx";
+import { auth } from "../firebase/firebase";
+
 const info = {};
 
 function Apply() {
@@ -40,9 +42,16 @@ function Apply() {
       description,
       userType: USER_TYPE_CLIENT,
     };
-
-    setUser(postingInfo);
-    insertUser(postingInfo);
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        console.log("Log in successful!")
+        console.log(userCredential.user);
+        setUser(postingInfo);
+        insertUser(postingInfo);  
+      })
+      .catch(e => {
+        console.error(`Error happened: ${e}`);
+      })
   };
 
   const optionData = {

@@ -17,7 +17,7 @@ const theme = createTheme({
 ReactDOM.render(
   <>
 		<ThemeProvider theme={theme} >
-    <AppRouter />
+    {/* <AppRouter /> */}
     <App />
 		</ThemeProvider>
   </>,
