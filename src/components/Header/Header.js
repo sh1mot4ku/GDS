@@ -1,19 +1,66 @@
 import React from "react";
 import "./Header.scss";
 import Button from "@mui/material/Button";
+import { useLocation, Link } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
+  console.log(location);
+
   return (
     <header className="header">
       <div className="header-container">
-        <img className="company-logo" src="photos/lraoughLogo.png" alt="" />
+        <Link to="/">
+          <img className="company-logo" src="photos/lraoughLogo.png" alt="" />
+        </Link>
         <nav className="nav-bar">
-          <ul className="menu">
-            <li className="menu-item">求人一覧</li>
-            <li className="menu-item">会社概要</li>
-            <li className="menu-item">FAQs</li>
-            <li className="menu-item">ブログ</li>
-          </ul>
+          <div className="menu">
+            <Link
+              className={[
+                "menu-item",
+                location.pathname === "/" && "activated-menu",
+              ].join(" ")}
+              to="/"
+            >
+              ホーム
+            </Link>
+            <Link
+              className={[
+                "menu-item",
+                location.pathname === "/joblistings" && "activated-menu",
+              ].join(" ")}
+              to="/joblistings"
+            >
+              求人一覧
+            </Link>
+            <Link
+              className={[
+                "menu-item",
+                location.pathname === "/about" && "activated-menu",
+              ].join(" ")}
+              to="/about"
+            >
+              会社概要
+            </Link>
+            <Link
+              className={[
+                "menu-item",
+                location.pathname === "/faqs" && "activated-menu",
+              ].join(" ")}
+              to="/faqs"
+            >
+              FAQs
+            </Link>
+            <Link
+              className={[
+                "menu-item",
+                location.pathname === "/blog" && "activated-menu",
+              ].join(" ")}
+              to="/blog"
+            >
+              ブログ
+            </Link>
+          </div>
           <Button
             // onClick={}
             variant="contained"

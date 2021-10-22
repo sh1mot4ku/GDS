@@ -5,7 +5,7 @@
   width: 100%;
   .header-container {
     height: 108px;
-    width: 80vw;
+    width: 90vw;
     margin: auto;
     display: flex;
     align-items: center;
@@ -19,11 +19,16 @@
 
       .menu {
         margin-right: 8px;
+        align-self: center;
         .menu-item {
-          display: inline-block;
-          list-style: none;
-          margin: 8px;
-          cursor: pointer;
+          margin: 16px;
+          padding-bottom: 4px;
+
+          &:hover {
+            color: $color_primary;
+            text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,
+              0.01em 0 $color_primary, -0.01em 0 $color_primary;
+          }
         }
       }
       .round-button {
@@ -39,4 +44,11 @@
       }
     }
   }
+}
+
+.activated-menu {
+  color: $color_primary;
+  text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,
+    0.01em 0 $color_primary, -0.01em 0 $color_primary;
+  border-bottom: solid 2px $color_primary;
 }

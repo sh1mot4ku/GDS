@@ -1,10 +1,10 @@
 .footer {
-  height: 220px;
+  height: 300px;
   width: 100%;
   background: black;
   .footer-container {
-    height: 220px;
-    width: 80vw;
+    height: 300px;
+    width: 90vw; // change later?
     margin: auto;
     color: white;
     display: flex;
@@ -12,18 +12,24 @@
     align-items: center;
 
     .menu-sns-wrapper {
-      height: 180px;
+      height: 260px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
       .menu {
         margin: 12px 0;
+        display: flex;
+        flex-direction: column;
         .menu-item {
-          list-style: none;
           font-size: 16px;
           margin-bottom: 4px;
           cursor: pointer;
+          color: white;
+
+          &:hover {
+            opacity: 0.6;
+          }
         }
       }
       .sns-wrapper {
@@ -31,6 +37,10 @@
           font-size: 28px;
           margin-right: 16px;
           cursor: pointer;
+
+          &:hover {
+            opacity: 0.6;
+          }
         }
       }
     }
@@ -39,12 +49,14 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      height: 180px;
-      .company-logo-bk {
-        margin-bottom: 28px;
-        height: 60px;
+      height: 260px;
+      .company-logo-bk-wrapper {
         align-self: flex-end;
-        cursor: pointer;
+        .company-logo-bk {
+          margin-bottom: 48px;
+          height: 60px;
+          cursor: pointer;
+        }
       }
       .copy-right {
         margin-bottom: 8px;
