@@ -9,7 +9,7 @@ import {
   BusinessUserContext,
   initialUser,
   initialBusinessUser,
-} from "../context";
+} from "../context/user-context";
 
 const AppRouter = () => {
   const [user, setUser] = useState(initialUser);
@@ -20,9 +20,9 @@ const AppRouter = () => {
       <UserContext.Provider value={[user, setUser]}>
         <BusinessUserContext.Provider value={[business, setBusiness]}>
           <Switch>
-          {/* <Route path="/" component={TopPage} exact={true} /> */}
+            {/* <Route path="/" component={TopPage} exact={true} /> */}
+            <Route path="/apply-developer" component={Apply} />
           </Switch>
-          <Apply />
         </BusinessUserContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>

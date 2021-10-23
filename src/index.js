@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import './sass_config/reset.scss';
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -17,8 +16,7 @@ const theme = createTheme({
 ReactDOM.render(
   <>
 		<ThemeProvider theme={theme} >
-    <AppRouter />
-    <App />
+      <AppRouter />
 		</ThemeProvider>
   </>,
   document.getElementById('root')
