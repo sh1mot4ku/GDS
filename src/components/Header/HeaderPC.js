@@ -1,22 +1,73 @@
 import React from "react";
-import "./Header.scss";
 import Button from "@mui/material/Button";
 import { useLocation, Link } from "react-router-dom";
+import headerMenuItems from "./headerMenuItems";
+import "./Header.scss";
 
 const HeaderPC = () => {
   const location = useLocation();
   return (
     <div>
-      {/* <Link to="/">
-        <img
-          className="company-logo"
-          src="photos/lraoughLogo.png"
-          alt="Lraough-logo"
-        />
-      </Link> */}
       <nav className="nav-bar">
         <div className="menu">
-          <Link
+          {
+            // [
+            //   {
+            //     title: "ホーム",
+            //     className: [
+            //       "menu-item",
+            //       location.pathname === "/" && "activated-menu",
+            //     ].join(" "),
+            //     to: "/",
+            //   },
+            //   {
+            //     title: "求人一覧",
+            //     className: [
+            //       "menu-item",
+            //       location.pathname === "/joblistings" && "activated-menu",
+            //     ].join(" "),
+            //     to: "/joblistings",
+            //   },
+            //   {
+            //     title: "会社概要",
+            //     className: [
+            //       "menu-item",
+            //       location.pathname === "/about" && "activated-menu",
+            //     ].join(" "),
+            //     to: "/about",
+            //   },
+            //   {
+            //     title: "FAQs",
+            //     className: [
+            //       "menu-item",
+            //       location.pathname === "/faqs" && "activated-menu",
+            //     ].join(" "),
+            //     to: "/faqs",
+            //   },
+            //   {
+            //     title: "ブログ",
+            //     className: [
+            //       "menu-item",
+            //       location.pathname === "/blog" && "activated-menu",
+            //     ].join(" "),
+            //     to: "/blog",
+            //   },
+            // ]
+            headerMenuItems.map((menuItem) => (
+              <Link
+                key={menuItem.title}
+                className={
+                  location.pathname === menuItem.to
+                    ? [...menuItem.className, "activated-menu"].join(" ")
+                    : menuItem.className
+                }
+                to={menuItem.to}
+              >
+                {menuItem.title}
+              </Link>
+            ))
+          }
+          {/* <Link
             className={[
               "menu-item",
               location.pathname === "/" && "activated-menu",
@@ -60,7 +111,7 @@ const HeaderPC = () => {
             to="/blog"
           >
             ブログ
-          </Link>
+          </Link> */}
         </div>
         <Button
           // onClick={}

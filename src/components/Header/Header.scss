@@ -3,6 +3,9 @@
 .header {
   height: 108px;
   width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: white;
   .header-container {
     height: 108px;
     width: 90vw;
@@ -45,10 +48,13 @@
     }
   }
 }
-
 .activated-menu {
   color: $color_primary;
   text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,
     0.01em 0 $color_primary, -0.01em 0 $color_primary;
   border-bottom: solid 2px $color_primary;
+}
+.company-logo {
+  height: 60px;
+  cursor: pointer;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import Drawer from "./Drawer";
 import "./Header.scss";
@@ -11,17 +10,10 @@ const HeaderHamburger = () => {
   };
   return (
     <>
-      {/* <Link to="/">
-        <img
-          className="company-logo"
-          src="photos/lraoughLogo.png"
-          alt="Lraough-logo"
-        />
-      </Link> */}
       <div onClick={toggleDrawer}>
         <MenuIcon />
+        <Drawer toggleDrawer={toggleDrawer} isDrawerOpen={isDrawerOpen} />
       </div>
-      <Drawer toggleDrawer={toggleDrawer} isDrawerOpen={isDrawerOpen} />
     </>
   );
 };
