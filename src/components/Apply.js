@@ -5,7 +5,7 @@ import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import "./Apply.scss";
 import RadioForm from "./RadioForm.jsx";
 import { insertUser } from "../API/dbutils";
-import { UserContext } from "../context";
+import { UserContext } from "../context/user-context";
 import InputSelect from "./InputSelect.jsx";
 const info = {};
 
