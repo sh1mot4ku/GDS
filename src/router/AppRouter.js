@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Apply from "../components/Apply";
+import Apply from "../components/Apply/Apply";
 import TopPage from '../components/TopPage/TopPage';
 
 
