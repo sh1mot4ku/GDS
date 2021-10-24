@@ -1,4 +1,4 @@
-const headerMenuItems = [
+const menuItems = [
   {
     title: "ホーム",
     className: ["menu-item"],
@@ -24,6 +24,12 @@ const headerMenuItems = [
     className: ["menu-item"],
     to: "/blog",
   },
+  {
+    title: "ログイン",
+    className: ["menu-item"],
+    // temporary url
+    to: "/login",
+  },
 ];
 
-export default headerMenuItems;
+export default menuItems;

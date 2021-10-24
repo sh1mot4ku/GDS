@@ -1,21 +1,26 @@
+@import "../../../sass_config/mixin.scss";
 .footer {
-  height: 300px;
   width: 100%;
   background: black;
   .footer-container {
-    height: 300px;
-    width: 90vw; // change later?
+    @include pc {
+      max-width: 1080px;
+    }
     margin: auto;
     color: white;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-
+    padding: 40px 0;
+    @include tablet {
+      padding: 40px;
+    }
+    @include mobile {
+      flex-direction: column;
+    }
     .menu-sns-wrapper {
-      height: 260px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
 
       .menu {
         margin: 12px 0;
@@ -49,18 +54,25 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      height: 260px;
       .company-logo-bk-wrapper {
         align-self: flex-end;
+        @include mobile {
+          align-self: flex-start;
+        }
         .company-logo-bk {
-          margin-bottom: 48px;
+          margin-bottom: 80px;
           height: 60px;
           cursor: pointer;
         }
       }
       .copy-right {
-        margin-bottom: 8px;
+        @include mobile {
+          align-self: flex-start;
+        }
       }
     }
   }
+}
+.company-logo-bk-mb {
+  height: 60px;
 }

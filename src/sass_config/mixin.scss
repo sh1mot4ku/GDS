@@ -1,5 +1,6 @@
 $mb: 768px;
 $tb: 1024px;
+$pc: 1025px;
 
 @mixin mobile {
   @media screen and (max-width: $mb) {
@@ -9,6 +10,12 @@ $tb: 1024px;
 
 @mixin tablet {
   @media screen and (max-width: $tb) {
+    @content;
+  }
+}
+
+@mixin pc {
+  @media screen and (min-width: $pc) {
     @content;
   }
 }

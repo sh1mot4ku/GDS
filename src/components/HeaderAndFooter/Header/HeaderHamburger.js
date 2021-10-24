@@ -11,7 +11,7 @@ const HeaderHamburger = () => {
   return (
     <>
       <div onClick={toggleDrawer}>
-        <MenuIcon />
+        <MenuIcon className="hamburger-icon" />
         <Drawer toggleDrawer={toggleDrawer} isDrawerOpen={isDrawerOpen} />
       </div>
     </>

@@ -1,20 +1,27 @@
-@import "../../sass_config/color.scss";
-@import "../../sass_config/mixin.scss";
+@import "../../../sass_config/color.scss";
+@import "../../../sass_config/mixin.scss";
 .header {
-  height: 108px;
   width: 100%;
   position: fixed;
   top: 0;
   background-color: white;
+  z-index: 10;
   .header-container {
-    height: 108px;
-    width: 90vw;
+    padding: 20px 40px;
+    @include tablet {
+      padding: 20px 8px;
+    }
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     .company-logo {
       height: 60px;
+      cursor: pointer;
+    }
+    .hamburger-icon {
+      font-size: 40px;
+      color: $gray;
       cursor: pointer;
     }
     .nav-bar {
@@ -53,8 +60,4 @@
   text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,
     0.01em 0 $color_primary, -0.01em 0 $color_primary;
   border-bottom: solid 2px $color_primary;
-}
-.company-logo {
-  height: 60px;
-  cursor: pointer;
 }
