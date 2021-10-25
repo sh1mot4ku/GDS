@@ -5,7 +5,7 @@ import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import "./Apply.scss";
 import RadioForm from "./RadioForm.jsx";
 import { insertUser } from "../API/dbutils";
-import { UserContext } from "../context";
+import { UserContext } from "../context/user-context";
 import InputSelect from "./InputSelect.jsx";
 import { auth } from "../firebase/firebase";
 import { v4 as uuid } from 'uuid';
@@ -31,23 +31,23 @@ function Apply() {
   const onSubmit = (e) => {
     e.preventDefault();
     const postingInfo = {
-      fullName,
-      email,
-      password,
-      location,
-      lookingFor,
-      linkedin,
-      github,
-      website,
-      englishLevel,
-      description,
+      profile: {
+        fullName,
+        email,
+        password,
+        location,
+        lookingFor,
+        linkedin,
+        github,
+        website,
+        englishLevel,
+        description  
+      },
       userType: USER_TYPE_CLIENT,
       uid: uuid()
     };
     auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        console.log("Log in successful!")
-        console.log(userCredential.user);
         setUser(postingInfo);
         insertUser(postingInfo, userCredential.user.uid);
       })

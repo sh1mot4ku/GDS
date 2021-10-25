@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppRouter, { history } from './router/AppRouter';
-import { auth } from './firebase/firebase';
+import database, { auth } from './firebase/firebase';
 import AuthContext from './context/auth-context';
 import './sass_config/reset.scss';
 
@@ -15,16 +14,16 @@ const theme = createTheme({
     },
   },
 });
-let uid = null;
+let loginId = null; // use this to judge if user is log in or not
+let userInfo = null; // user information
 let hasRendered = false;
 const renderApp = () => {
   if (!hasRendered) {
     ReactDOM.render(
       <>
         <ThemeProvider theme={theme} >
-          <AuthContext.Provider value={{ uid }}>
+          <AuthContext.Provider value={{ loginId, userInfo }}>
             <AppRouter />
-            {/* <App /> */}
           </AuthContext.Provider>
         </ThemeProvider>
       </>,
@@ -36,15 +35,16 @@ const renderApp = () => {
 
 auth.onAuthStateChanged(user => {
   if (user) {
-    uid = user.uid;
-    // authのuidを元にユーザデータをデータベースから取得 -> thenで繋ぐ
-    renderApp();
-    // ログインしているユーザ向けのトップページはどうするか？
-    if (history.location.pathname === '/') {
-      history.push('/'); // ログインユーザ向けのページに飛ばす？
-    }
+    loginId = user.uid;
+    database.ref(`user/${user.uid}`).once('value').then((snapshot) => {
+      userInfo = snapshot.val();
+      renderApp();
+      // if (history.location.pathname === '/') {
+      //   history.push('/'); // If they made a page for log in user, push it to that page
+      // }  
+    })
   } else {
-    uid = null;
+    loginId = null;
     renderApp();
     history.push('/');
   }

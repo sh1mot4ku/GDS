@@ -7,13 +7,10 @@ import {
   BusinessUserContext,
   initialUser,
   initialBusinessUser,
-} from "../context";
+} from "../context/user-context";
 import { createBrowserHistory }from 'history';
-// import { useHistory } from 'react-router-dom';
 
 const history = createBrowserHistory();
-
-// const history = useHistory();
 
 const AppRouter = () => {
   const [user, setUser] = useState(initialUser);
@@ -24,9 +21,9 @@ const AppRouter = () => {
       <UserContext.Provider value={[user, setUser]}>
         <BusinessUserContext.Provider value={[business, setBusiness]}>
           <Switch>
-          {/* <Route path="/" component={TopPage} exact={true} /> */}
+            <Route path="/" component={TopPage} exact={true} />
+            <Route path="/apply-developer" component={Apply} />
           </Switch>
-          <Apply />
         </BusinessUserContext.Provider>
       </UserContext.Provider>
     </Router>
