@@ -6,11 +6,11 @@ import InputSelect from "./InputSelect.jsx";
 import RadioForm from "./RadioForm.jsx";
 import "./Apply.scss";
 import { insertUser } from "../../API/dbutils";
-import { UserContext } from "../../context";
+import { UserContext } from "../../context/user-context";
 const info = {};
 
 function Apply() {
-  const [user, setUser] = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -230,8 +230,7 @@ function Apply() {
       break;
 
     default:
-      console.log("other", step);
-      contents = <p>Other</p>;
+      contents = <p>Unknown stepIndex</p>;
   }
 
   return (

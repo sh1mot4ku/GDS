@@ -1,27 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
-import './sass_config/reset.scss';
+import React from "react";
+import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
+import "./sass_config/reset.scss";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
-import AppRouter from './router/AppRouter';
+import AppRouter from "./router/AppRouter";
+import UserProvider from "./context/user-context";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1E40F6',
+      main: "#1E40F6",
     },
   },
 });
 
 ReactDOM.render(
   <>
-		<ThemeProvider theme={theme} >
-    <AppRouter />
-    <App />
-		</ThemeProvider>
+    <ThemeProvider theme={theme}>
+      <UserProvider>
+        <AppRouter />
+      </UserProvider>
+    </ThemeProvider>
   </>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
