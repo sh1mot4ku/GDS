@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Apply from "../components/Apply";
+import Recruiter from "../components/Recruiter/Recruiter";
 import TopPage from '../components/TopPage/TopPage';
 
 
@@ -20,9 +21,14 @@ const AppRouter = () => {
       <UserContext.Provider value={[user, setUser]}>
         <BusinessUserContext.Provider value={[business, setBusiness]}>
           <Switch>
-          {/* <Route path="/" component={TopPage} exact={true} /> */}
+            <Route path="/" component={TopPage} exact={true} />
           </Switch>
-          <Apply />
+          <Switch>
+            <Route path="/recruiter" component={Recruiter} exact={true} />
+          </Switch>
+          <Switch>
+            <Route path="/apply" component={Apply} exact={true} />
+          </Switch>
         </BusinessUserContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
