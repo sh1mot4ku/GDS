@@ -5,12 +5,13 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppRouter, { history } from './router/AppRouter';
 import database, { auth } from './firebase/firebase';
 import AuthContext from './context/auth-context';
+// import UserProvider from "./context/user-context";
 import './sass_config/reset.scss';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1E40F6',
+      main: "#1E40F6",
     },
   },
 });
@@ -23,7 +24,9 @@ const renderApp = () => {
       <>
         <ThemeProvider theme={theme} >
           <AuthContext.Provider value={{ loginId, userInfo }}>
-            <AppRouter />
+            {/* <UserProvider> 一旦消してユーザー編集機能などが動くかどうか見てみる */ }
+              <AppRouter />
+            {/* </UserProvider> */}
           </AuthContext.Provider>
         </ThemeProvider>
       </>,
@@ -40,7 +43,7 @@ auth.onAuthStateChanged(user => {
       userInfo = snapshot.val();
       renderApp();
       // if (history.location.pathname === '/') {
-      //   history.push('/'); // If they made a page for log in user, push it to that page
+      //   history.push('/job_listings'); // push it to job listings page after merging
       // }  
     })
   } else {

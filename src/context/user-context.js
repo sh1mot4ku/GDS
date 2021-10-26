@@ -1,6 +1,5 @@
-import { createContext } from 'react';
-export const UserContext = createContext([{},() => {}]);
-export const BusinessUserContext = createContext([{},() => {}]);
+import { createContext, useState } from 'react';
+export const UserContext = createContext();
 const userCommonInfo = {
 	fullName: "",
 	email: "",
@@ -26,5 +25,17 @@ export const initialBusinessUser = {
 	projectDetail: "",
 };
 
+const UserProvider = ({children}) => {
+  const [user, setUser] = useState(initialUser);
+  const [business, setBusiness] = useState(initialBusinessUser);
+
+  return (
+      <UserContext.Provider value={{user, setUser, business, setBusiness}}>
+					{children}
+      </UserContext.Provider>
+  );
+};
+
+export default UserProvider;
 
 
