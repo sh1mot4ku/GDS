@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button } from "@material-ui/core";
 import InputText from "../InputText.jsx";
 import InputTextAndLabel from "../InputTextAndLabel.jsx";
-// import "./Apply.scss";
+import "./Recruiter.scss";
 import RadioForm from "../RadioForm.jsx";
 import { insertUser } from "../../API/dbutils";
 import { UserContext } from "../../context";
