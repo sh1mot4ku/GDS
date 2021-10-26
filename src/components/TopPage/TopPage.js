@@ -1,19 +1,15 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import './TopPage.scss';
 import Button from '@material-ui/core/Button';
+// import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 import useMedia from 'use-media';
 
 const TopPage = () => {
   const isMobile = useMedia({ maxWidth: '768px' });
 
-  const developerSubscribe = () => {
-    // move to page of subscribing for developer
-    console.log('go to developer subscribe');
-  };
   const recruiterSubscribe = () => {
     // move to page of subscribing for recruiter
-    console.log('go to recruiter subscribe');
   };
 
   return (
@@ -27,21 +23,24 @@ const TopPage = () => {
             一緒にけもの道を笑顔で歩んで行きましょう
           </div>
           <div className="subscribe-buttons-top">
-            <Button
-              onClick={developerSubscribe}
-              variant="contained"
-              className="round-button background-white"
-            >
-              無料会員登録
-            </Button>
-            <Button
-              onClick={recruiterSubscribe}
-              variant="contained"
-              color="primary"
-              className="round-button"
-            >
-              採用担当者の方
-            </Button>
+            <Link to="/apply-developer">
+              <Button
+                variant="contained"
+                className="round-button background-white"
+              >
+                無料会員登録
+              </Button>
+            </Link>
+            <Link to="/apply-recruiter">
+              <Button
+                // onClick={recruiterSubscribe}
+                variant="contained"
+                color="primary"
+                className="round-button"
+              >
+                採用担当者の方
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="subscribe-logos">
@@ -125,14 +124,6 @@ const TopPage = () => {
           </div>
         </Button>
       </div>
-      {/* ↓↓↓↓↓↓↓↓ Make this footer ↓↓↓↓↓↓↓↓
-      <div className="contact-wrapper">
-        <h1>CONTACT</h1>
-        <div>取材/お仕事のご依頼・お問い合わせはこちら</div>
-        <Link to="/" className="contact-button">
-          <div>お問い合わせ</div>
-        </Link>
-      </div> */}
     </div>
   )
 }

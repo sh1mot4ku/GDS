@@ -1,16 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import InputText from "./InputText.jsx";
 import InputTextAndLabel from "./InputTextAndLabel.jsx";
-import "./Apply.scss";
-import RadioForm from "./RadioForm.jsx";
-import { insertUser } from "../API/dbutils";
-import { UserContext } from "../context";
 import InputSelect from "./InputSelect.jsx";
+import { auth } from "../../firebase/firebase";
+import { v4 as uuid } from 'uuid';
+import RadioForm from "./RadioForm.jsx";
+import "./Apply.scss";
+import { insertUser } from "../../API/dbutils";
+// import { UserContext } from "../../context/user-context";
 const info = {};
 
 function Apply() {
-  const [user, setUser] = useContext(UserContext);
+  // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,21 +30,30 @@ function Apply() {
   const onSubmit = (e) => {
     e.preventDefault();
     const postingInfo = {
-      fullName,
-      email,
-      password,
-      location,
-      lookingFor,
-      linkedin,
-      github,
-      website,
-      englishLevel,
-      description,
+      profile: {
+        fullName,
+        email,
+        password,
+        location,
+        lookingFor,
+        linkedin,
+        github,
+        website,
+        englishLevel,
+        description  
+      },
       userType: USER_TYPE_CLIENT,
+      uid: uuid()
     };
-
-    setUser(postingInfo);
-    insertUser(postingInfo);
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // setUser(postingInfo);
+        insertUser(postingInfo, userCredential.user.uid);
+        setStep(step + 1);
+      })
+      .catch(e => {
+        console.error(`Error happened: ${e}`);
+      })
   };
 
   const optionData = {
@@ -89,9 +100,6 @@ function Apply() {
   ];
 
   const levelOfEnglish = [
-    {
-      value: "旅行、買い物レベル",
-    },
     {
       value: "日常会話、旅行トラブル対応レベル",
     },
@@ -150,6 +158,12 @@ function Apply() {
             options={optionData.userLookingFor}
             onChange={(e) => setLookingFor(e.target.value)}
           />
+          <div className="buttonContainer">
+            <Button variant="contained" className="button" type="submit">
+              next
+            </Button>
+            <button className="loginButton">ログインはこちら</button>
+          </div>
         </>
       );
       break;
@@ -188,13 +202,45 @@ function Apply() {
             options={optionData.userDescription}
             onChange={(e) => setDescription(e.target.value)}
           />
+          <div className="buttonContainer">
+            <Button variant="contained" className="button" type="submit">
+              next
+            </Button>
+          </div>
+        </>
+      );
+      break;
+    case 2:
+      contents = (
+        <>
+          <div className="thxBox">
+            <h2 className="thxTitle">Thank you for Applying</h2>
+            <p className="sentence">
+              この度はGlobal
+              Developersへのご興味を頂き誠にありがとうございます。
+              <br />
+              <br />
+              ご応募頂いた皆様には、1週間以内にご連絡を改めさせて頂きます。
+              <br />
+              今後のプロセスについては、今までのご経験についてより詳しく知るための面談や面接が行われる予定です。
+              <br />
+              審査後に改めてメールにてお知らせ致します。
+              <br />
+              <br />
+              尚現在はα版として運用しており、β版ローンチは2022年1月を目指しております。
+              <br />
+              本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。
+            </p>
+            <Button variant="contained" className="button" >
+              ホームへ戻る
+            </Button>
+          </div>
         </>
       );
       break;
 
     default:
-      console.log("other", step);
-      contents = <p>Other</p>;
+      contents = <p>Unknown stepIndex</p>;
   }
 
   return (
@@ -204,7 +250,7 @@ function Apply() {
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />
       </div>
       <div className="rightBox">
-        <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>
+        { step !== 2 && <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>}
         <form
           onSubmit={
             step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
@@ -212,16 +258,6 @@ function Apply() {
           className="form"
         >
           {contents}
-          <div className="buttonContainer">
-            <Button
-              color="primary"
-              variant="contained"
-              className="button"
-              type="submit"
-            >
-              next
-            </Button>
-          </div>
         </form>
       </div>
     </div>

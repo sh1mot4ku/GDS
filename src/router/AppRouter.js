@@ -1,38 +1,22 @@
-import React, { useState } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Apply from "../components/Apply";
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
+import Apply from "../components/Apply/Apply";
 import Recruiter from "../components/Recruiter/Recruiter";
 import TopPage from '../components/TopPage/TopPage';
+import { createBrowserHistory }from 'history';
 
-
-import {
-  UserContext,
-  BusinessUserContext,
-  initialUser,
-  initialBusinessUser,
-} from "../context";
+const history = createBrowserHistory();
 
 const AppRouter = () => {
-  const [user, setUser] = useState(initialUser);
-  const [business, setBusiness] = useState(initialBusinessUser);
-
   return (
-    <BrowserRouter>
-      <UserContext.Provider value={[user, setUser]}>
-        <BusinessUserContext.Provider value={[business, setBusiness]}>
-          <Switch>
-            <Route path="/" component={TopPage} exact={true} />
-          </Switch>
-          <Switch>
-            <Route path="/recruiter" component={Recruiter} exact={true} />
-          </Switch>
-          <Switch>
-            <Route path="/apply" component={Apply} exact={true} />
-          </Switch>
-        </BusinessUserContext.Provider>
-      </UserContext.Provider>
-    </BrowserRouter>
+    <Router history={history}>
+      <Switch>
+        <Route path="/" component={TopPage} exact={true} />
+        <Route path="/apply-developer" component={Apply} />
+        <Route path="/apply-recruiter" component={Recruiter} />
+      </Switch>
+    </Router>
   );
 };
 
-export default AppRouter;
+export { history, AppRouter as default };
