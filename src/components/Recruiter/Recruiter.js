@@ -17,6 +17,7 @@ function Recruiter() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("Japan");
+  const [companyLocation, setCompanyLocation] = useState("");
   const [lookingFor, setLookingFor] = useState("");
   const [linkedin, setLinkedin] = useState("");
   const [github, setGithub] = useState("");
@@ -34,6 +35,7 @@ function Recruiter() {
         email,
         password,
         location,
+        companyLocation,
         lookingFor,
         linkedin,
         github,
@@ -126,7 +128,7 @@ function Recruiter() {
         <>
           <InputTextAndLabel
             label="FULL NAME"
-            placeholder="YOUR NAME"
+            placeholder="Your Name"
             type="text"
             onChange={(e) => setFullName(e.target.value)}
             value={fullName}
@@ -152,9 +154,21 @@ function Recruiter() {
             value={location}
             options={countries}
           />
+          <InputTextAndLabel
+            label="COMPANY LOCATION"
+            placeholder="Company Location"
+            type="text"
+            onChange={(e) => setCompanyLocation(e.target.value)}
+            value={companyLocation}
+          />
           <RadioForm
-            label="LOOKING FOR"
-            options={optionData.userLookingFor}
+            label=" I AM LOOKING FOR / 探している職種について"
+            options={optionData.businessLookingFor}
+            onChange={(e) => setLookingFor(e.target.value)}
+          />
+          <RadioForm
+            label="HOW MUCH DO YOU NEED A COMMITMENT? / コミット時間について"
+            options={optionData.businessCommitment}
             onChange={(e) => setLookingFor(e.target.value)}
           />
           <div className="buttonContainer">
@@ -249,7 +263,8 @@ function Recruiter() {
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />
       </div>
       <div className="rightBox">
-        { step !== 2 && <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>}
+        { step !== 2 && <><h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
+        <p className="subtitle">正確なマッチングの為に詳細な情報をお伝え下さい</p></>}
         <form
           onSubmit={
             step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
