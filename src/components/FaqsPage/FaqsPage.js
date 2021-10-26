@@ -30,7 +30,7 @@ const FaqsPage = () => {
     },
   ])
   return (
-    <div className='main'>
+    <div className='main-faqs'>
       <div className='title'>
         <h2>FAQS</h2>
         <p>よくあるご質問</p>

@@ -3,7 +3,7 @@ import './AboutPage.scss';
 
 const AboutPage = () => {
   return(
-    <div className='main'>
+    <div className='main-about'>
       <div className='title'>
         <h2>COMPANY</h2>
         <p>会社概要</p>
