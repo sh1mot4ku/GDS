@@ -1,16 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import InputText from "./InputText.jsx";
 import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import InputSelect from "./InputSelect.jsx";
+import { auth } from "../../firebase/firebase";
+import { v4 as uuid } from 'uuid';
 import RadioForm from "./RadioForm.jsx";
 import "./Apply.scss";
 import { insertUser } from "../../API/dbutils";
-import { UserContext } from "../../context/user-context";
+// import { UserContext } from "../../context/user-context";
 const info = {};
 
 function Apply() {
-  const {user, setUser} = useContext(UserContext);
+  // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,22 +30,30 @@ function Apply() {
   const onSubmit = (e) => {
     e.preventDefault();
     const postingInfo = {
-      fullName,
-      email,
-      password,
-      location,
-      lookingFor,
-      linkedin,
-      github,
-      website,
-      englishLevel,
-      description,
+      profile: {
+        fullName,
+        email,
+        password,
+        location,
+        lookingFor,
+        linkedin,
+        github,
+        website,
+        englishLevel,
+        description  
+      },
       userType: USER_TYPE_CLIENT,
+      uid: uuid()
     };
-
-    setUser(postingInfo);
-    insertUser(postingInfo);
-    setStep(step + 1);
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // setUser(postingInfo);
+        insertUser(postingInfo, userCredential.user.uid);
+        setStep(step + 1);
+      })
+      .catch(e => {
+        console.error(`Error happened: ${e}`);
+      })
   };
 
   const optionData = {
