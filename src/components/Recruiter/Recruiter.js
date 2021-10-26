@@ -96,21 +96,6 @@ function Recruiter() {
     },
   ];
 
-  const levelOfEnglish = [
-    {
-      value: "日常会話、旅行トラブル対応レベル",
-    },
-    {
-      value: "ビジネス会話、プレゼンレベル",
-    },
-    {
-      value: "簡単通訳、ディスカッションレベル",
-    },
-    {
-      value: "ネイティブレベル",
-    },
-  ];
-
   const handleClick = (e, newStep, userInfo) => {
     e.preventDefault();
     info[step] = userInfo;
@@ -212,23 +197,20 @@ function Recruiter() {
       contents = (
         <>
           <div className="thxBox">
-            <h2 className="thxTitle">Thank you for Applying</h2>
+            <h2 className="thxTitle">Thank you for Connecting</h2>
             <p className="sentence">
-              この度はGlobal
-              Developersへのご興味を頂き誠にありがとうございます。
+            この度はプロジェクトの詳細をご共有頂き有難うございました。
               <br />
               <br />
-              ご応募頂いた皆様には、1週間以内にご連絡を改めさせて頂きます。
+              よりお客様のニーズを理解するため、専任のコンサルタントがプロセス全体を通してお客様をサポートします。以下のLinkよりプロジェクト・求人に関するMTGを予約してください。
+              <br />尚現在はα版として稼働しております。β版ローンチは2022年1月を目指しておりますので、もうしばしお待ちいただけましたら幸いです。今後のプロセスについては、今までのご経験についてより詳しく知るための面談や面接が行われる予定です。
               <br />
-              今後のプロセスについては、今までのご経験についてより詳しく知るための面談や面接が行われる予定です。
-              <br />
-              審査後に改めてメールにてお知らせ致します。
-              <br />
-              <br />
-              尚現在はα版として運用しており、β版ローンチは2022年1月を目指しております。
-              <br />
-              本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。
             </p>
+          <div className="buttonContainer">
+            <Button variant="contained" className="button" type="button">
+              面談を予約する
+            </Button>
+          </div>
             <Button variant="contained" className="button" >
               ホームへ戻る
             </Button>
