@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import InputText from "../Apply/InputText";
+import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
 import InputTextAndLabel from "../Apply/InputTextAndLabel";
 import InputSelect from "../Apply/InputSelect";
 import { auth } from "../../firebase/firebase";
@@ -19,10 +19,8 @@ function Recruiter() {
   const [location, setLocation] = useState("Japan");
   const [companyLocation, setCompanyLocation] = useState("");
   const [lookingFor, setLookingFor] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [github, setGithub] = useState("");
-  const [website, setWebsite] = useState("");
-  const [englishLevel, setEnglishLevel] = useState("");
+  const [mustSkills, setMustSkills] = useState("");
+  const [niceSkills, setNiceSkills] = useState("");
   const [description, setDescription] = useState("");
 
   const USER_TYPE_CLIENT = "client";
@@ -37,10 +35,8 @@ function Recruiter() {
         location,
         companyLocation,
         lookingFor,
-        linkedin,
-        github,
-        website,
-        englishLevel,
+        mustSkills,
+        niceSkills,
         description  
       },
       userType: USER_TYPE_CLIENT,
@@ -184,36 +180,25 @@ function Recruiter() {
       contents = (
         <>
           <InputTextAndLabel
-            label="YOUR PROFILE (LinkedIn / GitHub / Website)"
-            placeholder="https://www.linkedin.com/in/example"
+            label="MUST HAVE"
+            placeholder="必要なスキルや経験を記入ください"
             type="text"
-            onChange={(e) => setLinkedin(e.target.value)}
-            value={linkedin}
+            onChange={(e) => setMustSkills(e.target.value)}
+            value={mustSkills}
           />
-          <InputText
-            placeholder="https://github.com/example"
+          <InputTextAndLabel
+            label="NICE TO HAVE"
+            placeholder="持っていた場合尚良いスキルや経験を記入ください"
             type="text"
-            onChange={(e) => setGithub(e.target.value)}
-            value={github}
+            onChange={(e) => setNiceSkills(e.target.value)}
+            value={niceSkills}
           />
-          <InputText
-            placeholder="https://lraough.com/"
+          <InputTextAreaAndLabel
+            label="PROJECT DESCRIPTION"
+            placeholder="簡単なプロジェクト概要について記入下さい。後ほどインタビューにて詳細を伺います。"
             type="text"
-            onChange={(e) => setWebsite(e.target.value)}
-            value={website}
-          />
-          <InputSelect
-            label="YOUR ENGLISH LEVEL"
-            placeholder="ご自身の英語レベルについて教えてください"
-            type="text"
-            onChange={(e) => setEnglishLevel(e.target.value)}
-            value={englishLevel}
-            options={levelOfEnglish}
-          />
-          <RadioForm
-            label="LOOKING FOR"
-            options={optionData.userDescription}
             onChange={(e) => setDescription(e.target.value)}
+            value={description}
           />
           <div className="buttonContainer">
             <Button variant="contained" className="button" type="submit">
