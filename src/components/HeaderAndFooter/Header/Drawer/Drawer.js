@@ -4,11 +4,26 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Box from "@mui/material/Box";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
-import menuItems from "../menuItems";
+import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../../menuItems";
 import "./Drawer.scss";
 
-function Drawer({ isDrawerOpen, toggleDrawer }) {
+function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
+
+  const createMenuList = (menuItems) =>
+    menuItems.map((menuItem) => (
+      <Link
+        key={menuItem.title}
+        className={
+          location.pathname === menuItem.to
+            ? [...menuItem.className, "activated-menu"].join(" ")
+            : menuItem.className
+        }
+        to={menuItem.to}
+      >
+        {menuItem.title}
+      </Link>
+    ));
   return (
     <div>
       <SwipeableDrawer
@@ -37,21 +52,15 @@ function Drawer({ isDrawerOpen, toggleDrawer }) {
           </div>
           <nav className="nav-bar-drawer">
             <div className="menu-drawer">
-              {menuItems.length !== 0 &&
-                menuItems.map((menuItem) => (
-                  <Link
-                    key={menuItem.title}
-                    className={
-                      location.pathname === menuItem.to
-                        ? [...menuItem.className, "activated-menu"].join(" ")
-                        : menuItem.className
-                    }
-                    to={menuItem.to}
-                  >
-                    {menuItem.title}
-                  </Link>
-                ))}
+              {isUserLoggedIn
+                ? headerMenuItemsLogIn.length !== 0 &&
+                  createMenuList(headerMenuItemsLogIn)
+                : headerMenuItemsLogOut.length !== 0 &&
+                  createMenuList(headerMenuItemsLogOut)}
             </div>
+            <Link className="login" to="/login">
+              ログイン
+            </Link>
             <Button className="round-button-drawer background-white-drawer">
               無料会員登録
             </Button>

@@ -1,26 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import useMedia from "use-media";
-import HeaderHamburger from "./HeaderHamburger";
+import HeaderTBandMB from "./HeaderTBandMB";
 import HeaderPC from "./HeaderPC";
+import { useAuthContext } from "../../../context/auth-context";
 import "./Header.scss";
 
 const Header = () => {
   const isTablet = useMedia({ maxWidth: "1024px" });
+  const location = useLocation();
+  const { loginId } = useAuthContext();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
+
+  useEffect(() => {
+    if (loginId === null) {
+      setIsUserLoggedIn(false);
+    } else {
+      setIsUserLoggedIn(true);
+    }
+  }, [loginId]);
 
   return (
-    <header className="header">
-      <div className="header-container">
-        <Link to="/">
-          <img
-            className="company-logo"
-            src="photos/lraoughLogo.png"
-            alt="Lraough-logo"
-          />
-        </Link>
-        {isTablet ? <HeaderHamburger /> : <HeaderPC />}
-      </div>
-    </header>
+    <>
+      {location.pathname === "/apply-developer" ||
+      location.pathname === "/apply-recruiter" ? null : (
+        <header className="header">
+          <div className="header-container">
+            <Link to="/">
+              <img
+                className="company-logo"
+                src="photos/lraoughLogo.png"
+                alt="Lraough-logo"
+              />
+            </Link>
+            {isUserLoggedIn !== null && isTablet ? (
+              <HeaderTBandMB isUserLoggedIn={isUserLoggedIn} />
+            ) : (
+              <HeaderPC isUserLoggedIn={isUserLoggedIn} />
+            )}
+          </div>
+        </header>
+      )}
+    </>
   );
 };
 

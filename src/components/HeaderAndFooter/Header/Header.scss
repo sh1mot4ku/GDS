@@ -5,6 +5,7 @@
   position: fixed;
   top: 0;
   background-color: white;
+  border-bottom: 2px solid $line;
   z-index: 10;
   .header-container {
     padding: 20px 40px;
@@ -41,16 +42,25 @@
           }
         }
       }
-      .round-button {
-        border: 1.8px solid $color_primary;
-        border-radius: 100px;
-        padding: 8px 32px;
-        margin: 0 4px;
-        font-weight: 700;
-      }
-      .background-white {
-        background-color: white;
-        color: $color_primary;
+      .nav-right {
+        padding-left: 20px;
+        border-left: 2px solid $line;
+        display: flex;
+        align-items: center;
+        .login {
+          margin-right: 8px;
+        }
+        .round-button {
+          border: 1.8px solid $color_primary;
+          border-radius: 100px;
+          padding: 8px 32px;
+          margin: 0 4px;
+          font-weight: 700;
+        }
+        .background-white {
+          background-color: white;
+          color: $color_primary;
+        }
       }
     }
   }

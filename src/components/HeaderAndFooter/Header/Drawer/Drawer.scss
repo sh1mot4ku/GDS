@@ -1,5 +1,5 @@
-@import "../../../sass_config/color.scss";
-@import "../../../sass_config/mixin.scss";
+@import "../../../../sass_config/color.scss";
+@import "../../../../sass_config/mixin.scss";
 
 .logo-closebtn-wrapper {
   display: flex;
@@ -39,6 +39,10 @@
           0.01em 0 $color_primary, -0.01em 0 $color_primary;
       }
     }
+  }
+
+  .login {
+    margin-bottom: 44px;
   }
   .round-button-drawer {
     border: 1.8px solid $color_primary;
