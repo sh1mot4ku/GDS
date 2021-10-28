@@ -8,7 +8,9 @@ const Contact = () => {
   return (
     <>
       {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ? null : (
+      location.pathname === "/apply-recruiter" ||
+      location.pathname === "/job-list-detail" ||
+      location.pathname === "/user-profile" ? null : (
         <section className="contact-section">
           <p className="contact-title">CONTACT</p>
           <p className="contact-content">
