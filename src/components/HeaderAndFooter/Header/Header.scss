@@ -43,11 +43,11 @@
         }
       }
       .nav-right {
-        padding-left: 20px;
-        border-left: 2px solid $line;
         display: flex;
         align-items: center;
         .login {
+          padding-left: 20px;
+          border-left: 2px solid $line;
           margin-right: 8px;
         }
         .round-button {
@@ -60,6 +60,11 @@
         .background-white {
           background-color: white;
           color: $color_primary;
+        }
+
+        .logout-icon {
+          color: $gray;
+          font-size: 32px;
         }
       }
     }
