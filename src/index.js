@@ -50,7 +50,7 @@ auth.onAuthStateChanged((user) => {
         // }
       });
   } else {
-    loginId = "null";
+    loginId = null;
     renderApp();
     history.push("/");
   }

@@ -52,6 +52,7 @@
         }
         .round-button {
           border: 1.8px solid $color_primary;
+          background: $color_primary;
           border-radius: 100px;
           padding: 8px 32px;
           margin: 0 4px;
@@ -61,10 +62,11 @@
           background-color: white;
           color: $color_primary;
         }
-
-        .logout-icon {
+        .user-icon-no-img {
           color: $gray;
           font-size: 32px;
+          padding-top: 4px;
+          align-items: center;
         }
       }
     }

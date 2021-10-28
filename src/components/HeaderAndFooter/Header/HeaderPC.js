@@ -36,7 +36,7 @@ const HeaderPC = ({ isUserLoggedIn }) => {
         <div className="nav-right">
           {isUserLoggedIn ? (
             <Link to="/user-profile">
-              <AccountCircleOutlinedIcon className="logout-icon" />
+              <AccountCircleOutlinedIcon className="user-icon-no-img" />
             </Link> // change this after user img func is implemented
           ) : (
             <>

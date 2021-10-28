@@ -4,7 +4,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Box from "@mui/material/Box";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
-import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../../menuItems";
+import { headerMenuItemsLogOut, drawerMenuItemsLogin } from "../../menuItems";
 import "./Drawer.scss";
 
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
@@ -15,7 +15,7 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
       <Link
         key={menuItem.title}
         className={
-          location.pathname === menuItem.to
+          location.pathname === menuItem.to && menuItem.to !== "/logout"
             ? [...menuItem.className, "activated-menu"].join(" ")
             : menuItem.className
         }
@@ -24,6 +24,7 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
         {menuItem.title}
       </Link>
     ));
+
   return (
     <div>
       <SwipeableDrawer
@@ -53,21 +54,32 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
           <nav className="nav-bar-drawer">
             <div className="menu-drawer">
               {isUserLoggedIn
-                ? headerMenuItemsLogIn.length !== 0 &&
-                  createMenuList(headerMenuItemsLogIn)
+                ? drawerMenuItemsLogin.length !== 0 &&
+                  createMenuList(drawerMenuItemsLogin)
                 : headerMenuItemsLogOut.length !== 0 &&
                   createMenuList(headerMenuItemsLogOut)}
             </div>
-            <Button className="round-button-drawer background-white-drawer">
-              無料会員登録
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              className="round-button-drawer"
-            >
-              採用担当者の方
-            </Button>
+            {isUserLoggedIn ? null : (
+              <>
+                <Link className="login" to="/login">
+                  ログイン
+                </Link>
+                <Link to="/apply-developer">
+                  <Button className="round-button-drawer background-white-drawer">
+                    無料会員登録
+                  </Button>
+                </Link>
+                <Link to="/apply-recruiter">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className="round-button-drawer"
+                  >
+                    採用担当者の方
+                  </Button>
+                </Link>
+              </>
+            )}
           </nav>
         </Box>
       </SwipeableDrawer>

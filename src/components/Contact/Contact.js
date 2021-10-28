@@ -14,9 +14,11 @@ const Contact = () => {
           <p className="contact-content">
             取材/お仕事のご依頼・お問い合わせはこちら
           </p>
-          <Button variant="contained" className="round-button">
-            お問い合わせ
-          </Button>
+          <Link to="/contact-form">
+            <Button variant="contained" className="round-button">
+              お問い合わせ
+            </Button>
+          </Link>
         </section>
       )}
     </>
