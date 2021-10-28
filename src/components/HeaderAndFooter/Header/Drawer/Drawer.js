@@ -58,9 +58,6 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
                 : headerMenuItemsLogOut.length !== 0 &&
                   createMenuList(headerMenuItemsLogOut)}
             </div>
-            <Link className="login" to="/login">
-              ログイン
-            </Link>
             <Button className="round-button-drawer background-white-drawer">
               無料会員登録
             </Button>

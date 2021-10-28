@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   background-color: white;
-  border-bottom: 2px solid $line;
+  border-bottom: 2px solid $light-gray;
   z-index: 10;
   .header-container {
     padding: 20px 40px;
@@ -47,7 +47,7 @@
         align-items: center;
         .login {
           padding-left: 20px;
-          border-left: 2px solid $line;
+          border-left: 2px solid $light-gray;
           margin-right: 8px;
         }
         .round-button {

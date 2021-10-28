@@ -47,6 +47,16 @@ export const headerMenuItemsLogIn = [
     className: ["menu-item"],
     to: "/blog",
   },
+  {
+    title: "プロフィール",
+    className: ["menu-item"],
+    to: "/profile",
+  },
+  {
+    title: "ログアウト",
+    className: ["menu-item"],
+    to: "/logout",
+  },
 ];
 
 export const footerMenuItemsLogOut = [
