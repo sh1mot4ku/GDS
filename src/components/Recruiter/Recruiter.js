@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
 import InputTextAndLabel from "../Apply/InputTextAndLabel";
-import InputSelect from "../Apply/InputSelect";
 import { auth } from "../../firebase/firebase";
 import { v4 as uuid } from 'uuid';
 import RadioForm from "../Apply/RadioForm";
@@ -17,8 +16,7 @@ function Recruiter() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("Japan");
-  const [companyLocation, setCompanyLocation] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
   const [lookingFor, setLookingFor] = useState("");
   const [mustHave, setMustHave] = useState("");
   const [niceToHave, setNiceToHave] = useState("");
@@ -33,8 +31,7 @@ function Recruiter() {
         fullName,
         email,
         password,
-        location,
-        companyLocation,
+        companyAddress,
         lookingFor,
         mustHave,
         niceToHave,
@@ -79,24 +76,6 @@ function Recruiter() {
     ],
   };
 
-  const countries = [
-    {
-      value: "Japan",
-    },
-    {
-      value: "USA",
-    },
-    {
-      value: "Canada",
-    },
-    {
-      value: "Korea",
-    },
-    {
-      value: "Chinese",
-    },
-  ];
-
   const handleClick = (e, newStep, userInfo) => {
     e.preventDefault();
     info[step] = userInfo;
@@ -129,19 +108,12 @@ function Recruiter() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <InputSelect
-            label="LOCATION"
-            placeholder="Location"
-            onChange={(e) => setLocation(e.target.value)}
-            value={location}
-            options={countries}
-          />
           <InputTextAndLabel
-            label="COMPANY LOCATION"
-            placeholder="Company Location"
+            label="COMPANY ADDRESS"
+            placeholder="Company Address"
             type="text"
-            onChange={(e) => setCompanyLocation(e.target.value)}
-            value={companyLocation}
+            onChange={(e) => setCompanyAddress(e.target.value)}
+            value={companyAddress}
           />
           <RadioForm
             label=" I AM LOOKING FOR / 探している職種について"
@@ -157,7 +129,6 @@ function Recruiter() {
             <Button variant="contained" className="button" type="submit">
               next
             </Button>
-            <button className="loginButton">ログインはこちら</button>
           </div>
         </>
       );
@@ -191,9 +162,9 @@ function Recruiter() {
               next
             </Button>
           </div>
-            <Link className="link-line" >
-              ＜ PREVIOUS
-            </Link>
+          <div className="link-line">
+            <button className="previousButton" type="submit">＜ PREVIOUS</button>
+          </div>
         </>
       );
       break;
@@ -212,14 +183,14 @@ function Recruiter() {
               尚現在はα版として稼働しております。β版ローンチは2022年1月を目指しておりますので、もうしばしお待ちいただけましたら幸いです。
               <br />
             </p>
-          <div className="buttonContainer">
-            <Button variant="contained" className="button" type="button">
-              面談を予約する
-            </Button>
-          </div>
-            <Link to="/" className="link-line" >
-              ホームへ戻る
-            </Link>
+            <div className="buttonContainer">
+              <Button variant="contained" className="button" type="button">
+                面談を予約する
+              </Button>
+            </div>
+            <div className="link-line">
+              <Link to="/" className="previousButton">ホームへ戻る</Link>
+            </div>
           </div>
         </>
       );

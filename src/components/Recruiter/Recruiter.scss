@@ -5,8 +5,8 @@
 
 	.leftBox {
     position: fixed;
-    height: 100%;
-    left: 0;
+    height: 100vh;
+    top: 0;
     z-index: 10000;
 		width: 471px;
 		background: #1e40f6;
@@ -26,10 +26,9 @@
 	}
 
 	.rightBox {
-		display: flex;
 		align-items: center;
 		flex-direction: column;
-    padding-left: 657px;
+    margin-left: 657px;
 
 		.title {
 			margin: 32px;
@@ -66,16 +65,25 @@
 					height: 54px;
 					border-radius: 30px;
 				}
-
 			}
+
+			.link-line {
+				text-align: center;
+				margin: 20px auto;
+				
+				.previousButton {
+					color: #A0A0A0;
+					background: #fff;
+					border: none;
+					cursor: pointer;
+					text-decoration: underline;
+				}
+			}
+
+			.thxBox {
+				padding-left: 0;
+			}
+
 		}
 	}
-}
-
-.link-line {
-	margin: 0 auto;
-	margin-top: 20px;
-	color: #A0A0A0;
-	text-decoration: underline;
-	padding-left: 178px;
 }

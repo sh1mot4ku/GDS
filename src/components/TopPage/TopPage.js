@@ -8,9 +8,9 @@ import useMedia from 'use-media';
 const TopPage = () => {
   const isMobile = useMedia({ maxWidth: '768px' });
 
-  const recruiterSubscribe = () => {
+  // const recruiterSubscribe = () => {
     // move to page of subscribing for recruiter
-  };
+  // };
 
   return (
     <div className="top-wrapper">
