@@ -29,7 +29,7 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
-    margin-left: 640px;
+    padding-left: 657px;
 
 		.title {
 			margin: 32px;
@@ -66,7 +66,16 @@
 					height: 54px;
 					border-radius: 30px;
 				}
+
 			}
 		}
 	}
+}
+
+.link-line {
+	margin: 0 auto;
+	margin-top: 20px;
+	color: #A0A0A0;
+	text-decoration: underline;
+	padding-left: 178px;
 }

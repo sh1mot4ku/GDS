@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
 import InputTextAndLabel from "../Apply/InputTextAndLabel";
@@ -19,11 +20,11 @@ function Recruiter() {
   const [location, setLocation] = useState("Japan");
   const [companyLocation, setCompanyLocation] = useState("");
   const [lookingFor, setLookingFor] = useState("");
-  const [mustSkills, setMustSkills] = useState("");
-  const [niceSkills, setNiceSkills] = useState("");
-  const [description, setDescription] = useState("");
+  const [mustHave, setMustHave] = useState("");
+  const [niceToHave, setNiceToHave] = useState("");
+  const [projectDetail, setProjectDetail] = useState("");
 
-  const USER_TYPE_CLIENT = "client";
+  const USER_TYPE_RECRUITER = "recruiter";
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -35,11 +36,11 @@ function Recruiter() {
         location,
         companyLocation,
         lookingFor,
-        mustSkills,
-        niceSkills,
-        description  
+        mustHave,
+        niceToHave,
+        projectDetail  
       },
-      userType: USER_TYPE_CLIENT,
+      userType: USER_TYPE_RECRUITER,
       uid: uuid()
     };
     auth.createUserWithEmailAndPassword(email, password)
@@ -168,28 +169,31 @@ function Recruiter() {
             label="MUST HAVE"
             placeholder="必要なスキルや経験を記入ください"
             type="text"
-            onChange={(e) => setMustSkills(e.target.value)}
-            value={mustSkills}
+            onChange={(e) => setMustHave(e.target.value)}
+            value={mustHave}
           />
           <InputTextAndLabel
             label="NICE TO HAVE"
             placeholder="持っていた場合尚良いスキルや経験を記入ください"
             type="text"
-            onChange={(e) => setNiceSkills(e.target.value)}
-            value={niceSkills}
+            onChange={(e) => setNiceToHave(e.target.value)}
+            value={niceToHave}
           />
           <InputTextAreaAndLabel
-            label="PROJECT DESCRIPTION"
+            label="PROJECT DETAIL"
             placeholder="簡単なプロジェクト概要について記入下さい。後ほどインタビューにて詳細を伺います。"
             type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
+            onChange={(e) => setProjectDetail(e.target.value)}
+            value={projectDetail}
           />
           <div className="buttonContainer">
             <Button variant="contained" className="button" type="submit">
               next
             </Button>
           </div>
+            <Link className="link-line" >
+              ＜ PREVIOUS
+            </Link>
         </>
       );
       break;
@@ -203,7 +207,9 @@ function Recruiter() {
               <br />
               <br />
               よりお客様のニーズを理解するため、専任のコンサルタントがプロセス全体を通してお客様をサポートします。以下のLinkよりプロジェクト・求人に関するMTGを予約してください。
-              <br />尚現在はα版として稼働しております。β版ローンチは2022年1月を目指しておりますので、もうしばしお待ちいただけましたら幸いです。今後のプロセスについては、今までのご経験についてより詳しく知るための面談や面接が行われる予定です。
+              <br />
+              <br />
+              尚現在はα版として稼働しております。β版ローンチは2022年1月を目指しておりますので、もうしばしお待ちいただけましたら幸いです。
               <br />
             </p>
           <div className="buttonContainer">
@@ -211,9 +217,9 @@ function Recruiter() {
               面談を予約する
             </Button>
           </div>
-            <Button variant="contained" className="button" >
+            <Link to="/" className="link-line" >
               ホームへ戻る
-            </Button>
+            </Link>
           </div>
         </>
       );
