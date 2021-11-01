@@ -1,0 +1,252 @@
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
+
+.top-wrapper {
+  width: 1070px;
+  margin: 30px auto;
+  font-family: "Roboto";
+
+  @include mobile {
+    width: 90vw;
+  }
+
+  .subscribe-wrapper {
+    margin-bottom: 120px;
+
+    @include mobile {
+      margin-bottom: 30vw;
+    }
+
+    .subscribe-container {
+      // background-image: url('./photos/logo-global-developers.svg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
+      padding: 150px 0 127px;
+      text-align: center;
+
+      @include mobile {
+        padding: 18vw 0;
+        background-position: center 14vw;
+      }
+
+      .subscribe-header {
+        // width: 550px;
+        margin: 0 auto 20px;
+        font-size: 56px;
+
+        @include mobile {
+          font-size: 30px;
+        }
+      }
+
+      .subscribe-header2 {
+        font-size: 20px;
+        margin-bottom: 72px;
+
+        @include mobile {
+          width: 78vw;
+          margin: 0 auto 49px;
+        }
+      }
+
+      .subscribe-buttons-top {
+        width: 500px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+
+        @include mobile {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .round-button {
+          border: 1.8px solid $color_primary;
+          border-radius: 100px;
+          padding: 16px 74px;
+          font-weight: 700;
+
+          @include mobile {
+            padding: 12px 74px;
+            width: 100%;
+            margin-bottom: 16px;
+          }
+        }
+      }
+    }
+    .subscribe-logos {
+      margin-right: calc(50% - 50vw);
+      margin-left: calc(50% - 50vw);
+
+      .tech-logos {
+        display: block;
+        width: 100%;
+        height: auto;
+
+        @include mobile {
+          width: 100%;
+          object-fit: cover;
+          height: 12vw;
+        }
+      }
+    }
+  }
+
+  .for-recruiter-wrapper {
+    text-align: center;
+
+    .for-recruiter-header-container {
+      margin-bottom: 60px;
+    }
+
+    .for-recruiter-header {
+      font-weight: bold;
+      color: #1e40f6;
+      font-size: 56px;
+
+      @include mobile {
+        font-size: 30px;
+        margin-bottom: 4vw;
+      }
+    }
+
+    .for-recruiter-subheader {
+      color: $gray;
+      font-weight: bold;
+    }
+
+    .for-recruiter-describe-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 150px;
+
+      @include mobile {
+        flex-direction: column;
+        margin-bottom: 10vw;
+      }
+    }
+
+    #describe-reverse {
+      flex-direction: row-reverse;
+
+      @include mobile {
+        flex-direction: column;
+      }
+
+      .describe-photo {
+        margin: 0 25px 0 0;
+      }
+    }
+
+    .describe-photo {
+      margin-left: 25px;
+      @include mobile {
+        margin: 0 0 5vw !important;
+      }
+
+      .describe-photo-content {
+        width: 500px;
+
+        @include mobile {
+          width: 100%;
+        }
+      }
+    }
+
+    .describe-text {
+      text-align: left;
+      width: 480px;
+
+      @include mobile {
+        width: 100%;
+      }
+
+      .describe-header {
+        margin-bottom: 20px;
+        font-weight: 700px;
+        font-size: 28px;
+
+        @include mobile {
+          font-size: 20px;
+        }
+      }
+      .describe-div {
+        line-height: 32px;
+        letter-spacing: 1.4px;
+        margin-bottom: 30px;
+        font-size: 16px;
+      }
+      .describe-lines {
+        list-style: none;
+        line-height: 32px;
+        letter-spacing: 1.4px;
+        font-size: 16px;
+
+        & > li {
+          @include mobile {
+            margin-bottom: 1vw;
+          }
+        }
+      }
+    }
+  }
+
+  .subscribe-buttons-buttom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+
+    @include mobile {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .subscribe-button-wrapper {
+      border-radius: 12px;
+      padding: 25px 9%;
+
+      @include mobile {
+        padding: 25px 0;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .subscribe-button {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 325px;
+        font-weight: 700;
+
+        @include mobile {
+          padding: 0;
+        }
+
+        .subscribe-user-icon {
+          width: 50px;
+          display: block;
+          margin-bottom: 4px;
+        }
+
+        .subscribe-text {
+          font-size: 23px;
+
+          @include mobile {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+  .background-white {
+    background-color: white;
+    color: $color_primary;
+  }
+}
