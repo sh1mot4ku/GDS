@@ -1,0 +1,83 @@
+@import "../../../sass_config/mixin.scss";
+.footer {
+  width: 100%;
+  background: black;
+  .footer-container {
+    @include pc {
+      max-width: 1080px;
+    }
+    margin: auto;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 0;
+    @include tablet {
+      padding: 40px;
+    }
+    @include mobile {
+      flex-direction: column;
+    }
+    .menu-sns-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .menu {
+        margin: 12px 0;
+        display: flex;
+        flex-direction: column;
+        .menu-item {
+          font-size: 16px;
+          margin-bottom: 4px;
+          cursor: pointer;
+          color: white;
+
+          &:hover {
+            opacity: 0.6;
+          }
+        }
+      }
+      .sns-wrapper {
+        margin: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        .icon {
+          font-size: 28px;
+          margin-right: 16px;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+    .logo-copyright-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      .company-logo-bk-wrapper {
+        align-self: flex-end;
+        @include mobile {
+          align-self: flex-start;
+        }
+        .company-logo-bk {
+          margin-bottom: 116px;
+          height: 60px;
+          cursor: pointer;
+        }
+      }
+      .copy-right {
+        @include mobile {
+          margin-top: 8px;
+          align-self: flex-start;
+        }
+      }
+    }
+  }
+}
+.company-logo-bk-mb {
+  height: 60px;
+}

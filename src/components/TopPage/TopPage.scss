@@ -1,5 +1,5 @@
-@import '../../sass_config/color.scss';
-@import '../../sass_config/mixin.scss';
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
 
 .top-wrapper {
   width: 1070px;
@@ -29,7 +29,7 @@
         padding: 18vw 0;
         background-position: center 14vw;
       }
-  
+
       .subscribe-header {
         // width: 550px;
         margin: 0 auto 20px;
@@ -38,7 +38,7 @@
         @include mobile {
           font-size: 30px;
         }
-      }  
+      }
 
       .subscribe-header2 {
         font-size: 20px;
@@ -75,12 +75,12 @@
             margin-bottom: 16px;
           }
         }
-      } 
+      }
     }
     .subscribe-logos {
       margin-right: calc(50% - 50vw);
       margin-left: calc(50% - 50vw);
-      
+
       .tech-logos {
         display: block;
         width: 100%;
@@ -91,7 +91,7 @@
           object-fit: cover;
           height: 12vw;
         }
-      }  
+      }
     }
   }
 
@@ -104,7 +104,7 @@
 
     .for-recruiter-header {
       font-weight: bold;
-      color: #1E40F6;
+      color: #1e40f6;
       font-size: 56px;
 
       @include mobile {
@@ -139,7 +139,7 @@
 
       .describe-photo {
         margin: 0 25px 0 0;
-      }  
+      }
     }
 
     .describe-photo {
@@ -154,9 +154,9 @@
         @include mobile {
           width: 100%;
         }
-      }  
+      }
     }
-  
+
     .describe-text {
       text-align: left;
       width: 480px;
@@ -192,7 +192,7 @@
           }
         }
       }
-    }  
+    }
   }
 
   .subscribe-buttons-buttom {
@@ -216,19 +216,19 @@
         margin-bottom: 20px;
         width: 100%;
       }
-      
+
       .subscribe-button {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        width: 325px;   
+        width: 325px;
         font-weight: 700;
 
         @include mobile {
           padding: 0;
         }
-        
+
         .subscribe-user-icon {
           width: 50px;
           display: block;
