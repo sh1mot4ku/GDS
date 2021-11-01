@@ -72,6 +72,18 @@
     }
   }
 }
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+
+  .dropdown-menuitem {
+    text-align: center;
+    padding: 4px;
+    width: 100%;
+  }
+}
+
 .activated-menu {
   color: $color_primary;
   text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,

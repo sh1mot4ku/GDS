@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useLocation, Link } from "react-router-dom";
 import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
@@ -7,6 +9,15 @@ import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn }) => {
   const location = useLocation();
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const createMenuList = (menuItems) =>
     menuItems.map((menuItem) => (
@@ -35,9 +46,46 @@ const HeaderPC = ({ isUserLoggedIn }) => {
         </div>
         <div className="nav-right">
           {isUserLoggedIn ? (
-            <Link to="/user-profile">
-              <AccountCircleOutlinedIcon className="user-icon-no-img" />
-            </Link> // change this after user img func is implemented
+            <>
+              <Button
+                id="basic-button"
+                aria-controls="basic-menu"
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <AccountCircleOutlinedIcon className="user-icon-no-img" />
+                {/* change this after user img func is implemented            */}
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <div className="dropdown-menu">
+                  <Link to="/user-profile">
+                    <MenuItem
+                      className="dropdown-menuitem"
+                      onClick={handleClose}
+                    >
+                      プロフィール
+                    </MenuItem>
+                  </Link>
+                  <Link to="/logout">
+                    <MenuItem
+                      className="dropdown-menuitem"
+                      onClick={handleClose}
+                    >
+                      ログアウト
+                    </MenuItem>
+                  </Link>
+                </div>
+              </Menu>
+            </>
           ) : (
             <>
               <Link className="login" to="/login">
