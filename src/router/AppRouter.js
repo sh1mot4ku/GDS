@@ -4,6 +4,7 @@ import TopPage from "../components/TopPage/TopPage";
 import AboutPage from "../components/AboutPage/AboutPage";
 import FaqsPage from "../components/FaqsPage/FaqsPage";
 import Apply from "../components/Apply/Apply";
+import ContactForm from "../components/Contact/ContactForm/ContactForm";
 import Wrapper from "../components/Wrapper/Wrapper";
 import { createBrowserHistory } from "history";
 
@@ -17,6 +18,7 @@ const AppRouter = () => (
         <Route path="/about" component={AboutPage} exact={true} />
         <Route path="/faqs" component={FaqsPage} exact={true} />
         <Route path="/apply-developer" component={Apply} />
+        <Route path="/contact" component={ContactForm} />
       </Switch>
     </Wrapper>
   </Router>

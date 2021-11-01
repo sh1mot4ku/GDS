@@ -13,7 +13,8 @@ const Wrapper = ({ children }) => {
       <main
         className={
           location.pathname === "/apply-developer" ||
-          location.pathname === "/apply-recruiter"
+          location.pathname === "/apply-recruiter" ||
+          location.pathname === "/contact"
             ? ["main-parent", "no-padding-top"].join(" ")
             : "main-parent"
         }

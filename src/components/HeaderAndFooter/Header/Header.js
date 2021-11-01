@@ -23,7 +23,8 @@ const Header = () => {
   return (
     <>
       {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ? null : (
+      location.pathname === "/apply-recruiter" ||
+      location.pathname === "/contact" ? null : (
         <header className="header">
           <div className="header-container">
             <Link to="/">
