@@ -1,0 +1,34 @@
+@import "../../../sass_config/color.scss";
+@import "../../../sass_config/mixin.scss";
+
+.thankyou-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 50%;
+  @include mobile {
+    width: 90%;
+  }
+  .title {
+    color: $color_primary;
+    margin-bottom: 60px;
+  }
+  .text {
+    font-size: 20px;
+  }
+  .first-text {
+    margin-bottom: 40px;
+  }
+  .back-btn {
+    margin-top: 60px;
+    width: 212px;
+    height: 54px;
+    border-radius: 30px;
+    background-color: $color_primary;
+    color: #fff;
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
