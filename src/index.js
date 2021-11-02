@@ -5,6 +5,7 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppRouter, { history } from "./router/AppRouter";
 import database, { auth } from "./firebase/firebase";
 import AuthContext from "./context/auth-context";
+import { JobListingsProvider } from "./context/jobListing-context";
 // import UserProvider from "./context/user-context";
 import "./sass_config/reset.scss";
 
@@ -25,7 +26,9 @@ const renderApp = () => {
         <ThemeProvider theme={theme}>
           <AuthContext.Provider value={{ loginId, userInfo }}>
             {/* <UserProvider> 一旦消してユーザー編集機能などが動くかどうか見てみる */}
-            <AppRouter />
+            <JobListingsProvider>
+              <AppRouter />
+            </JobListingsProvider>
             {/* </UserProvider> */}
           </AuthContext.Provider>
         </ThemeProvider>
