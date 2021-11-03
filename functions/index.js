@@ -2,6 +2,8 @@ const functions = require("firebase-functions");
 const nodemailer = require("nodemailer");
 const testEmail = functions.config().testemail.email;
 const testPassword = functions.config().testemail.password;
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -14,8 +16,8 @@ const testPassword = functions.config().testemail.password;
 const mailTransport = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: testEmail,
-    pass: testPassword,
+    user: gmailEmail,
+    pass: gmailPassword,
   },
 });
 
@@ -30,8 +32,8 @@ exports.sendMail = functions
   .region("us-central1")
   .https.onCall((data, context) => {
     const adminMail = {
-      from: testPassword,
-      to: testPassword,
+      from: gmailEmail,
+      to: testEmail,
       subject:
         "Global Developersのコンタクトフォームよりお問い合わせがきています。",
       text: adminContents(data),
