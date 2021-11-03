@@ -9,7 +9,7 @@ import { functions } from "../../../firebase/firebase";
 const ContactForm = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [content, setContent] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const onSubmit = (e) => {
@@ -18,13 +18,15 @@ const ContactForm = () => {
     const inquiryInfo = {
       name,
       email,
-      message,
+      content,
     };
+    const sendMail = functions.httpsCallable("sendMail");
+    sendMail(inquiryInfo);
     console.log(inquiryInfo);
     console.log("submitted");
     setName("");
     setEmail("");
-    setMessage("");
+    setContent("");
     setIsSubmitted(true);
   };
 
@@ -102,8 +104,8 @@ const ContactForm = () => {
             className="text-field"
             size="small"
             type="text"
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
+            onChange={(e) => setContent(e.target.value)}
+            value={content}
           />
           <Button
             variant="contained"
