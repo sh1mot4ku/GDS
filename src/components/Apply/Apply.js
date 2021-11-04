@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import InputText from "./InputText.jsx";
 import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import InputSelect from "./InputSelect.jsx";
-import { auth } from "../../firebase/firebase";
-import { v4 as uuid } from 'uuid';
 import RadioForm from "./RadioForm.jsx";
 import "./Apply.scss";
 import { insertUser } from "../../API/dbutils";
-// import { UserContext } from "../../context/user-context";
+import { UserContext } from "../../context/user-context";
 const info = {};
 
 function Apply() {
-  // const {user, setUser} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,33 +25,29 @@ function Apply() {
 
   const USER_TYPE_CLIENT = "client";
 
+  useEffect(() => {
+    console.log(user)
+  }, [user])
+
   const onSubmit = (e) => {
     e.preventDefault();
     const postingInfo = {
-      profile: {
-        fullName,
-        email,
-        password,
-        location,
-        lookingFor,
-        linkedin,
-        github,
-        website,
-        englishLevel,
-        description  
-      },
+      fullName,
+      email,
+      password,
+      location,
+      lookingFor,
+      linkedin,
+      github,
+      website,
+      englishLevel,
+      description,
       userType: USER_TYPE_CLIENT,
-      uid: uuid()
     };
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // setUser(postingInfo);
-        insertUser(postingInfo, userCredential.user.uid);
-        setStep(step + 1);
-      })
-      .catch(e => {
-        console.error(`Error happened: ${e}`);
-      })
+
+    setUser(postingInfo);
+    insertUser(postingInfo);
+    setStep(step + 1);
   };
 
   const optionData = {
@@ -244,7 +238,7 @@ function Apply() {
   }
 
   return (
-    <div className="main-apply">
+    <div className="main">
       <div className="leftBox">
         <img alt="" src="/image/logo-white 1.png" className="logo" />
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />
