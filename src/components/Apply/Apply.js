@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import InputText from "./InputText.jsx";
 import InputTextAndLabel from "./InputTextAndLabel.jsx";
@@ -28,9 +28,6 @@ function Apply() {
   // useEffect(() => {
   //   console.log(user)
   // }, [user])
-
-   useEffect(() => {
-  }, [step])
 
   const onSubmit = (e) => {
     e.preventDefault();
