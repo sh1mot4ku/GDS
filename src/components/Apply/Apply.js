@@ -6,11 +6,11 @@ import InputSelect from "./InputSelect.jsx";
 import RadioForm from "./RadioForm.jsx";
 import "./Apply.scss";
 import { insertUser } from "../../API/dbutils";
-import { UserContext } from "../../context/user-context";
+// import { UserContext } from "../../context/user-context";
 const info = {};
 
 function Apply() {
-  const {user, setUser} = useContext(UserContext);
+  // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,9 +25,12 @@ function Apply() {
 
   const USER_TYPE_CLIENT = "client";
 
-  useEffect(() => {
-    console.log(user)
-  }, [user])
+  // useEffect(() => {
+  //   console.log(user)
+  // }, [user])
+
+   useEffect(() => {
+  }, [step])
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -45,7 +48,7 @@ function Apply() {
       userType: USER_TYPE_CLIENT,
     };
 
-    setUser(postingInfo);
+    // setUser(postingInfo);
     insertUser(postingInfo);
     setStep(step + 1);
   };
@@ -156,7 +159,7 @@ function Apply() {
             <Button variant="contained" className="button" type="submit">
               next
             </Button>
-            <button className="loginButton">ログインはこちら</button>
+            <button className="subButton">ログインはこちら</button>
           </div>
         </>
       );
@@ -200,6 +203,7 @@ function Apply() {
             <Button variant="contained" className="button" type="submit">
               next
             </Button>
+            <button className="subButton" onClick={(e) => handleClick(e, step - 1, contents)}>＜ PREVIOUS</button>
           </div>
         </>
       );
@@ -238,7 +242,7 @@ function Apply() {
   }
 
   return (
-    <div className="main">
+    <div className="main-apply">
       <div className="leftBox">
         <img alt="" src="/image/logo-white 1.png" className="logo" />
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />
