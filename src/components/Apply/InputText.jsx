@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField } from "@material-ui/core"
 import "./Apply.scss"
 
-const InputTextAndLabel = ({ placeholder, type, onChange, value }) => {
+const InputText = ({ placeholder, type, onChange, value }) => {
 	return (
 		<React.Fragment>
 			<TextField
@@ -20,4 +20,4 @@ const InputTextAndLabel = ({ placeholder, type, onChange, value }) => {
 	)
 }
 
-export default InputTextAndLabel
+export default InputText

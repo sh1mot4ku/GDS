@@ -4,8 +4,9 @@ import TopPage from '../components/TopPage/TopPage';
 import AboutPage from '../components/AboutPage/AboutPage';
 import FaqsPage from '../components/FaqsPage/FaqsPage';
 import Apply from "../components/Apply/Apply";
-import Edit from "../components/Edit/Edit"
+import Profile from "../components/Edit/Profile"
 import { createBrowserHistory }from 'history';
+import Edit from '../components/Edit/Edit';
 
 const history = createBrowserHistory();
 
