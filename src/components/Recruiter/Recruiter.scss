@@ -1,4 +1,4 @@
-.main {
+.main-recruiter {
 	width: 100vw;
 	height: 100vh;
 	display: flex;
@@ -10,14 +10,20 @@
     z-index: 10000;
 		width: 471px;
 		background: #1e40f6;
+		text-align: center;
 
-		.logo {
-			width: 274px;
-			margin-bottom: 171px;
-		}
+		.imgBox {
+			position: fixed;
+			bottom: 0;
 
-		.remoteStack {
-			width: 368px;
+			.logo {
+				width: 274px;
+				margin-bottom: 171px;
+			}
+			
+			.remoteStack {
+				width: 368px;
+			}
 		}
 
 		@media screen and (max-width: 979px) {
@@ -64,6 +70,8 @@
 					width: 214px;
 					height: 54px;
 					border-radius: 30px;
+					background: #1e40f6;
+					color: #fff;
 				}
 			}
 

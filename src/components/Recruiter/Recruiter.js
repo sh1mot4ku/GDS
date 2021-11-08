@@ -163,7 +163,7 @@ function Recruiter() {
             </Button>
           </div>
           <div className="link-line">
-            <button className="previousButton" type="submit">＜ PREVIOUS</button>
+          <button className="previousButton" onClick={(e) => handleClick(e, step - 1, contents)}>＜ PREVIOUS</button>
           </div>
         </>
       );
@@ -201,10 +201,12 @@ function Recruiter() {
   }
 
   return (
-    <div className="main">
+    <div className="main-recruiter">
       <div className="leftBox">
-        <img alt="" src="/image/logo-white 1.png" className="logo" />
-        <img alt="" src="/image/remoteStack.png" className="remoteStack" />
+        <div className="imgBox">
+          <img alt="" src="/image/logo-white 1.png" className="logo" />
+          <img alt="" src="/image/remoteStack.png" className="remoteStack" />
+        </div>
       </div>
       <div className="rightBox">
         { step !== 2 && <><h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
