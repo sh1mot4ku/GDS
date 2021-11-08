@@ -81,8 +81,8 @@
 
       .tech-logos {
         display: block;
+        width: 100%;
         max-width: 80px;
-        // width: 100%;
         height: auto;
 
         @include mobile {
@@ -129,9 +129,9 @@
     }
 
     .d-demo__item {
-      width: calc(100vw / 14);
+      width: calc(100vw / 18);
       @include tablet {
-        width: calc(100vw / 10);
+        width: calc(100vw / 14);
       }
       @include mobile {
         width: calc(100vw / 6);
