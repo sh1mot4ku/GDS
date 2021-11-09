@@ -19,6 +19,9 @@
   }
   .first-text {
     margin-bottom: 40px;
+    @include mobile {
+      text-align: justify;
+    }
   }
   .back-btn {
     margin-top: 60px;

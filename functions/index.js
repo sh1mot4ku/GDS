@@ -33,7 +33,7 @@ exports.sendMail = functions
   .https.onCall((data, context) => {
     const adminMail = {
       from: gmailEmail,
-      to: testEmail,
+      to: gmailEmail,
       subject:
         "Global Developersのコンタクトフォームよりお問い合わせがきています。",
       text: adminContents(data),
