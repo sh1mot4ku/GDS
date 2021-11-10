@@ -16,14 +16,14 @@ const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: gmailEmail,
-    pass: gmailPassword,
+    user: testEmail,
+    pass: testPassword,
   },
 });
 
 const adminContents = (data) => {
-  return `Global Developersのコンタクトフォームよりお問い合わせがきています。
-  Name: ${data.name}
+  return `Global Developersのコンタクトフォームから${data.name}よりお問い合わせがきています。
+  Name: ${data.name}様
   Email: ${data.email}
   Message: ${data.content}`;
 };
@@ -32,10 +32,9 @@ exports.sendMail = functions
   .region("us-central1")
   .https.onCall((data, context) => {
     const adminMail = {
-      from: gmailEmail,
-      to: gmailEmail,
-      subject:
-        "Global Developersのコンタクトフォームよりお問い合わせがきています。",
+      from: testEmail,
+      to: testEmail,
+      subject: `[GDS] ${data.name}様よりお問い合わせがきています。`,
       text: adminContents(data),
     };
     mailTransport.sendMail(adminMail, (err, info) => {
