@@ -1,5 +1,25 @@
+@import "../../sass_config/color";
+
+.search-input-container {
+  margin-top: 36px;
+  display: flex;
+  justify-content: center;
+
+  .search-input {
+    width: 400px;
+    margin-right: 8px;
+  }
+  .submit-btn {
+    background: $color_primary;
+    &:hover {
+      background: $color_primary;
+    }
+  }
+}
+
 .joblisting-wrapper {
   width: 500px;
-  margin: 60px auto;
+  // margin: 60px auto;
+  margin: 0 auto;
   word-break: break-word;
 }
