@@ -36,8 +36,9 @@ export const Footer = () => {
 
   return (
     <>
-      {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ? null : (
+      { location.pathname === "/apply-developer" ||
+        location.pathname === "/apply-recruiter" ||
+        location.pathname === "/login" ? null : (
         <footer className="footer">
           <div className="footer-container">
             {isMobile && (
