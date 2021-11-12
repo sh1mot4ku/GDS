@@ -13,11 +13,11 @@ const history = createBrowserHistory();
 const AppRouter = () => (
   <Router history={history}>
     <Switch>
-      {/* <Route path="/" component={TopPage} exact={true} /> */}
+      <Route path="/" component={TopPage} exact={true} />
       <Route path="/about" component={AboutPage} exact={true} />
       <Route path="/faqs" component={FaqsPage} exact={true} />
       <Route path="/apply-developer" component={Apply} />
-      <Route path="/" component={Edit} />
+      <Route path="/edit" component={Edit} />
     </Switch>
   </Router>
 )

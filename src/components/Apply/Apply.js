@@ -46,7 +46,7 @@ function Apply() {
     };
 
     // setUser(postingInfo);
-    insertUser(postingInfo);
+    insertUser(postingInfo,);
     setStep(step + 1);
   };
 
