@@ -10,7 +10,7 @@
 		width: 471px;
 		background: $color_primary;
 		display: flex;
-		justify-content: center;
+		justify-content: flex-end;
 		align-items: center;
 		flex-direction: column;
 
@@ -21,6 +21,7 @@
 
 		.remoteStack {
 			width: 368px;
+			margin-bottom: 71px;
 		}
 		@include mobile {
 			display: none;
@@ -50,6 +51,11 @@
 			}
 
       .login-buttons {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				margin-top: 54px;
 
         .round-button {
           display: block;
