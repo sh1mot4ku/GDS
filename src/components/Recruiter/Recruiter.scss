@@ -39,13 +39,24 @@
 		flex-direction: column;
 		margin: 28px auto;
     margin-left: 657px;
+		@include mobile {
+			margin: 28px auto;
+			padding: 21px;
+		}
 
 		.title {
 			margin: 32px;
       margin-bottom: 5px;
+			@include mobile {
+				margin: 32px 0 0 0;
+				font-size: 19px;
+			}
 		}
     .subtitle {
       margin-bottom: 32px;
+			@include mobile {
+				font-size: 14px;
+			}
     }
 
 		.form {
@@ -77,6 +88,9 @@
 					border-radius: 30px;
 					background: #1e40f6;
 					color: #fff;
+					@include mobile {
+						width: 100%;
+					}
 				}
 			}
 
@@ -101,10 +115,16 @@
 				justify-content: center;
 				text-align: center;
 				padding: 15% 15% 15% 0;
+				@include mobile {
+					padding: 0;
+				}
 		
 				.thxTitle {
 					color: $color_primary;
 					margin-bottom: 50px;
+					@include mobile {
+						font-size: 21px;
+					}
 				}
 				.sentence {
 					line-height: 2;
@@ -121,6 +141,9 @@
 					background-color: $color_primary;
 					color: #fff;
 					margin-top: 50px;
+					@include mobile {
+						width: 100%;
+					}
 				}
 			}
 		}
