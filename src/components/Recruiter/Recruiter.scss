@@ -1,3 +1,6 @@
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
+
 .main-recruiter {
 	width: 100vw;
 	height: 100vh;
@@ -9,24 +12,24 @@
     top: 0;
     z-index: 10000;
 		width: 471px;
-		background: #1e40f6;
-		text-align: center;
-
-		.imgBox {
-			position: fixed;
-			bottom: 0;
-
-			.logo {
-				width: 274px;
-				margin-bottom: 171px;
-			}
-			
-			.remoteStack {
-				width: 368px;
-			}
+		background: $color_primary;
+		
+		.logo {
+			position: relative;
+			top: 40%;
+			left: 20%;
+			width: 274px;
+			margin-bottom: 171px;
+		}
+		
+		.remoteStack {
+			position: relative;
+			top: 36%;
+			left: 10%;
+			width: 368px;
 		}
 
-		@media screen and (max-width: 979px) {
+		@include mobile {
 			display: none;
 		}
 	}
@@ -34,6 +37,7 @@
 	.rightBox {
 		align-items: center;
 		flex-direction: column;
+		margin: 28px auto;
     margin-left: 657px;
 
 		.title {
@@ -67,6 +71,7 @@
 				align-items: center;
 
 				.button {
+					margin: 32px auto;
 					width: 214px;
 					height: 54px;
 					border-radius: 30px;
@@ -89,9 +94,35 @@
 			}
 
 			.thxBox {
-				padding-left: 0;
+				display: flex;
+				align-items: center;
+				margin: 0 auto;
+				flex-direction: column;
+				justify-content: center;
+				text-align: center;
+				padding: 15% 15% 15% 0;
+		
+				.thxTitle {
+					color: $color_primary;
+					margin-bottom: 50px;
+				}
+				.sentence {
+					line-height: 2;
+		
+					@include mobile {
+						text-align: left;;
+					}
+				}
+		
+				.button {
+					width: 214px;
+					height: 54px;
+					border-radius: 30px;
+					background-color: $color_primary;
+					color: #fff;
+					margin-top: 50px;
+				}
 			}
-
 		}
 	}
 }

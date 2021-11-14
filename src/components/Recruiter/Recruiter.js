@@ -203,10 +203,8 @@ function Recruiter() {
   return (
     <div className="main-recruiter">
       <div className="leftBox">
-        <div className="imgBox">
-          <img alt="" src="/image/logo-white 1.png" className="logo" />
-          <img alt="" src="/image/remoteStack.png" className="remoteStack" />
-        </div>
+        <img alt="" src="/image/logo-white 1.png" className="logo" />
+        <img alt="" src="/image/remoteStack.png" className="remoteStack" />
       </div>
       <div className="rightBox">
         { step !== 2 && <><h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
