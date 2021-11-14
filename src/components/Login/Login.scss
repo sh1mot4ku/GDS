@@ -33,6 +33,9 @@
 		align-items: center;
 		flex-direction: column;
 		margin: 0 auto;
+		@include mobile {
+			width: 80%;
+		}
 
 		.title {
 			margin: 32px;
@@ -41,6 +44,9 @@
 		.form {
 			justify-content: center;
 			width: 40vw;
+			@include mobile {
+				width: 100%;
+			}
 
 			.input {
 				width: 100%;
@@ -64,6 +70,9 @@
           border-radius: 30px;
           background-color: $color_primary;
           color: #fff;
+					@include mobile {
+						width: 100%;
+					}
         }
         .sub-button {
           display: block;
