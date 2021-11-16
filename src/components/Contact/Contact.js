@@ -7,10 +7,11 @@ const Contact = () => {
   const location = useLocation();
   return (
     <>
-      {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ||
-      location.pathname === "/job-list-detail" ||
-      location.pathname === "/user-profile" ? null : (
+      { location.pathname === "/apply-developer" ||
+        location.pathname === "/apply-recruiter" ||
+        location.pathname === "/job-list-detail" ||
+        location.pathname === "/user-profile" ||
+        location.pathname === "/login" ? null : (
         <section className="contact-section">
           <p className="contact-title">CONTACT</p>
           <p className="contact-content">
