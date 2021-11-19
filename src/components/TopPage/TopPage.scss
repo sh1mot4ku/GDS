@@ -18,7 +18,6 @@
     }
 
     .subscribe-container {
-      // background-image: url('./photos/logo-global-developers.svg');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center center;
@@ -31,7 +30,6 @@
       }
 
       .subscribe-header {
-        // width: 550px;
         margin: 0 auto 20px;
         font-size: 56px;
 
@@ -84,6 +82,7 @@
       .tech-logos {
         display: block;
         width: 100%;
+        max-width: 80px;
         height: auto;
 
         @include mobile {
@@ -92,6 +91,52 @@
           height: 12vw;
         }
       }
+    }
+    /*
+    右から左へ
+    ----------------------------*/
+    @keyframes infinity-scroll-left {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    /*
+    IE11対策
+    ----------------------------*/
+    _:-ms-lang(x)::-ms-backdrop,
+    .d-demo {
+      display: -ms-grid;
+      overflow: hidden;
+    }
+    /*----------------------------*/
+
+    .d-demo__wrap {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .d-demo__list {
+      display: flex;
+      list-style: none;
+    }
+
+    .d-demo__list--left{
+    animation :infinity-scroll-left 30s infinite linear 0.5s both;
+    }
+
+    .d-demo__item {
+      width: calc(100vw / 14);
+      
+      @include mobile {
+        width: calc(100vw / 6);
+      }
+    }
+    .d-demo__item > img{
+      width: 100%;
     }
   }
 
