@@ -2,26 +2,31 @@ import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import InputTextAndLabel from "../Apply/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
-import { insertUser } from "../../API/dbutils";
+// import { insertUser } from "../../API/dbutils";
+// import { history } from '../../router/AppRouter';
 import "./Login.scss";
+import { useHistory } from "react-router-dom";
+
 // const info = {};
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
-  const onSubmit = (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
-    const postingInfo = {
-      profile: {
-        email,
-        password,
-      },
-    };
-    auth.createUserWithEmailAndPassword(email, password)
+    // const postingInfo = {
+    //   profile: {
+    //     email,
+    //     password,
+    //   },
+    // };
+    auth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // setUser(postingInfo);
-        insertUser(postingInfo, userCredential.user.uid);
+        console.log('User logged in');
+        history.push('/');
       })
       .catch(e => {
         console.error(`Error happened: ${e}`);
@@ -37,7 +42,7 @@ const Login = () => {
       <div className="rightBox">
         <h2 className="title">Login</h2>
         <form
-          onSubmit={onSubmit}
+          // onSubmit={onSubmit}
           className="form"
         >
           <InputTextAndLabel
@@ -56,6 +61,7 @@ const Login = () => {
           />
           <div className="login-buttons">
             <Button
+              onClick={onLogin}
               variant="contained"
               color="primary"
               className="round-button"

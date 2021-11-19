@@ -3,13 +3,14 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
+import { auth } from '../../../firebase/firebase';
 import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn }) => {
   const location = useLocation();
-
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -17,6 +18,16 @@ const HeaderPC = ({ isUserLoggedIn }) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const onLogOut = () => {
+    auth.signOut().then(() => {
+      console.log('User logged out');
+      handleClose();
+      history.push('/');
+    }).catch((e) => {
+      console.error(e);
+    })
   };
 
   const createMenuList = (menuItems) =>
@@ -75,14 +86,14 @@ const HeaderPC = ({ isUserLoggedIn }) => {
                       プロフィール
                     </MenuItem>
                   </Link>
-                  <Link to="/logout">
+                  {/* <Link to="/logout"> */}
                     <MenuItem
                       className="dropdown-menuitem"
-                      onClick={handleClose}
+                      onClick={onLogOut}
                     >
                       ログアウト
                     </MenuItem>
-                  </Link>
+                  {/* </Link> */}
                 </div>
               </Menu>
             </>
