@@ -27,9 +27,23 @@ const JobListings = () => {
         );
       }
     });
-    console.log(filteredJoblistings);
+    const filteredJoblistingsWithDescriptions = jobListings.filter(
+      (jobListing) => {
+        if (jobListing.jobDescription) {
+          return (
+            replaceLetters(jobListing.jobDescription).search(
+              convertSearchInput
+            ) !== -1
+          );
+        }
+      }
+    );
+    const combinedArr = [
+      ...filteredJoblistings,
+      ...filteredJoblistingsWithDescriptions,
+    ];
     setJobListingsArr(
-      filteredJoblistings.length !== 0 ? filteredJoblistings : null
+      combinedArr.length !== 0 ? [...new Set(combinedArr)] : ["no result"]
     );
     setSearchInput("");
   };
@@ -57,7 +71,7 @@ const JobListings = () => {
 
   useEffect(() => {
     jobListings && setJobListingsArr(jobListings);
-  }, []);
+  }, [jobListings]);
 
   useEffect(() => {
     jobListings && console.log(jobListings);
@@ -65,12 +79,12 @@ const JobListings = () => {
 
   return (
     <>
-      <div className="search-input-container">
+      <div className='search-input-container'>
         <TextField
-          id="outlined-basic"
-          variant="outlined"
-          placeholder="Search for a job"
-          className="search-input"
+          id='outlined-basic'
+          variant='outlined'
+          placeholder='Search for a job'
+          className='search-input'
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
           onKeyPress={(e) => {
@@ -80,32 +94,32 @@ const JobListings = () => {
           }}
         />
         <Button
-          variant="contained"
-          className="submit-btn"
+          variant='contained'
+          className='submit-btn'
           onClick={() => filterJobListings()}
         >
           Submit
         </Button>
       </div>
-      <div className="joblisting-wrapper">
-        {jobListingsArr === null ? (
+      <div className='joblisting-wrapper'>
+        {jobListingsArr[0] === "no result" ? (
           <>
             <p>No Result</p>
             <Link
-              to="joblistings"
+              to='joblistings'
               onClick={() => setJobListingsArr(jobListings)}
             >
               Back to List
             </Link>
           </>
-        ) : jobListingsArr.length === 0 ? (
-          <div>Loading...</div>
-        ) : (
+        ) : jobListingsArr.length !== 0 ? (
           jobListingsArr.map((job) => (
             <React.Fragment key={job.id}>
               <JobBox {...job} />
             </React.Fragment>
           ))
+        ) : (
+          <div>Loading...</div>
         )}
       </div>
     </>
