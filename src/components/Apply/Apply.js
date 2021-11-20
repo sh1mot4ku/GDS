@@ -4,7 +4,7 @@ import InputText from "./InputText.jsx";
 import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import InputSelect from "./InputSelect.jsx";
 import { auth } from "../../firebase/firebase";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 import RadioForm from "./RadioForm.jsx";
 import "./Apply.scss";
 import { insertUser } from "../../API/dbutils";
@@ -40,20 +40,21 @@ function Apply() {
         github,
         website,
         englishLevel,
-        description  
+        description,
       },
       userType: USER_TYPE_CLIENT,
-      uid: uuid()
+      uid: uuid(),
     };
-    auth.createUserWithEmailAndPassword(email, password)
+    auth
+      .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // setUser(postingInfo);
         insertUser(postingInfo, userCredential.user.uid);
         setStep(step + 1);
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(`Error happened: ${e}`);
-      })
+      });
   };
 
   const optionData = {
@@ -162,7 +163,6 @@ function Apply() {
             <Button variant="contained" className="button" type="submit">
               next
             </Button>
-            <button className="loginButton">ログインはこちら</button>
           </div>
         </>
       );
@@ -206,6 +206,12 @@ function Apply() {
             <Button variant="contained" className="button" type="submit">
               next
             </Button>
+            <button
+              className="previousButton"
+              onClick={(e) => handleClick(e, step - 1, contents)}
+            >
+              ＜ PREVIOUS
+            </button>
           </div>
         </>
       );
@@ -231,7 +237,7 @@ function Apply() {
               <br />
               本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。
             </p>
-            <Button variant="contained" className="button" >
+            <Button variant="contained" className="button">
               ホームへ戻る
             </Button>
           </div>
@@ -250,7 +256,7 @@ function Apply() {
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />
       </div>
       <div className="rightBox">
-        { step !== 2 && <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>}
+        {step !== 2 && <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>}
         <form
           onSubmit={
             step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)

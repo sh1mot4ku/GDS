@@ -8,9 +8,9 @@ import useMedia from 'use-media';
 const TopPage = () => {
   const isMobile = useMedia({ maxWidth: '768px' });
 
-  const recruiterSubscribe = () => {
+  // const recruiterSubscribe = () => {
     // move to page of subscribing for recruiter
-  };
+  // };
 
   return (
     <div className="top-wrapper">
@@ -31,14 +31,16 @@ const TopPage = () => {
                 無料会員登録
               </Button>
             </Link>
-            <Button
-              onClick={recruiterSubscribe}
-              variant="contained"
-              color="primary"
-              className="round-button"
-            >
-              採用担当者の方
-            </Button>
+            <Link to="/apply-recruiter">
+              <Button
+                // onClick={recruiterSubscribe}
+                variant="contained"
+                color="primary"
+                className="round-button"
+              >
+                採用担当者の方
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="d-demo subscribe-logos">

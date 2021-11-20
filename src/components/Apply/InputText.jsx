@@ -9,8 +9,7 @@ const InputTextAndLabel = ({ placeholder, type, onChange, value }) => {
 				required
 				placeholder={placeholder}
 				variant="outlined"
-				margin="normal"
-				className="input"
+				className="input-small"
 				size="small"
 				type={type}
 				onChange={onChange}
