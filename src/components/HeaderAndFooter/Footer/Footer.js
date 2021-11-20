@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import "./Footer.scss";
-import { Link, useLocation } from "react-router-dom";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import { footerMenuItemsLogOut, footerMenuItemsLogIn } from "../menuItems";
-import { useAuthContext } from "../../../context/auth-context";
-import useMedia from "use-media";
+import React, { useState, useEffect } from 'react';
+import './Footer.scss';
+import { Link, useLocation } from 'react-router-dom';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { footerMenuItemsLogOut, footerMenuItemsLogIn } from '../menuItems';
+import { useAuthContext } from '../../../context/auth-context';
+import useMedia from 'use-media';
 
 export const Footer = () => {
-  const isMobile = useMedia({ maxWidth: "768px" });
+  const isMobile = useMedia({ maxWidth: '768px' });
   const location = useLocation();
   const { loginId } = useAuthContext();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
@@ -36,9 +36,10 @@ export const Footer = () => {
 
   return (
     <>
-      {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ||
-      location.pathname === "/contact" ? null : (
+      {location.pathname === '/apply-developer' ||
+      location.pathname === '/apply-recruiter' ||
+      location.pathname === '/contact' ||
+      location.pathname === '/login' ? null : (
         <footer className="footer">
           <div className="footer-container">
             {isMobile && (
