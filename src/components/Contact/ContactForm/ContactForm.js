@@ -1,18 +1,16 @@
-import React, { useEffect } from "react";
-import BlueSidePart from "../../BlueSidePart/BlueSidePart";
-import ThankYou from "./ThankYou";
-import { FormLabel, TextField, Button } from "@mui/material";
-import validator from "validator";
-import "./ContactForm.scss";
-import { useState } from "react";
-import { functions } from "../../../firebase/firebase";
+import React, { useEffect } from 'react';
+import BlueSidePart from '../../BlueSidePart/BlueSidePart';
+import ThankYou from './ThankYou';
+import { FormLabel, TextField, Button } from '@mui/material';
+import validator from 'validator';
+import './ContactForm.scss';
+import { useState } from 'react';
+import { functions } from '../../../firebase/firebase';
 
 const ContactForm = () => {
-  const [inquiryInfo, setInquiryInfo] = useState({
-    name: "",
-    email: "",
-    content: "",
-  });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [content, setContent] = useState('');
   const [canSubmit, setCanSubmit] = useState(false);
   const [nameError, setNameError] = useState(null);
   const [emailErrors, setEmailErrors] = useState(null);
@@ -29,10 +27,10 @@ const ContactForm = () => {
 
   const validateName = (inputName) => {
     if (!isEmptyOrHasWhiteSpace(inputName)) {
-      setNameError("");
+      setNameError('');
       return;
     }
-    setNameError("お名前が記入されていません");
+    setNameError('お名前が記入されていません');
     setShowNameError(true);
   };
 
@@ -40,10 +38,10 @@ const ContactForm = () => {
     let errMsgsArr = [];
     validator.trim(inputEmail);
     if (!validator.isEmail(inputEmail)) {
-      errMsgsArr.push("メールアドレスが無効です");
+      errMsgsArr.push('メールアドレスが無効です');
     }
     if (isEmptyOrHasWhiteSpace(inputEmail)) {
-      errMsgsArr.push("メールアドレスが記入されていません");
+      errMsgsArr.push('メールアドレスが記入されていません');
     }
     setEmailErrors(errMsgsArr);
     errMsgsArr.length !== 0 && setShowEmailError(true);
@@ -51,33 +49,38 @@ const ContactForm = () => {
 
   const validateMessage = (inputMessage) => {
     if (!isEmptyOrHasWhiteSpace(inputMessage)) {
-      setContentError("");
+      setContentError('');
       return;
     }
-    setContentError("メッセージが記入されていません");
+    setContentError('メッセージが記入されていません');
     setShowContentError(true);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    validateName(inquiryInfo.name);
-    validateEmail(inquiryInfo.email);
-    validateMessage(inquiryInfo.content);
+    validateName(name);
+    validateEmail(email);
+    validateMessage(content);
   };
 
   useEffect(() => {
     if (nameError === null && emailErrors === null && contentError === null)
       return;
-    if (nameError === "" && emailErrors.length === 0 && contentError === "")
+    if (nameError === '' && emailErrors.length === 0 && contentError === '')
       setCanSubmit(true);
   }, [nameError, emailErrors, contentError]);
 
   useEffect(() => {
     if (!canSubmit) return;
-    const sendMail = functions.httpsCallable("sendMail");
+    const inquiryInfo = {
+      name,
+      email,
+      content,
+    };
+    const sendMail = functions.httpsCallable('sendMail');
     sendMail(inquiryInfo);
-    console.log("submitted");
-  }, [canSubmit, inquiryInfo]);
+    console.log('submitted');
+  }, [canSubmit, name, email, content]);
 
   return (
     <div className="main-contact">
@@ -101,20 +104,17 @@ const ContactForm = () => {
             placeholder="Your Name"
             variant="outlined"
             margin="normal"
-            className={!showNameError ? "text-field" : null}
+            className={!showNameError ? 'text-field' : null}
             size="small"
             type="text"
             onChange={(e) => {
               setShowNameError(false);
               validator.isLength(e.target.value, 0, 100) &&
-                setInquiryInfo({
-                  ...inquiryInfo,
-                  name: e.target.value,
-                });
+                setName(e.target.value);
             }}
-            value={inquiryInfo.name}
+            value={name}
           />
-          {nameError !== "" && showNameError && (
+          {nameError !== '' && showNameError && (
             <p className="err-msg name-err">{nameError}</p>
           )}
           <FormLabel
@@ -132,18 +132,15 @@ const ContactForm = () => {
             placeholder="Email Address"
             variant="outlined"
             margin="normal"
-            className={!showEmailError ? "text-field" : null}
+            className={!showEmailError ? 'text-field' : null}
             size="small"
             type="email"
             onChange={(e) => {
               setShowEmailError(false);
-              validator.isLength(e.target.value, 0, 150) &&
-                setInquiryInfo({
-                  ...inquiryInfo,
-                  email: e.target.value,
-                });
+              validator.isLength(e.target.value, 0, 254) &&
+                setEmail(e.target.value);
             }}
-            value={inquiryInfo.email}
+            value={email}
           />
           {emailErrors !== null && emailErrors.length !== 0 && showEmailError && (
             <div className="email-err-wrap">
@@ -171,29 +168,24 @@ const ContactForm = () => {
             margin="normal"
             multiline
             rows={7}
-            className={!showContentError ? "text-field-content" : null}
+            className={!showContentError ? 'text-field-content' : null}
             size="small"
             type="text"
             onChange={(e) => {
               setShowContentError(false);
               validator.isLength(e.target.value, 0, 1000) &&
-                setInquiryInfo({
-                  ...inquiryInfo,
-                  content: e.target.value,
-                });
+                setContent(e.target.value);
             }}
-            value={inquiryInfo.content}
+            value={content}
           />
           <div
-            className={!showContentError ? "content-wrap" : "content-wrap-err"}
+            className={!showContentError ? 'content-wrap' : 'content-wrap-err'}
           >
-            {contentError !== "" && showContentError && (
+            {contentError !== '' && showContentError && (
               <p className="err-msg content-err">{contentError}</p>
             )}
-            <p
-              className={inquiryInfo.content.length > 950 ? "color-red" : null}
-            >
-              {inquiryInfo.content.length} / 1000
+            <p className={content.length > 950 ? 'color-red' : null}>
+              {content.length} / 1000
             </p>
           </div>
           <Button
