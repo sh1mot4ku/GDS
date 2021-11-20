@@ -6,22 +6,22 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { footerMenuItemsLogOut, footerMenuItemsLogIn } from "../menuItems";
-import { useAuthContext } from "../../../context/auth-context";
 import useMedia from "use-media";
+import { useSelector } from 'react-redux';
 
 export const Footer = () => {
+  const { uid, userInfo } = useSelector(state => state.auth)
   const isMobile = useMedia({ maxWidth: "768px" });
   const location = useLocation();
-  const { loginId } = useAuthContext();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
   useEffect(() => {
-    if (loginId === null) {
-      setIsUserLoggedIn(false);
-    } else {
+    if (uid) {
       setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
     }
-  }, [loginId]);
+  }, [uid]);
 
   const createMenuList = (menuItems) =>
     menuItems.map((menuItem) => (

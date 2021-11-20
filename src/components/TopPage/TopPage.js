@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './TopPage.scss';
 import Button from '@material-ui/core/Button';
 // import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import useMedia from 'use-media';
+import { useSelector } from 'react-redux';
 
 const TopPage = () => {
+  const { uid, userInfo } = useSelector(state => state.auth)
   const isMobile = useMedia({ maxWidth: '768px' });
 
   const recruiterSubscribe = () => {
     // move to page of subscribing for recruiter
   };
+
+  useEffect(() => {
+    if(uid && userInfo) {
+      console.log(`uid: ${uid}`);
+      console.log(`userInfo:`);
+      console.log(userInfo);  
+    }
+  }, [uid, userInfo])
 
   return (
     <div className="top-wrapper">

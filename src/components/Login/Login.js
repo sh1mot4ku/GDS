@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import InputTextAndLabel from "../Apply/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
-// import { insertUser } from "../../API/dbutils";
-// import { history } from '../../router/AppRouter';
-import "./Login.scss";
 import { useHistory } from "react-router-dom";
-
-// const info = {};
+import "./Login.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,35 +12,24 @@ const Login = () => {
 
   const onLogin = (e) => {
     e.preventDefault();
-    // const postingInfo = {
-    //   profile: {
-    //     email,
-    //     password,
-    //   },
-    // };
     auth.signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // setUser(postingInfo);
-        console.log('User logged in');
-        history.push('/');
-      })
-      .catch(e => {
-        console.error(`Error happened: ${e}`);
-      })
+    .then(() => {
+      history.push('/');
+    })
+    .catch(e => {
+      console.error(e);
+    })
   };
 
   return (
     <div className="main-login">
       <div className="leftBox">
-        <img alt="" src="/image/logo-white 1.png" className="logo" />
-        <img alt="" src="/image/remoteStack.png" className="remoteStack" />
+        <img alt="logo-white 1" src="/image/logo-white 1.png" className="logo" />
+        <img alt="remoteStack" src="/image/remoteStack.png" className="remoteStack" />
       </div>
       <div className="rightBox">
         <h2 className="title">Login</h2>
-        <form
-          // onSubmit={onSubmit}
-          className="form"
-        >
+        <form className="form">
           <InputTextAndLabel
             label="EMAIL"
             placeholder="YOUR EMAIL"
