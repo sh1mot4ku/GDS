@@ -1,31 +1,28 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import InputText from "./InputText.jsx";
-import InputTextAndLabel from "./InputTextAndLabel.jsx";
-import InputSelect from "./InputSelect.jsx";
+import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
+import InputTextAndLabel from "../Apply/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
-import { v4 as uuid } from "uuid";
-import RadioForm from "./RadioForm.jsx";
-import "./Apply.scss";
+import { v4 as uuid } from 'uuid';
+import RadioForm from "../Apply/RadioForm";
+import "./Recruiter.scss";
 import { insertUser } from "../../API/dbutils";
-// import { UserContext } from "../../context/user-context";
 const info = {};
 
-function Apply() {
+function Recruiter() {
   // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("Japan");
+  const [companyAddress, setCompanyAddress] = useState("");
   const [lookingFor, setLookingFor] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [github, setGithub] = useState("");
-  const [website, setWebsite] = useState("");
-  const [englishLevel, setEnglishLevel] = useState("");
-  const [description, setDescription] = useState("");
+  const [mustHave, setMustHave] = useState("");
+  const [niceToHave, setNiceToHave] = useState("");
+  const [projectDetail, setProjectDetail] = useState("");
 
-  const USER_TYPE_CLIENT = "client";
+  const USER_TYPE_RECRUITER = "recruiter";
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -34,27 +31,24 @@ function Apply() {
         fullName,
         email,
         password,
-        location,
+        companyAddress,
         lookingFor,
-        linkedin,
-        github,
-        website,
-        englishLevel,
-        description
+        mustHave,
+        niceToHave,
+        projectDetail  
       },
-      userType: USER_TYPE_CLIENT,
-      uid: uuid(),
+      userType: USER_TYPE_RECRUITER,
+      uid: uuid()
     };
-    auth
-      .createUserWithEmailAndPassword(email, password)
+    auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // setUser(postingInfo);
         insertUser(postingInfo, userCredential.user.uid);
         setStep(step + 1);
       })
-      .catch((e) => {
+      .catch(e => {
         console.error(`Error happened: ${e}`);
-      });
+      })
   };
 
   const optionData = {
@@ -82,39 +76,6 @@ function Apply() {
     ],
   };
 
-  const countries = [
-    {
-      value: "Japan",
-    },
-    {
-      value: "USA",
-    },
-    {
-      value: "Canada",
-    },
-    {
-      value: "Korea",
-    },
-    {
-      value: "Chinese",
-    },
-  ];
-
-  const levelOfEnglish = [
-    {
-      value: "日常会話、旅行トラブル対応レベル",
-    },
-    {
-      value: "ビジネス会話、プレゼンレベル",
-    },
-    {
-      value: "簡単通訳、ディスカッションレベル",
-    },
-    {
-      value: "ネイティブレベル",
-    },
-  ];
-
   const handleClick = (e, newStep, userInfo) => {
     e.preventDefault();
     info[step] = userInfo;
@@ -128,7 +89,7 @@ function Apply() {
         <>
           <InputTextAndLabel
             label="FULL NAME"
-            placeholder="YOUR NAME"
+            placeholder="Your Name"
             type="text"
             onChange={(e) => setFullName(e.target.value)}
             value={fullName}
@@ -147,16 +108,21 @@ function Apply() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
-          <InputSelect
-            label="LOCATION"
-            placeholder="Location"
-            onChange={(e) => setLocation(e.target.value)}
-            value={location}
-            options={countries}
+          <InputTextAndLabel
+            label="COMPANY ADDRESS"
+            placeholder="Company Address"
+            type="text"
+            onChange={(e) => setCompanyAddress(e.target.value)}
+            value={companyAddress}
           />
           <RadioForm
-            label="LOOKING FOR"
-            options={optionData.userLookingFor}
+            label=" I AM LOOKING FOR / 探している職種について"
+            options={optionData.businessLookingFor}
+            onChange={(e) => setLookingFor(e.target.value)}
+          />
+          <RadioForm
+            label="HOW MUCH DO YOU NEED A COMMITMENT? / コミット時間について"
+            options={optionData.businessCommitment}
             onChange={(e) => setLookingFor(e.target.value)}
           />
           <div className="buttonContainer">
@@ -171,47 +137,33 @@ function Apply() {
       contents = (
         <>
           <InputTextAndLabel
-            label="YOUR PROFILE (LinkedIn / GitHub / Website)"
-            placeholder="https://www.linkedin.com/in/example"
+            label="MUST HAVE"
+            placeholder="必要なスキルや経験を記入ください"
             type="text"
-            onChange={(e) => setLinkedin(e.target.value)}
-            value={linkedin}
+            onChange={(e) => setMustHave(e.target.value)}
+            value={mustHave}
           />
-          <InputText
-            placeholder="https://github.com/example"
+          <InputTextAndLabel
+            label="NICE TO HAVE"
+            placeholder="持っていた場合尚良いスキルや経験を記入ください"
             type="text"
-            onChange={(e) => setGithub(e.target.value)}
-            value={github}
+            onChange={(e) => setNiceToHave(e.target.value)}
+            value={niceToHave}
           />
-          <InputText
-            placeholder="https://lraough.com/"
+          <InputTextAreaAndLabel
+            label="PROJECT DETAIL"
+            placeholder="簡単なプロジェクト概要について記入下さい。後ほどインタビューにて詳細を伺います。"
             type="text"
-            onChange={(e) => setWebsite(e.target.value)}
-            value={website}
-          />
-          <InputSelect
-            label="YOUR ENGLISH LEVEL"
-            placeholder="ご自身の英語レベルについて教えてください"
-            type="text"
-            onChange={(e) => setEnglishLevel(e.target.value)}
-            value={englishLevel}
-            options={levelOfEnglish}
-          />
-          <RadioForm
-            label="LOOKING FOR"
-            options={optionData.userDescription}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setProjectDetail(e.target.value)}
+            value={projectDetail}
           />
           <div className="buttonContainer">
             <Button variant="contained" className="button" type="submit">
               next
             </Button>
-            <button
-              className="previousButton"
-              onClick={(e) => handleClick(e, step - 1, contents)}
-            >
-              ＜ PREVIOUS
-            </button>
+          </div>
+          <div className="link-line">
+          <button className="previousButton" onClick={(e) => handleClick(e, step - 1, contents)}>＜ PREVIOUS</button>
           </div>
         </>
       );
@@ -220,26 +172,25 @@ function Apply() {
       contents = (
         <>
           <div className="thxBox">
-            <h2 className="thxTitle">Thank you for Applying</h2>
+            <h2 className="thxTitle">Thank you for Connecting</h2>
             <p className="sentence">
-              この度はGlobal
-              Developersへのご興味を頂き誠にありがとうございます。
+            この度はプロジェクトの詳細をご共有頂き有難うございました。
               <br />
               <br />
-              ご応募頂いた皆様には、1週間以内にご連絡を改めさせて頂きます。
-              <br />
-              今後のプロセスについては、今までのご経験についてより詳しく知るための面談や面接が行われる予定です。
-              <br />
-              審査後に改めてメールにてお知らせ致します。
+              よりお客様のニーズを理解するため、専任のコンサルタントがプロセス全体を通してお客様をサポートします。以下のLinkよりプロジェクト・求人に関するMTGを予約してください。
               <br />
               <br />
-              尚現在はα版として運用しており、β版ローンチは2022年1月を目指しております。
+              尚現在はα版として稼働しております。β版ローンチは2022年1月を目指しておりますので、もうしばしお待ちいただけましたら幸いです。
               <br />
-              本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。
             </p>
-            <Button variant="contained" className="button">
-              ホームへ戻る
-            </Button>
+            <div className="buttonContainer">
+              <Button variant="contained" className="button" type="button">
+                面談を予約する
+              </Button>
+            </div>
+            <div className="link-line">
+              <Link to="/" className="previousButton">ホームへ戻る</Link>
+            </div>
           </div>
         </>
       );
@@ -250,13 +201,14 @@ function Apply() {
   }
 
   return (
-    <div className="main-apply">
+    <div className="main-recruiter">
       <div className="leftBox">
         <img alt="" src="/image/logo-white 1.png" className="logo" />
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />
       </div>
       <div className="rightBox">
-        {step !== 2 && <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>}
+        { step !== 2 && <><h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
+        <p className="subtitle">正確なマッチングの為に詳細な情報をお伝え下さい</p></>}
         <form
           onSubmit={
             step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
@@ -270,4 +222,4 @@ function Apply() {
   );
 }
 
-export default Apply;
+export default Recruiter;

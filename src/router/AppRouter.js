@@ -1,9 +1,10 @@
 import React from 'react';
 import { Router, Route, Switch } from "react-router-dom";
+import Apply from "../components/Apply/Apply";
+import Recruiter from "../components/Recruiter/Recruiter";
 import TopPage from '../components/TopPage/TopPage';
 import AboutPage from '../components/AboutPage/AboutPage';
 import FaqsPage from '../components/FaqsPage/FaqsPage';
-import Apply from "../components/Apply/Apply";
 import Profile from "../components/Edit/Profile"
 import { createBrowserHistory }from 'history';
 import Edit from '../components/Edit/Edit';
@@ -17,6 +18,7 @@ const AppRouter = () => (
       <Route path="/about" component={AboutPage} exact={true} />
       <Route path="/faqs" component={FaqsPage} exact={true} />
       <Route path="/apply-developer" component={Apply} />
+      <Route path="/apply-recruiter" component={Recruiter} />
       <Route path="/edit" component={Edit} />
     </Switch>
   </Router>
