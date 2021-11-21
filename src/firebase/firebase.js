@@ -1,7 +1,8 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/analytics';
-import 'firebase/compat/database';
-import 'firebase/compat/auth';
+import firebase from "firebase/compat/app";
+import "firebase/compat/analytics";
+import "firebase/compat/database";
+import "firebase/compat/auth";
+import "firebase/compat/functions";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -11,18 +12,19 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 const auth = firebase.auth();
+const functions = firebase.functions();
 
 // const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-// googleAuthProvider.setCustomParameters({    
+// googleAuthProvider.setCustomParameters({
 //   'prompt': 'select_account'
 // });
 
 // export { firebase, googleAuthProvider, database as default };
-export { firebase, auth, database as default };
+export { firebase, auth, functions, database as default };
