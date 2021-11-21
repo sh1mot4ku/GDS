@@ -1,5 +1,5 @@
-@import '../../sass_config/color.scss';
-@import '../../sass_config/mixin.scss';
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
 
 .top-wrapper {
   width: 1070px;
@@ -18,7 +18,6 @@
     }
 
     .subscribe-container {
-      // background-image: url('./photos/logo-global-developers.svg');
       background-size: contain;
       background-repeat: no-repeat;
       background-position: center center;
@@ -29,16 +28,15 @@
         padding: 18vw 0;
         background-position: center 14vw;
       }
-  
+
       .subscribe-header {
-        // width: 550px;
         margin: 0 auto 20px;
         font-size: 56px;
 
         @include mobile {
           font-size: 30px;
         }
-      }  
+      }
 
       .subscribe-header2 {
         font-size: 20px;
@@ -75,15 +73,16 @@
             margin-bottom: 16px;
           }
         }
-      } 
+      }
     }
     .subscribe-logos {
       margin-right: calc(50% - 50vw);
       margin-left: calc(50% - 50vw);
-      
+
       .tech-logos {
         display: block;
         width: 100%;
+        max-width: 80px;
         height: auto;
 
         @include mobile {
@@ -91,7 +90,53 @@
           object-fit: cover;
           height: 12vw;
         }
-      }  
+      }
+    }
+    /*
+    右から左へ
+    ----------------------------*/
+    @keyframes infinity-scroll-left {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-100%);
+      }
+    }
+
+    /*
+    IE11対策
+    ----------------------------*/
+    _:-ms-lang(x)::-ms-backdrop,
+    .d-demo {
+      display: -ms-grid;
+      overflow: hidden;
+    }
+    /*----------------------------*/
+
+    .d-demo__wrap {
+      display: flex;
+      overflow: hidden;
+    }
+
+    .d-demo__list {
+      display: flex;
+      list-style: none;
+    }
+
+    .d-demo__list--left{
+    animation :infinity-scroll-left 30s infinite linear 0.5s both;
+    }
+
+    .d-demo__item {
+      width: calc(100vw / 14);
+      
+      @include mobile {
+        width: calc(100vw / 6);
+      }
+    }
+    .d-demo__item > img{
+      width: 100%;
     }
   }
 
@@ -104,7 +149,7 @@
 
     .for-recruiter-header {
       font-weight: bold;
-      color: #1E40F6;
+      color: #1e40f6;
       font-size: 56px;
 
       @include mobile {
@@ -139,7 +184,7 @@
 
       .describe-photo {
         margin: 0 25px 0 0;
-      }  
+      }
     }
 
     .describe-photo {
@@ -154,9 +199,9 @@
         @include mobile {
           width: 100%;
         }
-      }  
+      }
     }
-  
+
     .describe-text {
       text-align: left;
       width: 480px;
@@ -192,7 +237,7 @@
           }
         }
       }
-    }  
+    }
   }
 
   .subscribe-buttons-buttom {
@@ -216,19 +261,19 @@
         margin-bottom: 20px;
         width: 100%;
       }
-      
+
       .subscribe-button {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        width: 325px;   
+        width: 325px;
         font-weight: 700;
 
         @include mobile {
           padding: 0;
         }
-        
+
         .subscribe-user-icon {
           width: 50px;
           display: block;

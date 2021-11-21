@@ -1,0 +1,92 @@
+@import "../../../sass_config/color.scss";
+@import "../../../sass_config/mixin.scss";
+.header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background-color: white;
+  border-bottom: 2px solid $light-gray;
+  z-index: 10;
+  .header-container {
+    padding: 20px 40px;
+    @include tablet {
+      padding: 20px 8px;
+    }
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .company-logo {
+      height: 60px;
+      cursor: pointer;
+    }
+    .hamburger-icon {
+      font-size: 40px;
+      color: $gray;
+      cursor: pointer;
+    }
+    .nav-bar {
+      display: flex;
+
+      .menu {
+        margin-right: 8px;
+        align-self: center;
+        .menu-item {
+          margin: 16px;
+          padding-bottom: 4px;
+
+          &:hover {
+            color: $color_primary;
+            text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,
+              0.01em 0 $color_primary, -0.01em 0 $color_primary;
+          }
+        }
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        .login {
+          padding-left: 20px;
+          border-left: 2px solid $light-gray;
+          margin-right: 8px;
+        }
+        .round-button {
+          border: 1.8px solid $color_primary;
+          background: $color_primary;
+          border-radius: 100px;
+          padding: 8px 32px;
+          margin: 0 4px;
+          font-weight: 700;
+        }
+        .background-white {
+          background-color: white;
+          color: $color_primary;
+        }
+        .user-icon-no-img {
+          color: $gray;
+          font-size: 32px;
+          padding-top: 4px;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+
+  .dropdown-menuitem {
+    text-align: center;
+    padding: 4px;
+    width: 100%;
+  }
+}
+
+.activated-menu {
+  color: $color_primary;
+  text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,
+    0.01em 0 $color_primary, -0.01em 0 $color_primary;
+  border-bottom: solid 2px $color_primary;
+}
