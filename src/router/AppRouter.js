@@ -9,6 +9,8 @@ import Login from '../components/Login/Login';
 import Wrapper from '../components/Wrapper/Wrapper';
 import { createBrowserHistory } from 'history';
 import Recruiter from '../components/Recruiter/Recruiter';
+import Profile from "../components/Edit/Profile"
+import Edit from '../components/Edit/Edit';
 
 const history = createBrowserHistory();
 
@@ -23,6 +25,7 @@ const AppRouter = () => (
         <Route path="/contact" component={ContactForm} />
         <Route path="/apply-recruiter" component={Recruiter} />
         <Route path="/login" component={Login} />
+        <Route path="/edit" component={Edit} />
       </Switch>
     </Wrapper>
   </Router>

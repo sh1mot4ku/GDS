@@ -40,7 +40,7 @@ function Apply() {
         github,
         website,
         englishLevel,
-        description,
+        description
       },
       userType: USER_TYPE_CLIENT,
       uid: uuid(),
