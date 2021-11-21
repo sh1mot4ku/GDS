@@ -7,7 +7,7 @@ import "./Header.scss";
 import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const { uid, userInfo } = useSelector(state => state.auth)
+  const { uid } = useSelector(state => state.user)
   const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);

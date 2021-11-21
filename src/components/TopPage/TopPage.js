@@ -7,7 +7,7 @@ import useMedia from 'use-media';
 import { useSelector } from 'react-redux';
 
 const TopPage = () => {
-  const { uid, userInfo } = useSelector(state => state.auth)
+  const { uid, userInfo } = useSelector(state => state.user)
   const isMobile = useMedia({ maxWidth: '768px' });
 
   const recruiterSubscribe = () => {

@@ -155,5 +155,6 @@ export const footerMenuItemsLogIn = [
     title: "ログアウト",
     className: ["menu-item"],
     to: "/",
+    logOut: true,
   },
 ];

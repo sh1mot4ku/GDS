@@ -8,9 +8,10 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { footerMenuItemsLogOut, footerMenuItemsLogIn } from "../menuItems";
 import useMedia from "use-media";
 import { useSelector } from 'react-redux';
+import { auth } from '../../../firebase/firebase';
 
 export const Footer = () => {
-  const { uid, userInfo } = useSelector(state => state.auth)
+  const { uid } = useSelector(state => state.user)
   const isMobile = useMedia({ maxWidth: "768px" });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
@@ -23,12 +24,21 @@ export const Footer = () => {
     }
   }, [uid]);
 
+  const onLogOut = () => {
+    auth.signOut().then(() => {
+      console.log('User logged out');
+    }).catch((e) => {
+      console.error(e);
+    })
+  };
+
   const createMenuList = (menuItems) =>
     menuItems.map((menuItem) => (
       <Link
         key={menuItem.title}
         to={menuItem.to}
         className={menuItem.className}
+        onClick={menuItem.logOut && onLogOut}
       >
         {menuItem.title}
       </Link>

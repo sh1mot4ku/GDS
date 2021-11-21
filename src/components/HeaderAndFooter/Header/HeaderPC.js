@@ -27,6 +27,7 @@ const HeaderPC = ({ isUserLoggedIn }) => {
       history.push('/');
     }).catch((e) => {
       console.error(e);
+      handleClose();
     })
   };
 
@@ -86,14 +87,12 @@ const HeaderPC = ({ isUserLoggedIn }) => {
                       プロフィール
                     </MenuItem>
                   </Link>
-                  {/* <Link to="/logout"> */}
-                    <MenuItem
-                      className="dropdown-menuitem"
-                      onClick={onLogOut}
-                    >
-                      ログアウト
-                    </MenuItem>
-                  {/* </Link> */}
+                  <MenuItem
+                    className="dropdown-menuitem"
+                    onClick={onLogOut}
+                  >
+                    ログアウト
+                  </MenuItem>
                 </div>
               </Menu>
             </>
