@@ -5,14 +5,11 @@ import InputText from "../Apply/InputText";
 import InputSelect from "../Apply/InputSelect";
 import RadioForm from "../Apply/RadioForm";
 import { updateUser } from "../../API/dbutils";
-import { getUser } from "../../API/dbutils";
 import "./Edit.scss";
-// import { UserContext } from "../../context/user-context";
-// const info = {};
+
 
 function Edit() {
-  // const {user, setUser} = useContext(UserContext);
-  // const [step, setStep] = useState(0);
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,9 +23,6 @@ function Edit() {
 
   const USER_TYPE_CLIENT = "client";
 
-  // useEffect(() => {
-  //   console.log(user)
-  // }, [user])
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -46,11 +40,9 @@ function Edit() {
       userType: USER_TYPE_CLIENT,
     };
 
-    // setUser(postingInfo);
     updateUser(postingInfo);
   };
 
-  getUser("2QKafAQdHFduQ3lkxrtQrIJHnuu2")
 
   const optionData = {
     userLookingFor: [
