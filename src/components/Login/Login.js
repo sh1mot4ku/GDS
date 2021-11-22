@@ -1,14 +1,15 @@
-import React, { useState } from "react";
-import { Button } from "@material-ui/core";
-import InputTextAndLabel from "../Apply/InputTextAndLabel";
-import { auth } from "../../firebase/firebase";
-import { insertUser } from "../../API/dbutils";
-import "./Login.scss";
+import React, { useState } from 'react';
+import { Button } from '@material-ui/core';
+import InputTextAndLabel from '../Apply/InputTextAndLabel';
+import { auth } from '../../firebase/firebase';
+import { insertUser } from '../../API/dbutils';
+import BlueSidePart from '../BlueSidePart/BlueSidePart';
+import './Login.scss';
 // const info = {};
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -18,28 +19,23 @@ const Login = () => {
         password,
       },
     };
-    auth.createUserWithEmailAndPassword(email, password)
+    auth
+      .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // setUser(postingInfo);
         insertUser(postingInfo, userCredential.user.uid);
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(`Error happened: ${e}`);
-      })
+      });
   };
 
   return (
     <div className="main-login">
-      <div className="leftBox">
-        <img alt="" src="/image/logo-white 1.png" className="logo" />
-        <img alt="" src="/image/remoteStack.png" className="remoteStack" />
-      </div>
+      <BlueSidePart />
       <div className="rightBox">
         <h2 className="title">Login</h2>
-        <form
-          onSubmit={onSubmit}
-          className="form"
-        >
+        <form onSubmit={onSubmit} className="form">
           <InputTextAndLabel
             label="EMAIL"
             placeholder="YOUR EMAIL"
@@ -62,18 +58,14 @@ const Login = () => {
             >
               Login
             </Button>
-            <button
-              variant="contained"
-              color="primary"
-              className="sub-button"
-            >
+            <button variant="contained" color="primary" className="sub-button">
               新規登録はこちら
             </button>
           </div>
         </form>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Login;

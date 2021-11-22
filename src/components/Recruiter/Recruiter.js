@@ -1,28 +1,29 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
-import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
-import InputTextAndLabel from "../Apply/InputTextAndLabel";
-import { auth } from "../../firebase/firebase";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
+import InputTextAreaAndLabel from './InputTextAreaAndLabel';
+import InputTextAndLabel from '../Apply/InputTextAndLabel';
+import { auth } from '../../firebase/firebase';
 import { v4 as uuid } from 'uuid';
-import RadioForm from "../Apply/RadioForm";
-import "./Recruiter.scss";
-import { insertUser } from "../../API/dbutils";
+import RadioForm from '../Apply/RadioForm';
+import './Recruiter.scss';
+import { insertUser } from '../../API/dbutils';
+import BlueSidePart from '../BlueSidePart/BlueSidePart';
 const info = {};
 
 function Recruiter() {
   // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [companyAddress, setCompanyAddress] = useState("");
-  const [lookingFor, setLookingFor] = useState("");
-  const [mustHave, setMustHave] = useState("");
-  const [niceToHave, setNiceToHave] = useState("");
-  const [projectDetail, setProjectDetail] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [companyAddress, setCompanyAddress] = useState('');
+  const [lookingFor, setLookingFor] = useState('');
+  const [mustHave, setMustHave] = useState('');
+  const [niceToHave, setNiceToHave] = useState('');
+  const [projectDetail, setProjectDetail] = useState('');
 
-  const USER_TYPE_RECRUITER = "recruiter";
+  const USER_TYPE_RECRUITER = 'recruiter';
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -35,43 +36,44 @@ function Recruiter() {
         lookingFor,
         mustHave,
         niceToHave,
-        projectDetail  
+        projectDetail,
       },
       userType: USER_TYPE_RECRUITER,
-      uid: uuid()
+      uid: uuid(),
     };
-    auth.createUserWithEmailAndPassword(email, password)
+    auth
+      .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // setUser(postingInfo);
         insertUser(postingInfo, userCredential.user.uid);
         setStep(step + 1);
       })
-      .catch(e => {
+      .catch((e) => {
         console.error(`Error happened: ${e}`);
-      })
+      });
   };
 
   const optionData = {
     userLookingFor: [
-      "FULL-TIME EMPLOYMENT",
-      "CONTRACT / FREELANCE JOBS",
-      "BOTH PERMANENT AND CONTRACT",
+      'FULL-TIME EMPLOYMENT',
+      'CONTRACT / FREELANCE JOBS',
+      'BOTH PERMANENT AND CONTRACT',
     ],
     userDescription: [
-      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
-      "PRODUCT DESIGNER / プロダクトデザイナー",
-      "PRODUCT MANAGER / プロダクトマネージャー",
-      "GROWTH HACKER / グロースハッカー",
-      "BUSINESS OPS / ビジネスオペレーションズ",
+      'SOFTWARE ENGINEER / ソフトウェアエンジニア',
+      'PRODUCT DESIGNER / プロダクトデザイナー',
+      'PRODUCT MANAGER / プロダクトマネージャー',
+      'GROWTH HACKER / グロースハッカー',
+      'BUSINESS OPS / ビジネスオペレーションズ',
     ],
     businessLookingFor: [
-      "HIRING DEVELOPERS / エンジニア",
-      "HIRING DESIGNERS / デザイナー",
-      "HIRING BUSINESS OPS / ビジネスサイド",
+      'HIRING DEVELOPERS / エンジニア',
+      'HIRING DESIGNERS / デザイナー',
+      'HIRING BUSINESS OPS / ビジネスサイド',
     ],
     businessCommitment: [
-      "FULL TIME (40 or more hrs/week) / 正社員",
-      "PART TIME (Less than 40hrs/week) / フリーランサー",
+      'FULL TIME (40 or more hrs/week) / 正社員',
+      'PART TIME (Less than 40hrs/week) / フリーランサー',
       "I'LL DECIDE LATER / まだ決めていない",
     ],
   };
@@ -159,11 +161,16 @@ function Recruiter() {
           />
           <div className="buttonContainer">
             <Button variant="contained" className="button" type="submit">
-              next
+              REGISTER
             </Button>
           </div>
           <div className="link-line">
-          <button className="previousButton" onClick={(e) => handleClick(e, step - 1, contents)}>＜ PREVIOUS</button>
+            <button
+              className="previousButton"
+              onClick={(e) => handleClick(e, step - 1, contents)}
+            >
+              ＜ PREVIOUS
+            </button>
           </div>
         </>
       );
@@ -174,7 +181,7 @@ function Recruiter() {
           <div className="thxBox">
             <h2 className="thxTitle">Thank you for Connecting</h2>
             <p className="sentence">
-            この度はプロジェクトの詳細をご共有頂き有難うございました。
+              この度はプロジェクトの詳細をご共有頂き有難うございました。
               <br />
               <br />
               よりお客様のニーズを理解するため、専任のコンサルタントがプロセス全体を通してお客様をサポートします。以下のLinkよりプロジェクト・求人に関するMTGを予約してください。
@@ -189,7 +196,9 @@ function Recruiter() {
               </Button>
             </div>
             <div className="link-line">
-              <Link to="/" className="previousButton">ホームへ戻る</Link>
+              <Link to="/" className="previousButton">
+                ホームへ戻る
+              </Link>
             </div>
           </div>
         </>
@@ -202,13 +211,16 @@ function Recruiter() {
 
   return (
     <div className="main-recruiter">
-      <div className="leftBox">
-        <img alt="" src="/image/logo-white 1.png" className="logo" />
-        <img alt="" src="/image/remoteStack.png" className="remoteStack" />
-      </div>
+      <BlueSidePart />
       <div className="rightBox">
-        { step !== 2 && <><h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
-        <p className="subtitle">正確なマッチングの為に詳細な情報をお伝え下さい</p></>}
+        {step !== 2 && (
+          <>
+            <h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
+            <p className="subtitle">
+              正確なマッチングの為に詳細な情報をお伝え下さい
+            </p>
+          </>
+        )}
         <form
           onSubmit={
             step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
