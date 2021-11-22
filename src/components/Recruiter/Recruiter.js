@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
-import InputTextAreaAndLabel from './InputTextAreaAndLabel';
-import InputTextAndLabel from '../Apply/InputTextAndLabel';
-import { auth } from '../../firebase/firebase';
-import { v4 as uuid } from 'uuid';
-import RadioForm from '../Apply/RadioForm';
-import './Recruiter.scss';
-import { insertUser } from '../../API/dbutils';
-import BlueSidePart from '../BlueSidePart/BlueSidePart';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
+import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
+import InputTextAndLabel from "../Apply/InputTextAndLabel";
+import { auth } from "../../firebase/firebase";
+import { v4 as uuid } from "uuid";
+import RadioForm from "../Apply/RadioForm";
+import "./Recruiter.scss";
+import { insertUser } from "../../API/dbutils";
+import BlueSidePart from "../BlueSidePart/BlueSidePart";
 const info = {};
 
 function Recruiter() {
   // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [companyAddress, setCompanyAddress] = useState('');
-  const [lookingFor, setLookingFor] = useState('');
-  const [mustHave, setMustHave] = useState('');
-  const [niceToHave, setNiceToHave] = useState('');
-  const [projectDetail, setProjectDetail] = useState('');
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [lookingFor, setLookingFor] = useState("");
+  const [mustHave, setMustHave] = useState("");
+  const [niceToHave, setNiceToHave] = useState("");
+  const [projectDetail, setProjectDetail] = useState("");
 
-  const USER_TYPE_RECRUITER = 'recruiter';
+  const USER_TYPE_RECRUITER = "recruiter";
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -55,25 +55,25 @@ function Recruiter() {
 
   const optionData = {
     userLookingFor: [
-      'FULL-TIME EMPLOYMENT',
-      'CONTRACT / FREELANCE JOBS',
-      'BOTH PERMANENT AND CONTRACT',
+      "FULL-TIME EMPLOYMENT",
+      "CONTRACT / FREELANCE JOBS",
+      "BOTH PERMANENT AND CONTRACT",
     ],
     userDescription: [
-      'SOFTWARE ENGINEER / ソフトウェアエンジニア',
-      'PRODUCT DESIGNER / プロダクトデザイナー',
-      'PRODUCT MANAGER / プロダクトマネージャー',
-      'GROWTH HACKER / グロースハッカー',
-      'BUSINESS OPS / ビジネスオペレーションズ',
+      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
+      "PRODUCT DESIGNER / プロダクトデザイナー",
+      "PRODUCT MANAGER / プロダクトマネージャー",
+      "GROWTH HACKER / グロースハッカー",
+      "BUSINESS OPS / ビジネスオペレーションズ",
     ],
     businessLookingFor: [
-      'HIRING DEVELOPERS / エンジニア',
-      'HIRING DESIGNERS / デザイナー',
-      'HIRING BUSINESS OPS / ビジネスサイド',
+      "HIRING DEVELOPERS / エンジニア",
+      "HIRING DESIGNERS / デザイナー",
+      "HIRING BUSINESS OPS / ビジネスサイド",
     ],
     businessCommitment: [
-      'FULL TIME (40 or more hrs/week) / 正社員',
-      'PART TIME (Less than 40hrs/week) / フリーランサー',
+      "FULL TIME (40 or more hrs/week) / 正社員",
+      "PART TIME (Less than 40hrs/week) / フリーランサー",
       "I'LL DECIDE LATER / まだ決めていない",
     ],
   };

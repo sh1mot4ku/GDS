@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import {
   FormLabel,
   RadioGroup,
   FormControlLabel,
   Radio,
-} from '@material-ui/core';
-import './Apply.scss';
+} from "@material-ui/core";
+import "./Apply.scss";
 
 const RadioForm = ({ value, onChange, label, options }) => {
   return (

@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { Button } from '@material-ui/core';
-import InputTextAndLabel from '../Apply/InputTextAndLabel';
-import { auth } from '../../firebase/firebase';
-import { insertUser } from '../../API/dbutils';
-import BlueSidePart from '../BlueSidePart/BlueSidePart';
-import './Login.scss';
+import React, { useState } from "react";
+import { Button } from "@material-ui/core";
+import InputTextAndLabel from "../Apply/InputTextAndLabel";
+import { auth } from "../../firebase/firebase";
+import { insertUser } from "../../API/dbutils";
+import BlueSidePart from "../BlueSidePart/BlueSidePart";
+import "./Login.scss";
 // const info = {};
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();

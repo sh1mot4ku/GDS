@@ -1,34 +1,34 @@
-import React, { useState } from 'react';
-import { Button, List } from '@material-ui/core';
-import InputText from './InputText.jsx';
-import InputTextAndLabel from './InputTextAndLabel.jsx';
-import InputLabel from '@mui/material/InputLabel';
-import InputSelect from './InputSelect.jsx';
-import { auth } from '../../firebase/firebase';
-import { v4 as uuid } from 'uuid';
-import RadioForm from './RadioForm.jsx';
-import './Apply.scss';
-import { insertUser } from '../../API/dbutils';
-import { Link } from 'react-router-dom';
-import BlueSidePart from '../BlueSidePart/BlueSidePart';
+import React, { useState } from "react";
+import { Button, List } from "@material-ui/core";
+import InputText from "./InputText.jsx";
+import InputTextAndLabel from "./InputTextAndLabel.jsx";
+import InputLabel from "@mui/material/InputLabel";
+import InputSelect from "./InputSelect.jsx";
+import { auth } from "../../firebase/firebase";
+import { v4 as uuid } from "uuid";
+import RadioForm from "./RadioForm.jsx";
+import "./Apply.scss";
+import { insertUser } from "../../API/dbutils";
+import { Link } from "react-router-dom";
+import BlueSidePart from "../BlueSidePart/BlueSidePart";
 // import { UserContext } from "../../context/user-context";
 const info = {};
 
 function Apply() {
   // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [location, setLocation] = useState('Japan');
-  const [lookingFor, setLookingFor] = useState('');
-  const [link1, setLink1] = useState('');
-  const [link2, setLink2] = useState('');
-  const [link3, setLink3] = useState('');
-  const [englishLevel, setEnglishLevel] = useState('');
-  const [description, setDescription] = useState('');
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [location, setLocation] = useState("Japan");
+  const [lookingFor, setLookingFor] = useState("");
+  const [link1, setLink1] = useState("");
+  const [link2, setLink2] = useState("");
+  const [link3, setLink3] = useState("");
+  const [englishLevel, setEnglishLevel] = useState("");
+  const [description, setDescription] = useState("");
 
-  const USER_TYPE_CLIENT = 'client';
+  const USER_TYPE_CLIENT = "client";
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -60,59 +60,59 @@ function Apply() {
 
   const optionData = {
     userLookingFor: [
-      'FULL-TIME EMPLOYMENT',
-      'CONTRACT / FREELANCE JOBS',
-      'BOTH PERMANENT AND CONTRACT',
+      "FULL-TIME EMPLOYMENT",
+      "CONTRACT / FREELANCE JOBS",
+      "BOTH PERMANENT AND CONTRACT",
     ],
     userDescription: [
-      'SOFTWARE ENGINEER / ソフトウェアエンジニア',
-      'PRODUCT DESIGNER / プロダクトデザイナー',
-      'PRODUCT MANAGER / プロダクトマネージャー',
-      'GROWTH HACKER / グロースハッカー',
-      'BUSINESS OPS / ビジネスオペレーションズ',
+      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
+      "PRODUCT DESIGNER / プロダクトデザイナー",
+      "PRODUCT MANAGER / プロダクトマネージャー",
+      "GROWTH HACKER / グロースハッカー",
+      "BUSINESS OPS / ビジネスオペレーションズ",
     ],
     businessLookingFor: [
-      'HIRING DEVELOPERS / エンジニア',
-      'HIRING DESIGNERS / デザイナー',
-      'HIRING BUSINESS OPS / ビジネスサイド',
+      "HIRING DEVELOPERS / エンジニア",
+      "HIRING DESIGNERS / デザイナー",
+      "HIRING BUSINESS OPS / ビジネスサイド",
     ],
     businessCommitment: [
-      'FULL TIME (40 or more hrs/week) / 正社員',
-      'PART TIME (Less than 40hrs/week) / フリーランサー',
+      "FULL TIME (40 or more hrs/week) / 正社員",
+      "PART TIME (Less than 40hrs/week) / フリーランサー",
       "I'LL DECIDE LATER / まだ決めていない",
     ],
   };
 
   const countries = [
     {
-      value: 'Japan',
+      value: "Japan",
     },
     {
-      value: 'USA',
+      value: "USA",
     },
     {
-      value: 'Canada',
+      value: "Canada",
     },
     {
-      value: 'Korea',
+      value: "Korea",
     },
     {
-      value: 'China',
+      value: "China",
     },
   ];
 
   const levelOfEnglish = [
     {
-      value: '日常会話、旅行トラブル対応レベル',
+      value: "日常会話、旅行トラブル対応レベル",
     },
     {
-      value: 'ビジネス会話、プレゼンレベル',
+      value: "ビジネス会話、プレゼンレベル",
     },
     {
-      value: '簡単通訳、ディスカッションレベル',
+      value: "簡単通訳、ディスカッションレベル",
     },
     {
-      value: 'ネイティブレベル',
+      value: "ネイティブレベル",
     },
   ];
 

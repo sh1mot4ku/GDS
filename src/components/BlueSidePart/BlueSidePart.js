@@ -1,6 +1,6 @@
-import React from 'react';
-import './BlueSidePart.scss';
-import { useLocation } from 'react-router-dom';
+import React from "react";
+import "./BlueSidePart.scss";
+import { useLocation } from "react-router-dom";
 
 const BlueSidePart = () => {
   const location = useLocation();
@@ -8,9 +8,9 @@ const BlueSidePart = () => {
     <>
       <div
         className={[
-          'sidepart-container',
-          location.pathname === '/apply-recruiter' ? 'position-fixed' : null,
-        ].join(' ')}
+          "sidepart-container",
+          location.pathname === "/apply-recruiter" ? "position-fixed" : null,
+        ].join(" ")}
       >
         <div className="box"></div>
         <img alt="" src="/image/logo-white 1.png" className="logo" />
