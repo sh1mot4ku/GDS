@@ -2,44 +2,34 @@ import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import InputTextAndLabel from "../Apply/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
-import { insertUser } from "../../API/dbutils";
+import { useHistory } from "react-router-dom";
 import "./Login.scss";
-// const info = {};
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
-  const onSubmit = (e) => {
+  const onLogin = (e) => {
     e.preventDefault();
-    const postingInfo = {
-      profile: {
-        email,
-        password,
-      },
-    };
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // setUser(postingInfo);
-        insertUser(postingInfo, userCredential.user.uid);
-      })
-      .catch(e => {
-        console.error(`Error happened: ${e}`);
-      })
+    auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      history.push('/');
+    })
+    .catch(e => {
+      console.error(e);
+    })
   };
 
   return (
     <div className="main-login">
       <div className="leftBox">
-        <img alt="" src="/image/logo-white 1.png" className="logo" />
-        <img alt="" src="/image/remoteStack.png" className="remoteStack" />
+        <img alt="logo-white 1" src="/image/logo-white 1.png" className="logo" />
+        <img alt="remoteStack" src="/image/remoteStack.png" className="remoteStack" />
       </div>
       <div className="rightBox">
         <h2 className="title">Login</h2>
-        <form
-          onSubmit={onSubmit}
-          className="form"
-        >
+        <form className="form">
           <InputTextAndLabel
             label="EMAIL"
             placeholder="YOUR EMAIL"
@@ -56,6 +46,7 @@ const Login = () => {
           />
           <div className="login-buttons">
             <Button
+              onClick={onLogin}
               variant="contained"
               color="primary"
               className="round-button"

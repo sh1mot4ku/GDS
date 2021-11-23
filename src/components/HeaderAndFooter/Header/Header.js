@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import useMedia from 'use-media';
-import HeaderTBandMB from './HeaderTBandMB';
-import HeaderPC from './HeaderPC';
-import { useAuthContext } from '../../../context/auth-context';
-import './Header.scss';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import useMedia from "use-media";
+import HeaderTBandMB from "./HeaderTBandMB";
+import HeaderPC from "./HeaderPC";
+import "./Header.scss";
+import { useSelector } from 'react-redux';
 
 const Header = () => {
-  const isTablet = useMedia({ maxWidth: '1024px' });
+  const { uid } = useSelector(state => state.user)
+  const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
-  const { loginId } = useAuthContext();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
   useEffect(() => {
-    if (loginId === null) {
-      setIsUserLoggedIn(false);
-    } else {
+    if (uid) {
       setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
     }
-  }, [loginId]);
+  }, [uid]);
 
   return (
     <>

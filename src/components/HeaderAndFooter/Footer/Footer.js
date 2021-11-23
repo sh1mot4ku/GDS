@@ -1,27 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import './Footer.scss';
-import { Link, useLocation } from 'react-router-dom';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import { footerMenuItemsLogOut, footerMenuItemsLogIn } from '../menuItems';
-import { useAuthContext } from '../../../context/auth-context';
-import useMedia from 'use-media';
+import React, { useState, useEffect } from "react";
+import "./Footer.scss";
+import { Link, useLocation } from "react-router-dom";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import { footerMenuItemsLogOut, footerMenuItemsLogIn } from "../menuItems";
+import useMedia from "use-media";
+import { useSelector } from 'react-redux';
+import { auth } from '../../../firebase/firebase';
 
 export const Footer = () => {
-  const isMobile = useMedia({ maxWidth: '768px' });
+  const { uid } = useSelector(state => state.user)
+  const isMobile = useMedia({ maxWidth: "768px" });
   const location = useLocation();
-  const { loginId } = useAuthContext();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
   useEffect(() => {
-    if (loginId === null) {
-      setIsUserLoggedIn(false);
-    } else {
+    if (uid) {
       setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
     }
-  }, [loginId]);
+  }, [uid]);
+
+  const onLogOut = () => {
+    auth.signOut().then(() => {
+      console.log('User logged out');
+    }).catch((e) => {
+      console.error(e);
+    })
+  };
 
   const createMenuList = (menuItems) =>
     menuItems.map((menuItem) => (
@@ -29,6 +38,7 @@ export const Footer = () => {
         key={menuItem.title}
         to={menuItem.to}
         className={menuItem.className}
+        onClick={menuItem.logOut && onLogOut}
       >
         {menuItem.title}
       </Link>
