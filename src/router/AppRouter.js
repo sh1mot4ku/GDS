@@ -9,7 +9,7 @@ import Login from '../components/Login/Login';
 import Wrapper from '../components/Wrapper/Wrapper';
 import { createBrowserHistory } from 'history';
 import Recruiter from '../components/Recruiter/Recruiter';
-import Profile from "../components/Edit/Profile"
+// import Profile from "../components/Edit/Profile"
 import Edit from '../components/Edit/Edit';
 import PostJobListings from '../components/PostJobListings/PostJobListings';
 import JobListings from '../components/JobListings/JobListings';
