@@ -6,22 +6,31 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { footerMenuItemsLogOut, footerMenuItemsLogIn } from "../menuItems";
-import { useAuthContext } from "../../../context/auth-context";
 import useMedia from "use-media";
+import { useSelector } from 'react-redux';
+import { auth } from '../../../firebase/firebase';
 
 export const Footer = () => {
+  const { uid } = useSelector(state => state.user)
   const isMobile = useMedia({ maxWidth: "768px" });
   const location = useLocation();
-  const { loginId } = useAuthContext();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
   useEffect(() => {
-    if (loginId === null) {
-      setIsUserLoggedIn(false);
-    } else {
+    if (uid) {
       setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
     }
-  }, [loginId]);
+  }, [uid]);
+
+  const onLogOut = () => {
+    auth.signOut().then(() => {
+      console.log('User logged out');
+    }).catch((e) => {
+      console.error(e);
+    })
+  };
 
   const createMenuList = (menuItems) =>
     menuItems.map((menuItem) => (
@@ -29,6 +38,7 @@ export const Footer = () => {
         key={menuItem.title}
         to={menuItem.to}
         className={menuItem.className}
+        onClick={menuItem.logOut && onLogOut}
       >
         {menuItem.title}
       </Link>
@@ -36,8 +46,10 @@ export const Footer = () => {
 
   return (
     <>
-      {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ? null : (
+      {location.pathname === '/apply-developer' ||
+      location.pathname === '/apply-recruiter' ||
+      location.pathname === '/contact' ||
+      location.pathname === '/login' ? null : (
         <footer className="footer">
           <div className="footer-container">
             {isMobile && (

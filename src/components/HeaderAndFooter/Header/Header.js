@@ -3,27 +3,29 @@ import { Link, useLocation } from "react-router-dom";
 import useMedia from "use-media";
 import HeaderTBandMB from "./HeaderTBandMB";
 import HeaderPC from "./HeaderPC";
-import { useAuthContext } from "../../../context/auth-context";
 import "./Header.scss";
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const { uid } = useSelector(state => state.user)
   const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
-  const { loginId } = useAuthContext();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
   useEffect(() => {
-    if (loginId === null) {
-      setIsUserLoggedIn(false);
-    } else {
+    if (uid) {
       setIsUserLoggedIn(true);
+    } else {
+      setIsUserLoggedIn(false);
     }
-  }, [loginId]);
+  }, [uid]);
 
   return (
     <>
-      {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ? null : (
+      {location.pathname === '/apply-developer' ||
+      location.pathname === '/apply-recruiter' ||
+      location.pathname === '/contact' ||
+      location.pathname === '/login' ? null : (
         <header className="header">
           <div className="header-container">
             <Link to="/">

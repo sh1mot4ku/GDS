@@ -1,0 +1,32 @@
+@import '../../sass_config/color.scss';
+@import '../../sass_config/mixin.scss';
+
+.sidepart-container {
+  height: 100vh;
+  width: 471px;
+  background: $color_primary;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  .box {
+    height: 15%;
+    width: 471px;
+    background: $color_primary;
+  }
+  .logo {
+    width: 274px;
+  }
+
+  .remoteStack {
+    width: 368px;
+    margin-bottom: 24px;
+  }
+  @include mobile {
+    display: none;
+  }
+}
+.position-fixed {
+  position: fixed;
+}
