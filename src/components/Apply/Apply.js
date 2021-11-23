@@ -4,15 +4,13 @@ import InputText from "./InputText.jsx";
 import InputTextAndLabel from "./InputTextAndLabel.jsx";
 import InputSelect from "./InputSelect.jsx";
 import { auth } from "../../firebase/firebase";
-import { v4 as uuid } from "uuid";
 import RadioForm from "./RadioForm.jsx";
-import "./Apply.scss";
 import { insertUser } from "../../API/dbutils";
-// import { UserContext } from "../../context/user-context";
+import "./Apply.scss";
+
 const info = {};
 
 function Apply() {
-  // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +23,7 @@ function Apply() {
   const [englishLevel, setEnglishLevel] = useState("");
   const [description, setDescription] = useState("");
 
-  const USER_TYPE_CLIENT = "client";
+  const USER_TYPE = "developer";
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -33,7 +31,6 @@ function Apply() {
       profile: {
         fullName,
         email,
-        password,
         location,
         lookingFor,
         linkedin,
@@ -42,13 +39,11 @@ function Apply() {
         englishLevel,
         description,
       },
-      userType: USER_TYPE_CLIENT,
-      uid: uuid(),
+      userType: USER_TYPE,
     };
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        // setUser(postingInfo);
         insertUser(postingInfo, userCredential.user.uid);
         setStep(step + 1);
       })

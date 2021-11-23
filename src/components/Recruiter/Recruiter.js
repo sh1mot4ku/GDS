@@ -4,14 +4,13 @@ import { Button } from "@material-ui/core";
 import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
 import InputTextAndLabel from "../Apply/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
-import { v4 as uuid } from 'uuid';
 import RadioForm from "../Apply/RadioForm";
-import "./Recruiter.scss";
 import { insertUser } from "../../API/dbutils";
+import "./Recruiter.scss";
+
 const info = {};
 
 function Recruiter() {
-  // const {user, setUser} = useContext(UserContext);
   const [step, setStep] = useState(0);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -22,7 +21,7 @@ function Recruiter() {
   const [niceToHave, setNiceToHave] = useState("");
   const [projectDetail, setProjectDetail] = useState("");
 
-  const USER_TYPE_RECRUITER = "recruiter";
+  const USER_TYPE = "recruiter";
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -30,19 +29,16 @@ function Recruiter() {
       profile: {
         fullName,
         email,
-        password,
         companyAddress,
         lookingFor,
         mustHave,
         niceToHave,
         projectDetail  
       },
-      userType: USER_TYPE_RECRUITER,
-      uid: uuid()
+      userType: USER_TYPE,
     };
     auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
-        // setUser(postingInfo);
         insertUser(postingInfo, userCredential.user.uid);
         setStep(step + 1);
       })
