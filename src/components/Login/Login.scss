@@ -1,5 +1,5 @@
-@import '../../sass_config/color.scss';
-@import '../../sass_config/mixin.scss';
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
 
 .main-login {
   width: 100vw;
@@ -33,7 +33,14 @@
       .radio {
         margin: 8px 0 8px;
       }
-
+      .empty-box {
+        height: 24px;
+        width: 200px;
+      }
+      .error-text {
+        text-align: center;
+        color: $warning;
+      }
       .login-buttons {
         display: flex;
         flex-direction: column;
