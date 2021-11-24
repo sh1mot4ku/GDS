@@ -3,16 +3,36 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import './PostJobListings.scss';
 import database, { firebase, storage } from '../../firebase/firebase';
-import { WithContext as ReactTags } from 'react-tag-input';
+// import { WithContext as ReactTags } from 'react-tag-input';
 import TrimModal from './TrimModal';
 import { v4 as uuid } from 'uuid';
+import ChipInputAutosuggest from './SkillInput';
 
 // APIなどから取得？
-const SUGGESTIONS = [
-  { id: 'React', text: 'React' },
-  { id: 'Sass', text: 'Sass' },
-  { id: 'TypeScript', text: 'TypeScript' }
-]
+// const SUGGESTIONS = [
+//   { id: 'React', text: 'React' },
+//   { id: 'Sass', text: 'Sass' },
+//   { id: 'TypeScript', text: 'TypeScript' }
+// ]
+
+const suggestions = [
+  "Texas",
+  "Arkansas",
+  "Louisiana",
+  "Oklahoma",
+  "New Mexico",
+  "Mississippi",
+  "Alabama",
+  "Florida",
+  "Georgia",
+  "South Carolina",
+  "North Carolina",
+  "Tennessee",
+  "Kansas",
+  "Nebraska",
+  "Arizona",
+  "Alaska"
+];
 
 const readFile = (file) => {
   return new Promise((resolve) => {
@@ -36,7 +56,7 @@ const PostJobListings = () => {
   const [workingHours, setWorkingHours] = useState(null);
   const [leaves, setLeaves] = useState(null);
   const [tags, setTags] = useState([]);
-  const [suggestions, setSuggestions] = useState(SUGGESTIONS);
+  // const [suggestions, setSuggestions] = useState(SUGGESTIONS);
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
   const [photoUrl, setPhotoUrl] = useState("");
@@ -111,12 +131,12 @@ const PostJobListings = () => {
     })
   }
 
-  const handleAddition = newTag => {
-    setTags([...tags, newTag])
-  };
-  const handleDelete = tagIndex => {
-    setTags(tags.filter((_, i) => i !== tagIndex))
-  }
+  // const handleAddition = newTag => {
+  //   setTags([...tags, newTag])
+  // };
+  // const handleDelete = tagIndex => {
+  //   setTags(tags.filter((_, i) => i !== tagIndex))
+  // }
 
   return (
     <div className="form-wrapper">
@@ -213,13 +233,14 @@ const PostJobListings = () => {
             />
           </div>
           <div className="input-block">
-            <ReactTags
+            {/* <ReactTags
               tags={tags}
               suggestions={suggestions}
               handleAddition={handleAddition}
               handleDelete={handleDelete}
               placeholder="スキル*"
-            />
+            /> */}
+            <ChipInputAutosuggest data={suggestions}/>
           </div>
           <div className="input-block">
             <TextField
