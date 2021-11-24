@@ -81,12 +81,12 @@ const FaqsPage = () => {
         <Faq question={question[2]} />
         <Faq question={question[3]} />
         <Faq question={question[4]} />
-        <Faq question={question[5]} />
       </div>
       <div className='title'>
         <p>その他のご質問</p>
       </div>
       <div className="contents">
+        <Faq question={question[5]} />
         <Faq question={question[6]} />
         <Faq question={question[7]} />
         <Faq question={question[8]} />
