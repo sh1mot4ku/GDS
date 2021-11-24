@@ -39,6 +39,10 @@ const Login = () => {
               "ログインの試行が何度も行われたため、セキュリティ上ユーザーアカウントを一時的にロックしています。しばらく経ってから再度お試し下さい。"
             );
             break;
+          default:
+            setFirebaseError(
+              "予期しないエラーが発生しました。再度ログインして下さい。"
+            );
         }
         console.error(error);
       });
@@ -51,7 +55,6 @@ const Login = () => {
     }
     setFirebaseError("");
   };
-  console.log(email, password);
 
   return (
     <div className="main-login">
