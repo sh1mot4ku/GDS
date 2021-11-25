@@ -1,38 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import './PostJobListings.scss';
 import database, { firebase, storage } from '../../firebase/firebase';
-// import { WithContext as ReactTags } from 'react-tag-input';
 import TrimModal from './TrimModal';
 import { v4 as uuid } from 'uuid';
 import ChipInputAutosuggest from './SkillInput';
-
-// APIなどから取得？
-// const SUGGESTIONS = [
-//   { id: 'React', text: 'React' },
-//   { id: 'Sass', text: 'Sass' },
-//   { id: 'TypeScript', text: 'TypeScript' }
-// ]
-
-const suggestions = [
-  "Texas",
-  "Arkansas",
-  "Louisiana",
-  "Oklahoma",
-  "New Mexico",
-  "Mississippi",
-  "Alabama",
-  "Florida",
-  "Georgia",
-  "South Carolina",
-  "North Carolina",
-  "Tennessee",
-  "Kansas",
-  "Nebraska",
-  "Arizona",
-  "Alaska"
-];
+import skillsSuggestion from '../../data/skills/integration';
+import './PostJobListings.scss';
 
 const readFile = (file) => {
   return new Promise((resolve) => {
@@ -56,7 +30,6 @@ const PostJobListings = () => {
   const [workingHours, setWorkingHours] = useState(null);
   const [leaves, setLeaves] = useState(null);
   const [tags, setTags] = useState([]);
-  // const [suggestions, setSuggestions] = useState(SUGGESTIONS);
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
   const [photoUrl, setPhotoUrl] = useState("");
@@ -68,9 +41,8 @@ const PostJobListings = () => {
 
   useEffect(() => {
     if (photoBlob){
-      const uid = uuid(); // 仮にユーザーIDをuuidで設定
-      // const uploadTask = storage.ref(`photos/${props.id}`).put(photoBlob);
-      const uploadTask = storage.ref(`photos/${uid}`).put(photoBlob);
+      const uid = uuid(); // Set posting ID with uuid
+      const uploadTask = storage.ref(`photos/${uid}`).put(photoBlob); // photos/uid/postId/ とする
       const unsubscribe = uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
         null,
@@ -133,17 +105,10 @@ const PostJobListings = () => {
     })
   }
 
-  // const handleAddition = newTag => {
-  //   setTags([...tags, newTag])
-  // };
-  // const handleDelete = tagIndex => {
-  //   setTags(tags.filter((_, i) => i !== tagIndex))
-  // }
-
   return (
     <div className="form-wrapper">
       <div className="form-container">
-        <form className="joblist-form">
+        <form onSubmit={onSubmit} className="joblist-form">
           <div className="input-block">
             <TextField
               label="職種"
@@ -235,15 +200,8 @@ const PostJobListings = () => {
             />
           </div>
           <div className="input-block">
-            {/* <ReactTags
-              tags={tags}
-              suggestions={suggestions}
-              handleAddition={handleAddition}
-              handleDelete={handleDelete}
-              placeholder="スキル*"
-            /> */}
             <ChipInputAutosuggest
-              data={suggestions}
+              data={skillsSuggestion}
               tags={tags}
               setTags={setTags}
             />
@@ -303,7 +261,7 @@ const PostJobListings = () => {
           ) : (
 
           )} */}
-          <Button onClick={onSubmit} variant="contained" color="primary" type="submit">投稿</Button>
+          <Button variant="contained" color="primary" type="submit">投稿</Button>
         </form>
         { originPhotoSrc && (
           <TrimModal

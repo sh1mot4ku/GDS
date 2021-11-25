@@ -7,25 +7,23 @@ import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
 
-const MAX_SUGGESTIONS = 5; // The maximum number of suggestions
+const MAX_SUGGESTIONS = 15; // The maximum number of suggestions
 
-const renderInput = (inputProps) => {
-  const { value, onChange, chips, ref, ...other } = inputProps;
-
-  return (
-    <ChipInput
-      clearInputValueOnChange
-      onUpdateInput={onChange}
-      value={chips}
-      inputRef={ref}
-      variant="outlined"
-      label="スキル"
-      allowDuplicates={false}
-      required
-      {...other}
-    />
-  );
-};
+const renderInput = ({ value, onChange, chips, ref, ...other }) => (
+  <ChipInput
+    clearInputValueOnChange
+    onUpdateInput={onChange}
+    value={chips}
+    inputRef={ref}
+    variant="outlined"
+    label="スキル"
+    allowDuplicates={false}
+    required
+    newChipKeys={[]} // prevent inputing values by hitting Enter key
+    newChipKeyCodes={[]} // prevent inputing values by hitting Enter key
+    {...other}
+  />
+);
 
 const renderSuggestion = (suggestion, { query, isHighlighted }) => {
   const matches = match(suggestion, query);
@@ -62,9 +60,7 @@ const renderSuggestionsContainer = (options) => {
   );
 };
 
-const getSuggestionValue = (suggestion) => {
-  return suggestion;
-};
+const getSuggestionValue = (suggestion) => suggestion;
 
 const styles = (theme) => ({
   container: {
@@ -101,7 +97,6 @@ const ReactAutosuggest = ({
   ...other 
 }) => {
   const [suggestion, setSuggestion] = useState([]);
-  // const [values, setValues] = useState([]);
   const [textFieldInput, setTextFieldInput] = useState("");
 
   useEffect(() => {
@@ -117,7 +112,7 @@ const ReactAutosuggest = ({
       ? []
       : data.filter((suggestion) => {
           const keep =
-            // count < MAX_SUGGESTIONS &&
+            count < MAX_SUGGESTIONS &&
             suggestion.toLowerCase().slice(0, inputLength) === inputValue &&
             !tags.includes(suggestion)
 
