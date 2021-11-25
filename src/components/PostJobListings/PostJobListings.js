@@ -64,6 +64,8 @@ const PostJobListings = () => {
 
   // いつ掲載されたかの情報も登録する
 
+  console.log(tags);
+
   useEffect(() => {
     if (photoBlob){
       const uid = uuid(); // 仮にユーザーIDをuuidで設定
@@ -240,7 +242,11 @@ const PostJobListings = () => {
               handleDelete={handleDelete}
               placeholder="スキル*"
             /> */}
-            <ChipInputAutosuggest data={suggestions}/>
+            <ChipInputAutosuggest
+              data={suggestions}
+              tags={tags}
+              setTags={setTags}
+            />
           </div>
           <div className="input-block">
             <TextField

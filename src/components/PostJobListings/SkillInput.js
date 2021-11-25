@@ -7,6 +7,8 @@ import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
 
+const MAX_SUGGESTIONS = 5; // The maximum number of suggestions
+
 const renderInput = (inputProps) => {
   const { value, onChange, chips, ref, ...other } = inputProps;
 
@@ -76,10 +78,10 @@ const styles = (theme) => ({
     marginBottom: theme.spacing(3),
     left: 0,
     right: 0,
-    zIndex: 1
+    zIndex: 10,
   },
   suggestion: {
-    display: "block"
+    display: "block",
   },
   suggestionsList: {
     margin: 0,
@@ -91,10 +93,15 @@ const styles = (theme) => ({
   }
 });
 
-const ReactAutosuggest = (props) => {
-  const { data, classes, ...other } = props;
+const ReactAutosuggest = ({
+  data,
+  tags,
+  setTags,
+  classes,
+  ...other 
+}) => {
   const [suggestion, setSuggestion] = useState([]);
-  const [values, setValues] = useState([]);
+  // const [values, setValues] = useState([]);
   const [textFieldInput, setTextFieldInput] = useState("");
 
   useEffect(() => {
@@ -110,8 +117,9 @@ const ReactAutosuggest = (props) => {
       ? []
       : data.filter((suggestion) => {
           const keep =
-            count < 5 &&
-            suggestion.toLowerCase().slice(0, inputLength) === inputValue;
+            // count < MAX_SUGGESTIONS &&
+            suggestion.toLowerCase().slice(0, inputLength) === inputValue &&
+            !tags.includes(suggestion)
 
           if (keep) {
             count += 1;
@@ -134,13 +142,13 @@ const ReactAutosuggest = (props) => {
   };
 
   const handleAddChip = (chip) => {
-    setValues([...values, chip]);
+    setTags([...tags, chip]);
     setTextFieldInput("");
   };
 
   const handleDeleteChip = (chip, index) => {
-    values.splice(index, 1);
-    setValues([...values]);
+    tags.splice(index, 1);
+    setTags([...tags]);
   };
 
   return (
@@ -164,7 +172,7 @@ const ReactAutosuggest = (props) => {
       }}
       focusInputOnSuggestionClick
       inputProps={{
-        chips: values,
+        chips: tags,
         value: textFieldInput,
         onChange: handletextFieldInputChange,
         onAdd: (chip) => handleAddChip(chip),
