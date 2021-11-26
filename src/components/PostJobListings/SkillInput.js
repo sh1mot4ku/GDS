@@ -7,7 +7,16 @@ import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
 
-const renderInput = ({ value, onChange, chips, maxTags, ref, ...other }) => (
+const renderInput = ({
+  value,
+  onChange,
+  chips,
+  maxTags,
+  label,
+  placeholder,
+  ref,
+  ...other
+}) => (
   <ChipInput
     clearInputValueOnChange
     onUpdateInput={onChange}
@@ -15,7 +24,8 @@ const renderInput = ({ value, onChange, chips, maxTags, ref, ...other }) => (
     inputRef={ref}
     onBeforeAdd={() => chips.length < maxTags}
     variant="outlined"
-    label="スキル"
+    label={label}
+    placeholder={placeholder}
     allowDuplicates={false}
     required
     {...other}
@@ -63,7 +73,7 @@ const styles = (theme) => ({
   container: {
     flexGrow: 1,
     position: "relative",
-    width: "100%"
+    width: "100%",
   },
   suggestionsContainerOpen: {
     position: "absolute",
@@ -79,28 +89,30 @@ const styles = (theme) => ({
   suggestionsList: {
     margin: 0,
     padding: 0,
-    listStyleType: "none"
+    listStyleType: "none",
   },
   textField: {
-    width: "100%"
-  }
+    width: "100%",
+  },
 });
 
 const ReactAutosuggest = ({
   data,
   tags,
   setTags,
-  maxSuggestion = 15,
+  maxSuggestions = 15,
   maxTags = 10,
+  label = "",
+  placeholder = "",
   classes,
-  ...other 
+  ...other
 }) => {
   const [suggestion, setSuggestion] = useState([]);
   const [textFieldInput, setTextFieldInput] = useState("");
 
   useEffect(() => {
-    setSuggestion(data);
-  }, []);
+    data && setSuggestion(data);
+  }, [data]);
 
   const getSuggestions = (value) => {
     const inputValue = value.trim().toLowerCase();
@@ -111,9 +123,9 @@ const ReactAutosuggest = ({
       ? []
       : data.filter((suggestion) => {
           const keep =
-            count < maxSuggestion &&
+            count < maxSuggestions &&
             suggestion.toLowerCase().slice(0, inputLength) === inputValue &&
-            !tags.includes(suggestion)
+            !tags.includes(suggestion);
 
           if (keep) {
             count += 1;
@@ -152,7 +164,7 @@ const ReactAutosuggest = ({
         container: classes.container,
         suggestionsContainerOpen: classes.suggestionsContainerOpen,
         suggestionsList: classes.suggestionsList,
-        suggestion: classes.suggestion
+        suggestion: classes.suggestion,
       }}
       renderInputComponent={renderInput}
       suggestions={suggestion}
@@ -170,9 +182,11 @@ const ReactAutosuggest = ({
         chips: tags,
         value: textFieldInput,
         maxTags,
+        label,
+        placeholder,
         onChange: handletextFieldInputChange,
         onAdd: (chip) => handleAddChip(chip),
-        onDelete: (chip, index) => handleDeleteChip(chip, index)
+        onDelete: (chip, index) => handleDeleteChip(chip, index),
       }}
     />
   );
