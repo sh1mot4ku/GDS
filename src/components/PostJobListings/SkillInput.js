@@ -7,20 +7,17 @@ import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
 
-const MAX_SUGGESTIONS = 15; // The maximum number of suggestions
-
-const renderInput = ({ value, onChange, chips, ref, ...other }) => (
+const renderInput = ({ value, onChange, chips, maxTags, ref, ...other }) => (
   <ChipInput
     clearInputValueOnChange
     onUpdateInput={onChange}
     value={chips}
     inputRef={ref}
+    onBeforeAdd={() => chips.length < maxTags}
     variant="outlined"
     label="スキル"
     allowDuplicates={false}
     required
-    newChipKeys={[]} // prevent inputing values by hitting Enter key
-    newChipKeyCodes={[]} // prevent inputing values by hitting Enter key
     {...other}
   />
 );
@@ -93,6 +90,8 @@ const ReactAutosuggest = ({
   data,
   tags,
   setTags,
+  maxSuggestion = 15,
+  maxTags = 10,
   classes,
   ...other 
 }) => {
@@ -108,11 +107,11 @@ const ReactAutosuggest = ({
     const inputLength = inputValue.length;
     let count = 0;
 
-    return inputLength === 0
+    return inputLength === 0 || tags.length >= maxTags
       ? []
       : data.filter((suggestion) => {
           const keep =
-            count < MAX_SUGGESTIONS &&
+            count < maxSuggestion &&
             suggestion.toLowerCase().slice(0, inputLength) === inputValue &&
             !tags.includes(suggestion)
 
@@ -137,6 +136,7 @@ const ReactAutosuggest = ({
   };
 
   const handleAddChip = (chip) => {
+    if (tags.length >= maxTags) return;
     setTags([...tags, chip]);
     setTextFieldInput("");
   };
@@ -169,6 +169,7 @@ const ReactAutosuggest = ({
       inputProps={{
         chips: tags,
         value: textFieldInput,
+        maxTags,
         onChange: handletextFieldInputChange,
         onAdd: (chip) => handleAddChip(chip),
         onDelete: (chip, index) => handleDeleteChip(chip, index)

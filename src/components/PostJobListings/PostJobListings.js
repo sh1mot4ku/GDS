@@ -36,8 +36,9 @@ const PostJobListings = () => {
   // const [photoUrl, setPhotoUrl] = useState(props.profile.photoUrl || defaultPhoto);
 
   // いつ掲載されたかの情報も登録する
-
-  console.log(tags);
+  useEffect(() => {
+    console.log(tags);
+  }, [tags])
 
   useEffect(() => {
     if (photoBlob){
@@ -113,6 +114,7 @@ const PostJobListings = () => {
             <TextField
               label="職種"
               id="outlined-basic"
+              inputProps={{ maxLength: 50 }}
               variant="outlined"
               onChange={e => setJobTitle(e.target.value)}
               className="text-field"
@@ -123,6 +125,7 @@ const PostJobListings = () => {
             <TextField
               label="会社名"
               id="outlined-basic"
+              inputProps={{ maxLength: 50 }}
               variant="outlined"
               onChange={e => setCompanyName(e.target.value)}
               className="text-field"
@@ -149,6 +152,7 @@ const PostJobListings = () => {
             <TextField
               label="労働形態"
               id="outlined-basic"
+              inputProps={{ maxLength: 50 }}
               variant="outlined"
               onChange={e => setWorkPlacePolicy(e.target.value)}
               className="text-field"
@@ -159,6 +163,7 @@ const PostJobListings = () => {
             <TextField
               label="場所"
               id="outlined-basic"
+              inputProps={{ maxLength: 100 }}
               variant="outlined"
               onChange={e => setEmployeeLocation(e.target.value)}
               className="text-field"
@@ -169,6 +174,7 @@ const PostJobListings = () => {
             <TextField
               label="雇用形態"
               id="outlined-basic"
+              inputProps={{ maxLength: 20 }}
               variant="outlined"
               onChange={e => setEmploymentType(e.target.value)}
               className="text-field"
@@ -179,9 +185,11 @@ const PostJobListings = () => {
             <TextField
               label="求人内容"
               id="outlined-multiline-static"
-              variant="outlined"
+              inputProps={{ maxLength: 1000 }}
               multiline
-              rows={5}
+              variant="outlined"
+              minRows={5}
+              maxRows={15}
               onChange={e => setJobListing(e.target.value)}
               className="text-field"
               required
@@ -191,9 +199,11 @@ const PostJobListings = () => {
             <TextField
               label="業務内容"
               id="outlined-multiline-static"
+              inputProps={{ maxLength: 1000 }}
               variant="outlined"
               multiline
-              rows={5}
+              minRows={5}
+              maxRows={15}
               onChange={e => setJobDescription(e.target.value)}
               className="text-field"
               required
@@ -204,6 +214,8 @@ const PostJobListings = () => {
               data={skillsSuggestion}
               tags={tags}
               setTags={setTags}
+              maxSuggestion={15}
+              maxTags={10}
             />
           </div>
           <div className="input-block">
