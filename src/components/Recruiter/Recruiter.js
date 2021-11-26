@@ -33,7 +33,8 @@ function Recruiter() {
   const [projectDetailError, setProjectDetailError] = useState(null);
   const [firebaseErrorMessage, setFirebaseErrorMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [isClientValidatePassed, setIsClientValidatePassed] = useState(false);
+  const [isClientValidationPassed, setIsClientValidationPassed] =
+    useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const USER_TYPE = "recruiter";
@@ -82,7 +83,7 @@ function Recruiter() {
         console.log("unexpected error occured");
     }
   };
-
+  /* ------------------------ Validator for each input ------------------------ */
   const validateAndTailorEmail = (inputEmail) => {
     console.log("validateAndTailorEmail() called");
     if (!validator.isEmail(inputEmail)) {
@@ -96,8 +97,9 @@ function Recruiter() {
 
   const validatePassword = (inputPassword) => {
     const regex =
-      /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,32}$/;
-    if (!regex.test(inputPassword) || inputPassword.length < 8) {
+      // /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,32}$/;
+      /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9~`! @#\$%\^&*()_\-\+=\{\[\}\]\|\\:;"'<,>\.\?/]{7,32}$/;
+    if (!regex.test(inputPassword) || inputPassword.length < 7) {
       setPasswordError(true);
     } else {
       setPasswordError(
@@ -170,7 +172,9 @@ function Recruiter() {
       }
     }
   };
+  /* -------------------------------------------------------------------------- */
 
+  // fired when register button is pressed
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("onsubmit clicked");
@@ -180,8 +184,23 @@ function Recruiter() {
     setIsTyping(false);
   };
 
+  // rendered after register button is pressed, and when inputting
   useEffect(() => {
-    if (isClientValidatePassed && !isSubmitted) {
+    console.log(mustHaveError, niceToHaveError, projectDetailError, isTyping);
+    if (
+      mustHaveError === false &&
+      niceToHaveError === false &&
+      projectDetailError === false &&
+      !isTyping
+    ) {
+      console.log("setIsClientValidationPassed(true);");
+      setIsClientValidationPassed(true);
+    }
+  }, [mustHaveError, niceToHaveError, projectDetailError, isTyping]);
+
+  // rendered after register button is pressed, when useEffect() above is run, and when firebase throuws an error
+  useEffect(() => {
+    if (isClientValidationPassed && !isSubmitted) {
       console.log("firebase useeffect");
       const postingInfo = {
         profile: {
@@ -230,40 +249,16 @@ function Recruiter() {
                 "予期しないエラーが発生しました。再度登録してください。"
               );
           }
-          setIsClientValidatePassed(false);
+          setIsClientValidationPassed(false);
           setMustHaveError(null);
           setNiceToHaveError(null);
           setProjectDetailError(null);
         });
     }
     console.log(isSubmitted);
-  }, [isClientValidatePassed]);
+  }, [isClientValidationPassed]);
 
-  const optionData = {
-    userLookingFor: [
-      "FULL-TIME EMPLOYMENT",
-      "CONTRACT / FREELANCE JOBS",
-      "BOTH PERMANENT AND CONTRACT",
-    ],
-    userDescription: [
-      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
-      "PRODUCT DESIGNER / プロダクトデザイナー",
-      "PRODUCT MANAGER / プロダクトマネージャー",
-      "GROWTH HACKER / グロースハッカー",
-      "BUSINESS OPS / ビジネスオペレーションズ",
-    ],
-    businessLookingFor: [
-      "HIRING DEVELOPERS / エンジニア",
-      "HIRING DESIGNERS / デザイナー",
-      "HIRING BUSINESS OPS / ビジネスサイド",
-    ],
-    businessCommitment: [
-      "FULL TIME (40 or more hrs/week) / 正社員",
-      "PART TIME (Less than 40hrs/week) / フリーランサー",
-      "I'LL DECIDE LATER / まだ決めていない",
-    ],
-  };
-
+  // fired when the next or previous button is clicked
   const handleClick = (e, newStep, userInfo) => {
     e.preventDefault();
     console.log("clicked");
@@ -273,11 +268,11 @@ function Recruiter() {
     validateAndTailorInput(companyAddress, "company-address");
     setIsTyping(false);
     setNewStep(newStep);
+    setIsClientValidationPassed((prevInfo) => prevInfo && false);
     firebaseErrorMessage.length !== 0 && setFirebaseErrorMessage("");
-
     contents = userInfo;
   };
-
+  // rendered after next or previous button is clicked, and when inputting
   useEffect(() => {
     console.log(
       nameError,
@@ -305,18 +300,30 @@ function Recruiter() {
     isTyping,
   ]);
 
-  useEffect(() => {
-    console.log(mustHaveError, niceToHaveError, projectDetailError, isTyping);
-    if (
-      mustHaveError === false &&
-      niceToHaveError === false &&
-      projectDetailError === false &&
-      !isTyping
-    ) {
-      console.log("setIsClientValidatePassed(true);");
-      setIsClientValidatePassed(true);
-    }
-  }, [mustHaveError, niceToHaveError, projectDetailError, isTyping]);
+  const optionData = {
+    userLookingFor: [
+      "FULL-TIME EMPLOYMENT",
+      "CONTRACT / FREELANCE JOBS",
+      "BOTH PERMANENT AND CONTRACT",
+    ],
+    userDescription: [
+      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
+      "PRODUCT DESIGNER / プロダクトデザイナー",
+      "PRODUCT MANAGER / プロダクトマネージャー",
+      "GROWTH HACKER / グロースハッカー",
+      "BUSINESS OPS / ビジネスオペレーションズ",
+    ],
+    businessLookingFor: [
+      "HIRING DEVELOPERS / エンジニア",
+      "HIRING DESIGNERS / デザイナー",
+      "HIRING BUSINESS OPS / ビジネスサイド",
+    ],
+    businessCommitment: [
+      "FULL TIME (40 or more hrs/week) / 正社員",
+      "PART TIME (Less than 40hrs/week) / フリーランサー",
+      "I'LL DECIDE LATER / まだ決めていない",
+    ],
+  };
 
   let contents = <></>;
   switch (step) {
@@ -343,7 +350,6 @@ function Recruiter() {
             onChange={(e) => onHandleInputs(e)}
             value={email}
             name="email"
-            // onBlur={() => validateAndTailorEmail(email)}
           />
           {emailError ? (
             <p className="error-message">メールアドレスが無効です</p>
@@ -360,7 +366,7 @@ function Recruiter() {
           />
           {passwordError ? (
             <p className="error-message">
-              パスワードは8文字以上、1文字以上の英字、1文字以上の数字、1文字以上の!@#$%^&*いずれかの記号を含め作成ください。
+              パスワードは7文字以上32字以下、英数字と、記号(任意)を組み合わせてください。
             </p>
           ) : (
             <div className="spacing"></div>
