@@ -9,6 +9,7 @@ const InputTextAndLabel = ({
   onChange,
   value,
   name,
+  // onBlur,
 }) => {
   return (
     <React.Fragment>
@@ -26,6 +27,7 @@ const InputTextAndLabel = ({
         onChange={onChange}
         value={value}
         name={name}
+        // onBlur={onBlur}
       />
     </React.Fragment>
   );
