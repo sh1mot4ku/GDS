@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./JobBox.scss";
 
 const MAX_LENGTH_OF_JD = 100;
@@ -15,19 +15,19 @@ const JobBox = ({
   skills,
   annualSalaly,
   id,
-  details
+  details,
 }) => {
-  const [shortJd, setShortJD] = useState('');
+  const [shortJd, setShortJD] = useState("");
 
   useEffect(() => {
     jobDescription && setShortJD(jobDescription.substr(0, MAX_LENGTH_OF_JD));
-  }, [jobDescription])
+  }, [jobDescription]);
 
   return (
     <div className="job-box">
       <Link to={`/joblisting/${id}`}>
         <div className="job-img-wrapper">
-          <img src={photoUrl} className="job-img"></img>
+          <img src={photoUrl} className="job-img" alt="top-job"></img>
         </div>
         <div className="job-box-content">
           <span className="job-title">{jobTitle}</span>
@@ -39,28 +39,24 @@ const JobBox = ({
           <span className="location">{employeeLocation}</span>
         </div>
         <div className="job-box-content">
-          {
-            Array.isArray(skills) && skills.length !== 0 && (
-              skills.map(skill => (
-                <div className="skill-tag-wrapper" key={skill}>
-                  <span className="skill-tag">{ skill }</span>
-                </div>
-              ))
-            )
-          }
+          {Array.isArray(skills) &&
+            skills.length !== 0 &&
+            skills.map((skill) => (
+              <div className="skill-tag-wrapper" key={skill}>
+                <span className="skill-tag">{skill}</span>
+              </div>
+            ))}
         </div>
-        {
-          details ? (
-            <React.Fragment>{ "いつ作成されたか" }</React.Fragment>
-          ) : (
-            <div className="job-box-content">
-              <span className="short-jd">{shortJd}</span>
-            </div>
-          )
-        }
+        {details ? (
+          <React.Fragment>{"いつ作成されたか"}</React.Fragment>
+        ) : (
+          <div className="job-box-content">
+            <span className="short-jd">{shortJd}</span>
+          </div>
+        )}
       </Link>
     </div>
-  )
-}
+  );
+};
 
-export default JobBox
+export default JobBox;

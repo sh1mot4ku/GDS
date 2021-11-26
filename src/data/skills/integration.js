@@ -1,7 +1,9 @@
-import bizSkills from './biz';
-import designerSkills from './designer';
-import developerSkills from './developer';
+import bizSkills from "./biz";
+import designerSkills from "./designer";
+import developerSkills from "./developer";
 
-const integratedSkills = bizSkills.concat(designerSkills, developerSkills).sort();
+const concatSkills = bizSkills.concat(designerSkills, developerSkills);
+const sortedSkills = concatSkills.sort();
+const integratedSkills = [...new Set(sortedSkills)];
 
-export default [...new Set(integratedSkills)];
+export default integratedSkills;

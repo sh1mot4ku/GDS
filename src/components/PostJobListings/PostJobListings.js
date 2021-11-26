@@ -40,9 +40,6 @@ const PostJobListings = () => {
   // const [photoUrl, setPhotoUrl] = useState(props.profile.photoUrl || defaultPhoto);
 
   // いつ掲載されたかの情報も登録する
-  useEffect(() => {
-    console.log(tags);
-  }, [tags]);
 
   useEffect(() => {
     if (photoBlob) {
@@ -247,8 +244,9 @@ const PostJobListings = () => {
               setTags={setTags}
               maxSuggestions={15}
               maxTags={10}
+              maxInputLength={30}
               label="スキル"
-              placeholder="10個までで入力してください"
+              placeholder="10個以内で入力してください"
             />
           </div>
           <div className="input-block">

@@ -20,6 +20,7 @@ const renderInput = ({
   <ChipInput
     clearInputValueOnChange
     onUpdateInput={onChange}
+    inputValue={value}
     value={chips}
     inputRef={ref}
     onBeforeAdd={() => chips.length < maxTags}
@@ -104,6 +105,7 @@ const ReactAutosuggest = ({
   maxTags = 10,
   label = "",
   placeholder = "",
+  maxInputLength = 20,
   classes,
   ...other
 }) => {
@@ -144,6 +146,7 @@ const ReactAutosuggest = ({
   };
 
   const handletextFieldInputChange = (event, { newValue }) => {
+    if (newValue.length > maxInputLength) return;
     setTextFieldInput(newValue);
   };
 
