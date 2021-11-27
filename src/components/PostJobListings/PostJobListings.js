@@ -37,6 +37,7 @@ const PostJobListings = () => {
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
   const [photoUrl, setPhotoUrl] = useState("");
+  const postId = uuid();
   // const [photoUrl, setPhotoUrl] = useState(props.profile.photoUrl || defaultPhoto);
 
   // いつ掲載されたかの情報も登録する
@@ -88,7 +89,7 @@ const PostJobListings = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const skills = tags.map((tag) => tag.text);
+    const skills = tags.map((tag) => tag.text); // need to change here?
     console.log(skills);
     const postingInfo = {
       photoUrl,
@@ -145,6 +146,7 @@ const PostJobListings = () => {
             <TextField
               label="会社名"
               id="outlined-basic"
+              placeholder="会社名を記入してください"
               inputProps={{ maxLength: 50 }}
               variant="outlined"
               value={companyName}
@@ -157,6 +159,7 @@ const PostJobListings = () => {
             <TextField
               label="会社所在地"
               id="outlined-basic"
+              placeholder="会社所在地を記入してください"
               inputProps={{ maxLength: 100 }}
               variant="outlined"
               value={companyAddress}
@@ -169,6 +172,7 @@ const PostJobListings = () => {
             <TextField
               label="募集職種"
               id="outlined-basic"
+              placeholder="募集職種を記入してください"
               variant="outlined"
               inputProps={{ maxLength: 50 }}
               value={jobTitle}
@@ -178,9 +182,22 @@ const PostJobListings = () => {
             />
           </div>
           <div className="input-block">
+            <ChipInputAutosuggest
+              data={skillsSuggestion}
+              tags={tags}
+              setTags={setTags}
+              maxSuggestions={15}
+              maxTags={10}
+              maxInputLength={30}
+              label="スキルタグ"
+              placeholder="スキルタグを記入してください"
+            />
+          </div>
+          <div className="input-block">
             <TextField
               label="求人内容"
               id="outlined-multiline-static"
+              placeholder="求人内容を記入してください"
               variant="outlined"
               inputProps={{ maxLength: 1000 }}
               multiline
@@ -196,6 +213,7 @@ const PostJobListings = () => {
             <TextField
               label="業務内容"
               id="outlined-multiline-static"
+              placeholder="業務内容を記入してください"
               inputProps={{ maxLength: 1000 }}
               variant="outlined"
               multiline
@@ -211,6 +229,7 @@ const PostJobListings = () => {
             <TextField
               label="必須条件・スキル"
               id="outlined-basic"
+              placeholder="必須条件・スキルを記入してください"
               variant="outlined"
               inputProps={{ maxLength: 500 }}
               multiline
@@ -226,6 +245,7 @@ const PostJobListings = () => {
             <TextField
               label="歓迎するスキル・経験"
               id="outlined-basic"
+              placeholder="歓迎するスキル・経験を記入してください"
               variant="outlined"
               inputProps={{ maxLength: 500 }}
               multiline
@@ -238,21 +258,10 @@ const PostJobListings = () => {
             />
           </div>
           <div className="input-block">
-            <ChipInputAutosuggest
-              data={skillsSuggestion}
-              tags={tags}
-              setTags={setTags}
-              maxSuggestions={15}
-              maxTags={10}
-              maxInputLength={30}
-              label="スキル"
-              placeholder="10個以内で入力してください"
-            />
-          </div>
-          <div className="input-block">
             <TextField
               label="勤務地"
               id="outlined-basic"
+              placeholder="勤務地詳細を記入してください"
               inputProps={{ maxLength: 100 }}
               variant="outlined"
               multiline
@@ -268,6 +277,7 @@ const PostJobListings = () => {
             <TextField
               label="雇用形態"
               id="outlined-basic"
+              placeholder="雇用形態を記入してください"
               inputProps={{ maxLength: 100 }}
               variant="outlined"
               multiline
@@ -279,21 +289,11 @@ const PostJobListings = () => {
               required
             />
           </div>
-          {/* <div className="input-block">
-            <TextField
-              label="労働形態"
-              id="outlined-basic"
-              inputProps={{ maxLength: 50 }}
-              variant="outlined"
-              onChange={(e) => setWorkPlacePolicy(e.target.value)}
-              className="text-field"
-              required
-            />
-          </div> */}
           <div className="input-block">
             <TextField
               label="想定年収"
               id="outlined-basic"
+              placeholder="想定年収を記入してください"
               variant="outlined"
               inputProps={{ maxLength: 100 }}
               multiline
@@ -309,6 +309,7 @@ const PostJobListings = () => {
             <TextField
               label="勤務時間"
               id="outlined-basic"
+              placeholder="勤務時間を記入してください"
               variant="outlined"
               inputProps={{ maxLength: 200 }}
               multiline
@@ -323,6 +324,7 @@ const PostJobListings = () => {
             <TextField
               label="休日・休暇"
               id="outlined-basic"
+              placeholder="休日・休暇を記入してください"
               variant="outlined"
               inputProps={{ maxLength: 200 }}
               multiline
