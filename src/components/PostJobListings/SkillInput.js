@@ -15,6 +15,7 @@ const renderInput = ({
   label,
   placeholder,
   ref,
+  error,
   ...other
 }) => (
   <ChipInput
@@ -28,7 +29,8 @@ const renderInput = ({
     label={label}
     placeholder={placeholder}
     allowDuplicates={false}
-    required
+    error={error}
+    helperText={error && "Please fill out the field"}
     {...other}
   />
 );
@@ -106,6 +108,7 @@ const ReactAutosuggest = ({
   label = "",
   placeholder = "",
   maxInputLength = 20,
+  error = false,
   classes,
   ...other
 }) => {
@@ -187,6 +190,7 @@ const ReactAutosuggest = ({
         maxTags,
         label,
         placeholder,
+        error,
         onChange: handletextFieldInputChange,
         onAdd: (chip) => handleAddChip(chip),
         onDelete: (chip, index) => handleDeleteChip(chip, index),

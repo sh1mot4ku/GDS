@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
-import TextField from "@material-ui/core/TextField";
+import React, { useState, useEffect, useRef } from "react";
+import { FormLabel, TextField } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import database, { firebase, storage } from "../../firebase/firebase";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import TrimModal from "./TrimModal";
 import { v4 as uuid } from "uuid";
 import ChipInputAutosuggest from "./SkillInput";
 import skillsSuggestion from "../../data/skills/integration";
+import moment from "moment";
 import "./PostJobListings.scss";
 
 const MIN_ROWS_LARGE_INPUT = 6;
 const MAX_ROWS_LARGE_INPUT = 12;
+let postingId = ""; // unique posting ID
 
 const readFile = (file) => {
   return new Promise((resolve) => {
@@ -20,32 +24,36 @@ const readFile = (file) => {
 };
 
 const PostJobListings = () => {
-  const [jobTitle, setJobTitle] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [companyAddress, setCompanyAddress] = useState("");
-  // const [workPlacePolicy, setWorkPlacePolicy] = useState("");
-  const [employeeLocation, setEmployeeLocation] = useState("");
-  const [employmentType, setEmploymentType] = useState("");
-  const [jobListing, setJobListing] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
-  const [annualSalaly, setAnnualSalaly] = useState("");
-  const [must, setMust] = useState("");
-  const [welcome, setWelcome] = useState("");
-  const [workingHours, setWorkingHours] = useState("");
-  const [leaves, setLeaves] = useState("");
-  const [tags, setTags] = useState([]);
+  const history = useHistory();
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
   const [photoUrl, setPhotoUrl] = useState("");
-  const postId = uuid();
   // const [photoUrl, setPhotoUrl] = useState(props.profile.photoUrl || defaultPhoto);
+  const [companyName, setCompanyName] = useState("");
+  const [companyAddress, setCompanyAddress] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [tags, setTags] = useState([]);
+  const [jobListing, setJobListing] = useState("");
+  const [jobDescription, setJobDescription] = useState("");
+  const [must, setMust] = useState("");
+  const [welcome, setWelcome] = useState("");
+  const [employeeLocation, setEmployeeLocation] = useState("");
+  const [employmentType, setEmploymentType] = useState("");
+  const [annualSalaly, setAnnualSalaly] = useState("");
+  const [workingHours, setWorkingHours] = useState("");
+  const [leaves, setLeaves] = useState("");
+  const [skillTagsError, setSkillTagsError] = useState(false);
+  const { uid } = useSelector((state) => state.user); // user's auth ID
 
-  // いつ掲載されたかの情報も登録する
+  useEffect(() => {
+    postingId = uuid(); // set posting ID just once after component loaded
+  }, []);
 
   useEffect(() => {
     if (photoBlob) {
-      const uid = uuid(); // Set posting ID with uuid
-      const uploadTask = storage.ref(`photos/${uid}`).put(photoBlob); // photos/uid/postId/ とする
+      const uploadTask = storage
+        .ref(`photos/${uid}/${postingId}`)
+        .put(photoBlob); // photos/uid/postId/ とする
       const unsubscribe = uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
         null,
@@ -63,10 +71,8 @@ const PostJobListings = () => {
   };
 
   const complete = () => {
-    // storage.ref("photos").child(props.id).getDownloadURL().then((url) => {
     storage
-      .ref("photos")
-      .child("kari")
+      .ref(`photos/${uid}/${postingId}`)
       .getDownloadURL()
       .then((url) => {
         setPhotoUrl(url);
@@ -74,7 +80,6 @@ const PostJobListings = () => {
   };
 
   const onPhotoChange = async (e) => {
-    // 同じ画像を選んだ時も動くようにしておく
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       const photoDataUrl = await readFile(file);
@@ -89,30 +94,49 @@ const PostJobListings = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const skills = tags.map((tag) => tag.text); // need to change here?
-    console.log(skills);
-    const postingInfo = {
-      photoUrl,
-      jobTitle,
-      companyName,
-      // workPlacePolicy,
-      employeeLocation,
-      employmentType,
-      jobListing,
-      jobDescription,
-      annualSalaly,
-      skills,
-      must,
-      welcome,
-      workingHours,
-      leaves,
-    };
-    database
-      .ref(`/jobListings`)
-      .push(postingInfo)
-      .then(() => {
-        console.log("Posted!");
-      });
+    if (
+      companyName &&
+      companyAddress &&
+      jobTitle &&
+      tags.length !== 0 &&
+      jobListing &&
+      jobDescription &&
+      must &&
+      welcome &&
+      leaves &&
+      employeeLocation &&
+      employmentType &&
+      annualSalaly &&
+      workingHours
+    ) {
+      const postedTimeStamp = moment().utc().valueOf();
+      const postingInfo = {
+        photoUrl,
+        companyName,
+        companyAddress,
+        jobTitle,
+        tags,
+        jobListing,
+        jobDescription,
+        must,
+        welcome,
+        leaves,
+        employeeLocation,
+        employmentType,
+        annualSalaly,
+        workingHours,
+        postedTimeStamp,
+      };
+      database
+        .ref(`/jobListings/${uid}/${postingId}`)
+        .set(postingInfo)
+        .then(() => {
+          console.log("Posted successfully!");
+          // history.push('/joblistings');
+        });
+    } else {
+      if (tags.length === 0) setSkillTagsError(true);
+    }
   };
 
   return (
@@ -143,8 +167,10 @@ const PostJobListings = () => {
             </div>
           </div>
           <div className="input-block">
+            <FormLabel component="legend" required className="input-label">
+              会社名
+            </FormLabel>
             <TextField
-              label="会社名"
               id="outlined-basic"
               placeholder="会社名を記入してください"
               inputProps={{ maxLength: 50 }}
@@ -191,6 +217,7 @@ const PostJobListings = () => {
               maxInputLength={30}
               label="スキルタグ"
               placeholder="スキルタグを記入してください"
+              error={skillTagsError}
             />
           </div>
           <div className="input-block">
@@ -199,7 +226,7 @@ const PostJobListings = () => {
               id="outlined-multiline-static"
               placeholder="求人内容を記入してください"
               variant="outlined"
-              inputProps={{ maxLength: 1000 }}
+              inputProps={{ maxLength: 750 }}
               multiline
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
@@ -214,7 +241,7 @@ const PostJobListings = () => {
               label="業務内容"
               id="outlined-multiline-static"
               placeholder="業務内容を記入してください"
-              inputProps={{ maxLength: 1000 }}
+              inputProps={{ maxLength: 750 }}
               variant="outlined"
               multiline
               minRows={MIN_ROWS_LARGE_INPUT}
@@ -335,14 +362,19 @@ const PostJobListings = () => {
               required
             />
           </div>
-          {/* { errorMsg ? (
-            <div className="error-message">{errorMsg}</div>
-          ) : (
-
-          )} */}
-          <Button variant="contained" color="primary" type="submit">
-            投稿
-          </Button>
+          <div className="save-button-wrapper">
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className="save-button"
+            >
+              保存する
+            </Button>
+          </div>
+          <div className="cancel-wrapper">
+            <span className="cancel">キャンセル</span>
+          </div>
         </form>
         {originPhotoSrc && (
           <TrimModal
