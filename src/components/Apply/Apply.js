@@ -40,6 +40,7 @@ function Apply() {
   const [englishLevelError, setEnglishLevelError] = useState(true);
   const [firebaseErrorMessage, setFirebaseErrorMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(true);
   const [isClientValidationPassed, setIsClientValidationPassed] =
     useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -220,6 +221,7 @@ function Apply() {
     validateAndTailorUrl(link2, "link2");
     validateAndTailorUrl(link3, "link3");
     setIsTyping(false);
+    setIsRegistering(false);
   };
 
   useEffect(() => {
@@ -235,13 +237,13 @@ function Apply() {
       link2Error === false &&
       link3Error === false &&
       englishLevelError === false &&
-      !isTyping
-      // noError
+      !isTyping &&
+      !isRegistering
     ) {
       console.log("setIsClientValidationPassed(true);");
       setIsClientValidationPassed(true);
     }
-  }, [link1Error, link2Error, link3Error, isTyping]);
+  }, [link1Error, link2Error, link3Error, isTyping, isRegistering]);
 
   // rendered after register button is pressed, when useEffect() above is run, and when firebase throuws an error
   useEffect(() => {
@@ -301,20 +303,23 @@ function Apply() {
               );
           }
           setIsClientValidationPassed(false);
-          setLink1Error(null);
+          setIsRegistering(true);
+          // setLink1Error(null);
         });
     }
     console.log(isSubmitted);
   }, [isClientValidationPassed]);
+
   // fired when the next or previous button is clicked
   const handleClick = (e, newStep, userInfo) => {
     e.preventDefault();
     validateAndTailorName(fullName);
     validateAndTailorEmail(email);
     validatePassword(password);
-    // setIsTyping(false);
+    setIsTyping(false);
     setNewStep(newStep);
     setIsClientValidationPassed(false);
+    !isRegistering && setIsRegistering(true);
     firebaseErrorMessage.length !== 0 && setFirebaseErrorMessage("");
     contents = userInfo;
   };
@@ -334,8 +339,8 @@ function Apply() {
       emailInvalidError === false &&
       emailError === false &&
       passwordInvalidError === false &&
-      passwordError === false
-      // !isTyping
+      passwordError === false &&
+      !isTyping
     ) {
       info[step] = contents;
       console.log(info);
@@ -522,6 +527,11 @@ function Apply() {
             value={description}
           />
           <div className="buttonContainer">
+            {firebaseErrorMessage.length !== 0 && (
+              <p className="error-message firebase-err-message">
+                {firebaseErrorMessage}
+              </p>
+            )}
             <Button variant="contained" className="button" type="submit">
               REGISTER
             </Button>

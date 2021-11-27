@@ -36,6 +36,7 @@ function Recruiter() {
   const [projectDetailError, setProjectDetailError] = useState(null);
   const [firebaseErrorMessage, setFirebaseErrorMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isRegistering, setIsRegistering] = useState(true);
   const [isClientValidationPassed, setIsClientValidationPassed] =
     useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -195,6 +196,7 @@ function Recruiter() {
     validateAndTailorInput(niceToHave, "niceTo-have");
     validateAndTailorInput(projectDetail, "project-detail");
     setIsTyping(false);
+    setIsRegistering(false);
   };
 
   // rendered after register button is pressed, and when inputting
@@ -204,11 +206,18 @@ function Recruiter() {
       mustHaveError === false &&
       niceToHaveError === false &&
       projectDetailError === false &&
-      !isTyping
+      !isTyping &&
+      !isRegistering
     ) {
       setIsClientValidationPassed(true);
     }
-  }, [mustHaveError, niceToHaveError, projectDetailError, isTyping]);
+  }, [
+    mustHaveError,
+    niceToHaveError,
+    projectDetailError,
+    isTyping,
+    isRegistering,
+  ]);
 
   // rendered after register button is pressed, when useEffect() above is run, and when firebase throuws an error
   useEffect(() => {
@@ -262,9 +271,10 @@ function Recruiter() {
               );
           }
           setIsClientValidationPassed(false);
-          setMustHaveError(null);
-          setNiceToHaveError(null);
-          setProjectDetailError(null);
+          setIsRegistering(true);
+          // setMustHaveError(null);
+          // setNiceToHaveError(null);
+          // setProjectDetailError(null);
         });
     }
     console.log(isSubmitted);
@@ -278,9 +288,10 @@ function Recruiter() {
     validateAndTailorEmail(email);
     validatePassword(password);
     validateAndTailorInput(companyAddress, "company-address");
-    // setIsTyping(false);
+    setIsTyping(false);
     setNewStep(newStep);
     setIsClientValidationPassed(false);
+    !isRegistering && setIsRegistering(true);
     firebaseErrorMessage.length !== 0 && setFirebaseErrorMessage("");
     contents = userInfo;
   };
@@ -301,8 +312,8 @@ function Recruiter() {
       emailError === false &&
       passwordInvalidError === false &&
       passwordError === false &&
-      companyAddressError === false
-      // !isTyping
+      companyAddressError === false &&
+      !isTyping
     ) {
       info[step] = contents;
       console.log(info);
