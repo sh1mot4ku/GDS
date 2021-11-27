@@ -29,8 +29,11 @@ function Apply() {
   const [englishLevel, setEnglishLevel] = useState("");
   const [description, setDescription] = useState("");
   const [nameError, setNameError] = useState(null);
+  const [emailInvalidError, setEmailInvalidError] = useState(null);
   const [emailError, setEmailError] = useState(null);
+  const [passwordInvalidError, setPasswordInvalidError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [linkError, setLinkError] = useState(null);
   const [link1Error, setLink1Error] = useState(null);
   const [link2Error, setLink2Error] = useState(false);
   const [link3Error, setLink3Error] = useState(false);
@@ -63,22 +66,28 @@ function Apply() {
         break;
       case "email":
         validator.isLength(e.target.value, 0, 254) && setEmail(e.target.value);
+        (emailInvalidError || emailInvalidError === null) &&
+          setEmailInvalidError(false);
         (emailError || emailError === null) && setEmailError(false);
         break;
       case "password":
-        setPassword(e.target.value);
+        validator.isLength(e.target.value, 0, 32) &&
+          setPassword(e.target.value);
+        (passwordInvalidError || passwordInvalidError === null) &&
+          setPasswordInvalidError(false);
         (passwordError || passwordError === null) && setPasswordError(false);
         break;
       case "link1":
-        validator.isLength(e.target.value, 0, 2100) && setLink1(e.target.value);
+        validator.isLength(e.target.value, 0, 2083) && setLink1(e.target.value);
         (link1Error || link1Error === null) && setLink1Error(false);
+        (linkError || linkError === null) && setLinkError(false);
         break;
       case "link2":
-        validator.isLength(e.target.value, 0, 2100) && setLink2(e.target.value);
+        validator.isLength(e.target.value, 0, 2083) && setLink2(e.target.value);
         (link2Error || link2Error === null) && setLink2Error(false);
         break;
       case "link3":
-        validator.isLength(e.target.value, 0, 2100) && setLink3(e.target.value);
+        validator.isLength(e.target.value, 0, 2083) && setLink3(e.target.value);
         (link3Error || link3Error === null) && setLink3Error(false);
         break;
       default:
@@ -86,6 +95,7 @@ function Apply() {
     }
   };
   const onHandleEnglishLevel = (e) => {
+    !isTyping && setIsTyping(true);
     setEnglishLevelError(false);
     setEnglishLevel(e.target.value);
   };
@@ -103,10 +113,16 @@ function Apply() {
 
   const validateAndTailorEmail = (inputEmail) => {
     if (!validator.isEmail(inputEmail)) {
+      setEmailInvalidError(true);
+    } else if (!inputEmail.match(/\S/g)) {
+      setEmail("");
       setEmailError(true);
     } else {
       const emailWithoutWhiteSpace = inputEmail.replace(/\s+/g, "");
       setEmail(emailWithoutWhiteSpace);
+      setEmailInvalidError(
+        (prevState) => (prevState || prevState === null) && false
+      );
       setEmailError((prevState) => (prevState || prevState === null) && false);
     }
   };
@@ -115,15 +131,16 @@ function Apply() {
     const regex =
       /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9~`! @#\$%\^&*()_\-\+=\{\[\}\]\|\\:;"'<,>\.\?/]{7,32}$/;
     if (!regex.test(inputPassword) || inputPassword.length < 7) {
-      setPasswordError(true);
+      setPasswordInvalidError(true);
     } else {
-      setPasswordError(
+      setPasswordInvalidError(
         (prevState) => (prevState || prevState === null) && false
       );
     }
   };
 
   const validateAndTailorUrl = (url, whatUrlInput) => {
+    !isTyping && setIsTyping(true);
     const trimedUrl = url.trim();
     if (validator.isURL(trimedUrl)) {
       switch (whatUrlInput) {
@@ -153,6 +170,7 @@ function Apply() {
         case "link1":
           setLink1("");
           setLink1Error(true);
+          setLinkError(true);
           break;
         case "link2":
           setLink2("");
@@ -177,7 +195,8 @@ function Apply() {
         default:
           console.log("unexpected error occured");
       }
-    } else if (url === "") {
+    }
+    if (url === "") {
       switch (whatUrlInput) {
         case "link2":
           setLink2Error((prevInfo) => prevInfo && false);
@@ -189,7 +208,7 @@ function Apply() {
           console.log("unexpected error occured");
       }
     }
-    console.log(`this is in the validate links ${link1}, ${link2}, ${link3}`);
+    // console.log(`this is in the validate links ${link1}, ${link2}, ${link3}`);
   };
   /* -------------------------------------------------------------------------- */
 
@@ -203,7 +222,6 @@ function Apply() {
     setIsTyping(false);
   };
 
-  // rendered after register button is pressed, and when inputting
   useEffect(() => {
     console.log(
       link1Error,
@@ -218,6 +236,7 @@ function Apply() {
       link3Error === false &&
       englishLevelError === false &&
       !isTyping
+      // noError
     ) {
       console.log("setIsClientValidationPassed(true);");
       setIsClientValidationPassed(true);
@@ -226,13 +245,13 @@ function Apply() {
 
   // rendered after register button is pressed, when useEffect() above is run, and when firebase throuws an error
   useEffect(() => {
-    console.log(
-      "isClientValidationPassed" +
-        isClientValidationPassed +
-        ":" +
-        "issubmitted:" +
-        isSubmitted
-    );
+    // console.log(
+    //   "isClientValidationPassed" +
+    //     isClientValidationPassed +
+    //     ":" +
+    //     "issubmitted:" +
+    //     isSubmitted
+    // );
     if (isClientValidationPassed && !isSubmitted) {
       console.log("firebase useeffect");
       const postingInfo = {
@@ -259,7 +278,7 @@ function Apply() {
           console.error(`Error happened: ${error}`);
           switch (error.code) {
             case "auth/invalid-email":
-              setFirebaseErrorMessage("メールアドレスの形式が無効です");
+              setFirebaseErrorMessage("メールアドレスが無効です");
               break;
             case "auth/email-already-in-use":
               setFirebaseErrorMessage(
@@ -273,7 +292,7 @@ function Apply() {
               break;
             case "auth/weak-password":
               setFirebaseErrorMessage(
-                "パスワードは7文字以上の半角英数字記号で作成ください"
+                "パスワードは7文字以上、文字と数字を組み合わせて入力してください"
               );
               break;
             default:
@@ -293,49 +312,57 @@ function Apply() {
     validateAndTailorName(fullName);
     validateAndTailorEmail(email);
     validatePassword(password);
-    setIsTyping(false);
+    // setIsTyping(false);
     setNewStep(newStep);
-    setIsClientValidationPassed((prevInfo) => prevInfo && false);
+    setIsClientValidationPassed(false);
     firebaseErrorMessage.length !== 0 && setFirebaseErrorMessage("");
     contents = userInfo;
   };
 
   // rendered after next or previous button is clicked, and when inputting
   useEffect(() => {
-    console.log(nameError, emailError, passwordError, isTyping);
+    console.log(
+      nameError,
+      emailInvalidError,
+      emailError,
+      passwordInvalidError,
+      passwordError,
+      isTyping
+    );
     if (
       nameError === false &&
+      emailInvalidError === false &&
       emailError === false &&
-      passwordError === false &&
-      !isTyping
+      passwordInvalidError === false &&
+      passwordError === false
+      // !isTyping
     ) {
       info[step] = contents;
+      console.log(info);
       setStep(newStep);
     }
-  }, [nameError, emailError, passwordError, newStep, isTyping]);
+  }, [
+    nameError,
+    emailInvalidError,
+    emailError,
+    passwordInvalidError,
+    passwordError,
+    newStep,
+    isTyping,
+  ]);
 
   const optionData = {
     userLookingFor: [
-      "FULL-TIME EMPLOYMENT",
-      "CONTRACT / FREELANCE JOBS",
-      "BOTH PERMANENT AND CONTRACT",
+      "正社員",
+      "副業・フリーランス",
+      "正社員と副業・フリーランスの両方",
     ],
     userDescription: [
-      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
-      "PRODUCT DESIGNER / プロダクトデザイナー",
-      "PRODUCT MANAGER / プロダクトマネージャー",
-      "GROWTH HACKER / グロースハッカー",
-      "BUSINESS OPS / ビジネスオペレーションズ",
-    ],
-    businessLookingFor: [
-      "HIRING DEVELOPERS / エンジニア",
-      "HIRING DESIGNERS / デザイナー",
-      "HIRING BUSINESS OPS / ビジネスサイド",
-    ],
-    businessCommitment: [
-      "FULL TIME (40 or more hrs/week) / 正社員",
-      "PART TIME (Less than 40hrs/week) / フリーランサー",
-      "I'LL DECIDE LATER / まだ決めていない",
+      "ソフトウェアエンジニア",
+      "プロダクトデザイナー",
+      "プロダクトマネージャー",
+      "グロースハッカー",
+      "ビジネスオペレーションズ",
     ],
   };
 
@@ -378,61 +405,61 @@ function Apply() {
       contents = (
         <>
           <InputTextAndLabel
-            label="FULL NAME"
-            placeholder="YOUR NAME"
+            label="お名前"
+            placeholder="例)山田 太郎"
             type="text"
             onChange={(e) => onHandleInputs(e)}
             value={fullName}
             name="fullname"
           />
           {nameError ? (
-            <p className="error-message">お名前をご記入下さい</p>
+            <p className="error-message">お名前が記入されていません</p>
           ) : (
             <div className="spacing"></div>
           )}
           <InputTextAndLabel
-            label="EMAIL"
-            placeholder="Email Address"
+            label="メールアドレス"
+            placeholder="example@example.com"
             type="email"
             onChange={(e) => onHandleInputs(e)}
             value={email}
             name="email"
           />
-          {emailError ? (
+          {emailError && (
+            <p className="error-message">メールアドレスが記入されていません</p>
+          )}
+          {emailInvalidError && (
             <p className="error-message">メールアドレスが無効です</p>
-          ) : (
-            <div className="spacing"></div>
           )}
           <InputTextAndLabel
-            label="PASSWORD"
-            placeholder="Password"
+            label="パスワード"
+            placeholder="7文字以上の半角英数字"
             type="password"
             onChange={(e) => onHandleInputs(e)}
             value={password}
             name="password"
           />
-          {passwordError ? (
+          {passwordInvalidError && (
             <p className="error-message">
-              パスワードは7文字以上32字以下、英数字と、記号(任意)を組み合わせてください。
+              7文字以上、文字と数字を組み合わせて入力してください
             </p>
-          ) : (
-            <div className="spacing"></div>
+          )}
+          {passwordError && (
+            <p className="error-message">パスワードを入力してください</p>
           )}
           <InputSelect
-            label="LOCATION"
-            placeholder="Location"
+            label="ロケーション"
+            placeholder="ロケーションを選択してください"
             onChange={(e) => setLocation(e.target.value)}
             value={location}
             options={countries}
           />
-          <div className="spacing-others"></div>
           <RadioForm
-            label="LOOKING FOR"
+            label="求める雇用形態"
             options={optionData.userLookingFor}
             onChange={(e) => setLookingFor(e.target.value)}
             value={lookingFor}
           />
-          <div className="spacing-others"></div>
           <div className="buttonContainer">
             <Button variant="contained" className="button" type="submit">
               next
@@ -445,7 +472,7 @@ function Apply() {
       contents = (
         <>
           <InputLabel required>
-            YOUR PROFILE (LinkedIn / GitHub / Website etc)
+            プロフィールリンク (LinkedIn / GitHub / Website etc)
           </InputLabel>
           <InputLabel shrink={true} className="link-input-label-sm">
             1つ以上のLinkを記載してください。出来るだけSimpleにする為、CVやResumeのアップロードは不要です！
@@ -458,11 +485,7 @@ function Apply() {
             value={link1}
             name="link1"
           />
-          {link1Error ? (
-            <p className="error-message">有効なリンクを入力ください</p>
-          ) : (
-            <div className="spacing-link"></div>
-          )}
+          {link1Error && <p className="error-message">URLが無効です</p>}
           <InputText
             isRequired={false}
             placeholder="https://github.com/example"
@@ -471,11 +494,7 @@ function Apply() {
             value={link2}
             name="link2"
           />
-          {link2Error ? (
-            <p className="error-message">有効なリンクを入力ください。</p>
-          ) : (
-            <div className="spacing-link"></div>
-          )}
+          {link2Error && <p className="error-message">URLが無効です</p>}
           <InputText
             isRequired={false}
             placeholder="https://lraough.com/"
@@ -484,27 +503,24 @@ function Apply() {
             value={link3}
             name="link3"
           />
-          {link3Error ? (
-            <p className="error-message">有効なリンクを入力ください。</p>
-          ) : (
-            <div className="spacing-link"></div>
+          {link3Error && <p className="error-message">URLが無効です</p>}
+          {linkError && (
+            <p className="error-message">1つ以上のリンクが記入されていません</p>
           )}
           <InputSelect
-            label="YOUR ENGLISH LEVEL"
+            label="英語レベル"
             placeholder="ご自身の英語レベルについて教えてください"
             type="text"
             onChange={(e) => onHandleEnglishLevel(e)}
             value={englishLevel}
             options={levelOfEnglish}
           />
-          <div className="spacing-others"></div>
           <RadioForm
-            label="LOOKING FOR"
+            label="ご自身の職種"
             options={optionData.userDescription}
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           />
-          <div className="spacing-others"></div>
           <div className="buttonContainer">
             <Button variant="contained" className="button" type="submit">
               REGISTER

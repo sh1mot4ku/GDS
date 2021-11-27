@@ -11,6 +11,7 @@ import "./Recruiter.scss";
 import validator from "validator";
 
 const info = {};
+console.log(info);
 
 function Recruiter() {
   const [step, setStep] = useState(0);
@@ -25,7 +26,9 @@ function Recruiter() {
   const [niceToHave, setNiceToHave] = useState("");
   const [projectDetail, setProjectDetail] = useState("");
   const [nameError, setNameError] = useState(null);
+  const [emailInvalidError, setEmailInvalidError] = useState(null);
   const [emailError, setEmailError] = useState(null);
+  const [passwordInvalidError, setPasswordInvalidError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [companyAddressError, setCompanyAddressError] = useState(null);
   const [mustHaveError, setMustHaveError] = useState(null);
@@ -50,10 +53,15 @@ function Recruiter() {
         break;
       case "email":
         validator.isLength(e.target.value, 0, 254) && setEmail(e.target.value);
+        (emailInvalidError || emailInvalidError === null) &&
+          setEmailInvalidError(false);
         (emailError || emailError === null) && setEmailError(false);
         break;
       case "password":
-        setPassword(e.target.value);
+        validator.isLength(e.target.value, 0, 32) &&
+          setPassword(e.target.value);
+        (passwordInvalidError || passwordInvalidError === null) &&
+          setPasswordInvalidError(false);
         (passwordError || passwordError === null) && setPasswordError(false);
         break;
       case "company-address":
@@ -85,12 +93,17 @@ function Recruiter() {
   };
   /* ------------------------ Validator for each input ------------------------ */
   const validateAndTailorEmail = (inputEmail) => {
-    console.log("validateAndTailorEmail() called");
     if (!validator.isEmail(inputEmail)) {
+      setEmailInvalidError(true);
+    } else if (!inputEmail.match(/\S/g)) {
+      setEmail("");
       setEmailError(true);
     } else {
       const emailWithoutWhiteSpace = inputEmail.replace(/\s+/g, "");
       setEmail(emailWithoutWhiteSpace);
+      setEmailInvalidError(
+        (prevState) => (prevState || prevState === null) && false
+      );
       setEmailError((prevState) => (prevState || prevState === null) && false);
     }
   };
@@ -100,9 +113,9 @@ function Recruiter() {
       // /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,32}$/;
       /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9~`! @#\$%\^&*()_\-\+=\{\[\}\]\|\\:;"'<,>\.\?/]{7,32}$/;
     if (!regex.test(inputPassword) || inputPassword.length < 7) {
-      setPasswordError(true);
+      setPasswordInvalidError(true);
     } else {
-      setPasswordError(
+      setPasswordInvalidError(
         (prevState) => (prevState || prevState === null) && false
       );
     }
@@ -193,7 +206,6 @@ function Recruiter() {
       projectDetailError === false &&
       !isTyping
     ) {
-      console.log("setIsClientValidationPassed(true);");
       setIsClientValidationPassed(true);
     }
   }, [mustHaveError, niceToHaveError, projectDetailError, isTyping]);
@@ -227,7 +239,7 @@ function Recruiter() {
           console.error(`Error happened: ${error}`);
           switch (error.code) {
             case "auth/invalid-email":
-              setFirebaseErrorMessage("メールアドレスの形式が無効です");
+              setFirebaseErrorMessage("メールアドレスが無効です");
               break;
             case "auth/email-already-in-use":
               setFirebaseErrorMessage(
@@ -241,7 +253,7 @@ function Recruiter() {
               break;
             case "auth/weak-password":
               setFirebaseErrorMessage(
-                "パスワードは7文字以上の半角英数字記号で作成ください"
+                "パスワードは7文字以上、文字と数字を組み合わせて入力してください"
               );
               break;
             default:
@@ -266,9 +278,9 @@ function Recruiter() {
     validateAndTailorEmail(email);
     validatePassword(password);
     validateAndTailorInput(companyAddress, "company-address");
-    setIsTyping(false);
+    // setIsTyping(false);
     setNewStep(newStep);
-    setIsClientValidationPassed((prevInfo) => prevInfo && false);
+    setIsClientValidationPassed(false);
     firebaseErrorMessage.length !== 0 && setFirebaseErrorMessage("");
     contents = userInfo;
   };
@@ -276,24 +288,31 @@ function Recruiter() {
   useEffect(() => {
     console.log(
       nameError,
+      emailInvalidError,
       emailError,
+      passwordInvalidError,
       passwordError,
       companyAddressError,
       isTyping
     );
     if (
       nameError === false &&
+      emailInvalidError === false &&
       emailError === false &&
+      passwordInvalidError === false &&
       passwordError === false &&
-      companyAddressError === false &&
-      !isTyping
+      companyAddressError === false
+      // !isTyping
     ) {
       info[step] = contents;
+      console.log(info);
       setStep(newStep);
     }
   }, [
     nameError,
+    emailInvalidError,
     emailError,
+    passwordInvalidError,
     passwordError,
     companyAddressError,
     newStep,
@@ -301,27 +320,11 @@ function Recruiter() {
   ]);
 
   const optionData = {
-    userLookingFor: [
-      "FULL-TIME EMPLOYMENT",
-      "CONTRACT / FREELANCE JOBS",
-      "BOTH PERMANENT AND CONTRACT",
-    ],
-    userDescription: [
-      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
-      "PRODUCT DESIGNER / プロダクトデザイナー",
-      "PRODUCT MANAGER / プロダクトマネージャー",
-      "GROWTH HACKER / グロースハッカー",
-      "BUSINESS OPS / ビジネスオペレーションズ",
-    ],
-    businessLookingFor: [
-      "HIRING DEVELOPERS / エンジニア",
-      "HIRING DESIGNERS / デザイナー",
-      "HIRING BUSINESS OPS / ビジネスサイド",
-    ],
+    businessLookingFor: ["エンジニア", "デザイナー", "ビジネスサイド"],
     businessCommitment: [
-      "FULL TIME (40 or more hrs/week) / 正社員",
-      "PART TIME (Less than 40hrs/week) / フリーランサー",
-      "I'LL DECIDE LATER / まだ決めていない",
+      "正社員 (週40時間以上)",
+      "副業・フリーランサー",
+      "未定",
     ],
   };
 
@@ -331,67 +334,65 @@ function Recruiter() {
       contents = (
         <>
           <InputTextAndLabel
-            label="FULL NAME"
-            placeholder="Your Name"
+            label="お名前"
+            placeholder="例)山田 太郎"
             type="text"
             onChange={(e) => onHandleInputs(e)}
             value={fullName}
             name="fullname"
           />
-          {nameError ? (
-            <p className="error-message">お名前をご記入下さい</p>
-          ) : (
-            <div className="spacing"></div>
+          {nameError && (
+            <p className="error-message">お名前が記入されていません</p>
           )}
           <InputTextAndLabel
-            label="EMAIL"
-            placeholder="Email Address"
+            label="メールアドレス"
+            placeholder="example@example.com"
             type="email"
             onChange={(e) => onHandleInputs(e)}
             value={email}
             name="email"
           />
-          {emailError ? (
+          {emailError && (
+            <p className="error-message">メールアドレスが記入されていません</p>
+          )}
+          {emailInvalidError && (
             <p className="error-message">メールアドレスが無効です</p>
-          ) : (
-            <div className="spacing"></div>
           )}
           <InputTextAndLabel
-            label="PASSWORD"
-            placeholder="Password"
+            label="パスワード"
+            placeholder="7文字以上の半角英数字"
             type="password"
             onChange={(e) => onHandleInputs(e)}
             value={password}
             name="password"
           />
-          {passwordError ? (
+          {passwordInvalidError && (
             <p className="error-message">
-              パスワードは7文字以上32字以下、英数字と、記号(任意)を組み合わせてください。
+              7文字以上、文字と数字を組み合わせて入力してください
             </p>
-          ) : (
-            <div className="spacing"></div>
+          )}
+          {passwordError && (
+            <p className="error-message">パスワードを入力してください</p>
           )}
           <InputTextAndLabel
-            label="COMPANY ADDRESS"
-            placeholder="Company Address"
+            label="会社所在地"
+            placeholder="会社所在地を記入してください"
             type="text"
             onChange={(e) => onHandleInputs(e)}
             value={companyAddress}
             name="company-address"
           />
-          {companyAddressError ? (
-            <p className="error-message">貴社所在地をご記入下さい</p>
-          ) : (
-            <div className="spacing"></div>
+          {companyAddressError && (
+            <p className="error-message">会社所在地をご記入ください</p>
           )}
           <RadioForm
-            label=" I AM LOOKING FOR / 探している職種について"
+            label="募集職種"
             options={optionData.businessLookingFor}
             onChange={(e) => setLookingFor(e.target.value)}
             value={lookingFor}
           />
           <RadioForm
-            label="HOW MUCH DO YOU NEED A COMMITMENT? / コミット時間について"
+            label="コミット時間"
             options={optionData.businessCommitment}
             onChange={(e) => setCommitment(e.target.value)}
             value={commitment}
@@ -408,50 +409,44 @@ function Recruiter() {
       contents = (
         <>
           <InputTextAndLabel
-            label="MUST HAVE"
-            placeholder="必要なスキルや経験を記入ください"
+            label="必須条件・スキル"
+            placeholder="必須条件・スキルを記入ください"
             type="text"
             onChange={(e) => onHandleInputs(e)}
             value={mustHave}
             name="must-have"
           />
-          {mustHaveError ? (
-            <p className="error-message">こちらのフォームにご記入下さい</p>
-          ) : (
-            <div className="spacing"></div>
+          {mustHaveError && (
+            <p className="error-message">
+              必須条件・スキルが記入されていません
+            </p>
           )}
           <InputTextAndLabel
-            label="NICE TO HAVE"
-            placeholder="持っていた場合尚良いスキルや経験を記入ください"
+            label="歓迎するスキル"
+            placeholder="歓迎するスキルを記入ください"
             type="text"
             onChange={(e) => onHandleInputs(e)}
             value={niceToHave}
             name="niceTo-have"
           />
-          {niceToHaveError ? (
-            <p className="error-message">こちらのフォームにご記入下さい</p>
-          ) : (
-            <div className="spacing"></div>
+          {niceToHaveError && (
+            <p className="error-message">歓迎するスキルが記入されていません</p>
           )}
           <InputTextAreaAndLabel
-            label="PROJECT DETAIL"
+            label="募集内容"
             placeholder="簡単なプロジェクト概要について記入下さい。後ほどインタビューにて詳細を伺います。"
             type="text"
             onChange={(e) => onHandleInputs(e)}
             value={projectDetail}
             name="project-detail"
           />
-          {projectDetailError ? (
-            <p className="error-message">こちらのフォームにご記入下さい</p>
-          ) : (
-            <div className="spacing"></div>
+          {projectDetailError && (
+            <p className="error-message">募集内容が記入されていません</p>
           )}
-          {firebaseErrorMessage.length !== 0 ? (
+          {firebaseErrorMessage.length !== 0 && (
             <p className="error-message firebase-err-message">
               {firebaseErrorMessage}
             </p>
-          ) : (
-            <div className="spacing"></div>
           )}
           <div className="buttonContainer">
             <Button variant="contained" className="button" type="submit">
