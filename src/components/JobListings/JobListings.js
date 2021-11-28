@@ -10,40 +10,68 @@ import "./JobListings.scss";
 const replaceLetters = (searchInput) =>
   searchInput.replace(/\s+/g, "").replace(/-/g, "").toLowerCase();
 
+const replaceLettersAndCreateKeywordsArr = (searchInput) => {
+  let keywordsArr = searchInput.toLowerCase().replace(/　/g, " ").split(" ");
+  for (let i = 0; i < keywordsArr.length; i++) {
+    if (keywordsArr[i] === "") {
+      keywordsArr = keywordsArr.splice(i, 1);
+      console.log(keywordsArr[i]);
+    }
+  }
+  console.log(keywordsArr);
+  return keywordsArr;
+};
+
 const JobListings = () => {
   const { jobListings, dispatchJobListings } = useJobListingsContext();
   const [searchInput, setSearchInput] = useState("");
-  console.log(searchInput);
+  // const [searchKeywords, setSearchKeywords] = useState([]);
   const [jobListingsArr, setJobListingsArr] = useState([]);
 
-  const filterJobListings = () => {
+  const filterJobListings2 = () => {
     let convertSearchInput = searchInput;
-    convertSearchInput = replaceLetters(convertSearchInput);
-    console.log(convertSearchInput);
-    const filteredJoblistings = jobListings.filter((jobListing) => {
-      if (jobListing.jobTitle) {
-        return (
-          replaceLetters(jobListing.jobTitle).search(convertSearchInput) !== -1
-        );
-      }
-    });
-    const filteredJoblistingsWithDescriptions = jobListings.filter(
-      (jobListing) => {
+    // convertSearchInput = replaceLetters(convertSearchInput);
+    let searchKeywordsArr =
+      replaceLettersAndCreateKeywordsArr(convertSearchInput);
+
+    console.log(searchKeywordsArr);
+
+    let filteredJoblistingsbyTitles;
+    let filteredJoblistingsbyDescriptions;
+    let totalfilteredJobListings = [];
+    for (let i = 0; i < searchKeywordsArr.length; i++) {
+      filteredJoblistingsbyTitles = jobListings.filter((jobListing) => {
+        if (jobListing.jobTitle) {
+          return (
+            replaceLetters(jobListing.jobTitle).search(searchKeywordsArr[i]) !==
+            -1
+          );
+        }
+      });
+      filteredJoblistingsbyDescriptions = jobListings.filter((jobListing) => {
         if (jobListing.jobDescription) {
           return (
             replaceLetters(jobListing.jobDescription).search(
-              convertSearchInput
+              searchKeywordsArr[i]
             ) !== -1
           );
         }
-      }
+      });
+      totalfilteredJobListings.push(
+        ...filteredJoblistingsbyTitles,
+        ...filteredJoblistingsbyDescriptions
+      );
+    }
+
+    console.log(
+      filteredJoblistingsbyTitles,
+      filteredJoblistingsbyDescriptions,
+      totalfilteredJobListings
     );
-    const combinedArr = [
-      ...filteredJoblistings,
-      ...filteredJoblistingsWithDescriptions,
-    ];
     setJobListingsArr(
-      combinedArr.length !== 0 ? [...new Set(combinedArr)] : ["no result"]
+      totalfilteredJobListings.length !== 0
+        ? [...new Set(totalfilteredJobListings)]
+        : ["no result"]
     );
     setSearchInput("");
   };
@@ -73,40 +101,36 @@ const JobListings = () => {
     jobListings && setJobListingsArr(jobListings);
   }, [jobListings]);
 
-  useEffect(() => {
-    jobListings && console.log(jobListings);
-  }, [jobListings]);
-
   return (
     <>
-      <div className='search-input-container'>
+      <div className="search-input-container">
         <TextField
-          id='outlined-basic'
-          variant='outlined'
-          placeholder='Search for a job'
-          className='search-input'
+          id="outlined-basic"
+          variant="outlined"
+          placeholder="Search for a job"
+          className="search-input"
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              filterJobListings();
+              filterJobListings2();
             }
           }}
         />
         <Button
-          variant='contained'
-          className='submit-btn'
-          onClick={() => filterJobListings()}
+          variant="contained"
+          className="submit-btn"
+          onClick={() => filterJobListings2()}
         >
           Submit
         </Button>
       </div>
-      <div className='joblisting-wrapper'>
+      <div className="joblisting-wrapper">
         {jobListingsArr[0] === "no result" ? (
           <>
             <p>No Result</p>
             <Link
-              to='joblistings'
+              to="joblistings"
               onClick={() => setJobListingsArr(jobListings)}
             >
               Back to List
