@@ -5,6 +5,8 @@ import useJobListingsContext from "../../context/jobListing-context";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import ChipInputAutosuggest from "../ui/SkillInput";
+import skillsSuggestion from "../../data/skills/integration";
 import "./JobListings.scss";
 
 const replaceLetters = (searchInput) =>
@@ -25,12 +27,11 @@ const replaceLettersAndCreateKeywordsArr = (searchInput) => {
 const JobListings = () => {
   const { jobListings, dispatchJobListings } = useJobListingsContext();
   const [searchInput, setSearchInput] = useState("");
-  // const [searchKeywords, setSearchKeywords] = useState([]);
   const [jobListingsArr, setJobListingsArr] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  const filterJobListings2 = () => {
+  const filterJobListings = () => {
     let convertSearchInput = searchInput;
-    // convertSearchInput = replaceLetters(convertSearchInput);
     let searchKeywordsArr =
       replaceLettersAndCreateKeywordsArr(convertSearchInput);
 
@@ -76,6 +77,39 @@ const JobListings = () => {
     setSearchInput("");
   };
 
+  const filterJobListingsWithTags = () => {
+    console.log("func called");
+    if (tags.length === 0) {
+      return;
+    }
+    let filteredJoblistingsByTags = [];
+    for (let i = 0; i < tags.length; i++) {
+      for (let j = 0; j < jobListings.length; j++) {
+        if (jobListings[j].skills) {
+          if (!Array.isArray(jobListings[j].skills)) {
+            continue;
+          } else {
+            for (let k = 0; k < jobListings[j].skills.length; k++) {
+              const filterResultsArr = jobListings.filter((jobListing) => {
+                if (jobListing.skills) {
+                  return jobListing.skills[k] === tags[i];
+                }
+              });
+              filteredJoblistingsByTags.push(...filterResultsArr);
+            }
+          }
+        }
+        console.log("hello");
+      }
+    }
+    console.log(filteredJoblistingsByTags);
+    setJobListingsArr(
+      filteredJoblistingsByTags.length !== 0
+        ? [...new Set(filteredJoblistingsByTags)]
+        : ["no result"]
+    );
+  };
+
   useEffect(() => {
     if (dispatchJobListings) {
       database
@@ -99,6 +133,7 @@ const JobListings = () => {
 
   useEffect(() => {
     jobListings && setJobListingsArr(jobListings);
+    console.log(jobListings);
   }, [jobListings]);
 
   return (
@@ -111,16 +146,31 @@ const JobListings = () => {
           className="search-input"
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              filterJobListings2();
-            }
-          }}
+          onKeyPress={(e) => e.key === "Enter" && filterJobListings()}
         />
         <Button
           variant="contained"
           className="submit-btn"
-          onClick={() => filterJobListings2()}
+          onClick={() => filterJobListings()}
+        >
+          Submit
+        </Button>
+        <ChipInputAutosuggest
+          data={skillsSuggestion}
+          tags={tags}
+          setTags={setTags}
+          maxSuggestions={15}
+          maxTags={10}
+          maxInputLength={30}
+          label="スキルタグ"
+          placeholder="スキルタグを記入してください"
+          // error={skillTagsError}
+          onKeyPress={(e) => e.key === "Enter" && filterJobListingsWithTags()}
+        />
+        <Button
+          variant="contained"
+          className="submit-btn"
+          onClick={() => filterJobListingsWithTags()}
         >
           Submit
         </Button>
