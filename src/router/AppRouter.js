@@ -1,14 +1,19 @@
-import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
-import Wrapper from "../components/Wrapper/Wrapper";
-import TopPage from "../components/TopPage/TopPage";
-import AboutPage from "../components/AboutPage/AboutPage";
-import FaqsPage from "../components/FaqsPage/FaqsPage";
-import Apply from "../components/Apply/Apply";
+import React from 'react';
+import { Router, Route, Switch } from 'react-router-dom';
+import TopPage from '../components/TopPage/TopPage';
+import AboutPage from '../components/AboutPage/AboutPage';
+import FaqsPage from '../components/FaqsPage/FaqsPage';
+import Apply from '../components/Apply/Apply';
+import ContactForm from '../components/Contact/ContactForm/ContactForm';
+import Login from '../components/Login/Login';
+import Wrapper from '../components/Wrapper/Wrapper';
+import { createBrowserHistory } from 'history';
+import Recruiter from '../components/Recruiter/Recruiter';
+// import Profile from "../components/Edit/Profile"
+import Edit from '../components/Edit/Edit';
 import PostJobListings from '../components/PostJobListings/PostJobListings';
 import JobListings from '../components/JobListings/JobListings';
 import JobListing from '../components/JobListings/JobListing';
-import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
 
@@ -17,12 +22,16 @@ const AppRouter = () => (
     <Wrapper>
       <Switch>
         <Route path="/" component={TopPage} exact={true} />
-        <Route path="/about" component={AboutPage} exact={true} />
-        <Route path="/faqs" component={FaqsPage} exact={true} />
+        <Route path="/about" component={AboutPage} />
+        <Route path="/faqs" component={FaqsPage} />
         <Route path="/apply-developer" component={Apply} />
+        <Route path="/apply-recruiter" component={Recruiter} />
         <Route path="/post_joblistings" component={PostJobListings} />
         <Route path="/joblistings" component={JobListings} />
         <Route path="/joblisting/:id" component={JobListing} />
+        <Route path="/contact" component={ContactForm} />
+        <Route path="/login" component={Login} />
+        <Route path="/edit" component={Edit} />
       </Switch>
     </Wrapper>
   </Router>

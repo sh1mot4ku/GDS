@@ -3,13 +3,14 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
 import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
+import { auth } from '../../../firebase/firebase';
 import "./Header.scss";
 
-const HeaderPC = ({ isUserLoggedIn }) => {
+const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
   const location = useLocation();
-
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -17,6 +18,17 @@ const HeaderPC = ({ isUserLoggedIn }) => {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const onLogOut = () => {
+    auth.signOut().then(() => {
+      console.log('User logged out');
+      handleClose();
+      history.push('/');
+    }).catch((e) => {
+      console.error(e);
+      handleClose();
+    })
   };
 
   const createMenuList = (menuItems) =>
@@ -47,16 +59,27 @@ const HeaderPC = ({ isUserLoggedIn }) => {
         <div className="nav-right">
           {isUserLoggedIn ? (
             <>
-              <Button
-                id="basic-button"
-                aria-controls="basic-menu"
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                <AccountCircleOutlinedIcon className="user-icon-no-img" />
-                {/* change this after user img func is implemented            */}
-              </Button>
+              <div className="user-icon-post-button">
+                <Button
+                  id="basic-button"
+                  aria-controls="basic-menu"
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <AccountCircleOutlinedIcon className="user-icon-no-img" />
+                  {/* change this after user img func is implemented            */}
+                </Button>
+                {isRecruiter && ( 
+                  <div className="post-button">
+                    {/* insert a judgement if there are any job postings user already posted inside href attribute */}
+                    <a href="/post_joblistings" target="_blank" rel="noopener noreferrer" className="post-button-anchor">
+                      <span>求人投稿・管理</span>
+                      <img src="/photos/chevron-right 2.svg" alt="chevron" />
+                    </a>
+                  </div>
+                )}
+              </div>
               <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -75,14 +98,12 @@ const HeaderPC = ({ isUserLoggedIn }) => {
                       プロフィール
                     </MenuItem>
                   </Link>
-                  <Link to="/logout">
-                    <MenuItem
-                      className="dropdown-menuitem"
-                      onClick={handleClose}
-                    >
-                      ログアウト
-                    </MenuItem>
-                  </Link>
+                  <MenuItem
+                    className="dropdown-menuitem"
+                    onClick={onLogOut}
+                  >
+                    ログアウト
+                  </MenuItem>
                 </div>
               </Menu>
             </>

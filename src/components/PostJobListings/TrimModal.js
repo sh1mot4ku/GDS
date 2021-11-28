@@ -1,29 +1,32 @@
-import React, { useState } from 'react';
-import Modal from '../ui/Modal';
-import Cropper from 'react-easy-crop';
-import createImage, { getCroppedImg } from '../../readImage/cropImage';
-import Slider from '@material-ui/core/Slider';
-import Button from '@material-ui/core/Button';
-import './TrimModal.scss';
+import React, { useState } from "react";
+import Modal from "../ui/Modal";
+import Cropper from "react-easy-crop";
+import { getCroppedImg } from "../../readImage/cropImage";
+import Slider from "@material-ui/core/Slider";
+import Button from "@material-ui/core/Button";
+import "./TrimModal.scss";
 
 const TrimModal = (props) => {
-  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [error, setError] = useState(null);
-  
+
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
-  }
-  
+  };
+
   const onZoomChange = (zoom) => {
     setZoom(zoom);
-  }
+  };
 
   const saveCroppedImage = async () => {
     try {
-      const croppedImage = await getCroppedImg(props.originPhotoSrc, croppedAreaPixels);
-      console.log('done', { croppedImage });
+      const croppedImage = await getCroppedImg(
+        props.originPhotoSrc,
+        croppedAreaPixels
+      );
+      console.log("done", { croppedImage });
       props.setPhotoBlob(croppedImage); // Send blob of image to parent component
       props.onClose(); // Close modal
       setError(null);
@@ -32,13 +35,13 @@ const TrimModal = (props) => {
       console.error(err);
     }
   };
-  
+
   return (
     <React.Fragment>
       <Modal onClose={props.onClose}>
         <div className="crop-container">
           <Cropper
-            image={props.originPhotoSrc} 
+            image={props.originPhotoSrc}
             crop={crop}
             onCropChange={setCrop}
             zoom={zoom}
@@ -49,7 +52,7 @@ const TrimModal = (props) => {
         </div>
         <div className="controls">
           <span id="minus">&#8722;</span>
-          <Slider 
+          <Slider
             value={zoom}
             min={1}
             max={3}
@@ -59,19 +62,13 @@ const TrimModal = (props) => {
           />
           <span id="plus">&#43;</span>
         </div>
-        {
-          error && (
-            <div className="error-text">
-              <span>{error}</span>
-            </div>
-          )
-        }
+        {error && (
+          <div className="error-text">
+            <span>{error}</span>
+          </div>
+        )}
         <div className="buttons">
-          <Button
-            onClick={props.onClose}
-            variant="contained"
-            id="close"
-          >
+          <Button onClick={props.onClose} variant="contained" id="close">
             Close
           </Button>
           <Button
@@ -84,7 +81,7 @@ const TrimModal = (props) => {
         </div>
       </Modal>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default TrimModal;

@@ -1,113 +1,100 @@
-@import "../../sass_config/color.scss";
-@import "../../sass_config/mixin.scss";
+@import '../../sass_config/color.scss';
+@import '../../sass_config/mixin.scss';
 
 .main-apply {
-	width: 100vw;
-	height: 100vh;
-	display: flex;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
 
-	.leftBox {
-		width: 471px;
-		background: $color_primary;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
+  .rightBox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 auto;
 
-		.logo {
-			width: 274px;
-			margin-bottom: 171px;
-		}
+    .title {
+      margin: 32px;
+      text-align: center;
+    }
 
-		.remoteStack {
-			width: 368px;
-		}
-		@include mobile {
-			display: none;
-		}
-	}
+    .form {
+      justify-content: center;
+      width: 100%;
 
-	.rightBox {
-		display: flex;
-		align-items: center;
-		flex-direction: column;
-		margin: 0 auto;
+      .input {
+        width: 100%;
+        height: 55px;
+      }
+      .input-small {
+        width: 100%;
+        height: 60px;
+      }
+      .radio {
+        margin: 8px 0 8px;
+      }
+      .buttonContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
 
-		.title {
-			margin: 32px;
-		}
+        .button {
+          width: 214px;
+          height: 54px;
+          border-radius: 30px;
+          background-color: $color_primary;
+          color: #fff;
+        }
 
-		.loginButton {
-			color: #e5e5e5;
-			border: none;
-			outline: none;
-			background: transparent;
-			text-decoration: underline;
-			margin-top: 20px;
-			cursor: pointer;
+        .previousButton {
+          color: #e5e5e5;
+          border: none;
+          outline: none;
+          background: transparent;
+          text-decoration: underline;
+          margin-top: 20px;
+          cursor: pointer;
 
-			&:hover {
-				color: $color_primary;
-				text-decoration: underline;
-			}
-		}
+          &:hover {
+            color: $color_primary;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+  .thxBox {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 15%;
 
-		.form {
-			justify-content: center;
-			width: 100%;
+    .thxTitle {
+      color: $color_primary;
+      margin-bottom: 50px;
+    }
+    .sentence {
+      line-height: 2;
 
-			.input {
-				width: 100%;
-				height: 55px;
-			}
-			.radio {
-				margin: 8px 0 8px;
-			}
-			.buttonContainer {
-				width: 100%;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				flex-direction: column;
+      @include mobile {
+        text-align: left;
+      }
+    }
 
-				.button {
-					width: 214px;
-					height: 54px;
-					border-radius: 30px;
-					background-color: $color_primary;
-					color: #fff;
-				}
-			}
-		}
-	}
-	.thxBox {
-		display: flex;
-		align-items: center;
-		margin: 0 auto;
-		flex-direction: column;
-		justify-content: center;
-		text-align: center;
-		padding: 15%;
-
-		.thxTitle {
-			color: $color_primary;
-			margin-bottom: 50px;
-		}
-		.sentence {
-			line-height: 2;
-
-			@include mobile {
-				text-align: left;;
-			}
-		}
-
-		.button {
-			width: 214px;
-			height: 54px;
-			border-radius: 30px;
-			background-color: $color_primary;
-			color: #fff;
-			margin-top: 50px;
-		}
-	}
+    .button {
+      width: 214px;
+      height: 54px;
+      border-radius: 30px;
+      background-color: $color_primary;
+      color: #fff;
+      margin-top: 50px;
+    }
+  }
+}
+.link-input-label-sm {
+  margin: 8px 0;
 }
