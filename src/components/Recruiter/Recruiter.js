@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
-import InputTextAreaAndLabel from "./InputTextAreaAndLabel";
-import InputTextAndLabel from "../Apply/InputTextAndLabel";
+import InputTextAreaAndLabel from "../ui/InputTextAreaAndLabel";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
+import RadioForm from "../ui/RadioForm";
 import { auth } from "../../firebase/firebase";
-import RadioForm from "../Apply/RadioForm";
 import { insertUser } from "../../API/dbutils";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
 import "./Recruiter.scss";

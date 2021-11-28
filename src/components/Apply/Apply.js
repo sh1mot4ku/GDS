@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Button, List } from "@material-ui/core";
-import InputText from "./InputText.jsx";
-import InputTextAndLabel from "./InputTextAndLabel.jsx";
+import InputText from "../ui/InputText";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputLabel from "@mui/material/InputLabel";
-import InputSelect from "./InputSelect.jsx";
+import InputSelect from "../ui/InputSelect";
 import { auth } from "../../firebase/firebase";
-import RadioForm from "./RadioForm.jsx";
+import RadioForm from "../ui/RadioForm";
 import { insertUser } from "../../API/dbutils";
 import { Link } from "react-router-dom";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";

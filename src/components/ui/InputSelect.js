@@ -1,6 +1,6 @@
 import React from "react";
 import { FormLabel, TextField, MenuItem } from "@material-ui/core";
-import "./Apply.scss";
+import "./ui.scss";
 
 const InputSelect = ({
   label,
@@ -12,8 +12,8 @@ const InputSelect = ({
 }) => {
   return (
     <React.Fragment>
-      <FormLabel component="legend" required>
-        {label}
+      <FormLabel component="legend">
+        {label} <span className="required-star">*</span>
       </FormLabel>
       <TextField
         required

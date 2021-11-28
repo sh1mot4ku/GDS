@@ -6,33 +6,42 @@ import parse from "autosuggest-highlight/parse";
 import Paper from "@material-ui/core/Paper";
 import MenuItem from "@material-ui/core/MenuItem";
 import { withStyles } from "@material-ui/core/styles";
+import { FormLabel } from "@material-ui/core";
 
 const renderInput = ({
   value,
   onChange,
   chips,
   maxTags,
-  label,
   placeholder,
   ref,
   error,
+  label,
   ...other
 }) => (
-  <ChipInput
-    clearInputValueOnChange
-    onUpdateInput={onChange}
-    inputValue={value}
-    value={chips}
-    inputRef={ref}
-    onBeforeAdd={() => chips.length < maxTags}
-    variant="outlined"
-    label={label}
-    placeholder={placeholder}
-    allowDuplicates={false}
-    error={error}
-    helperText={error && "Please fill out the field"}
-    {...other}
-  />
+  <>
+    {label && (
+      <FormLabel component="legend">
+        {label} <span className="required-star">*</span>
+      </FormLabel>
+    )}
+    <ChipInput
+      clearInputValueOnChange
+      onUpdateInput={onChange}
+      inputValue={value}
+      value={chips}
+      inputRef={ref}
+      onBeforeAdd={() => chips.length < maxTags}
+      placeholder={placeholder}
+      allowDuplicates={false}
+      error={error}
+      helperText={error && "Please fill out the field"}
+      variant="outlined"
+      margin="normal"
+      className="input"
+      {...other}
+    />
+  </>
 );
 
 const renderSuggestion = (suggestion, { query, isHighlighted }) => {
@@ -188,8 +197,8 @@ const ReactAutosuggest = ({
         chips: tags,
         value: textFieldInput,
         maxTags,
-        label,
         placeholder,
+        label,
         error,
         onChange: handletextFieldInputChange,
         onAdd: (chip) => handleAddChip(chip),
