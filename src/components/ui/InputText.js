@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
-import "./Apply.scss";
+import "./ui.scss";
 
 const InputText = ({ placeholder, type, onChange, value, isRequired }) => {
   return (

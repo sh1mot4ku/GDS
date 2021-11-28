@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import InputTextAndLabel from "../Apply/InputTextAndLabel";
-import InputText from "../Apply/InputText";
-import InputSelect from "../Apply/InputSelect";
-import RadioForm from "../Apply/RadioForm";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
+import InputText from "../ui/InputText";
+import InputSelect from "../ui/InputSelect";
+import RadioForm from "../ui/RadioForm";
 import { updateUser } from "../../API/dbutils";
 import "./Edit.scss";
 
-
 function Edit() {
-
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +20,6 @@ function Edit() {
   const [description, setDescription] = useState("");
 
   const USER_TYPE_CLIENT = "client";
-
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -42,7 +39,6 @@ function Edit() {
 
     updateUser(postingInfo);
   };
-
 
   const optionData = {
     userLookingFor: [
@@ -91,7 +87,6 @@ function Edit() {
       value: "ネイティブレベル",
     },
   ];
-
 
   return (
     <div className="main-edit">

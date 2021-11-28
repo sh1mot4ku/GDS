@@ -14,13 +14,10 @@
       text-align: center;
 
       .input-block {
-        margin-bottom: 24px;
+        margin-bottom: 12px;
+        text-align: left;
 
-        .input-label {
-          text-align: left;
-        }
-
-        .MuiFormControl-root.WAMuiChipInput-root-10 {
+        .MuiFormControl-root {
           width: 100%;
         }
 

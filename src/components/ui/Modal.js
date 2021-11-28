@@ -1,10 +1,10 @@
-import React from 'react';
-import './Modal.scss';
+import React from "react";
+import "./ui.scss";
 
 const Modal = ({ children, onClose }) => (
   <div onClick={onClose} id="overlay">
     <div onClick={(e) => e.stopPropagation()} id="content">
-      { children }
+      {children}
     </div>
   </div>
 );

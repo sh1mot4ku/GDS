@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FormLabel, TextField } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import database, { firebase, storage } from "../../firebase/firebase";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import TrimModal from "./TrimModal";
 import { v4 as uuid } from "uuid";
-import ChipInputAutosuggest from "./SkillInput";
+import ChipInputAutosuggest from "../ui/SkillInput";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
 import skillsSuggestion from "../../data/skills/integration";
 import moment from "moment";
 import "./PostJobListings.scss";
@@ -132,7 +132,7 @@ const PostJobListings = () => {
         .set(postingInfo)
         .then(() => {
           console.log("Posted successfully!");
-          // history.push('/joblistings');
+          history.push("/joblistings");
         });
     } else {
       if (tags.length === 0) setSkillTagsError(true);
@@ -167,44 +167,30 @@ const PostJobListings = () => {
             </div>
           </div>
           <div className="input-block">
-            <FormLabel component="legend" required className="input-label">
-              会社名
-            </FormLabel>
-            <TextField
-              id="outlined-basic"
+            <InputTextAndLabel
+              label="会社名"
               placeholder="会社名を記入してください"
-              inputProps={{ maxLength: 50 }}
-              variant="outlined"
+              inputProps={{ maxLength: 100 }}
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
-              className="text-field"
-              required
             />
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
               label="会社所在地"
-              id="outlined-basic"
               placeholder="会社所在地を記入してください"
               inputProps={{ maxLength: 100 }}
-              variant="outlined"
               value={companyAddress}
               onChange={(e) => setCompanyAddress(e.target.value)}
-              className="text-field"
-              required
             />
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
               label="募集職種"
-              id="outlined-basic"
               placeholder="募集職種を記入してください"
-              variant="outlined"
               inputProps={{ maxLength: 50 }}
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
-              className="text-field"
-              required
             />
           </div>
           <div className="input-block">
@@ -221,87 +207,77 @@ const PostJobListings = () => {
             />
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
               label="求人内容"
-              id="outlined-multiline-static"
               placeholder="求人内容を記入してください"
-              variant="outlined"
               inputProps={{ maxLength: 750 }}
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
               value={jobListing}
               onChange={(e) => setJobListing(e.target.value)}
-              className="text-field"
-              required
+              multiline
+              minRows={MIN_ROWS_LARGE_INPUT}
+              maxRows={MAX_ROWS_LARGE_INPUT}
             />
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
               label="業務内容"
-              id="outlined-multiline-static"
               placeholder="業務内容を記入してください"
               inputProps={{ maxLength: 750 }}
-              variant="outlined"
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
               value={jobDescription}
               onChange={(e) => setJobDescription(e.target.value)}
-              className="text-field"
-              required
-            />
-          </div>
-          <div className="input-block">
-            <TextField
-              label="必須条件・スキル"
-              id="outlined-basic"
-              placeholder="必須条件・スキルを記入してください"
-              variant="outlined"
-              inputProps={{ maxLength: 500 }}
               multiline
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
+            />
+          </div>
+          <div className="input-block">
+            <InputTextAndLabel
+              label="必須条件・スキル"
+              placeholder="必須条件・スキルを記入してください"
+              inputProps={{ maxLength: 500 }}
               value={must}
               onChange={(e) => setMust(e.target.value)}
-              className="text-field"
-              required
-            />
-          </div>
-          <div className="input-block">
-            <TextField
-              label="歓迎するスキル・経験"
-              id="outlined-basic"
-              placeholder="歓迎するスキル・経験を記入してください"
-              variant="outlined"
-              inputProps={{ maxLength: 500 }}
               multiline
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
+            />
+          </div>
+          <div className="input-block">
+            <InputTextAndLabel
+              label="歓迎するスキル・経験"
+              placeholder="歓迎するスキル・経験を記入してください"
+              inputProps={{ maxLength: 500 }}
               value={welcome}
               onChange={(e) => setWelcome(e.target.value)}
-              className="text-field"
-              required
-            />
-          </div>
-          <div className="input-block">
-            <TextField
-              label="勤務地"
-              id="outlined-basic"
-              placeholder="勤務地詳細を記入してください"
-              inputProps={{ maxLength: 100 }}
-              variant="outlined"
               multiline
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
-              value={employeeLocation}
-              onChange={(e) => setEmployeeLocation(e.target.value)}
-              className="text-field"
-              required
             />
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
+              label="勤務地"
+              placeholder="勤務地詳細を記入してください"
+              inputProps={{ maxLength: 100 }}
+              value={employeeLocation}
+              onChange={(e) => setEmployeeLocation(e.target.value)}
+              multiline
+              minRows={MIN_ROWS_LARGE_INPUT}
+              maxRows={MAX_ROWS_LARGE_INPUT}
+            />
+          </div>
+          <div className="input-block">
+            <InputTextAndLabel
+              label="雇用形態"
+              placeholder="雇用形態を記入してください"
+              inputProps={{ maxLength: 100 }}
+              value={employmentType}
+              onChange={(e) => setEmploymentType(e.target.value)}
+              multiline
+              minRows={MIN_ROWS_LARGE_INPUT}
+              maxRows={MAX_ROWS_LARGE_INPUT}
+            />
+            {/* <TextField
               label="雇用形態"
               id="outlined-basic"
               placeholder="雇用形態を記入してください"
@@ -314,10 +290,20 @@ const PostJobListings = () => {
               onChange={(e) => setEmploymentType(e.target.value)}
               className="text-field"
               required
-            />
+            /> */}
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
+              label="想定年収"
+              placeholder="想定年収を記入してください"
+              inputProps={{ maxLength: 100 }}
+              value={annualSalaly}
+              onChange={(e) => setAnnualSalaly(e.target.value)}
+              multiline
+              minRows={MIN_ROWS_LARGE_INPUT}
+              maxRows={MAX_ROWS_LARGE_INPUT}
+            />
+            {/* <TextField
               label="想定年収"
               id="outlined-basic"
               placeholder="想定年収を記入してください"
@@ -330,10 +316,20 @@ const PostJobListings = () => {
               onChange={(e) => setAnnualSalaly(e.target.value)}
               className="text-field"
               required
-            />
+            /> */}
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
+              label="勤務時間"
+              placeholder="勤務時間を記入してください"
+              inputProps={{ maxLength: 200 }}
+              value={workingHours}
+              onChange={(e) => setWorkingHours(e.target.value)}
+              multiline
+              minRows={MIN_ROWS_LARGE_INPUT}
+              maxRows={MAX_ROWS_LARGE_INPUT}
+            />
+            {/* <TextField
               label="勤務時間"
               id="outlined-basic"
               placeholder="勤務時間を記入してください"
@@ -345,10 +341,20 @@ const PostJobListings = () => {
               onChange={(e) => setWorkingHours(e.target.value)}
               className="text-field"
               required
-            />
+            /> */}
           </div>
           <div className="input-block">
-            <TextField
+            <InputTextAndLabel
+              label="休日・休暇"
+              placeholder="休日・休暇を記入してください"
+              inputProps={{ maxLength: 200 }}
+              value={leaves}
+              onChange={(e) => setLeaves(e.target.value)}
+              multiline
+              minRows={MIN_ROWS_LARGE_INPUT}
+              maxRows={MAX_ROWS_LARGE_INPUT}
+            />
+            {/* <TextField
               label="休日・休暇"
               id="outlined-basic"
               placeholder="休日・休暇を記入してください"
@@ -360,7 +366,7 @@ const PostJobListings = () => {
               onChange={(e) => setLeaves(e.target.value)}
               className="text-field"
               required
-            />
+            /> */}
           </div>
           <div className="save-button-wrapper">
             <Button
