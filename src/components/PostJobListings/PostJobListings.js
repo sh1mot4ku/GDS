@@ -14,6 +14,7 @@ import "./PostJobListings.scss";
 const MIN_ROWS_LARGE_INPUT = 6;
 const MAX_ROWS_LARGE_INPUT = 12;
 let postingId = ""; // unique posting ID
+const DEFAULT_PHOTO = "/photos/img-empty.jpg";
 
 const readFile = (file) => {
   return new Promise((resolve) => {
@@ -27,8 +28,7 @@ const PostJobListings = () => {
   const history = useHistory();
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
-  const [photoUrl, setPhotoUrl] = useState("");
-  // const [photoUrl, setPhotoUrl] = useState(props.profile.photoUrl || defaultPhoto);
+  const [photoUrl, setPhotoUrl] = useState(DEFAULT_PHOTO);
   const [companyName, setCompanyName] = useState("");
   const [companyAddress, setCompanyAddress] = useState("");
   const [jobTitle, setJobTitle] = useState("");
@@ -53,7 +53,7 @@ const PostJobListings = () => {
     if (photoBlob) {
       const uploadTask = storage
         .ref(`photos/${uid}/${postingId}`)
-        .put(photoBlob); // photos/uid/postId/ とする
+        .put(photoBlob);
       const unsubscribe = uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
         null,
@@ -277,20 +277,6 @@ const PostJobListings = () => {
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
             />
-            {/* <TextField
-              label="雇用形態"
-              id="outlined-basic"
-              placeholder="雇用形態を記入してください"
-              inputProps={{ maxLength: 100 }}
-              variant="outlined"
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
-              value={employmentType}
-              onChange={(e) => setEmploymentType(e.target.value)}
-              className="text-field"
-              required
-            /> */}
           </div>
           <div className="input-block">
             <InputTextAndLabel
@@ -303,20 +289,6 @@ const PostJobListings = () => {
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
             />
-            {/* <TextField
-              label="想定年収"
-              id="outlined-basic"
-              placeholder="想定年収を記入してください"
-              variant="outlined"
-              inputProps={{ maxLength: 100 }}
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
-              value={annualSalaly}
-              onChange={(e) => setAnnualSalaly(e.target.value)}
-              className="text-field"
-              required
-            /> */}
           </div>
           <div className="input-block">
             <InputTextAndLabel
@@ -329,19 +301,6 @@ const PostJobListings = () => {
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
             />
-            {/* <TextField
-              label="勤務時間"
-              id="outlined-basic"
-              placeholder="勤務時間を記入してください"
-              variant="outlined"
-              inputProps={{ maxLength: 200 }}
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
-              onChange={(e) => setWorkingHours(e.target.value)}
-              className="text-field"
-              required
-            /> */}
           </div>
           <div className="input-block">
             <InputTextAndLabel
@@ -354,19 +313,6 @@ const PostJobListings = () => {
               minRows={MIN_ROWS_LARGE_INPUT}
               maxRows={MAX_ROWS_LARGE_INPUT}
             />
-            {/* <TextField
-              label="休日・休暇"
-              id="outlined-basic"
-              placeholder="休日・休暇を記入してください"
-              variant="outlined"
-              inputProps={{ maxLength: 200 }}
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
-              onChange={(e) => setLeaves(e.target.value)}
-              className="text-field"
-              required
-            /> */}
           </div>
           <div className="save-button-wrapper">
             <Button
