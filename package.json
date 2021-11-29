@@ -20,6 +20,7 @@
     "history": "^4.10.1",
     "material-ui-chip-input": "^1.1.0",
     "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
     "node": "^16.6.1",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",

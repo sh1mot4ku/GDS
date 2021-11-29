@@ -5,12 +5,42 @@ import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
 import Button from "@material-ui/core/Button";
 import "./JobListing.scss";
+import { useSelector } from "react-redux";
+import momentTimezone from "moment-timezone";
+import { functions } from "../../firebase/firebase";
+import ThankYouForApplying from "./ThankYouForApplying";
+import "./ThankYouForApplying.scss";
 
 const JobListing = () => {
   const { jobListings } = useJobListingsContext();
   const [job, setJob] = useState(null);
   const [overview, setOverview] = useState(null);
   const { id } = useParams();
+  const { userInfo } = useSelector((state) => state.user);
+  const [isApplied, setIsApplied] = useState(false);
+
+  const sendApplicationEmail = (e) => {
+    e.preventDefault();
+    const currentPacificTime = momentTimezone()
+      .tz("America/Los_Angeles")
+      .format("MMMM Do YYYY, h:mm a z");
+    if (userInfo) {
+      const userInfoForApplication = {
+        applicant: userInfo.profile.fullName,
+        applicantEmail: userInfo.profile.email,
+        appliedOn: currentPacificTime,
+        jobTitle: job.jobTitle,
+        companyName: job.companyName,
+        jobListingId: job.id,
+      };
+      const sendApplicationMail = functions.httpsCallable(
+        "sendApplicationMail"
+      );
+      sendApplicationMail(userInfoForApplication);
+      console.log("submitted");
+      setIsApplied(true);
+    }
+  };
 
   useEffect(() => {
     if (jobListings && id) {
@@ -69,38 +99,49 @@ const JobListing = () => {
         },
       ]);
     }
+    console.log(job);
   }, [job]);
 
   return (
-    <div className="joblisting-details-wrapper">
-      {job ? (
-        <>
-          <JobBox {...job} details={true} />
-          <div className="job-description">
-            <h2>求人内容</h2>
-            <span>{job.jobDescription}</span>
-          </div>
-          <div className="overview">
-            <h2 className="overview-header">概要</h2>
-            {overview &&
-              overview.map((element) => (
-                <OverviewList
-                  title={element.key}
-                  text={element.value}
-                  key={element.key}
-                />
-              ))}
-          </div>
-          <div className="oubo-wrapper">
-            <Button variant="contained" color="primary">
-              応募する
-            </Button>
-          </div>
-        </>
+    <>
+      {!isApplied ? (
+        <div className="joblisting-details-wrapper">
+          {job ? (
+            <>
+              <JobBox {...job} details={true} />
+              <div className="job-description">
+                <h2>求人内容</h2>
+                <span>{job.jobDescription}</span>
+              </div>
+              <div className="overview">
+                <h2 className="overview-header">概要</h2>
+                {overview &&
+                  overview.map((element) => (
+                    <OverviewList
+                      title={element.key}
+                      text={element.value}
+                      key={element.key}
+                    />
+                  ))}
+              </div>
+              <div className="oubo-wrapper">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={(e) => sendApplicationEmail(e)}
+                >
+                  応募する
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div>Loading....</div>
+          )}
+        </div>
       ) : (
-        <div>Loading....</div>
+        <ThankYouForApplying />
       )}
-    </div>
+    </>
   );
 };
 
