@@ -9,7 +9,6 @@ import RadioForm from "../ui/RadioForm";
 import { insertUser } from "../../API/dbutils";
 import { Link } from "react-router-dom";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
-// import { UserContext } from "../../context/user-context";
 import "./Apply.scss";
 
 const info = {};
@@ -47,6 +46,7 @@ function Apply() {
       .createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         insertUser(postingInfo, userCredential.user.uid);
+        // push to page which show message "Sent confirm mail"?
         setStep(step + 1);
       })
       .catch((e) => {
