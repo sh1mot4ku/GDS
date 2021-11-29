@@ -20,7 +20,6 @@ const replaceLettersAndCreateKeywordsArr = (searchInput) => {
       console.log(keywordsArr[i]);
     }
   }
-  console.log(keywordsArr);
   return keywordsArr;
 };
 
@@ -34,9 +33,6 @@ const JobListings = () => {
     let convertSearchInput = searchInput;
     let searchKeywordsArr =
       replaceLettersAndCreateKeywordsArr(convertSearchInput);
-
-    console.log(searchKeywordsArr);
-
     let filteredJoblistingsbyTitles;
     let filteredJoblistingsbyDescriptions;
     let totalfilteredJobListings = [];
@@ -63,22 +59,15 @@ const JobListings = () => {
         ...filteredJoblistingsbyDescriptions
       );
     }
-
-    console.log(
-      filteredJoblistingsbyTitles,
-      filteredJoblistingsbyDescriptions,
-      totalfilteredJobListings
-    );
     setJobListingsArr(
       totalfilteredJobListings.length !== 0
         ? [...new Set(totalfilteredJobListings)]
         : ["no result"]
     );
-    setSearchInput("");
+    tags.length !== 0 && setTags([]);
   };
 
   const filterJobListingsWithTags = () => {
-    console.log("func called");
     if (tags.length === 0) {
       return;
     }
@@ -99,7 +88,6 @@ const JobListings = () => {
             }
           }
         }
-        console.log("hello");
       }
     }
     console.log(filteredJoblistingsByTags);
@@ -108,6 +96,7 @@ const JobListings = () => {
         ? [...new Set(filteredJoblistingsByTags)]
         : ["no result"]
     );
+    searchInput !== "" && setSearchInput("");
   };
 
   useEffect(() => {
@@ -133,7 +122,6 @@ const JobListings = () => {
 
   useEffect(() => {
     jobListings && setJobListingsArr(jobListings);
-    console.log(jobListings);
   }, [jobListings]);
 
   return (
@@ -142,7 +130,7 @@ const JobListings = () => {
         <TextField
           id="outlined-basic"
           variant="outlined"
-          placeholder="Search for a job"
+          placeholder="キーワード検索"
           className="search-input"
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
@@ -159,13 +147,11 @@ const JobListings = () => {
           data={skillsSuggestion}
           tags={tags}
           setTags={setTags}
-          maxSuggestions={15}
+          maxSuggestions={20}
           maxTags={10}
           maxInputLength={30}
-          label="スキルタグ"
-          placeholder="スキルタグを記入してください"
-          // error={skillTagsError}
-          onKeyPress={(e) => e.key === "Enter" && filterJobListingsWithTags()}
+          placeholder="スキルタグ検索"
+          // onKeyPress={(e) => e.key === "Enter" && filterJobListingsWithTags()}
         />
         <Button
           variant="contained"

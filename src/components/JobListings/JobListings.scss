@@ -3,14 +3,17 @@
 .search-input-container {
   margin-top: 36px;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  width: 40%;
+  margin: 36px auto;
 
   .search-input {
-    width: 400px;
-    margin-right: 8px;
+    width: 700px;
   }
   .submit-btn {
     background: $color_primary;
+    margin: 0 8px;
+    height: 60px;
     &:hover {
       background: $color_primary;
     }
