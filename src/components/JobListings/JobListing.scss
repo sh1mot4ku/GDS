@@ -22,12 +22,12 @@
 }
 
 .joblisting-details-wrapper-logout {
-  height: 800px;
+  height: 1000px;
   overflow: hidden;
   position: relative;
+  margin: 100px auto;
   .joblisting-details-mask {
-    height: 800px;
-    // width: 600px;
+    height: 700px;
     @extend .joblisting-wrapper;
     background-image: linear-gradient(
       to bottom,
@@ -35,6 +35,7 @@
       rgba(255, 255, 255, 1)
     );
     position: absolute;
+    top: 300px;
   }
   .round-button {
     border: 1.8px solid $color_primary;
@@ -49,7 +50,7 @@
     font-size: 16px;
     position: absolute;
     left: 170px;
-    top: 700px;
+    top: 900px;
 
     &:hover {
       background: $color_primary;
