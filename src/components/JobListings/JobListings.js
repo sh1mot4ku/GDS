@@ -76,14 +76,14 @@ const JobListings = () => {
     let filteredJoblistingsByTags = [];
     for (let i = 0; i < tags.length; i++) {
       for (let j = 0; j < jobListings.length; j++) {
-        if (jobListings[j].skills) {
-          if (!Array.isArray(jobListings[j].skills)) {
+        if (jobListings[j].tags) {
+          if (!Array.isArray(jobListings[j].tags)) {
             continue;
           } else {
-            for (let k = 0; k < jobListings[j].skills.length; k++) {
+            for (let k = 0; k < jobListings[j].tags.length; k++) {
               const filterResultsArr = jobListings.filter((jobListing) => {
-                if (jobListing.skills) {
-                  return jobListing.skills[k] === tags[i];
+                if (jobListing.tags) {
+                  return jobListing.tags[k] === tags[i];
                 }
               });
               filteredJoblistingsByTags.push(...filterResultsArr);
