@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Modal from "../ui/Modal";
+import Modal from "./Modal";
 import Cropper from "react-easy-crop";
 import { getCroppedImg } from "../../readImage/cropImage";
 import Slider from "@material-ui/core/Slider";
 import Button from "@material-ui/core/Button";
-import "./TrimModal.scss";
+import "./ui.scss";
 
 const TrimModal = (props) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });

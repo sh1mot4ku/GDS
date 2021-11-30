@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import useJobListingsContext from "../../context/jobListing-context";
 import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
 import Button from "@material-ui/core/Button";
 import "./JobListing.scss";
-import { useSelector } from "react-redux";
 import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
 import ThankYouForApplying from "./ThankYouForApplying";
 import "./ThankYouForApplying.scss";
 
 const JobListing = () => {
-  const { jobListings } = useJobListingsContext();
+  const jobListings = useSelector((state) => state.jobListings);
   const [job, setJob] = useState(null);
   const [overview, setOverview] = useState(null);
   const { id } = useParams();

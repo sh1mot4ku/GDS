@@ -7,11 +7,11 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { footerMenuItemsLogOut, footerMenuItemsLogIn } from "../menuItems";
 import useMedia from "use-media";
-import { useSelector } from 'react-redux';
-import { auth } from '../../../firebase/firebase';
+import { useSelector } from "react-redux";
+import { auth } from "../../../firebase/firebase";
 
 export const Footer = () => {
-  const { uid } = useSelector(state => state.user)
+  const { uid } = useSelector((state) => state.user);
   const isMobile = useMedia({ maxWidth: "768px" });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
@@ -25,11 +25,14 @@ export const Footer = () => {
   }, [uid]);
 
   const onLogOut = () => {
-    auth.signOut().then(() => {
-      console.log('User logged out');
-    }).catch((e) => {
-      console.error(e);
-    })
+    auth
+      .signOut()
+      .then(() => {
+        console.log("User logged out");
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   const createMenuList = (menuItems) =>
@@ -46,10 +49,11 @@ export const Footer = () => {
 
   return (
     <>
-      {location.pathname === '/apply-developer' ||
-      location.pathname === '/apply-recruiter' ||
-      location.pathname === '/contact' ||
-      location.pathname === '/login' ? null : (
+      {location.pathname === "/apply-developer" ||
+      location.pathname === "/apply-recruiter" ||
+      location.pathname === "/contact" ||
+      location.pathname === "/login" ||
+      location.pathname === "/joblistings_management" ? null : (
         <footer className="footer">
           <div className="footer-container">
             {isMobile && (

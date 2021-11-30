@@ -1,47 +1,188 @@
-import React, { useEffect } from 'react';
-import JobBox from './JobBox';
-import database from '../../firebase/firebase';
-import useJobListingsContext from '../../context/jobListing-context';
-import './JobListings.scss';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import JobBox from "./JobBox";
+import database from "../../firebase/firebase";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
+import ChipInputAutosuggest from "../ui/SkillInput";
+import skillsSuggestion from "../../data/skills/integration";
+import { setJobListings } from "../../action/jobListings";
+import "./JobListings.scss";
+
+const replaceLetters = (searchInput) =>
+  searchInput.replace(/\s+/g, "").replace(/-/g, "").toLowerCase();
+
+const replaceLettersAndCreateKeywordsArr = (searchInput) => {
+  let keywordsArr = searchInput.toLowerCase().replace(/　/g, " ").split(" ");
+  for (let i = 0; i < keywordsArr.length; i++) {
+    if (keywordsArr[i] === "") {
+      keywordsArr = keywordsArr.splice(i, 1);
+      console.log(keywordsArr[i]);
+    }
+  }
+  return keywordsArr;
+};
 
 const JobListings = () => {
-  const { jobListings, dispatchJobListings } = useJobListingsContext();
+  const jobListings = useSelector((state) => state.jobListings);
+  const dispatch = useDispatch();
+  const [searchInput, setSearchInput] = useState("");
+  const [jobListingsArr, setJobListingsArr] = useState([]);
+  const [tags, setTags] = useState([]);
+
+  const filterJobListings = () => {
+    let convertSearchInput = searchInput;
+    let searchKeywordsArr =
+      replaceLettersAndCreateKeywordsArr(convertSearchInput);
+    let filteredJoblistingsbyTitles;
+    let filteredJoblistingsbyDescriptions;
+    let totalfilteredJobListings = [];
+    for (let i = 0; i < searchKeywordsArr.length; i++) {
+      filteredJoblistingsbyTitles = jobListings.filter((jobListing) => {
+        if (jobListing.jobTitle) {
+          return (
+            replaceLetters(jobListing.jobTitle).search(searchKeywordsArr[i]) !==
+            -1
+          );
+        }
+      });
+      filteredJoblistingsbyDescriptions = jobListings.filter((jobListing) => {
+        if (jobListing.jobDescription) {
+          return (
+            replaceLetters(jobListing.jobDescription).search(
+              searchKeywordsArr[i]
+            ) !== -1
+          );
+        }
+      });
+      totalfilteredJobListings.push(
+        ...filteredJoblistingsbyTitles,
+        ...filteredJoblistingsbyDescriptions
+      );
+    }
+    setJobListingsArr(
+      totalfilteredJobListings.length !== 0
+        ? [...new Set(totalfilteredJobListings)]
+        : ["no result"]
+    );
+    tags.length !== 0 && setTags([]);
+  };
+
+  const filterJobListingsWithTags = () => {
+    if (tags.length === 0) {
+      return;
+    }
+    let filteredJoblistingsByTags = [];
+    for (let i = 0; i < tags.length; i++) {
+      for (let j = 0; j < jobListings.length; j++) {
+        if (jobListings[j].tags) {
+          if (!Array.isArray(jobListings[j].tags)) {
+            continue;
+          } else {
+            for (let k = 0; k < jobListings[j].tags.length; k++) {
+              const filterResultsArr = jobListings.filter((jobListing) => {
+                if (jobListing.tags) {
+                  return jobListing.tags[k] === tags[i];
+                }
+              });
+              filteredJoblistingsByTags.push(...filterResultsArr);
+            }
+          }
+        }
+      }
+    }
+    console.log(filteredJoblistingsByTags);
+    setJobListingsArr(
+      filteredJoblistingsByTags.length !== 0
+        ? [...new Set(filteredJoblistingsByTags)]
+        : ["no result"]
+    );
+    searchInput !== "" && setSearchInput("");
+  };
 
   useEffect(() => {
-    if (dispatchJobListings) {
-      database.ref(`/jobListings`).once('value').then((snapshot) => {
+    database
+      .ref(`/jobListings`)
+      .once("value")
+      .then((snapshot) => {
         const jobListingsArray = [];
         snapshot.forEach((childSnapshot) => {
-          jobListingsArray.push({
-            id: childSnapshot.key,
-            ...childSnapshot.val()
-          })
+          childSnapshot.forEach((grandChildSnapshot) => {
+            jobListingsArray.push({
+              id: grandChildSnapshot.key,
+              ...grandChildSnapshot.val(),
+            });
+          });
         });
-        dispatchJobListings({
-          type: 'SET_JOB_LISTINGS',
-          jobListings: jobListingsArray
-        });
-      })
-    }
-  }, [dispatchJobListings]);
+        dispatch(setJobListings(jobListingsArray));
+      });
+  }, []);
 
   useEffect(() => {
-    jobListings && console.log(jobListings);
-  }, [jobListings])
+    jobListings && setJobListingsArr(jobListings);
+  }, [jobListings]);
 
   return (
-    <div className="joblisting-wrapper">
-      {jobListings.length === 0 ? (
-        <div>Loading...</div>
-      ) : (
-        jobListings.map(job => (
-          <React.Fragment key={job.id}>
-            <JobBox {...job} />
-          </React.Fragment>
-        ))
-      )}
-    </div>
-  )
-}
+    <>
+      <div className="search-input-container">
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          placeholder="キーワード検索"
+          className="search-input"
+          onChange={(e) => setSearchInput(e.target.value)}
+          value={searchInput}
+          onKeyPress={(e) => e.key === "Enter" && filterJobListings()}
+        />
+        <Button
+          variant="contained"
+          className="submit-btn"
+          onClick={() => filterJobListings()}
+        >
+          Submit
+        </Button>
+        <ChipInputAutosuggest
+          data={skillsSuggestion}
+          tags={tags}
+          setTags={setTags}
+          maxSuggestions={20}
+          maxTags={10}
+          maxInputLength={30}
+          placeholder="スキルタグ検索"
+          // onKeyPress={(e) => e.key === "Enter" && filterJobListingsWithTags()}
+        />
+        <Button
+          variant="contained"
+          className="submit-btn"
+          onClick={() => filterJobListingsWithTags()}
+        >
+          Submit
+        </Button>
+      </div>
+      <div className="joblisting-wrapper">
+        {jobListingsArr[0] === "no result" ? (
+          <>
+            <p>No Result</p>
+            <Link
+              to="joblistings"
+              onClick={() => setJobListingsArr(jobListings)}
+            >
+              Back to List
+            </Link>
+          </>
+        ) : jobListingsArr.length !== 0 ? (
+          jobListingsArr.map((job) => (
+            <React.Fragment key={job.id}>
+              <JobBox {...job} />
+            </React.Fragment>
+          ))
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
+    </>
+  );
+};
 
-export default JobListings
+export default JobListings;

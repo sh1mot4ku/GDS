@@ -14,7 +14,9 @@ const Contact = (props) => {
       location.pathname === "/job-list-detail" ||
       location.pathname === "/user-profile" ||
       location.pathname === "/contact" ||
-      location.pathname === "/login" ? null : (
+      location.pathname === "/login" ||
+      location.pathname === "/post_joblistings" ||
+      location.pathname === "/joblistings_management" ? null : (
         <section className="contact-section">
           <p className="contact-title">CONTACT</p>
           <p className="contact-content">

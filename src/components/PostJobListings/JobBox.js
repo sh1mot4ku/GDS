@@ -8,12 +8,9 @@ const JobBox = ({
   photoUrl,
   jobTitle,
   companyName,
-  workPlacePolicy,
   employeeLocation,
-  employmentType,
   jobDescription,
   tags,
-  annualSalaly,
   id,
   details,
 }) => {

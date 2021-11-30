@@ -1,0 +1,5 @@
+@import "../JobListings/JobListings";
+
+.users-joblistings-wrapper {
+  @extend .joblisting-wrapper;
+}
