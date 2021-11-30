@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
@@ -107,10 +108,23 @@ const JobListing = () => {
         <div className="joblisting-details-wrapper">
           {job ? (
             <>
+              <div className="bread-list">
+                <div className="bread-item">
+                  <Link to="/joblistings" className="previous-link">
+                    求人一覧
+                  </Link>
+                </div>
+                <div className="bread-item">
+                  <span>&gt;</span>
+                </div>
+                <div className="bread-item">
+                  <span>{job.jobTitle}</span>
+                </div>
+              </div>
               <JobBox {...job} details={true} />
               <div className="job-description">
-                <h2>求人内容</h2>
-                <span>{job.jobDescription}</span>
+                <h2 className="job-description-header">求人内容</h2>
+                <span>{job.jobListing}</span>
               </div>
               <div className="overview">
                 <h2 className="overview-header">概要</h2>

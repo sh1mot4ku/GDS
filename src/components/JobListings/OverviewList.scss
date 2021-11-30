@@ -1,12 +1,16 @@
-@import '../../sass_config/color';
+@import "../../sass_config/color";
 
 .overview-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: flex-start;
   width: 100%;
 
   .overview-title {
     color: $color-sub-text;
+    width: 160px;
+  }
+  .overview-text {
+    width: 440px;
   }
 }
