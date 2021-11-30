@@ -12,7 +12,6 @@ const JobBox = ({
   jobDescription,
   tags,
   id,
-  details,
 }) => {
   const [shortJd, setShortJD] = useState("");
 
@@ -22,7 +21,7 @@ const JobBox = ({
 
   return (
     <div className="job-box">
-      <Link to={`/joblisting/${id}`}>
+      <Link to={`/edit_joblisting/${id}`}>
         <div className="job-img-wrapper">
           <img src={photoUrl} className="job-img" alt="top-job"></img>
         </div>
@@ -44,13 +43,9 @@ const JobBox = ({
               </div>
             ))}
         </div>
-        {details ? (
-          <React.Fragment>{"いつ作成されたか"}</React.Fragment>
-        ) : (
-          <div className="job-box-content">
-            <span className="short-jd">{shortJd}</span>
-          </div>
-        )}
+        <div className="job-box-content">
+          <span className="short-jd">{shortJd}</span>
+        </div>
       </Link>
     </div>
   );

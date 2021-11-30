@@ -15,6 +15,7 @@ import PostJobListings from "../components/PostJobListings/PostJobListings";
 import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
 import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
+import EditJobListing from "../components/PostJobListings/EditJobListing";
 
 const history = createBrowserHistory();
 
@@ -32,8 +33,9 @@ const AppRouter = () => (
           path="/joblistings_management"
           component={JobListingsManagement}
         />
+        <Route path="/edit_joblisting/:jobId" component={EditJobListing} />
         <Route path="/joblistings" component={JobListings} />
-        <Route path="/joblisting/:id" component={JobListing} />
+        <Route path="/joblisting/:jobId" component={JobListing} />
         <Route path="/contact" component={ContactForm} />
         <Route path="/login" component={Login} />
         <Route path="/edit" component={Edit} />

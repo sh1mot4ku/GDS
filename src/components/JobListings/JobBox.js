@@ -8,14 +8,10 @@ const JobBox = ({
   photoUrl,
   jobTitle,
   companyName,
-  workPlacePolicy,
   employeeLocation,
-  employmentType,
   jobDescription,
   tags,
-  annualSalaly,
   id,
-  details,
 }) => {
   const [shortJd, setShortJD] = useState("");
 
@@ -47,13 +43,9 @@ const JobBox = ({
               </div>
             ))}
         </div>
-        {details ? (
-          <React.Fragment>{"いつ作成されたか"}</React.Fragment>
-        ) : (
-          <div className="job-box-content">
-            <span className="short-jd">{shortJd}</span>
-          </div>
-        )}
+        <div className="job-box-content">
+          <span className="short-jd">{shortJd}</span>
+        </div>
       </Link>
     </div>
   );

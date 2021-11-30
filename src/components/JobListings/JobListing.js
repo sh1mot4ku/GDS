@@ -14,7 +14,7 @@ const JobListing = () => {
   const jobListings = useSelector((state) => state.jobListings);
   const [job, setJob] = useState(null);
   const [overview, setOverview] = useState(null);
-  const { id } = useParams();
+  const { jobId } = useParams();
   const { userInfo } = useSelector((state) => state.user);
   const [isApplied, setIsApplied] = useState(false);
 
@@ -42,13 +42,13 @@ const JobListing = () => {
   };
 
   useEffect(() => {
-    if (jobListings && id) {
-      const matchedJob = jobListings.filter((job) => job.id === id);
+    if (jobListings && jobId) {
+      const matchedJob = jobListings.filter((job) => job.id === jobId);
       if (matchedJob.length === 1) {
         setJob(matchedJob[0]);
       }
     }
-  }, [jobListings, id]);
+  }, [jobListings, jobId]);
 
   useEffect(() => {
     if (job) {

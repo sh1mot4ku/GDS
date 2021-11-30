@@ -4,6 +4,14 @@ const usersJobListingsReducer = (state = [], action) => {
       return action.jobListings;
     case "ADD_USERS_JOB_LISTING":
       return [...state, action.jobListing];
+    case "EDIT_USERS_JOB_LISTING":
+      return state.map((jobListing) => {
+        if (jobListing.id === action.jobListing.id) {
+          return action.jobListing;
+        } else {
+          return jobListing;
+        }
+      });
     default:
       return state;
   }
