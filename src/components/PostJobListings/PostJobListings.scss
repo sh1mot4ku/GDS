@@ -2,15 +2,18 @@
 
 .form-wrapper {
   width: 1000px;
-  margin: 60px auto;
+  margin: -60px auto 0;
+  padding-bottom: 200px;
 
   .form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 600px;
+    margin: 0 auto;
+
+    .form-header {
+      margin-bottom: 44px;
+    }
 
     .joblist-form {
-      width: 600px;
       text-align: center;
 
       .input-block {

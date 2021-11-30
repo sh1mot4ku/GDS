@@ -100,25 +100,25 @@ const JobListings = () => {
   };
 
   useEffect(() => {
-    if (dispatchJobListings) {
-      database
-        .ref(`/jobListings`)
-        .once("value")
-        .then((snapshot) => {
-          const jobListingsArray = [];
-          snapshot.forEach((childSnapshot) => {
+    database
+      .ref(`/jobListings`)
+      .once("value")
+      .then((snapshot) => {
+        const jobListingsArray = [];
+        snapshot.forEach((childSnapshot) => {
+          childSnapshot.forEach((grandChildSnapshot) => {
             jobListingsArray.push({
-              id: childSnapshot.key,
-              ...childSnapshot.val(),
+              id: grandChildSnapshot.key,
+              ...grandChildSnapshot.val(),
             });
           });
-          dispatchJobListings({
-            type: "SET_JOB_LISTINGS",
-            jobListings: jobListingsArray,
-          });
         });
-    }
-  }, [dispatchJobListings]);
+        dispatchJobListings({
+          type: "SET_JOB_LISTINGS",
+          jobListings: jobListingsArray,
+        });
+      });
+  }, []);
 
   useEffect(() => {
     jobListings && setJobListingsArr(jobListings);

@@ -4,10 +4,10 @@ import useMedia from "use-media";
 import HeaderTBandMB from "./HeaderTBandMB";
 import HeaderPC from "./HeaderPC";
 import "./Header.scss";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { userInfo } = useSelector(state => state.user)
+  const { userInfo } = useSelector((state) => state.user);
   const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -16,7 +16,9 @@ const Header = () => {
   useEffect(() => {
     if (userInfo) {
       setIsUserLoggedIn(true);
-      userInfo.userType === 'recruiter' ? setIsRecruiter(true) : setIsRecruiter(false)
+      userInfo.userType === "recruiter"
+        ? setIsRecruiter(true)
+        : setIsRecruiter(false);
     } else {
       setIsUserLoggedIn(false);
     }
@@ -24,10 +26,11 @@ const Header = () => {
 
   return (
     <>
-      {location.pathname === '/apply-developer' ||
-      location.pathname === '/apply-recruiter' ||
-      location.pathname === '/contact' ||
-      location.pathname === '/login' ? null : (
+      {location.pathname === "/apply-developer" ||
+      location.pathname === "/apply-recruiter" ||
+      location.pathname === "/contact" ||
+      location.pathname === "/login" ||
+      location.pathname === "/post_joblistings" ? null : (
         <header className="header">
           <div className="header-container">
             <Link to="/">
@@ -40,7 +43,7 @@ const Header = () => {
             {isUserLoggedIn !== null && isTablet ? (
               <HeaderTBandMB
                 isUserLoggedIn={isUserLoggedIn}
-                isRecruiter={isRecruiter} 
+                isRecruiter={isRecruiter}
               />
             ) : (
               <HeaderPC
