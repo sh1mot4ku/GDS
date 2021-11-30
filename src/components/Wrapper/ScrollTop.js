@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 const ScrollTop = ({ children }) => {
   useEffect(() => {
-    console.log("scrolltop");
     window.scrollTo(0, 0);
   }, [children]);
 
