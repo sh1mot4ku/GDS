@@ -1,16 +1,16 @@
-import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
-import TopPage from '../components/TopPage/TopPage';
-import AboutPage from '../components/AboutPage/AboutPage';
-import FaqsPage from '../components/FaqsPage/FaqsPage';
-import Apply from '../components/Apply/Apply';
-import ContactForm from '../components/Contact/ContactForm/ContactForm';
-import Login from '../components/Login/Login';
-import Wrapper from '../components/Wrapper/Wrapper';
-import { createBrowserHistory } from 'history';
-import Recruiter from '../components/Recruiter/Recruiter';
-import Profile from "../components/Edit/Profile"
-import Edit from '../components/Edit/Edit';
+import React from "react";
+import { Router, Route, Switch } from "react-router-dom";
+import TopPage from "../components/TopPage/TopPage";
+import AboutPage from "../components/AboutPage/AboutPage";
+import FaqsPage from "../components/FaqsPage/FaqsPage";
+import Apply from "../components/Apply/Apply";
+import ContactForm from "../components/Contact/ContactForm/ContactForm";
+import Login from "../components/Login/Login";
+import Wrapper from "../components/Wrapper/Wrapper";
+import { createBrowserHistory } from "history";
+import Recruiter from "../components/Recruiter/Recruiter";
+import Profile from "../components/Edit/Profile";
+import Edit from "../components/Edit/Edit";
 
 const history = createBrowserHistory();
 
