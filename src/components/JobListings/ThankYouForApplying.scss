@@ -12,12 +12,13 @@
   }
   .title {
     color: $color_primary;
-    margin: 120px auto;
+    margin: 100px auto;
   }
   .text {
     font-size: 20px;
+    text-align: center;
   }
-  .first-text {
+  .second-text {
     margin-bottom: 40px;
     @include mobile {
       text-align: justify;
