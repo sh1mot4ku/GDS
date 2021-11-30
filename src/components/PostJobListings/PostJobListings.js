@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import database, { firebase, storage } from "../../firebase/firebase";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import TrimModal from "./TrimModal";
+import TrimModal from "../ui/TrimModal";
 import { v4 as uuid } from "uuid";
 import ChipInputAutosuggest from "../ui/SkillInput";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
@@ -144,12 +146,29 @@ const PostJobListings = () => {
       <div className="form-container">
         <form onSubmit={onSubmit} className="joblist-form">
           <div className="input-block">
-            <img src={photoUrl} alt="profile" className="profile-photo"></img>
             <div className="photo-buttons">
               <label>
-                <div variant="contained" className="button--photo">
-                  背景画像の設定
-                </div>
+                {photoUrl === DEFAULT_PHOTO ? (
+                  <div className="button--photo">
+                    <CameraAltIcon />
+                    <div>画像を選択してください</div>
+                  </div>
+                ) : (
+                  <div className="profile-photo-wrapper">
+                    <img
+                      src={photoUrl}
+                      alt="profile"
+                      className="profile-photo"
+                    />
+                    <CancelIcon
+                      className="profile-photo-delete-button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setPhotoUrl(DEFAULT_PHOTO);
+                      }}
+                    />
+                  </div>
+                )}
                 <input
                   type="file"
                   onChange={onPhotoChange}
@@ -157,13 +176,6 @@ const PostJobListings = () => {
                   accept="image/*"
                 ></input>
               </label>
-              <div
-                variant="contained"
-                className="button--photo"
-                onClick={() => setPhotoUrl("")}
-              >
-                画像を削除
-              </div>
             </div>
           </div>
           <div className="input-block">
