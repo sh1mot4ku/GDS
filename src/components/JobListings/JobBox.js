@@ -12,6 +12,8 @@ const JobBox = ({
   jobDescription,
   tags,
   id,
+  timestamp,
+  details,
 }) => {
   const [shortJd, setShortJD] = useState("");
 
@@ -43,9 +45,13 @@ const JobBox = ({
               </div>
             ))}
         </div>
-        <div className="job-box-content">
-          <span className="short-jd">{shortJd}</span>
-        </div>
+        {details ? (
+          <React.Fragment>{timestamp}</React.Fragment>
+        ) : (
+          <div className="job-box-content">
+            <span className="short-jd">{shortJd}</span>
+          </div>
+        )}
       </Link>
     </div>
   );

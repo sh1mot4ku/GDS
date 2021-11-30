@@ -1,40 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUsersJobListings } from "../../action/usersJobListings";
 import JobBox from "./JobBox";
-import database from "../../firebase/firebase";
+import { startSetUsersJobListings } from "../../action/usersJobListings";
 import "./JobListingsManagement.scss";
 
 const JobListingsManagement = () => {
-  const { uid } = useSelector((state) => state.user);
   const usersJobListings = useSelector((state) => state.usersJobListings);
   const dispatch = useDispatch();
   const [jobListingsArr, setJobListingsArr] = useState([]);
 
   useEffect(() => {
-    if (uid) {
-      database
-        .ref(`jobListings/${uid}`)
-        .once("value")
-        .then((snapshot) => {
-          const usersJobListingsArray = [];
-          snapshot.forEach((childSnapShot) => {
-            usersJobListingsArray.push({
-              id: childSnapShot.key,
-              ...childSnapShot.val(),
-            });
-          });
-          dispatch(setUsersJobListings(usersJobListingsArray));
-        });
+    if (usersJobListings.length !== 0) {
+      setJobListingsArr(usersJobListings);
+    } else if (usersJobListings.length === 0) {
+      // if there are not any users' joblistings information, fetch them from db
+      dispatch(startSetUsersJobListings());
+      console.log(
+        "Dispatch startSetUsersJobListings from JobListingsManagement"
+      );
     }
-  }, [uid]);
-
-  useEffect(() => {
-    usersJobListings && setJobListingsArr(usersJobListings);
   }, [usersJobListings]);
 
   return (
     <div className="users-joblistings-wrapper">
+      <h2 className="users-joblistings-header">求人一覧</h2>
       {jobListingsArr.length !== 0 ? (
         jobListingsArr.map((job) => (
           <React.Fragment key={job.id}>

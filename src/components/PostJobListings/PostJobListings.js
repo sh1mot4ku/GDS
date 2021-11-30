@@ -165,7 +165,7 @@ const PostJobListings = (props) => {
   return (
     <div className="form-wrapper">
       <div className="form-container">
-        <h2 className="form-header">求人投稿</h2>
+        <h2 className="form-header">{!props.edit ? "求人投稿" : "求人編集"}</h2>
         <form onSubmit={onSubmit} className="joblist-form">
           <div className="input-block">
             <div className="photo-buttons">
@@ -359,7 +359,12 @@ const PostJobListings = (props) => {
             </Button>
           </div>
           <div className="cancel-wrapper">
-            <span className="cancel">キャンセル</span>
+            <span
+              className="cancel"
+              onClick={() => history.push("/joblistings_management")}
+            >
+              キャンセル
+            </span>
           </div>
         </form>
         {originPhotoSrc && (

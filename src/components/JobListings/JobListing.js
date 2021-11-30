@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
@@ -8,9 +8,11 @@ import "./JobListing.scss";
 import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
 import ThankYouForApplying from "./ThankYouForApplying";
+import { startSetJobListings } from "../../action/jobListings";
 import "./ThankYouForApplying.scss";
 
 const JobListing = () => {
+  const dispatch = useDispatch();
   const jobListings = useSelector((state) => state.jobListings);
   const [job, setJob] = useState(null);
   const [overview, setOverview] = useState(null);
@@ -42,17 +44,16 @@ const JobListing = () => {
   };
 
   useEffect(() => {
-    if (jobListings && jobId) {
-      const matchedJob = jobListings.filter((job) => job.id === jobId);
-      if (matchedJob.length === 1) {
-        setJob(matchedJob[0]);
-      }
+    if (jobListings.length !== 0 && jobId) {
+      const matchedJob = jobListings.find((job) => job.id === jobId);
+      setJob(matchedJob);
+    } else if (jobListings.length === 0) {
+      dispatch(startSetJobListings());
     }
   }, [jobListings, jobId]);
 
   useEffect(() => {
     if (job) {
-      console.log(job);
       const {
         employeeLocation,
         employmentType,
@@ -98,7 +99,6 @@ const JobListing = () => {
         },
       ]);
     }
-    console.log(job);
   }, [job]);
 
   return (

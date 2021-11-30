@@ -5,8 +5,6 @@ import "./Contact.scss";
 
 const Contact = (props) => {
   const location = useLocation();
-  console.log(location);
-  console.log(props);
   return (
     <>
       {location.pathname === "/apply-developer" ||
@@ -16,7 +14,8 @@ const Contact = (props) => {
       location.pathname === "/contact" ||
       location.pathname === "/login" ||
       location.pathname === "/post_joblistings" ||
-      location.pathname === "/joblistings_management" ? null : (
+      location.pathname === "/joblistings_management" ||
+      location.pathname.includes("/edit_joblisting/") ? null : (
         <section className="contact-section">
           <p className="contact-title">CONTACT</p>
           <p className="contact-content">

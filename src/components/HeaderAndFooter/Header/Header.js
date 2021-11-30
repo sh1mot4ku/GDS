@@ -31,7 +31,8 @@ const Header = () => {
       location.pathname === "/contact" ||
       location.pathname === "/login" ||
       location.pathname === "/post_joblistings" ||
-      location.pathname === "/joblistings_management" ? null : (
+      location.pathname === "/joblistings_management" ||
+      location.pathname.includes("/edit_joblisting/") ? null : (
         <header className="header">
           <div className="header-container">
             <Link to="/">

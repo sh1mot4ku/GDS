@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobBox from "./JobBox";
-import database from "../../firebase/firebase";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import ChipInputAutosuggest from "../ui/SkillInput";
 import skillsSuggestion from "../../data/skills/integration";
-import { setJobListings } from "../../action/jobListings";
+import { startSetJobListings } from "../../action/jobListings";
 import "./JobListings.scss";
 
 const replaceLetters = (searchInput) =>
@@ -102,25 +101,11 @@ const JobListings = () => {
   };
 
   useEffect(() => {
-    database
-      .ref(`/jobListings`)
-      .once("value")
-      .then((snapshot) => {
-        const jobListingsArray = [];
-        snapshot.forEach((childSnapshot) => {
-          childSnapshot.forEach((grandChildSnapshot) => {
-            jobListingsArray.push({
-              id: grandChildSnapshot.key,
-              ...grandChildSnapshot.val(),
-            });
-          });
-        });
-        dispatch(setJobListings(jobListingsArray));
-      });
-  }, []);
-
-  useEffect(() => {
-    jobListings && setJobListingsArr(jobListings);
+    if (jobListings.length !== 0) {
+      setJobListingsArr(jobListings);
+    } else if (jobListings.length === 0) {
+      dispatch(startSetJobListings());
+    }
   }, [jobListings]);
 
   return (

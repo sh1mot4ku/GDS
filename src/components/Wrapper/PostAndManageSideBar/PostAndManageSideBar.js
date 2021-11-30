@@ -28,7 +28,8 @@ const PostAndManageSideBar = () => {
   return (
     <React.Fragment>
       {(location.pathname === "/post_joblistings" ||
-        location.pathname === "/joblistings_management") &&
+        location.pathname === "/joblistings_management" ||
+        location.pathname.includes("/edit_joblisting/")) &&
         user.userInfo && (
           <div className="sb-wrapper">
             <div className="sb-container">
@@ -36,7 +37,7 @@ const PostAndManageSideBar = () => {
                 <div className="sb-user-wrapper">
                   <AccountCircleOutlinedIcon className="sb-user-icon" />
                   <div className="sb-user-name">
-                    {user.userInfo.profile.fullName}
+                    {user.userInfo?.profile.fullName}
                   </div>
                   <ArrowForwardIosIcon className="right-arrow" />
                 </div>
@@ -45,7 +46,9 @@ const PostAndManageSideBar = () => {
                 </div>
               </div>
               <div className="sb-list">
-                <span className="sb-post-and-manage">求人投稿・管理</span>
+                <Link to="/joblistings_management">
+                  <span className="sb-post-and-manage">求人投稿・管理</span>
+                </Link>
               </div>
               <div className="sb-list">
                 <a

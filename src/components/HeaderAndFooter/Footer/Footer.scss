@@ -2,6 +2,8 @@
 .footer {
   width: 100%;
   background: black;
+  z-index: 30;
+  position: relative;
   .footer-container {
     @include pc {
       max-width: 1080px;

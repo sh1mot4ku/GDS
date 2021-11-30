@@ -1,5 +1,10 @@
 @import "../JobListings/JobListings";
+@import "./PostJobListings";
 
 .users-joblistings-wrapper {
   @extend .joblisting-wrapper;
+
+  .users-joblistings-header {
+    margin-bottom: 44px;
+  }
 }
