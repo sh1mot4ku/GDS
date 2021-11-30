@@ -5,12 +5,15 @@ import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
 import Button from "@material-ui/core/Button";
 import "./JobListing.scss";
+import { useSelector } from "react-redux";
 
 const JobListing = () => {
   const { jobListings } = useJobListingsContext();
   const [job, setJob] = useState(null);
   const [overview, setOverview] = useState(null);
   const { id } = useParams();
+  const { uid } = useSelector((state) => state.user);
+  console.log(uid);
 
   useEffect(() => {
     if (jobListings && id) {
@@ -72,9 +75,23 @@ const JobListing = () => {
   }, [job]);
 
   return (
-    <div className="joblisting-details-wrapper">
+    <div
+      className={[
+        "joblisting-details-wrapper",
+        !uid && "joblisting-details-wrapper-logout",
+      ].join(" ")}
+    >
       {job ? (
         <>
+          {!uid && (
+            <>
+              <div className="joblisting-details-mask"></div>
+              <Button variant="contained" className="round-button">
+                続きを読む
+              </Button>
+            </>
+          )}
+
           <JobBox {...job} details={true} />
           <div className="job-description">
             <h2>求人内容</h2>

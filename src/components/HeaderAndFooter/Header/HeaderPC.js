@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
-import { auth } from '../../../firebase/firebase';
+import { auth } from "../../../firebase/firebase";
 import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
@@ -21,14 +21,17 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
   };
 
   const onLogOut = () => {
-    auth.signOut().then(() => {
-      console.log('User logged out');
-      handleClose();
-      history.push('/');
-    }).catch((e) => {
-      console.error(e);
-      handleClose();
-    })
+    auth
+      .signOut()
+      .then(() => {
+        console.log("User logged out");
+        handleClose();
+        history.push("/");
+      })
+      .catch((e) => {
+        console.error(e);
+        handleClose();
+      });
   };
 
   const createMenuList = (menuItems) =>
@@ -70,10 +73,15 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                   <AccountCircleOutlinedIcon className="user-icon-no-img" />
                   {/* change this after user img func is implemented            */}
                 </Button>
-                {isRecruiter && ( 
+                {isRecruiter && (
                   <div className="post-button">
                     {/* insert a judgement if there are any job postings user already posted inside href attribute */}
-                    <a href="/post_joblistings" target="_blank" rel="noopener noreferrer" className="post-button-anchor">
+                    <a
+                      href="/post_joblistings"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="post-button-anchor"
+                    >
                       <span>求人投稿・管理</span>
                       <img src="/photos/chevron-right 2.svg" alt="chevron" />
                     </a>
@@ -98,10 +106,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                       プロフィール
                     </MenuItem>
                   </Link>
-                  <MenuItem
-                    className="dropdown-menuitem"
-                    onClick={onLogOut}
-                  >
+                  <MenuItem className="dropdown-menuitem" onClick={onLogOut}>
                     ログアウト
                   </MenuItem>
                 </div>
