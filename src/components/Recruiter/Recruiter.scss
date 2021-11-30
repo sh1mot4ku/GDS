@@ -1,5 +1,5 @@
-@import '../../sass_config/color.scss';
-@import '../../sass_config/mixin.scss';
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
 
 .main-recruiter {
   width: 100vw;
@@ -118,6 +118,15 @@
             width: 100%;
           }
         }
+      }
+      .error-message {
+        color: $warning;
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .firebase-err-message {
+        font-size: 15px;
+        text-align: center;
       }
     }
   }
