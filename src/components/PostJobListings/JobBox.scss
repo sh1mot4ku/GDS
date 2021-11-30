@@ -1,40 +1,21 @@
 @import "../../sass_config/color";
+@import "../JobListings/JobBox";
 
 .job-box {
-  font-family: "Roboto";
-  padding-bottom: 24px;
-  margin-bottom: 24px;
-  border-bottom: 1px $color-line solid;
-  
-  .job-img-wrapper {
-    margin-bottom: 16px;
+  .job-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
 
-    .job-img {
-      width: 100%;
-      border-radius: 8px;
-    }
-  }
+    .job-img-wrapper {
+      width: 208px !important;
+      height: 127px !important;
+      margin-right: 20px;
 
-  .job-box-content {
-    margin-bottom: 8px;
-
-    .job-title {
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    .short-jd {
-      color: $color-sub-text;
-    }
-
-    .skill-tag-wrapper {
-      margin-right: 2px;
-      display: inline;
-
-      .skill-tag {
-        padding: 4px 12px;
-        border: 1px solid $color-line;
-        border-radius: 4px;  
+      .job-img {
+        width: 208px !important;
+        height: 127px !important;
+        object-fit: cover;
       }
     }
   }
