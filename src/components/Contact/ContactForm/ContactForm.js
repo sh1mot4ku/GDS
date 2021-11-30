@@ -1,16 +1,16 @@
-import React, { useEffect } from 'react';
-import BlueSidePart from '../../BlueSidePart/BlueSidePart';
-import ThankYou from './ThankYou';
-import { FormLabel, TextField, Button } from '@mui/material';
-import validator from 'validator';
-import './ContactForm.scss';
-import { useState } from 'react';
-import { functions } from '../../../firebase/firebase';
+import React, { useEffect } from "react";
+import BlueSidePart from "../../BlueSidePart/BlueSidePart";
+import ThankYou from "./ThankYou";
+import { FormLabel, TextField, Button } from "@mui/material";
+import validator from "validator";
+import "./ContactForm.scss";
+import { useState } from "react";
+import { functions } from "../../../firebase/firebase";
 
 const ContactForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [content, setContent] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [content, setContent] = useState("");
   const [canSubmit, setCanSubmit] = useState(false);
   const [nameError, setNameError] = useState(null);
   const [emailErrors, setEmailErrors] = useState(null);
@@ -27,10 +27,10 @@ const ContactForm = () => {
 
   const validateName = (inputName) => {
     if (!isEmptyOrHasWhiteSpace(inputName)) {
-      setNameError('');
+      setNameError("");
       return;
     }
-    setNameError('お名前が記入されていません');
+    setNameError("お名前が記入されていません");
     setShowNameError(true);
   };
 
@@ -38,10 +38,10 @@ const ContactForm = () => {
     let errMsgsArr = [];
     validator.trim(inputEmail);
     if (!validator.isEmail(inputEmail)) {
-      errMsgsArr.push('メールアドレスが無効です');
+      errMsgsArr.push("メールアドレスが無効です");
     }
     if (isEmptyOrHasWhiteSpace(inputEmail)) {
-      errMsgsArr.push('メールアドレスが記入されていません');
+      errMsgsArr.push("メールアドレスが記入されていません");
     }
     setEmailErrors(errMsgsArr);
     errMsgsArr.length !== 0 && setShowEmailError(true);
@@ -49,10 +49,10 @@ const ContactForm = () => {
 
   const validateMessage = (inputMessage) => {
     if (!isEmptyOrHasWhiteSpace(inputMessage)) {
-      setContentError('');
+      setContentError("");
       return;
     }
-    setContentError('メッセージが記入されていません');
+    setContentError("お問い合わせ内容が記入されていません");
     setShowContentError(true);
   };
 
@@ -66,7 +66,7 @@ const ContactForm = () => {
   useEffect(() => {
     if (nameError === null && emailErrors === null && contentError === null)
       return;
-    if (nameError === '' && emailErrors.length === 0 && contentError === '')
+    if (nameError === "" && emailErrors.length === 0 && contentError === "")
       setCanSubmit(true);
   }, [nameError, emailErrors, contentError]);
 
@@ -77,9 +77,9 @@ const ContactForm = () => {
       email,
       content,
     };
-    const sendMail = functions.httpsCallable('sendMail');
+    const sendMail = functions.httpsCallable("sendMail");
     sendMail(inquiryInfo);
-    console.log('submitted');
+    console.log("submitted");
   }, [canSubmit]);
 
   return (
@@ -94,27 +94,27 @@ const ContactForm = () => {
             component="legend"
             required
           >
-            NAME
+            お名前
           </FormLabel>
 
           <TextField
             id="name"
             fullWidth
             required
-            placeholder="Your Name"
+            placeholder="例) 山田 太郎"
             variant="outlined"
             margin="normal"
-            className={!showNameError ? 'text-field' : null}
+            className={!showNameError ? "text-field" : null}
             size="small"
             type="text"
             onChange={(e) => {
               setShowNameError(false);
-              validator.isLength(e.target.value, 0, 100) &&
+              validator.isLength(e.target.value, 0, 50) &&
                 setName(e.target.value);
             }}
             value={name}
           />
-          {nameError !== '' && showNameError && (
+          {nameError !== "" && showNameError && (
             <p className="err-msg name-err">{nameError}</p>
           )}
           <FormLabel
@@ -123,16 +123,16 @@ const ContactForm = () => {
             component="legend"
             required
           >
-            EMAIL
+            メールアドレス
           </FormLabel>
           <TextField
             fullWidth
             id="email"
             required
-            placeholder="Email Address"
+            placeholder="example@example.com"
             variant="outlined"
             margin="normal"
-            className={!showEmailError ? 'text-field' : null}
+            className={!showEmailError ? "text-field" : null}
             size="small"
             type="email"
             onChange={(e) => {
@@ -157,7 +157,7 @@ const ContactForm = () => {
             component="legend"
             required
           >
-            DESCRIPTION
+            お問い合わせ内容
           </FormLabel>
           <TextField
             fullWidth
@@ -168,7 +168,7 @@ const ContactForm = () => {
             margin="normal"
             multiline
             rows={7}
-            className={!showContentError ? 'text-field-content' : null}
+            className={!showContentError ? "text-field-content" : null}
             size="small"
             type="text"
             onChange={(e) => {
@@ -179,12 +179,12 @@ const ContactForm = () => {
             value={content}
           />
           <div
-            className={!showContentError ? 'content-wrap' : 'content-wrap-err'}
+            className={!showContentError ? "content-wrap" : "content-wrap-err"}
           >
-            {contentError !== '' && showContentError && (
+            {contentError !== "" && showContentError && (
               <p className="err-msg content-err">{contentError}</p>
             )}
-            <p className={content.length > 950 ? 'color-red' : null}>
+            <p className={content.length > 950 ? "color-red" : null}>
               {content.length} / 1000
             </p>
           </div>

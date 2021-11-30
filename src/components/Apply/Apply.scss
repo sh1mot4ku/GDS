@@ -62,6 +62,27 @@
           }
         }
       }
+      .spacing {
+        width: 20px;
+        height: 20px;
+      }
+      .spacing-link {
+        width: 20px;
+        height: 30px;
+      }
+      .spacing-others {
+        width: 20px;
+        height: 20px;
+      }
+      .error-message {
+        color: $warning;
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .firebase-err-message {
+        font-size: 15px;
+        text-align: center;
+      }
     }
   }
   .thxBox {

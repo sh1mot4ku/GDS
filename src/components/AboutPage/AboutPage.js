@@ -25,11 +25,11 @@ const AboutPage = () => {
             </tr>
             <tr className='description_contents'>
               <th><span>所在地</span></th>
-              <td><span className='description_contents_text'>テキストテキストテキストテキストテキスト</span></td>
+              <td><span className='description_contents_text'>12130 Millennium Drive, Los Angeles, CA 90094</span></td>
             </tr>
             <tr className='description_contents'>
               <th><span>事業内容</span></th>
-              <td><span className='description_contents_text'>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</span></td>
+              <td><span className='description_contents_text'>Tech Talent紹介、HR Consulting、フリーランスマッチング、HR Tech プロダクト開発、ダイレクトリクルーティング</span></td>
             </tr>
           </tbody>
         </table>
@@ -63,7 +63,7 @@ const AboutPage = () => {
           </div>
           <div className='works_contents_item'>
             <h3>ラフなしもたくの海外転職RADIO</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>この番組は アメリカはカリフォルニアのロサンゼルスから 読みにくい会社名でお馴染みのLraough/ラフの提供にてお送りしています</p>
           </div>
         </a>
         <div className='border'></div>
@@ -73,7 +73,7 @@ const AboutPage = () => {
           </div>
           <div className='works_contents_item'>
             <h3>【無料PDF配布】グローバル企業のリクルーターからLinkedInでスカウトを待つ時に設定すべき7つの項目</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>リサーチ時に選ばれる為に大切なこと、スカウトを貰う為に必要なこと、Profile Pageを充実させるのに大切なことなどをまとめています</p>
           </div>
         </a>
       </div>
@@ -85,7 +85,7 @@ const AboutPage = () => {
           </div>
           <div className='interviews_contents_item'>
             <h3>カリフォルニア・LA在住の起業家 下村拓哉（しもたく）さんが語るリクルーティングに必要な「人間力」について</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>フィラメント公式の雑談タイム「フィーカ」にて「Lraough（ラフ）」の目指す世界について語ってきました</p>
           </div>
         </a>
         <div className='border'></div>
@@ -95,7 +95,7 @@ const AboutPage = () => {
           </div>
           <div className='interviews_contents_item'>
             <h3>Bizreach ダイレクトリクルーティングアワード　最優秀ダイレクト・リクルーター賞受賞</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>DeNA時代に選ばれた「最優秀ダイレクトリクルーター賞」を受賞した際のNews記事です</p>
           </div>
         </a>
         <div className='border'></div>
@@ -105,7 +105,7 @@ const AboutPage = () => {
           </div>
           <div className='interviews_contents_item'>
             <h3>30歳を境に感じた強烈な危機感。DeNA下村拓哉がシンガポールでチャレンジするワケ</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>キャリアの分岐点で捉えることが出来たグローバルへのチャレンジ機会について、CEOのしもたくが語った記事です</p>
           </div>
         </a>
       </div>
@@ -117,7 +117,7 @@ const AboutPage = () => {
           </div>
           <div className='blog_contents_item'>
             <h3>Tech系エンジニア・デザイナー・アントレプレナーの海外就職を支援するLraough/ラフを立ち上げた理由について</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>ラフの原点となるキッカケや会社を立ち上げた理由についてお話しています</p>
           </div>
         </a>
         <div className='border'></div>
@@ -127,7 +127,7 @@ const AboutPage = () => {
           </div>
           <div className='blog_contents_item'>
             <h3>【誰しもがデザインを理解すべき時代】0からデザインツールFigmaを「無課金」で学ぶ方法まとめ</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>noteで一番人気の記事となります。デザイナーを目指していない人でもサービスやプロダクト開発に関わる人には必須スキルとなったFigmaについて</p>
           </div>
         </a>
         <div className='border'></div>
@@ -137,7 +137,7 @@ const AboutPage = () => {
           </div>
           <div className='blog_contents_item'>
             <h3>話題のNotionを使ってLraough Communityのガイドラインを作成してみた</h3>
-            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+            <p>ラフのリモートスタックの一つであるNotionを使って創ったガイドラインについて</p>
           </div>
         </a>
       </div>
