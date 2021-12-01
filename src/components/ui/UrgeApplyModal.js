@@ -1,9 +1,9 @@
-import React from "react";
-import Modal from "./Modal";
-import Button from "@mui/material/Button";
-import "./ui.scss";
-import CloseIcon from "@mui/icons-material/Close";
-import { Link } from "react-router-dom";
+import React from 'react';
+import Modal from './Modal';
+import Button from '@mui/material/Button';
+import './ui.scss';
+import CloseIcon from '@mui/icons-material/Close';
+import { Link } from 'react-router-dom';
 
 const UrgeApplyModal = (props) => {
   return (
@@ -20,6 +20,9 @@ const UrgeApplyModal = (props) => {
             <Button variant="contained" className="apply-button">
               無料会員登録
             </Button>
+          </Link>
+          <Link to="/login" className="login-link">
+            ログインはこちら
           </Link>
         </div>
       </Modal>
