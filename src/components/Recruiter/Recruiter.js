@@ -233,6 +233,7 @@ function Recruiter() {
           mustHave,
           niceToHave,
           projectDetail,
+          photoUrl: "",
         },
         userType: USER_TYPE,
       };

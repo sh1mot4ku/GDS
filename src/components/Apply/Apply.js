@@ -265,6 +265,8 @@ function Apply() {
           links: { link1, link2, link3 },
           englishLevel,
           description,
+          pl: password.length,
+          photoUrl: "",
         },
         userType: USER_TYPE,
       };

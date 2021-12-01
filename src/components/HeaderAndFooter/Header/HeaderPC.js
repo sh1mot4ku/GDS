@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
-import { auth } from '../../../firebase/firebase';
+import { auth } from "../../../firebase/firebase";
 import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn }) => {
@@ -21,14 +21,17 @@ const HeaderPC = ({ isUserLoggedIn }) => {
   };
 
   const onLogOut = () => {
-    auth.signOut().then(() => {
-      console.log('User logged out');
-      handleClose();
-      history.push('/');
-    }).catch((e) => {
-      console.error(e);
-      handleClose();
-    })
+    auth
+      .signOut()
+      .then(() => {
+        console.log("User logged out");
+        handleClose();
+        history.push("/");
+      })
+      .catch((e) => {
+        console.error(e);
+        handleClose();
+      });
   };
 
   const createMenuList = (menuItems) =>
@@ -79,7 +82,7 @@ const HeaderPC = ({ isUserLoggedIn }) => {
                 }}
               >
                 <div className="dropdown-menu">
-                  <Link to="/user-profile">
+                  <Link to="/profile">
                     <MenuItem
                       className="dropdown-menuitem"
                       onClick={handleClose}
@@ -87,10 +90,7 @@ const HeaderPC = ({ isUserLoggedIn }) => {
                       プロフィール
                     </MenuItem>
                   </Link>
-                  <MenuItem
-                    className="dropdown-menuitem"
-                    onClick={onLogOut}
-                  >
+                  <MenuItem className="dropdown-menuitem" onClick={onLogOut}>
                     ログアウト
                   </MenuItem>
                 </div>

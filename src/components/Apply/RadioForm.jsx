@@ -16,6 +16,7 @@ const RadioForm = ({ value, onChange, label, options }) => {
         value={value}
         onChange={onChange}
         className="radio"
+        defaultValue={value}
       >
         <FormLabel component="legend" required>
           {label}

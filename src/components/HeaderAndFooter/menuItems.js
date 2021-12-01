@@ -73,7 +73,7 @@ export const drawerMenuItemsLogin = [
   {
     title: "プロフィール",
     className: ["menu-item"],
-    to: "/user-profile",
+    to: "/profile",
   },
   {
     title: "ログアウト",
@@ -149,7 +149,7 @@ export const footerMenuItemsLogIn = [
   {
     title: "プロフィール",
     className: ["menu-item"],
-    to: "/user-profile",
+    to: "/profile",
   },
   {
     title: "ログアウト",

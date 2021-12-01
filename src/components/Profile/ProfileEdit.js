@@ -4,25 +4,35 @@ import InputTextAndLabel from "../Apply/InputTextAndLabel";
 import InputText from "../Apply/InputText";
 import InputSelect from "../Apply/InputSelect";
 import RadioForm from "../Apply/RadioForm";
-import { updateUser } from "../../API/dbutils";
-import "./Edit.scss";
+import { useSelector } from "react-redux";
+import {
+  optionData,
+  countries,
+  levelOfEnglish,
+} from "../../data/applyingInfo/client";
+import "./ProfileEdit.scss";
 
-
-function Edit() {
-
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
+const ProfileEdit = () => {
+  const { uid, userInfo } = useSelector((state) => state.user);
+  const [fullName, setFullName] = useState(userInfo.profile.fullName || "");
+  const [email, setEmail] = useState(userInfo.profile.email || "");
   const [password, setPassword] = useState("");
-  const [location, setLocation] = useState("Japan");
-  const [lookingFor, setLookingFor] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [github, setGithub] = useState("");
-  const [website, setWebsite] = useState("");
-  const [englishLevel, setEnglishLevel] = useState("");
-  const [description, setDescription] = useState("");
-
-  const USER_TYPE_CLIENT = "client";
-
+  const [changedPassword, setChangedPassword] = useState("");
+  const [location, setLocation] = useState(
+    userInfo.profile.location || "Japan"
+  );
+  const [lookingFor, setLookingFor] = useState(
+    userInfo.profile.lookingFor || ""
+  );
+  const [link1, setLink1] = useState(userInfo.profile.links.link1 || "");
+  const [link2, setLink2] = useState(userInfo.profile.links.link2 || "");
+  const [link3, setLink3] = useState(userInfo.profile.links.link3 || "");
+  const [englishLevel, setEnglishLevel] = useState(
+    userInfo.profile.englishLevel || ""
+  );
+  const [description, setDescription] = useState(
+    userInfo.profile.description || ""
+  );
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -32,66 +42,15 @@ function Edit() {
       password,
       location,
       lookingFor,
-      linkedin,
-      github,
-      website,
+      link1,
+      link2,
+      link3,
       englishLevel,
       description,
-      userType: USER_TYPE_CLIENT,
     };
 
-    updateUser(postingInfo);
+    // updateUser(postingInfo);
   };
-
-
-  const optionData = {
-    userLookingFor: [
-      "FULL-TIME EMPLOYMENT",
-      "CONTRACT / FREELANCE JOBS",
-      "BOTH PERMANENT AND CONTRACT",
-    ],
-    userDescription: [
-      "SOFTWARE ENGINEER / ソフトウェアエンジニア",
-      "PRODUCT DESIGNER / プロダクトデザイナー",
-      "PRODUCT MANAGER / プロダクトマネージャー",
-      "GROWTH HACKER / グロースハッカー",
-      "BUSINESS OPS / ビジネスオペレーションズ",
-    ],
-  };
-
-  const countries = [
-    {
-      value: "Japan",
-    },
-    {
-      value: "USA",
-    },
-    {
-      value: "Canada",
-    },
-    {
-      value: "Korea",
-    },
-    {
-      value: "Chinese",
-    },
-  ];
-
-  const levelOfEnglish = [
-    {
-      value: "日常会話、旅行トラブル対応レベル",
-    },
-    {
-      value: "ビジネス会話、プレゼンレベル",
-    },
-    {
-      value: "簡単通訳、ディスカッションレベル",
-    },
-    {
-      value: "ネイティブレベル",
-    },
-  ];
-
 
   return (
     <div className="main-edit">
@@ -99,15 +58,15 @@ function Edit() {
         <div className="pf-container">
           <img alt="" src="/image/icon-user.png" className="icon" />
           <div>
-            <div className="pf-name">山田 太郎</div>
-            <div className="pf-country">Asia</div>
+            <div className="pf-name">{fullName}</div>
+            <div className="pf-country">{location}</div>
             <button className="pf-button">画像追加</button>
           </div>
         </div>
         <div className="edit-container">
           <InputTextAndLabel
-            label="FULL NAME"
-            placeholder="YOUR NAME"
+            label="お名前"
+            placeholder="お名前"
             type="text"
             onChange={(e) => setFullName(e.target.value)}
             value={fullName}
@@ -116,8 +75,8 @@ function Edit() {
         </div>
         <div className="edit-container">
           <InputTextAndLabel
-            label="EMAIL"
-            placeholder="Email Address"
+            label="メールアドレス"
+            placeholder="メールアドレス"
             type="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
@@ -125,17 +84,27 @@ function Edit() {
         </div>
         <div className="edit-container">
           <InputTextAndLabel
-            label="PASSWORD"
-            placeholder="Password"
+            label="現在のパスワード"
+            placeholder="現在のパスワードを入力してください"
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
         </div>
         <div className="edit-container">
+          <InputTextAndLabel
+            label="変更後のパスワード"
+            placeholder="変更後のパスワードを入力してください"
+            type="password"
+            x
+            onChange={(e) => setChangedPassword(e.target.value)}
+            value={changedPassword}
+          />
+        </div>
+        <div className="edit-container">
           <InputSelect
-            label="LOCATION"
-            placeholder="Location"
+            label="ロケーション"
+            placeholder="ロケーション"
             onChange={(e) => setLocation(e.target.value)}
             value={location}
             options={countries}
@@ -143,32 +112,33 @@ function Edit() {
         </div>
         <div className="edit-container">
           <RadioForm
-            label="LOOKING FOR"
+            label="求める雇用形態"
             options={optionData.userLookingFor}
             onChange={(e) => setLookingFor(e.target.value)}
+            value={lookingFor}
           />
         </div>
         <div className="edit-container">
           <InputTextAndLabel
-            label="YOUR PROFILE (LinkedIn / GitHub / Website)"
+            label="プロフィールリンク (LinkedIn / GitHub / Website)"
             placeholder="https://www.linkedin.com/in/example"
             type="text"
-            onChange={(e) => setLinkedin(e.target.value)}
-            value={linkedin}
+            onChange={(e) => setLink1(e.target.value)}
+            value={link1}
           />
 
           <InputText
             placeholder="https://github.com/example"
             type="text"
-            onChange={(e) => setGithub(e.target.value)}
-            value={github}
+            onChange={(e) => setLink2(e.target.value)}
+            value={link2}
           />
 
           <InputText
             placeholder="https://lraough.com/"
             type="text"
-            onChange={(e) => setWebsite(e.target.value)}
-            value={website}
+            onChange={(e) => setLink3(e.target.value)}
+            value={link3}
           />
         </div>
         <div className="edit-container">
@@ -196,6 +166,6 @@ function Edit() {
       </form>
     </div>
   );
-}
+};
 
-export default Edit;
+export default ProfileEdit;
