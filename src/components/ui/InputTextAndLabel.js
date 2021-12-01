@@ -12,6 +12,7 @@ const InputTextAndLabel = ({
   multiline = false,
   minRows = 1,
   maxRows = 1,
+  name = "",
   error = false,
 }) => {
   return (
@@ -22,6 +23,7 @@ const InputTextAndLabel = ({
       <TextField
         required
         placeholder={placeholder}
+        name={name}
         variant="outlined"
         margin="normal"
         className="input"

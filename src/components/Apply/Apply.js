@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
 import InputText from "../ui/InputText";
-import InputTextAndLabel from "../ui/InputTextAreaAndLabel";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputLabel from "@mui/material/InputLabel";
 import InputSelect from "../ui/InputSelect";
 import { auth } from "../../firebase/firebase";
