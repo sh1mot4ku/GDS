@@ -20,6 +20,7 @@ const replaceLettersAndCreateKeywordsArr = (searchInput) => {
       console.log(keywordsArr[i]);
     }
   }
+  console.log(keywordsArr);
   return keywordsArr;
 };
 
@@ -31,73 +32,87 @@ const JobListings = () => {
   const [tags, setTags] = useState([]);
 
   const filterJobListings = () => {
-    let convertSearchInput = searchInput;
-    let searchKeywordsArr =
-      replaceLettersAndCreateKeywordsArr(convertSearchInput);
-    let filteredJoblistingsbyTitles;
-    let filteredJoblistingsbyDescriptions;
+    console.log("filter func");
     let totalfilteredJobListings = [];
-    for (let i = 0; i < searchKeywordsArr.length; i++) {
-      filteredJoblistingsbyTitles = jobListings.filter((jobListing) => {
-        if (jobListing.jobTitle) {
-          return (
-            replaceLetters(jobListing.jobTitle).search(searchKeywordsArr[i]) !==
-            -1
-          );
+    if (searchInput.length !== 0) {
+      let convertSearchInput = searchInput;
+      let searchKeywordsArr =
+        replaceLettersAndCreateKeywordsArr(convertSearchInput);
+      let filteredJoblistingsbyTitles;
+      let filteredJoblistingsbyDescriptions;
+      let filteredJoblistingsbyCompanyName;
+      let filteredJoblistingsbyPlace;
+      for (let i = 0; i < searchKeywordsArr.length; i++) {
+        filteredJoblistingsbyTitles = jobListings.filter((jobListing) => {
+          if (jobListing.jobTitle) {
+            return (
+              replaceLetters(jobListing.jobTitle).search(
+                searchKeywordsArr[i]
+              ) !== -1
+            );
+          }
+        });
+        filteredJoblistingsbyDescriptions = jobListings.filter((jobListing) => {
+          if (jobListing.jobDescription) {
+            return (
+              replaceLetters(jobListing.jobDescription).search(
+                searchKeywordsArr[i]
+              ) !== -1
+            );
+          }
+        });
+        filteredJoblistingsbyCompanyName = jobListings.filter((jobListing) => {
+          if (jobListing.companyName) {
+            return (
+              replaceLetters(jobListing.companyName).search(
+                searchKeywordsArr[i]
+              ) !== -1
+            );
+          }
+        });
+        filteredJoblistingsbyPlace = jobListings.filter((jobListing) => {
+          if (jobListing.companyAddress) {
+            return (
+              replaceLetters(jobListing.companyAddress).search(
+                searchKeywordsArr[i]
+              ) !== -1
+            );
+          }
+        });
+        totalfilteredJobListings.push(
+          ...filteredJoblistingsbyTitles,
+          ...filteredJoblistingsbyDescriptions,
+          ...filteredJoblistingsbyCompanyName,
+          ...filteredJoblistingsbyPlace
+        );
+      }
+    }
+
+    if (tags.length !== 0) {
+      for (let i = 0; i < tags.length; i++) {
+        for (let j = 0; j < jobListings.length; j++) {
+          if (jobListings[j].tags) {
+            if (!Array.isArray(jobListings[j].tags)) {
+              continue;
+            } else {
+              for (let k = 0; k < jobListings[j].tags.length; k++) {
+                const filterResultsArr = jobListings.filter((jobListing) => {
+                  if (jobListing.tags) {
+                    return jobListing.tags[k] === tags[i];
+                  }
+                });
+                totalfilteredJobListings.push(...filterResultsArr);
+              }
+            }
+          }
         }
-      });
-      filteredJoblistingsbyDescriptions = jobListings.filter((jobListing) => {
-        if (jobListing.jobDescription) {
-          return (
-            replaceLetters(jobListing.jobDescription).search(
-              searchKeywordsArr[i]
-            ) !== -1
-          );
-        }
-      });
-      totalfilteredJobListings.push(
-        ...filteredJoblistingsbyTitles,
-        ...filteredJoblistingsbyDescriptions
-      );
+      }
     }
     setJobListingsArr(
       totalfilteredJobListings.length !== 0
         ? [...new Set(totalfilteredJobListings)]
         : ["no result"]
     );
-    tags.length !== 0 && setTags([]);
-  };
-
-  const filterJobListingsWithTags = () => {
-    if (tags.length === 0) {
-      return;
-    }
-    let filteredJoblistingsByTags = [];
-    for (let i = 0; i < tags.length; i++) {
-      for (let j = 0; j < jobListings.length; j++) {
-        if (jobListings[j].tags) {
-          if (!Array.isArray(jobListings[j].tags)) {
-            continue;
-          } else {
-            for (let k = 0; k < jobListings[j].tags.length; k++) {
-              const filterResultsArr = jobListings.filter((jobListing) => {
-                if (jobListing.tags) {
-                  return jobListing.tags[k] === tags[i];
-                }
-              });
-              filteredJoblistingsByTags.push(...filterResultsArr);
-            }
-          }
-        }
-      }
-    }
-    console.log(filteredJoblistingsByTags);
-    setJobListingsArr(
-      filteredJoblistingsByTags.length !== 0
-        ? [...new Set(filteredJoblistingsByTags)]
-        : ["no result"]
-    );
-    searchInput !== "" && setSearchInput("");
   };
 
   useEffect(() => {
@@ -106,7 +121,12 @@ const JobListings = () => {
     } else if (jobListings.length === 0) {
       dispatch(startSetJobListings());
     }
+    console.log(jobListings);
   }, [jobListings]);
+
+  useEffect(() => {
+    console.log(jobListingsArr);
+  }, [jobListingsArr]);
 
   return (
     <>
@@ -120,13 +140,6 @@ const JobListings = () => {
           value={searchInput}
           onKeyPress={(e) => e.key === "Enter" && filterJobListings()}
         />
-        <Button
-          variant="contained"
-          className="submit-btn"
-          onClick={() => filterJobListings()}
-        >
-          Submit
-        </Button>
         <ChipInputAutosuggest
           data={skillsSuggestion}
           tags={tags}
@@ -137,13 +150,13 @@ const JobListings = () => {
           placeholder="スキルタグ検索"
           // onKeyPress={(e) => e.key === "Enter" && filterJobListingsWithTags()}
         />
-        <Button
+        <button
           variant="contained"
           className="submit-btn"
-          onClick={() => filterJobListingsWithTags()}
+          onClick={() => filterJobListings()}
         >
-          Submit
-        </Button>
+          検索
+        </button>
       </div>
       <div className="joblisting-wrapper">
         {jobListingsArr[0] === "no result" ? (
