@@ -21,7 +21,7 @@ const mailTransport = nodemailer.createTransport({
   },
 });
 
-const adminContents = (data) => {
+const emailContentsForContactForm = (data) => {
   return `Global Developersのコンタクトフォームから${data.name}よりお問い合わせがきています。
   Name: ${data.name}様
   Email: ${data.email}
@@ -35,7 +35,36 @@ exports.sendMail = functions
       from: testEmail,
       to: testEmail,
       subject: `[GDS] ${data.name}様よりお問い合わせがきています。`,
-      text: adminContents(data),
+      text: emailContentsForContactForm(data),
+    };
+    mailTransport.sendMail(adminMail, (err, info) => {
+      if (err) {
+        return console.error(`transmission error: ${err}`);
+      }
+      return console.log("Email sent successfully.");
+    });
+  });
+
+const emailContentsForApplicationEmail = (data) => {
+  // change url later
+  return `Global Developersの求人への応募がきています。
+  応募者名: ${data.applicant}
+  応募者Email: ${data.applicantEmail}
+  求人タイトル: ${data.jobTitle}
+  会社名: ${data.companyName}
+  求人リンク: http://localhost:3000/joblisting/${data.jobListingId}
+  応募した日: ${data.appliedOn}
+  `;
+};
+
+exports.sendApplicationMail = functions
+  .region("us-central1")
+  .https.onCall((data, context) => {
+    const adminMail = {
+      from: testEmail,
+      to: testEmail,
+      subject: `[GDS] ${data.applicant}様より求人への応募がありました。`,
+      text: emailContentsForApplicationEmail(data),
     };
     mailTransport.sendMail(adminMail, (err, info) => {
       if (err) {

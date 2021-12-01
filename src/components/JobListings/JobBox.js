@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
+import "moment/locale/ja";
 import "./JobBox.scss";
 
 const MAX_LENGTH_OF_JD = 100;
@@ -8,16 +10,26 @@ const JobBox = ({
   photoUrl,
   jobTitle,
   companyName,
-  workPlacePolicy,
   employeeLocation,
-  employmentType,
   jobDescription,
-  skills,
-  annualSalaly,
+  tags,
   id,
+  postedTimeStamp,
   details,
 }) => {
   const [shortJd, setShortJD] = useState("");
+  const [timeLag, setTimeLag] = useState(null);
+
+  useEffect(() => {
+    moment.locale("ja");
+  }, []);
+
+  useEffect(() => {
+    if (details && postedTimeStamp) {
+      const lag = moment(postedTimeStamp).fromNow();
+      setTimeLag(lag);
+    }
+  }, [details, postedTimeStamp]);
 
   useEffect(() => {
     jobDescription && setShortJD(jobDescription.substr(0, MAX_LENGTH_OF_JD));
@@ -25,7 +37,7 @@ const JobBox = ({
 
   return (
     <div className="job-box">
-      <Link to={`/joblisting/${id}`}>
+      <Link to={`/joblisting/${id}`} className={details && "disabled-link"}>
         <div className="job-img-wrapper">
           <img src={photoUrl} className="job-img" alt="top-job"></img>
         </div>
@@ -38,17 +50,17 @@ const JobBox = ({
         <div className="job-box-content">
           <span className="location">{employeeLocation}</span>
         </div>
-        <div className="job-box-content">
-          {Array.isArray(skills) &&
-            skills.length !== 0 &&
-            skills.map((skill) => (
+        <div className="job-box-skill-tags">
+          {Array.isArray(tags) &&
+            tags.length !== 0 &&
+            tags.map((skill) => (
               <div className="skill-tag-wrapper" key={skill}>
                 <span className="skill-tag">{skill}</span>
               </div>
             ))}
         </div>
-        {details ? (
-          <React.Fragment>{"いつ作成されたか"}</React.Fragment>
+        {details && timeLag ? (
+          <div className="timestamp">{timeLag}に掲載</div>
         ) : (
           <div className="job-box-content">
             <span className="short-jd">{shortJd}</span>

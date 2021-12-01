@@ -1,6 +1,6 @@
 import React from "react";
 import { FormLabel, TextField } from "@material-ui/core";
-import "./ui.scss";
+import "./Recruiter.scss";
 
 const InputTextAndLabel = ({
   label,
@@ -12,8 +12,8 @@ const InputTextAndLabel = ({
 }) => {
   return (
     <React.Fragment>
-      <FormLabel component="legend">
-        {label} <span className="required-star">*</span>
+      <FormLabel component="legend" required>
+        {label}
       </FormLabel>
       <TextField
         required

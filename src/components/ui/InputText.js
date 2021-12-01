@@ -2,7 +2,14 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import "./ui.scss";
 
-const InputText = ({ placeholder, type, onChange, value, isRequired }) => {
+const InputText = ({
+  placeholder,
+  type,
+  onChange,
+  value,
+  isRequired,
+  name,
+}) => {
   return (
     <React.Fragment>
       <TextField
@@ -14,6 +21,7 @@ const InputText = ({ placeholder, type, onChange, value, isRequired }) => {
         type={type}
         onChange={onChange}
         value={value}
+        name={name}
       />
     </React.Fragment>
   );

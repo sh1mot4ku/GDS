@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import database, { firebase, storage } from "../../firebase/firebase";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import TrimModal from "../ui/TrimModal";
 import { v4 as uuid } from "uuid";
@@ -11,11 +11,15 @@ import ChipInputAutosuggest from "../ui/SkillInput";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import skillsSuggestion from "../../data/skills/integration";
 import moment from "moment";
+import {
+  addUsersJobListings,
+  editUsersJobListings,
+} from "../../action/usersJobListings";
 import "./PostJobListings.scss";
 
 const MIN_ROWS_LARGE_INPUT = 6;
 const MAX_ROWS_LARGE_INPUT = 12;
-let postingId = ""; // unique posting ID
+let jobId = ""; // unique posting ID
 const DEFAULT_PHOTO = "/photos/img-empty.jpg";
 
 const readFile = (file) => {
@@ -26,36 +30,47 @@ const readFile = (file) => {
   });
 };
 
-const PostJobListings = () => {
+const PostJobListings = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
-  const [photoUrl, setPhotoUrl] = useState(DEFAULT_PHOTO);
-  const [companyName, setCompanyName] = useState("");
-  const [companyAddress, setCompanyAddress] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [tags, setTags] = useState([]);
-  const [jobListing, setJobListing] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
-  const [must, setMust] = useState("");
-  const [welcome, setWelcome] = useState("");
-  const [employeeLocation, setEmployeeLocation] = useState("");
-  const [employmentType, setEmploymentType] = useState("");
-  const [annualSalaly, setAnnualSalaly] = useState("");
-  const [workingHours, setWorkingHours] = useState("");
-  const [leaves, setLeaves] = useState("");
+  const [photoUrl, setPhotoUrl] = useState(props.photoUrl || DEFAULT_PHOTO);
+  const [companyName, setCompanyName] = useState(props.companyName || "");
+  const [companyAddress, setCompanyAddress] = useState(
+    props.companyAddress || ""
+  );
+  const [jobTitle, setJobTitle] = useState(props.jobTitle || "");
+  const [tags, setTags] = useState(props.tags || []);
+  const [jobListing, setJobListing] = useState(props.jobListing || "");
+  const [jobDescription, setJobDescription] = useState(
+    props.jobDescription || ""
+  );
+  const [must, setMust] = useState(props.must || "");
+  const [welcome, setWelcome] = useState(props.welcome || "");
+  const [employeeLocation, setEmployeeLocation] = useState(
+    props.employeeLocation || ""
+  );
+  const [employmentType, setEmploymentType] = useState(
+    props.employmentType || ""
+  );
+  const [annualSalaly, setAnnualSalaly] = useState(props.annualSalaly || "");
+  const [workingHours, setWorkingHours] = useState(props.workingHours || "");
+  const [leaves, setLeaves] = useState(props.leaves || "");
   const [skillTagsError, setSkillTagsError] = useState(false);
   const { uid } = useSelector((state) => state.user); // user's auth ID
 
   useEffect(() => {
-    postingId = uuid(); // set posting ID just once after component loaded
-  }, []);
+    if (!props.id) {
+      jobId = uuid(); // set posting ID just once after component loaded
+    } else {
+      jobId = props.id; // assign previous job ID when user edit job listing
+    }
+  }, [props.id]);
 
   useEffect(() => {
     if (photoBlob) {
-      const uploadTask = storage
-        .ref(`photos/${uid}/${postingId}`)
-        .put(photoBlob);
+      const uploadTask = storage.ref(`photos/${uid}/${jobId}`).put(photoBlob);
       const unsubscribe = uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
         null,
@@ -74,7 +89,7 @@ const PostJobListings = () => {
 
   const complete = () => {
     storage
-      .ref(`photos/${uid}/${postingId}`)
+      .ref(`photos/${uid}/${jobId}`)
       .getDownloadURL()
       .then((url) => {
         setPhotoUrl(url);
@@ -130,11 +145,17 @@ const PostJobListings = () => {
         postedTimeStamp,
       };
       database
-        .ref(`/jobListings/${uid}/${postingId}`)
+        .ref(`/jobListings/${uid}/${jobId}`)
         .set(postingInfo)
         .then(() => {
-          console.log("Posted successfully!");
-          history.push("/joblistings");
+          if (!props.edit) {
+            dispatch(addUsersJobListings(postingInfo));
+            console.log("Posted successfully!");
+          } else {
+            dispatch(editUsersJobListings(postingInfo));
+            console.log("Editted Successfully!");
+          }
+          history.push("/joblistings_management");
         });
     } else {
       if (tags.length === 0) setSkillTagsError(true);
@@ -144,7 +165,7 @@ const PostJobListings = () => {
   return (
     <div className="form-wrapper">
       <div className="form-container">
-        <h2 className="form-header">求人投稿</h2>
+        <h2 className="form-header">{!props.edit ? "求人投稿" : "求人編集"}</h2>
         <form onSubmit={onSubmit} className="joblist-form">
           <div className="input-block">
             <div className="photo-buttons">
@@ -338,7 +359,12 @@ const PostJobListings = () => {
             </Button>
           </div>
           <div className="cancel-wrapper">
-            <span className="cancel">キャンセル</span>
+            <span
+              className="cancel"
+              onClick={() => history.push("/joblistings_management")}
+            >
+              キャンセル
+            </span>
           </div>
         </form>
         {originPhotoSrc && (

@@ -1,7 +1,9 @@
-@import "../../../sass_config/mixin.scss";
+@import '../../../sass_config/mixin.scss';
 .footer {
   width: 100%;
   background: black;
+  z-index: 0;
+  position: relative;
   .footer-container {
     @include pc {
       max-width: 1080px;
