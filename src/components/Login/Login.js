@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import InputTextAndLabel from "../Apply/InputTextAndLabel";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
-import { insertUser } from "../../API/dbutils";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
 import { useHistory } from "react-router-dom";
 import "./Login.scss";

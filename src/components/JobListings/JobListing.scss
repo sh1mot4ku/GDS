@@ -1,0 +1,84 @@
+@import './JobListings';
+@import '../../sass_config/color';
+
+.joblisting-details-wrapper {
+  @extend .joblisting-wrapper;
+
+  .bread-list {
+    display: inline-flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    font-size: 12px;
+    margin: 24.5px 0 40px;
+
+    .bread-item {
+      margin-right: 4px;
+
+      .previous-link {
+        color: $color_primary;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .job-description {
+    margin-bottom: 40px;
+
+    .job-description-header {
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+  }
+  .overview-wrapper {
+    padding: 24px 0;
+    border-bottom: 1px solid $color-line;
+  }
+  .overview-header {
+    font-size: 20px;
+  }
+  .oubo-wrapper {
+    width: 33%;
+    margin: 80px auto 0;
+    border-radius: 16px;
+    text-align: center;
+  }
+}
+
+.joblisting-details-wrapper-logout {
+  height: 1000px;
+  overflow: hidden;
+  position: relative;
+  // margin: 100px auto;
+  margin: 0 auto;
+  .joblisting-details-mask {
+    height: 700px;
+    @extend .joblisting-wrapper;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1)
+    );
+    position: absolute;
+    top: 300px;
+  }
+  .round-button {
+    border: 1.8px solid $color_primary;
+    background: $color_primary;
+    border-radius: 100px;
+    padding: 0;
+    height: 63px;
+    width: 250px;
+    margin: 0 4px;
+    font-weight: 700;
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    left: 170px;
+    top: 900px;
+
+    &:hover {
+      background: $color_primary;
+    }
+  }
+}

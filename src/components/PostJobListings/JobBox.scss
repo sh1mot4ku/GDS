@@ -1,0 +1,22 @@
+@import "../../sass_config/color";
+@import "../JobListings/JobBox";
+
+.job-box {
+  .job-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+
+    .job-img-wrapper {
+      width: 208px !important;
+      height: 127px !important;
+      margin-right: 20px;
+
+      .job-img {
+        width: 208px !important;
+        height: 127px !important;
+        object-fit: cover;
+      }
+    }
+  }
+}

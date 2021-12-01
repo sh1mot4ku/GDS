@@ -9,8 +9,13 @@ import Login from "../components/Login/Login";
 import Wrapper from "../components/Wrapper/Wrapper";
 import { createBrowserHistory } from "history";
 import Recruiter from "../components/Recruiter/Recruiter";
-import Profile from "../components/Edit/Profile";
+// import Profile from "../components/Edit/Profile"
 import Edit from "../components/Edit/Edit";
+import PostJobListings from "../components/PostJobListings/PostJobListings";
+import JobListings from "../components/JobListings/JobListings";
+import JobListing from "../components/JobListings/JobListing";
+import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
+import EditJobListing from "../components/PostJobListings/EditJobListing";
 
 const history = createBrowserHistory();
 
@@ -22,8 +27,16 @@ const AppRouter = () => (
         <Route path="/about" component={AboutPage} />
         <Route path="/faqs" component={FaqsPage} />
         <Route path="/apply-developer" component={Apply} />
-        <Route path="/contact" component={ContactForm} />
         <Route path="/apply-recruiter" component={Recruiter} />
+        <Route path="/post_joblistings" component={PostJobListings} />
+        <Route
+          path="/joblistings_management"
+          component={JobListingsManagement}
+        />
+        <Route path="/edit_joblisting/:jobId" component={EditJobListing} />
+        <Route path="/joblistings" component={JobListings} />
+        <Route path="/joblisting/:jobId" component={JobListing} />
+        <Route path="/contact" component={ContactForm} />
         <Route path="/login" component={Login} />
         <Route path="/edit" component={Edit} />
       </Switch>
