@@ -8,6 +8,7 @@ const JobListingsManagement = () => {
   const usersJobListings = useSelector((state) => state.usersJobListings);
   const dispatch = useDispatch();
   const [jobListingsArr, setJobListingsArr] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (usersJobListings.length !== 0) {
@@ -18,18 +19,21 @@ const JobListingsManagement = () => {
       console.log(
         "Dispatch startSetUsersJobListings from JobListingsManagement"
       );
+      setLoaded(true);
     }
   }, [usersJobListings]);
 
   return (
     <div className="users-joblistings-wrapper">
       <h2 className="users-joblistings-header">求人一覧</h2>
-      {jobListingsArr.length !== 0 ? (
+      {(jobListingsArr.length !== 0) & loaded ? (
         jobListingsArr.map((job) => (
           <React.Fragment key={job.id}>
             <JobBox {...job} />
           </React.Fragment>
         ))
+      ) : (jobListingsArr.length === 0) & loaded ? (
+        <div>求人投稿はまだありません</div>
       ) : (
         <div>Loading...</div>
       )}

@@ -1,4 +1,4 @@
-@import '../../sass_config/color';
+@import "../../sass_config/color";
 
 // =========== Input ===========
 .input {
@@ -38,10 +38,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 90;
 
   #content {
-    z-index: 11;
+    z-index: 100;
     width: 600px;
     // padding: 1em;
     background: #fff;
