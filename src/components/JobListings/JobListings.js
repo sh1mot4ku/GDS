@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import JobBox from "./JobBox";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import ChipInputAutosuggest from "../ui/SkillInput";
-import skillsSuggestion from "../../data/skills/integration";
-import { startSetJobListings } from "../../action/jobListings";
-import "./JobListings.scss";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import JobBox from './JobBox';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import ChipInputAutosuggest from '../ui/SkillInput';
+import skillsSuggestion from '../../data/skills/integration';
+import { startSetJobListings } from '../../action/jobListings';
+import './JobListings.scss';
 
 const replaceLetters = (searchInput) =>
-  searchInput.replace(/\s+/g, "").replace(/-/g, "").toLowerCase();
+  searchInput.replace(/\s+/g, '').replace(/-/g, '').toLowerCase();
 
 const replaceLettersAndCreateKeywordsArr = (searchInput) => {
-  let keywordsArr = searchInput.toLowerCase().replace(/　/g, " ").split(" ");
+  let keywordsArr = searchInput.toLowerCase().replace(/　/g, ' ').split(' ');
   for (let i = 0; i < keywordsArr.length; i++) {
-    if (keywordsArr[i] === "") {
+    if (keywordsArr[i] === '') {
       keywordsArr = keywordsArr.splice(i, 1);
       console.log(keywordsArr[i]);
     }
   }
+  console.log(keywordsArr);
   return keywordsArr;
 };
 
 const JobListings = () => {
   const jobListings = useSelector((state) => state.jobListings);
   const dispatch = useDispatch();
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
   const [jobListingsArr, setJobListingsArr] = useState([]);
   const [tags, setTags] = useState([]);
 
   const filterJobListings = () => {
+    console.log('filter func');
     let convertSearchInput = searchInput;
     let searchKeywordsArr =
       replaceLettersAndCreateKeywordsArr(convertSearchInput);
@@ -63,7 +65,7 @@ const JobListings = () => {
     setJobListingsArr(
       totalfilteredJobListings.length !== 0
         ? [...new Set(totalfilteredJobListings)]
-        : ["no result"]
+        : ['no result']
     );
     tags.length !== 0 && setTags([]);
   };
@@ -95,9 +97,9 @@ const JobListings = () => {
     setJobListingsArr(
       filteredJoblistingsByTags.length !== 0
         ? [...new Set(filteredJoblistingsByTags)]
-        : ["no result"]
+        : ['no result']
     );
-    searchInput !== "" && setSearchInput("");
+    searchInput !== '' && setSearchInput('');
   };
 
   useEffect(() => {
@@ -106,7 +108,12 @@ const JobListings = () => {
     } else if (jobListings.length === 0) {
       dispatch(startSetJobListings());
     }
+    console.log(jobListings);
   }, [jobListings]);
+
+  useEffect(() => {
+    console.log(jobListingsArr);
+  }, [jobListingsArr]);
 
   return (
     <>
@@ -118,15 +125,15 @@ const JobListings = () => {
           className="search-input"
           onChange={(e) => setSearchInput(e.target.value)}
           value={searchInput}
-          onKeyPress={(e) => e.key === "Enter" && filterJobListings()}
+          onKeyPress={(e) => e.key === 'Enter' && filterJobListings()}
         />
-        <Button
+        {/* <Button
           variant="contained"
           className="submit-btn"
           onClick={() => filterJobListings()}
         >
           Submit
-        </Button>
+        </Button> */}
         <ChipInputAutosuggest
           data={skillsSuggestion}
           tags={tags}
@@ -146,7 +153,7 @@ const JobListings = () => {
         </Button>
       </div>
       <div className="joblisting-wrapper">
-        {jobListingsArr[0] === "no result" ? (
+        {jobListingsArr[0] === 'no result' ? (
           <>
             <p>No Result</p>
             <Link
