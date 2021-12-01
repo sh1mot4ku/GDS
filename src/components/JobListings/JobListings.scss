@@ -1,19 +1,29 @@
-@import "../../sass_config/color";
+@import '../../sass_config/color';
 
 .search-input-container {
   margin-top: 36px;
   display: flex;
   align-items: center;
-  width: 40%;
+  justify-content: center;
+  width: 600px;
   margin: 36px auto;
 
   .search-input {
-    width: 700px;
+    width: 500px !important;
+    padding: 12px 0 12px 0 !important;
   }
   .submit-btn {
     background: $color_primary;
-    margin: 0 8px;
-    height: 60px;
+    padding: 0;
+    align-self: center;
+    height: 54px;
+    width: 100px;
+    color: white;
+    margin-bottom: 3px;
+    font-size: 12px;
+    border-radius: 0 10px 10px 0;
+    outline: none;
+
     &:hover {
       background: $color_primary;
     }
