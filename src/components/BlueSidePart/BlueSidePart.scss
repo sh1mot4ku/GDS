@@ -17,6 +17,9 @@
   }
   .logo {
     width: 274px;
+    &:hover{
+      opacity: 0.6;
+    }
   }
 
   .remoteStack {

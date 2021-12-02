@@ -11,6 +11,9 @@
   .company-logo {
     height: 60px;
     cursor: pointer;
+    &:hover{
+      opacity: 0.6;
+    }
   }
   .close-icon {
     cursor: pointer;
@@ -44,7 +47,7 @@
       padding: 8px 0;
 
       &:hover {
-        text-shadow: 0 0.015em black, 0 -0.015emblack, 0.01em 0 black,
+        text-shadow: 0 0.015em black, 0 -0.015em black, 0.01em 0 black,
           -0.01em 0 black;
       }
     }

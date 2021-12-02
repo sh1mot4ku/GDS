@@ -4,8 +4,9 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Box from "@mui/material/Box";
 import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
-import { headerMenuItemsLogOut, drawerMenuItemsLogin } from "../../menuItems";
+import { drawerMenuItemsLogout, drawerMenuItemsLogin } from "../../menuItems";
 import "./Drawer.scss";
+
 
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
@@ -56,14 +57,11 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
               {isUserLoggedIn
                 ? drawerMenuItemsLogin.length !== 0 &&
                   createMenuList(drawerMenuItemsLogin)
-                : headerMenuItemsLogOut.length !== 0 &&
-                  createMenuList(headerMenuItemsLogOut)}
+                : drawerMenuItemsLogout.length !== 0 &&
+                  createMenuList(drawerMenuItemsLogout)}
             </div>
             {isUserLoggedIn ? null : (
               <>
-                <Link className="login" to="/login">
-                  ログイン
-                </Link>
                 <Link to="/apply-developer">
                   <Button className="round-button-drawer background-white-drawer">
                     無料会員登録

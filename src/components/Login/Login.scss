@@ -16,7 +16,7 @@
     }
 
     .title {
-      margin: 32px;
+      margin: 80px auto 40px auto;
     }
 
     .form {
@@ -61,12 +61,12 @@
         }
         .sub-button {
           display: block;
-          color: #e5e5e5;
+          color: $gray;
           border: none;
           outline: none;
           background: transparent;
           text-decoration: none;
-          margin-top: 20px;
+          margin-top: 24px;
           cursor: pointer;
 
           &:hover {

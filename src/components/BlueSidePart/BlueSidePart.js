@@ -1,6 +1,6 @@
 import React from "react";
 import "./BlueSidePart.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const BlueSidePart = () => {
   const location = useLocation();
@@ -13,7 +13,9 @@ const BlueSidePart = () => {
         ].join(" ")}
       >
         <div className="box"></div>
-        <img alt="" src="/image/logo-white 1.png" className="logo" />
+        <Link to="/joblistings">
+          <img alt="" src="/image/logo-white 1.png" className="logo" />
+        </Link>
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />
       </div>
     </>

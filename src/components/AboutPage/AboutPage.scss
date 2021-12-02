@@ -30,7 +30,7 @@ $color_line: #F5F5F5;
         font-size: 32px;
     }
   }
-  
+
   p {
     color: $color_sub_text;
   }
@@ -42,16 +42,17 @@ table {
 }
 .description_contents {
   text-align: left;
-  line-height: 94px;
-  
+  line-height: 68px;
+
   table, td, th {
     border-bottom: 1px solid $color_line;
   }
   th {
     width: 180px;
+    color: $color_sub_text;
+
     // mobile
     @media screen and (max-width: 768px) {
-        color: $color_sub_text;
         width: 100px;
     }
   }
@@ -59,23 +60,20 @@ table {
     margin-right: 36px;
   }
   td {
-    color: $color_sub_text;
+    color: $color_black;
     margin-right: 30px;
     line-height: 32px;
-    // mobile
-    @media screen and (max-width: 768px) {
-        color: $color_black;
-    }
+
   }
 }
 
 .image.top {
   text-align: center;
-  margin-top: 48px;
-  
+  margin-top: 80px;
+
   img {
     width: 100%;
-    height: 240px;
+    height: 320px;
     object-fit: cover;
     border-radius: 8px;
     // mobile
@@ -86,7 +84,7 @@ table {
 }
 
 .profile {
-  margin: 28px auto;
+  margin: 40px auto;
   font-size: 16px;
 
   h2 {
@@ -106,7 +104,7 @@ table {
       font-size: 16px;
       line-height: 24px;
     }
-    
+
     h3 {
       font-weight: bold;
       // mobile
@@ -115,9 +113,9 @@ table {
       }
     }
   }
-  
+
   &_skills, &_links {
-    margin-top: 36px;
+    margin-top: 40px;
     // mobile
     @media screen and (max-width: 768px) {
       font-size: 14px;
@@ -128,7 +126,7 @@ table {
         margin-bottom: 14px;
       }
     }
-    
+
     a {
       color: $color_primary;
       text-decoration-line: underline;
@@ -157,7 +155,7 @@ WORKS
   }
 
   .border {
-    margin: 16px auto 24px;
+    margin: 20px auto 20px;
     border-bottom: 1px solid $color_line;
   }
 
@@ -169,11 +167,12 @@ WORKS
     }
 
     &_image {
-      margin-right: 10px;
+      margin-right: 20px;
 
       img {
         width: 208px;
         height: 127px;
+        border-radius: 4px;
         // mobile
         @media screen and (max-width: 768px) {
           width: 100px;
@@ -181,9 +180,10 @@ WORKS
         }
       }
     }
-    
+
     h3 {
       font-size: 16px;
+      margin-bottom: 8px;
       @media screen and (max-width: 768px) {
         font-size: 14px;
         line-height: 21px;
@@ -213,7 +213,7 @@ INTERVIEWS
   }
 
   .border {
-    margin: 16px auto 24px;
+    margin: 20px auto 20px;
     border-bottom: 1px solid $color_line;
   }
 
@@ -225,11 +225,12 @@ INTERVIEWS
     }
 
     &_image {
-      margin-right: 10px;
+      margin-right: 20px;
 
       img {
         width: 208px;
         height: 127px;
+        border-radius: 4px;
         // mobile
         @media screen and (max-width: 768px) {
           width: 100px;
@@ -240,6 +241,7 @@ INTERVIEWS
 
     h3 {
       font-size: 16px;
+      margin-bottom: 8px;
       @media screen and (max-width: 768px) {
         font-size: 14px;
         line-height: 21px;
@@ -269,7 +271,7 @@ BLOG
   }
 
   .border {
-    margin: 16px auto 24px;
+    margin: 20px auto 20px;
     border-bottom: 1px solid $color_line;
   }
 
@@ -281,11 +283,12 @@ BLOG
     }
 
     &_image {
-      margin-right: 10px;
+      margin-right: 20px;
 
       img {
         width: 208px;
         height: 127px;
+        border-radius: 4px;
         // mobile
         @media screen and (max-width: 768px) {
           width: 100px;
@@ -296,6 +299,7 @@ BLOG
 
     h3 {
       font-size: 16px;
+      margin-bottom: 8px;
       @media screen and (max-width: 768px) {
         font-size: 14px;
         line-height: 21px;

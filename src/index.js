@@ -8,6 +8,7 @@ import database, { auth } from "./firebase/firebase";
 import { login, logout } from './action/user';
 import "./sass_config/reset.scss";
 import configureStore from "./store/configureStore";
+import "./sass_config/mui.scss";
 
 const theme = createTheme({
   palette: {
@@ -46,7 +47,7 @@ auth.onAuthStateChanged((user) => {
       .ref(`user/${uid}`)
       .once("value")
       .then((snapshot) => {
-        store.dispatch(login({ 
+        store.dispatch(login({
           uid,
           userInfo: snapshot.val()
         }))

@@ -76,6 +76,7 @@ const AboutPage = () => {
             <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
           </div>
         </a>
+        <div className='border'></div>
       </div>
       <div className='interviews'>
         <h2>Interviews</h2>
@@ -108,9 +109,10 @@ const AboutPage = () => {
             <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
           </div>
         </a>
+        <div className='border'></div>
       </div>
       <div className='blog'>
-        <h2>blog</h2>
+        <h2>Blog</h2>
         <a href='https://note.com/lraough/n/n5cee60158410?magazine_key=m7b08a61f539c' target='_blank' rel="noreferrer" className='blog_contents'>
           <div className='blog_contents_image'>
             <img src={`${process.env.PUBLIC_URL}/image/about-blog1.webp`} alt='blog1' />
@@ -140,6 +142,7 @@ const AboutPage = () => {
             <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
           </div>
         </a>
+        <div className='border'></div>
       </div>
     </div>
   )
