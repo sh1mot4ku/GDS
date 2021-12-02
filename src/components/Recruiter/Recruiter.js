@@ -7,6 +7,7 @@ import RadioForm from "../ui/RadioForm";
 import { auth } from "../../firebase/firebase";
 import { insertUser } from "../../API/dbutils";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
+import { optionData } from "../../data/applyingInfo/recruiter";
 import "./Recruiter.scss";
 import validator from "validator";
 
@@ -330,15 +331,6 @@ function Recruiter() {
     newStep,
     isTyping,
   ]);
-
-  const optionData = {
-    businessLookingFor: ["エンジニア", "デザイナー", "ビジネスサイド"],
-    businessCommitment: [
-      "正社員 (週40時間以上)",
-      "副業・フリーランサー",
-      "未定",
-    ],
-  };
 
   let contents = <></>;
   switch (step) {

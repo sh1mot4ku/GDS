@@ -143,7 +143,7 @@ const ProfileEdit = () => {
         </div>
         <div className="edit-container">
           <InputSelect
-            label="YOUR ENGLISH LEVEL"
+            label="英語レベル"
             placeholder="ご自身の英語レベルについて教えてください"
             type="text"
             onChange={(e) => setEnglishLevel(e.target.value)}
@@ -153,9 +153,10 @@ const ProfileEdit = () => {
         </div>
         <div className="edit-container">
           <RadioForm
-            label="LOOKING FOR"
+            label="ご自身の職種"
             options={optionData.userDescription}
             onChange={(e) => setDescription(e.target.value)}
+            value={description}
           />
         </div>
         <div className="buttonContainer">

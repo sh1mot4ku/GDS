@@ -15,20 +15,13 @@ import {
   addUsersJobListings,
   editUsersJobListings,
 } from "../../action/usersJobListings";
+import { readFile } from "../../readImage/cropImage";
 import "./PostJobListings.scss";
 
 const MIN_ROWS_LARGE_INPUT = 6;
 const MAX_ROWS_LARGE_INPUT = 12;
 let jobId = ""; // unique posting ID
 const DEFAULT_PHOTO = "/photos/img-empty.jpg";
-
-const readFile = (file) => {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => resolve(reader.result), false);
-    reader.readAsDataURL(file);
-  });
-};
 
 const PostJobListings = (props) => {
   const history = useHistory();
@@ -59,6 +52,7 @@ const PostJobListings = (props) => {
   const [leaves, setLeaves] = useState(props.leaves || "");
   const [skillTagsError, setSkillTagsError] = useState(false);
   const { uid } = useSelector((state) => state.user); // user's auth ID
+  const [storageRef, setStorageRef] = useState("");
 
   useEffect(() => {
     if (!props.id) {
@@ -69,8 +63,14 @@ const PostJobListings = (props) => {
   }, [props.id]);
 
   useEffect(() => {
+    if (uid && jobId) {
+      setStorageRef(storage.ref(`photos/jobListings/${uid}/${jobId}`));
+    }
+  }, [uid, jobId]);
+
+  useEffect(() => {
     if (photoBlob) {
-      const uploadTask = storage.ref(`photos/${uid}/${jobId}`).put(photoBlob);
+      const uploadTask = storageRef.put(photoBlob);
       const unsubscribe = uploadTask.on(
         firebase.storage.TaskEvent.STATE_CHANGED,
         null,
@@ -88,12 +88,9 @@ const PostJobListings = (props) => {
   };
 
   const complete = () => {
-    storage
-      .ref(`photos/${uid}/${jobId}`)
-      .getDownloadURL()
-      .then((url) => {
-        setPhotoUrl(url);
-      });
+    storageRef.getDownloadURL().then((url) => {
+      setPhotoUrl(url);
+    });
   };
 
   const onPhotoChange = async (e) => {

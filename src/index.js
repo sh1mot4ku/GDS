@@ -41,7 +41,7 @@ const renderApp = () => {
 
 auth.onAuthStateChanged((user) => {
   if (user) {
-    console.log(user);
+    // console.log(user);
     const uid = user.uid;
     database
       .ref(`user/${uid}`)
