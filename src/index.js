@@ -6,8 +6,8 @@ import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppRouter, { history } from "./router/AppRouter";
 import database, { auth } from "./firebase/firebase";
 import { login, logout } from "./action/user";
-import "./sass_config/reset.scss";
 import configureStore from "./store/configureStore";
+import "./sass_config/reset.scss";
 
 const theme = createTheme({
   palette: {

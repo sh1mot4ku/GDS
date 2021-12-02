@@ -1,0 +1,39 @@
+@import '../../sass_config/color';
+
+.search-input-container {
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 600px;
+  margin: 36px auto;
+
+  .search-input {
+    width: 500px !important;
+    padding: 12px 0 12px 0 !important;
+  }
+  .submit-btn {
+    background: $color_primary;
+    padding: 0;
+    align-self: center;
+    height: 54px;
+    width: 100px;
+    color: white;
+    margin-bottom: 3px;
+    font-size: 12px;
+    border-radius: 0 10px 10px 0;
+    outline: none;
+
+    &:hover {
+      background: $color_primary;
+    }
+  }
+}
+
+.joblisting-wrapper {
+  width: 600px;
+  // margin: 60px auto;
+  margin: 0 auto;
+  word-break: break-word;
+  padding-bottom: 200px;
+}

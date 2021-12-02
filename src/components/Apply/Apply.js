@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@material-ui/core";
-import InputText from "./InputText.jsx";
-import InputTextAndLabel from "./InputTextAndLabel.jsx";
+import InputText from "../ui/InputText";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputLabel from "@mui/material/InputLabel";
-import InputSelect from "./InputSelect.jsx";
+import InputSelect from "../ui/InputSelect";
 import { auth } from "../../firebase/firebase";
-import RadioForm from "./RadioForm.jsx";
+import RadioForm from "../ui/RadioForm";
 import { insertUser } from "../../API/dbutils";
 import { Link } from "react-router-dom";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
-// import { UserContext } from "../../context/user-context";
 import "./Apply.scss";
 import validator from "validator";
 
@@ -46,15 +45,6 @@ function Apply() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const USER_TYPE = "developer";
-
-  //test
-  useEffect(() => {
-    console.log(englishLevelError);
-  }, [englishLevelError]);
-  //test
-  useEffect(() => {
-    console.log(`step: ${step}, newStep: ${newStep}`);
-  }, [step, newStep]);
 
   const onHandleInputs = (e) => {
     !isTyping && setIsTyping(true);

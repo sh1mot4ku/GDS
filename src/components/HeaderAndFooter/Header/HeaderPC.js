@@ -8,7 +8,7 @@ import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
 import { auth } from "../../../firebase/firebase";
 import "./Header.scss";
 
-const HeaderPC = ({ isUserLoggedIn }) => {
+const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
   const location = useLocation();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -62,16 +62,31 @@ const HeaderPC = ({ isUserLoggedIn }) => {
         <div className="nav-right">
           {isUserLoggedIn ? (
             <>
-              <Button
-                id="basic-button"
-                aria-controls="basic-menu"
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-                onClick={handleClick}
-              >
-                <AccountCircleOutlinedIcon className="user-icon-no-img" />
-                {/* change this after user img func is implemented            */}
-              </Button>
+              <div className="user-icon-post-button">
+                <Button
+                  id="basic-button"
+                  aria-controls="basic-menu"
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                >
+                  <AccountCircleOutlinedIcon className="user-icon-no-img" />
+                  {/* change this after user img func is implemented            */}
+                </Button>
+                {isRecruiter && (
+                  <div className="post-button">
+                    <a
+                      href="/joblistings_management"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="post-button-anchor"
+                    >
+                      <span>求人投稿・管理</span>
+                      <img src="/photos/chevron-right 2.svg" alt="chevron" />
+                    </a>
+                  </div>
+                )}
+              </div>
               <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}

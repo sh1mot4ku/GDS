@@ -1,0 +1,104 @@
+@import "../../sass_config/color";
+
+.form-wrapper {
+  width: 600px;
+  margin: 0 auto;
+
+  .form-container {
+    .form-header {
+      margin-bottom: 44px;
+    }
+
+    .joblist-form {
+      text-align: center;
+
+      .input-block {
+        margin-bottom: 12px;
+        text-align: left;
+
+        .MuiFormControl-root {
+          width: 100%;
+        }
+
+        .profile-photo {
+          width: 100%;
+        }
+
+        .change-photo {
+          display: none;
+        }
+
+        .photo-buttons {
+          // display: flex;
+          // flex-direction: row;
+          // justify-content: space-between;
+          // align-items: center;
+          width: 100%;
+          height: 240px;
+          margin: 16px auto 37px;
+
+          .button--photo {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid $gray;
+            background: $light-gray;
+            border-radius: 8px;
+            color: $color-sub-text;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+
+            &:hover {
+              background: darken($color: $light-gray, $amount: 3%);
+            }
+          }
+
+          .profile-photo-wrapper {
+            width: 100%;
+            position: relative;
+            cursor: pointer;
+
+            .profile-photo {
+              width: 100%;
+              position: relative;
+              border-radius: 8px;
+            }
+            .profile-photo-delete-button {
+              position: absolute;
+              top: 4px;
+              right: 4px;
+              color: rgba(0, 0, 0, 0.3);
+
+              &:hover {
+                color: rgba(0, 0, 0);
+              }
+            }
+          }
+        }
+
+        .text-field {
+          width: 100%;
+        }
+      }
+
+      .save-button-wrapper {
+        margin: 62px 0 24px;
+
+        .save-button {
+          border-radius: 100px;
+          padding: 16px 92px;
+          font-size: 16px;
+        }
+      }
+
+      .cancel {
+        color: $color-sub-text;
+        text-decoration: underline;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    }
+  }
+}
