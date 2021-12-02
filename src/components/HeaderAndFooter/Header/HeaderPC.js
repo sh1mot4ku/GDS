@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { useLocation, useHistory, Link } from 'react-router-dom';
-import { headerMenuItemsLogOut, headerMenuItemsLogIn } from '../menuItems';
-import { auth } from '../../../firebase/firebase';
-import './Header.scss';
+import React, { useState } from "react";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import { useLocation, useHistory, Link } from "react-router-dom";
+import {
+  headerAndDrawerMenuItemsLogOut,
+  headerMenuItemsLogIn,
+} from "../menuItems";
+import { auth } from "../../../firebase/firebase";
+import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
   const location = useLocation();
@@ -24,9 +27,9 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
     auth
       .signOut()
       .then(() => {
-        console.log('User logged out');
+        console.log("User logged out");
         handleClose();
-        history.push('/');
+        history.push("/");
       })
       .catch((e) => {
         console.error(e);
@@ -35,19 +38,33 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
   };
 
   const createMenuList = (menuItems) =>
-    menuItems.map((menuItem) => (
-      <Link
-        key={menuItem.title}
-        className={
-          location.pathname === menuItem.to
-            ? [...menuItem.className, 'activated-menu'].join(' ')
-            : menuItem.className
-        }
-        to={menuItem.to}
-      >
-        {menuItem.title}
-      </Link>
-    ));
+    menuItems.map((menuItem) => {
+      if (menuItem.isExternal) {
+        return (
+          <a
+            href="https://note.com/lraough/m/m7b08a61f539c"
+            className={menuItem.className}
+            target="_blank"
+          >
+            {menuItem.title}
+          </a>
+        );
+      } else {
+        return (
+          <Link
+            key={menuItem.title}
+            className={
+              location.pathname === menuItem.to
+                ? [...menuItem.className, "activated-menu"].join(" ")
+                : menuItem.className
+            }
+            to={menuItem.to}
+          >
+            {menuItem.title}
+          </Link>
+        );
+      }
+    });
 
   return (
     <div>
@@ -56,8 +73,8 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
           {isUserLoggedIn
             ? headerMenuItemsLogIn.length !== 0 &&
               createMenuList(headerMenuItemsLogIn)
-            : headerMenuItemsLogOut.length !== 0 &&
-              createMenuList(headerMenuItemsLogOut)}
+            : headerAndDrawerMenuItemsLogOut.length !== 0 &&
+              createMenuList(headerAndDrawerMenuItemsLogOut)}
         </div>
         <div className="nav-right">
           {isUserLoggedIn ? (
@@ -67,7 +84,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                   id="basic-button"
                   aria-controls="basic-menu"
                   aria-haspopup="true"
-                  aria-expanded={open ? 'true' : undefined}
+                  aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
                 >
                   <AccountCircleOutlinedIcon className="user-icon-no-img" />
@@ -93,7 +110,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{
-                  'aria-labelledby': 'basic-button',
+                  "aria-labelledby": "basic-button",
                 }}
               >
                 <div className="dropdown-menu">
