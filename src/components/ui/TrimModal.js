@@ -45,8 +45,8 @@ const TrimModal = (props) => {
             crop={crop}
             onCropChange={setCrop}
             zoom={zoom}
-            // cropShape="round"
-            aspect={5 / 2}
+            cropShape={props.cropShape || "rect"}
+            aspect={props.aspect}
             onCropComplete={onCropComplete}
           />
         </div>

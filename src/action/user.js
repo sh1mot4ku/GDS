@@ -5,6 +5,8 @@ export const login = (user) => ({
   user,
 });
 
+// Write startLogin too
+
 export const logout = () => ({
   type: "LOGOUT",
 });
@@ -21,3 +23,8 @@ export const startLogout = () => {
       });
   };
 };
+
+export const editUserInfo = (userInfo) => ({
+  type: "EDIT_USER_INFO",
+  userInfo,
+});

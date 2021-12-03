@@ -1,19 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import { Button } from "@material-ui/core";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputText from "../ui/InputText";
 import InputSelect from "../ui/InputSelect";
 import RadioForm from "../ui/RadioForm";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   optionData,
   countries,
   levelOfEnglish,
 } from "../../data/applyingInfo/client";
+import TrimModal from "../ui/TrimModal";
+import { readFile } from "../../readImage/cropImage";
+import database, { firebase, storage, auth } from "../../firebase/firebase";
+import { editUserInfo } from "../../action/user";
 import "./ProfileEdit.scss";
 
+const DEFAULT_PHOTO = "/image/icon-user.png";
+const USER_TYPE = "client";
+
 const ProfileEdit = () => {
+  const history = useHistory();
   const { uid, userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const [photoBlob, setPhotoBlob] = useState(null);
+  const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(
+    userInfo.profile.photoUrl || DEFAULT_PHOTO
+  );
   const [fullName, setFullName] = useState(userInfo.profile.fullName || "");
   const [email, setEmail] = useState(userInfo.profile.email || "");
   const [password, setPassword] = useState("");
@@ -33,34 +48,129 @@ const ProfileEdit = () => {
   const [description, setDescription] = useState(
     userInfo.profile.description || ""
   );
+  const [storageRef, setStorageRef] = useState("");
 
-  const onSubmit = (e) => {
+  useEffect(() => {
+    if (uid) {
+      setStorageRef(storage.ref(`photos/user/${uid}/`));
+    }
+  }, [uid]);
+
+  useEffect(() => {
+    if (photoBlob) {
+      const uploadTask = storageRef.put(photoBlob);
+      const unsubscribe = uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        null,
+        error,
+        complete
+      );
+      return () => {
+        unsubscribe();
+      };
+    }
+  }, [photoBlob]);
+
+  const error = (error) => {
+    console.log(`Error occured : ${error}`);
+  };
+
+  const complete = () => {
+    storageRef.getDownloadURL().then((url) => {
+      setPhotoUrl(url);
+    });
+  };
+
+  const onPhotoChange = async (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      const photoDataUrl = await readFile(file);
+      setOriginPhotoSrc(photoDataUrl);
+      e.target.value = "";
+    }
+  };
+
+  const onClose = () => {
+    setOriginPhotoSrc(null);
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    // reauthenticate with Firebase Auth
+    const user = auth.currentUser;
+    const isEmailSame = user.email === email;
+    const isPasswordSame = password === changedPassword;
+    if (!isEmailSame || !isPasswordSame) {
+      // If user wants to change email or password
+      try {
+        const credential = firebase.auth.EmailAuthProvider.credential(
+          user.email,
+          password
+        );
+        await user.reauthenticateWithCredential(credential);
+        if (!isPasswordSame) await user.updatePassword(changedPassword);
+        if (!isEmailSame) await user.updateEmail(email);
+      } catch (e) {
+        console.error(e);
+        return; // set Error message here
+      }
+    }
     const postingInfo = {
-      fullName,
-      email,
-      password,
-      location,
-      lookingFor,
-      link1,
-      link2,
-      link3,
-      englishLevel,
-      description,
+      profile: {
+        fullName,
+        email,
+        location,
+        lookingFor,
+        links: { link1, link2, link3 },
+        englishLevel,
+        description,
+        pl: changedPassword.length,
+        photoUrl,
+      },
+      userType: USER_TYPE,
     };
-
-    // updateUser(postingInfo);
+    database
+      .ref(`/user/${uid}`)
+      .set(postingInfo)
+      .then(() => {
+        dispatch(editUserInfo(postingInfo));
+        console.log("Editted Successfully!");
+        history.push("/profile");
+      });
   };
 
   return (
     <div className="main-edit">
       <form onSubmit={onSubmit}>
         <div className="pf-container">
-          <img alt="" src="/image/icon-user.png" className="icon" />
+          <img alt="user-icon" src={photoUrl} className="user-icon" />
           <div>
             <div className="pf-name">{fullName}</div>
             <div className="pf-country">{location}</div>
-            <button className="pf-button">画像追加</button>
+            <div className="pf-photo-buttons">
+              {photoUrl !== DEFAULT_PHOTO && (
+                <div
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setPhotoUrl(DEFAULT_PHOTO);
+                  }}
+                  className="pf-photo-delete-button pf-photo-buttons"
+                >
+                  <span>削除</span>
+                </div>
+              )}
+              <label>
+                <div className="pf-photo-add-button pf-photo-buttons">
+                  画像追加
+                </div>
+                <input
+                  type="file"
+                  onChange={onPhotoChange}
+                  className="change-photo"
+                  accept="image/*"
+                ></input>
+              </label>
+            </div>
           </div>
         </div>
         <div className="edit-container">
@@ -160,11 +270,26 @@ const ProfileEdit = () => {
           />
         </div>
         <div className="buttonContainer">
-          <Button variant="contained" className="button" type="submit">
+          <Button variant="contained" className="save-button" type="submit">
             保存する
           </Button>
+          <div
+            className="cancel-button"
+            onClick={() => history.push("/profile")}
+          >
+            <span>キャンセル</span>
+          </div>
         </div>
       </form>
+      {originPhotoSrc && (
+        <TrimModal
+          originPhotoSrc={originPhotoSrc}
+          setPhotoBlob={setPhotoBlob}
+          onClose={onClose}
+          aspect={1 / 1}
+          cropShape={"round"}
+        />
+      )}
     </div>
   );
 };

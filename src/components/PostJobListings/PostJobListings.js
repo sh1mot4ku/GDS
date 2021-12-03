@@ -369,6 +369,7 @@ const PostJobListings = (props) => {
             originPhotoSrc={originPhotoSrc}
             setPhotoBlob={setPhotoBlob}
             onClose={onClose}
+            aspect={5 / 2}
           />
         )}
       </div>

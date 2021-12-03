@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./Profile.scss";
 
+const DEFAULT_PHOTO = "/image/icon-user.png";
+
 const Profile = () => {
   const { uid, userInfo } = useSelector((state) => state.user);
 
@@ -11,7 +13,11 @@ const Profile = () => {
       {uid ? (
         <div className="main-profile">
           <div className="pf-container">
-            <img alt="" src="/image/icon-user.png" className="icon" />
+            <img
+              alt="user-icon"
+              src={userInfo.profile.photoUrl || DEFAULT_PHOTO}
+              className="user-icon"
+            />
             <div>
               <div className="pf-name">{userInfo.profile.fullName}</div>
               <div className="pf-country">{userInfo.profile.location}</div>
