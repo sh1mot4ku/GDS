@@ -77,4 +77,15 @@
       background: whitesmoke;
     }
   }
+
+  .post-button {
+    border-top: 1px solid $color-line;
+    padding-top: 32px;
+
+    .post-button-anchor {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
 }

@@ -5,10 +5,10 @@ import reportWebVitals from "./reportWebVitals";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppRouter, { history } from "./router/AppRouter";
 import database, { auth } from "./firebase/firebase";
-import { login, logout } from './action/user';
-import "./sass_config/reset.scss";
+import { login, logout } from "./action/user";
 import configureStore from "./store/configureStore";
 import "./sass_config/mui.scss";
+import "./sass_config/reset.scss";
 
 const theme = createTheme({
   palette: {
@@ -29,7 +29,7 @@ const jsx = (
       </Provider>
     </ThemeProvider>
   </>
-)
+);
 
 const renderApp = () => {
   if (!hasRendered) {
@@ -47,10 +47,12 @@ auth.onAuthStateChanged((user) => {
       .ref(`user/${uid}`)
       .once("value")
       .then((snapshot) => {
-        store.dispatch(login({
-          uid,
-          userInfo: snapshot.val()
-        }))
+        store.dispatch(
+          login({
+            uid,
+            userInfo: snapshot.val(),
+          })
+        );
         renderApp();
         // if (history.location.pathname === '/') {
         //   history.push('/job_listings'); // push it to job listings page after merging

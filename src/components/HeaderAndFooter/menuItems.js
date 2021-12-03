@@ -79,6 +79,7 @@ export const drawerMenuItemsLogin = [
     title: "ログアウト",
     className: ["menu-item-logout"],
     to: "/",
+    logOut: true,
   },
 ];
 export const drawerMenuItemsLogout = [

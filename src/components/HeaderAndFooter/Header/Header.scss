@@ -75,8 +75,25 @@
         .user-icon-no-img {
           color: $gray;
           font-size: 32px;
-          padding-top: 4px;
+          // padding-top: 4px;
           align-items: center;
+        }
+        .user-icon-post-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .post-button {
+            border-left: 2px solid $color-line;
+            padding: 0 16px;
+
+            .post-button-anchor {
+              cursor: pointer;
+              display: inline-flex;
+              justify-content: space-between;
+              align-items: center;  
+            }
+          }
         }
       }
     }

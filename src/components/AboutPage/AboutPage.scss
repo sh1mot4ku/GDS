@@ -1,18 +1,15 @@
-$color_primary: #2146f5;
-$color_black: #000000;
-$color_sub_text: #a0a0a0;
-$color_line: #F5F5F5;
-
+@import '../../sass_config/color.scss';
+@import '../../sass_config/mixin.scss';
 
 .main-about {
   margin: 72px auto;
   width: 45%;
-  color: $color_black;
+  color: #000;
   font-size: 16px;
   font-family: 'Noto Sans JP', sans-serif;
 
   // mobile
-  @media screen and (max-width: 768px) {
+  @include mobile {
       width: 90%;
   }
 }
@@ -26,13 +23,13 @@ $color_line: #F5F5F5;
     font-size: 56px;
     color: $color_primary;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
         font-size: 32px;
     }
   }
 
   p {
-    color: $color_sub_text;
+    color: $gray;
   }
 }
 
@@ -45,14 +42,14 @@ table {
   line-height: 68px;
 
   table, td, th {
-    border-bottom: 1px solid $color_line;
+    border-bottom: 1px solid $light-gray;
   }
   th {
     width: 180px;
-    color: $color_sub_text;
-
+    font-weight: unset;
+    color: $gray;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
         width: 100px;
     }
   }
@@ -60,10 +57,10 @@ table {
     margin-right: 36px;
   }
   td {
-    color: $color_black;
+    color: #000;
+    font-weight: bold;
     margin-right: 30px;
     line-height: 32px;
-
   }
 }
 
@@ -77,7 +74,7 @@ table {
     object-fit: cover;
     border-radius: 8px;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
         height: 140px;
     }
   }
@@ -91,7 +88,7 @@ table {
     font-weight: bold;
     font-size: 26px;
       // mobile
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 20px;
         line-height: 30px;
       }
@@ -100,7 +97,7 @@ table {
   &_detail {
     margin-top: 20px;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
       font-size: 16px;
       line-height: 24px;
     }
@@ -108,7 +105,7 @@ table {
     h3 {
       font-weight: bold;
       // mobile
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 16px;
       }
     }
@@ -117,7 +114,7 @@ table {
   &_skills, &_links {
     margin-top: 40px;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
       font-size: 14px;
       line-height: 16px;
       letter-spacing: 0.02em;
@@ -132,7 +129,7 @@ table {
       text-decoration-line: underline;
       margin-right: 10px;
       // mobile
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 16px;
         line-height: 19px;
         letter-spacing: 0.02em;
@@ -148,7 +145,7 @@ WORKS
   h2 {
     margin: 100px auto 28px;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
       font-size: 20px;
       line-height: 30px;
     }
@@ -156,7 +153,7 @@ WORKS
 
   .border {
     margin: 20px auto 20px;
-    border-bottom: 1px solid $color_line;
+    border-bottom: 1px solid $light-gray;
   }
 
   &_contents {
@@ -174,7 +171,7 @@ WORKS
         height: 127px;
         border-radius: 4px;
         // mobile
-        @media screen and (max-width: 768px) {
+        @include mobile {
           width: 100px;
           height: 60px;
         }
@@ -184,14 +181,14 @@ WORKS
     h3 {
       font-size: 16px;
       margin-bottom: 8px;
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 14px;
         line-height: 21px;
       }
     }
     p {
       font-size: 14px;
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 12px;
         line-height: 18px;
       }
@@ -206,7 +203,7 @@ INTERVIEWS
   h2 {
     margin: 100px auto 28px;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
       font-size: 20px;
       line-height: 30px;
     }
@@ -214,7 +211,7 @@ INTERVIEWS
 
   .border {
     margin: 20px auto 20px;
-    border-bottom: 1px solid $color_line;
+    border-bottom: 1px solid $light-gray;
   }
 
   &_contents {
@@ -232,7 +229,7 @@ INTERVIEWS
         height: 127px;
         border-radius: 4px;
         // mobile
-        @media screen and (max-width: 768px) {
+        @include mobile {
           width: 100px;
           height: 60px;
         }
@@ -242,14 +239,14 @@ INTERVIEWS
     h3 {
       font-size: 16px;
       margin-bottom: 8px;
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 14px;
         line-height: 21px;
       }
     }
     p {
       font-size: 14px;
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 12px;
         line-height: 18px;
       }
@@ -264,7 +261,7 @@ BLOG
   h2 {
     margin: 100px auto 28px;
     // mobile
-    @media screen and (max-width: 768px) {
+    @include mobile {
       font-size: 20px;
       line-height: 30px;
     }
@@ -272,7 +269,7 @@ BLOG
 
   .border {
     margin: 20px auto 20px;
-    border-bottom: 1px solid $color_line;
+    border-bottom: 1px solid $light-gray;
   }
 
   &_contents {
@@ -290,7 +287,7 @@ BLOG
         height: 127px;
         border-radius: 4px;
         // mobile
-        @media screen and (max-width: 768px) {
+        @include mobile {
           width: 100px;
           height: 60px;
         }
@@ -300,14 +297,14 @@ BLOG
     h3 {
       font-size: 16px;
       margin-bottom: 8px;
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 14px;
         line-height: 21px;
       }
     }
     p {
       font-size: 14px;
-      @media screen and (max-width: 768px) {
+      @include mobile {
         font-size: 12px;
         line-height: 18px;
       }

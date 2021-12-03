@@ -1,5 +1,7 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../../../action/user";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Box from "@mui/material/Box";
 import CloseIcon from "@mui/icons-material/Close";
@@ -10,17 +12,21 @@ import "./Drawer.scss";
 
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const createMenuList = (menuItems) =>
     menuItems.map((menuItem) => (
       <Link
         key={menuItem.title}
         className={
-          location.pathname === menuItem.to && menuItem.to !== "/logout"
+          location.pathname === menuItem.to
             ? [...menuItem.className, "activated-menu"].join(" ")
             : menuItem.className
         }
         to={menuItem.to}
+        onClick={() => {
+          menuItem.logOut && dispatch(startLogout());
+        }}
       >
         {menuItem.title}
       </Link>
@@ -60,7 +66,19 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
                 : drawerMenuItemsLogout.length !== 0 &&
                   createMenuList(drawerMenuItemsLogout)}
             </div>
-            {isUserLoggedIn ? null : (
+            {isUserLoggedIn ? (
+              <div className="post-button">
+                <a
+                  href="/joblistings_management"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="post-button-anchor"
+                >
+                  <span>求人投稿・管理</span>
+                  <img src="/photos/chevron-right 2.svg" alt="chevron" />
+                </a>
+              </div>
+            ) : (
               <>
                 <Link to="/apply-developer">
                   <Button className="round-button-drawer background-white-drawer">
