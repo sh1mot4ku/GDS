@@ -5,7 +5,7 @@ import {
   FormControlLabel,
   Radio,
 } from "@material-ui/core";
-import "./Apply.scss";
+import "./ui.scss";
 
 const RadioForm = ({ value, onChange, label, options }) => {
   return (
@@ -17,8 +17,8 @@ const RadioForm = ({ value, onChange, label, options }) => {
         onChange={onChange}
         className="radio"
       >
-        <FormLabel component="legend" required>
-          {label}
+        <FormLabel component="legend">
+          {label} <span className="required-star">*</span>
         </FormLabel>
         {options.map((item, index) => (
           <FormControlLabel

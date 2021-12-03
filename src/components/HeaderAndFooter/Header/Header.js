@@ -4,28 +4,35 @@ import useMedia from "use-media";
 import HeaderTBandMB from "./HeaderTBandMB";
 import HeaderPC from "./HeaderPC";
 import "./Header.scss";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { uid } = useSelector(state => state.user)
+  const { userInfo } = useSelector((state) => state.user);
   const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isRecruiter, setIsRecruiter] = useState(false);
 
   useEffect(() => {
-    if (uid) {
+    if (userInfo) {
       setIsUserLoggedIn(true);
+      userInfo.userType === "recruiter"
+        ? setIsRecruiter(true)
+        : setIsRecruiter(false);
     } else {
       setIsUserLoggedIn(false);
     }
-  }, [uid]);
+  }, [userInfo]);
 
   return (
     <>
-      {location.pathname === '/apply-developer' ||
-      location.pathname === '/apply-recruiter' ||
-      location.pathname === '/contact' ||
-      location.pathname === '/login' ? null : (
+      {location.pathname === "/apply-developer" ||
+      location.pathname === "/apply-recruiter" ||
+      location.pathname === "/contact" ||
+      location.pathname === "/login" ||
+      location.pathname === "/post_joblistings" ||
+      location.pathname === "/joblistings_management" ||
+      location.pathname.includes("/edit_joblisting/") ? null : (
         <header className="header">
           <div className="header-container">
             <Link to="/">
@@ -36,9 +43,15 @@ const Header = () => {
               />
             </Link>
             {isUserLoggedIn !== null && isTablet ? (
-              <HeaderTBandMB isUserLoggedIn={isUserLoggedIn} />
+              <HeaderTBandMB
+                isUserLoggedIn={isUserLoggedIn}
+                isRecruiter={isRecruiter}
+              />
             ) : (
-              <HeaderPC isUserLoggedIn={isUserLoggedIn} />
+              <HeaderPC
+                isUserLoggedIn={isUserLoggedIn}
+                isRecruiter={isRecruiter}
+              />
             )}
           </div>
         </header>

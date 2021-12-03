@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import { Link, useLocation } from 'react-router-dom';
 import './Contact.scss';
 
-const Contact = () => {
+const Contact = (props) => {
   const location = useLocation();
   return (
     <>
@@ -12,7 +12,11 @@ const Contact = () => {
       location.pathname === '/job-list-detail' ||
       location.pathname === '/user-profile' ||
       location.pathname === '/contact' ||
-      location.pathname === '/login' ? null : (
+      location.pathname === '/login' ||
+      location.pathname === '/post_joblistings' ||
+      location.pathname === '/joblistings_management' ||
+      location.pathname.includes('/edit_joblisting/') ||
+      location.pathname.includes('/joblisting/') ? null : (
         <section className="contact-section">
           <p className="contact-title">CONTACT</p>
           <p className="contact-content">

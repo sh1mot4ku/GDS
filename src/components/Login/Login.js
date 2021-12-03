@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import InputTextAndLabel from "../Apply/InputTextAndLabel";
+import InputTextAndLabel from "../ui/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
-import { insertUser } from "../../API/dbutils";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
 import { useHistory } from "react-router-dom";
 import "./Login.scss";
@@ -36,7 +35,7 @@ const Login = () => {
             break;
           case "auth/too-many-requests":
             setFirebaseError(
-              "ログインの試行が何度も行われたため、セキュリティ上ユーザーアカウントを一時的にロックしています。しばらく経ってから再度お試し下さい。"
+              "ログインの試行が何度も行われたため、セキュリティ上ユーザーアカウントを一時的にロックしています。しばらく経ってから再度お試しください。"
             );
             break;
           default:
@@ -63,16 +62,16 @@ const Login = () => {
         <h2 className="title">Login</h2>
         <form className="form">
           <InputTextAndLabel
-            label="EMAIL"
-            placeholder="YOUR EMAIL"
+            label="メールアドレス"
+            placeholder="example@example.com"
             type="text"
             onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
             value={email}
             name="email"
           />
           <InputTextAndLabel
-            label="PASSWORD"
-            placeholder="YOUR PASSWORD"
+            label="パスワード"
+            placeholder="7文字以上の半角英数字"
             type="password"
             onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
             value={password}

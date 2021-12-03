@@ -1,5 +1,5 @@
-@import '../../sass_config/color.scss';
-@import '../../sass_config/mixin.scss';
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
 
 .main-apply {
   width: 100vw;
@@ -21,17 +21,17 @@
       justify-content: center;
       width: 100%;
 
-      .input {
-        width: 100%;
-        height: 55px;
-      }
-      .input-small {
-        width: 100%;
-        height: 60px;
-      }
-      .radio {
-        margin: 8px 0 8px;
-      }
+      // .input {
+      //   width: 100%;
+      //   height: 55px;
+      // }
+      // .input-small {
+      //   width: 100%;
+      //   height: 60px;
+      // }
+      // .radio {
+      //   margin: 8px 0 8px;
+      // }
       .buttonContainer {
         width: 100%;
         display: flex;
@@ -61,6 +61,27 @@
             text-decoration: underline;
           }
         }
+      }
+      .spacing {
+        width: 20px;
+        height: 20px;
+      }
+      .spacing-link {
+        width: 20px;
+        height: 30px;
+      }
+      .spacing-others {
+        width: 20px;
+        height: 20px;
+      }
+      .error-message {
+        color: $warning;
+        font-size: 13px;
+        margin-bottom: 12px;
+      }
+      .firebase-err-message {
+        font-size: 15px;
+        text-align: center;
       }
     }
   }
