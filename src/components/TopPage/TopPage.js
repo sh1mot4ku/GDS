@@ -258,7 +258,7 @@ const TopPage = () => {
         <div className="for-recruiter-describe-box">
           <div className="describe-photo">
             <img
-              src="/photos/Interviewing candidate for job - 1280x853 1.png"
+              src="/image/Interviewing candidate for job - 1280x853 1.png"
               alt="Interviewing candidate for job"
               className="describe-photo-content"
             />
@@ -280,7 +280,7 @@ const TopPage = () => {
         <div className="for-recruiter-describe-box" id="describe-reverse">
           <div className="describe-photo">
             <img
-              src="/photos/HR manager hand shaking with female candidate - 900x750 1.png"
+              src="/image/HR manager hand shaking with female candidate - 900x750 1.png"
               alt="HR manager hand shaking with female candidate"
               className="describe-photo-content"
             />
@@ -307,7 +307,7 @@ const TopPage = () => {
         <div className="for-recruiter-describe-box">
           <div className="describe-photo">
             <img
-              src="/photos/Recruiters searching new employees - 1280x853 1.png"
+              src="/image/Recruiters searching new employees - 1280x853 1.png"
               alt="Recruiters searching new employees"
               className="describe-photo-content"
             />
