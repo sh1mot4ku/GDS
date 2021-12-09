@@ -16,7 +16,7 @@ import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
 import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
 import EditJobListing from "../components/PostJobListings/EditJobListing";
-import ForgetPassword from "../components/PostJobListings/ForgetPassword";
+import ForgetPassword from "../components/ForgetPassword/ForgetPassword";
 
 const history = createBrowserHistory();
 
