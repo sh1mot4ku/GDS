@@ -12,7 +12,7 @@ const TopPage = () => {
       <div className="subscribe-wrapper">
         <div
           className="subscribe-container"
-          style={{ backgroundImage: "url(/photos/logo-global-developers.svg)" }}
+          style={{ backgroundImage: "url(/image/logo-global-developers.svg)" }}
         >
           <h1 className="subscribe-header">
             厳選されたグローバルな開発者と共に
@@ -50,98 +50,98 @@ const TopPage = () => {
             <ul className="d-demo__list d-demo__list--left">
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo01.png"
+                  src="/image/logo01.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo02.png"
+                  src="/image/logo02.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo03.png"
+                  src="/image/logo03.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo04.png"
+                  src="/image/logo04.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo05.png"
+                  src="/image/logo05.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo06.png"
+                  src="/image/logo06.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo07.png"
+                  src="/image/logo07.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo08.png"
+                  src="/image/logo08.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo09.png"
+                  src="/image/logo09.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo10.png"
+                  src="/image/logo10.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo11.png"
+                  src="/image/logo11.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo12.png"
+                  src="/image/logo12.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo13.png"
+                  src="/image/logo13.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo14.png"
+                  src="/image/logo14.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
@@ -150,98 +150,98 @@ const TopPage = () => {
             <ul className="d-demo__list d-demo__list--left">
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo01.png"
+                  src="/image/logo01.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo02.png"
+                  src="/image/logo02.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo03.png"
+                  src="/image/logo03.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo04.png"
+                  src="/image/logo04.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo05.png"
+                  src="/image/logo05.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo06.png"
+                  src="/image/logo06.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo07.png"
+                  src="/image/logo07.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo08.png"
+                  src="/image/logo08.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo09.png"
+                  src="/image/logo09.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo10.png"
+                  src="/image/logo10.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo11.png"
+                  src="/image/logo11.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo12.png"
+                  src="/image/logo12.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo13.png"
+                  src="/image/logo13.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
               </li>
               <li className="d-demo__item">
                 <img
-                  src="/photos/logo14.png"
+                  src="/image/logo14.png"
                   alt="tech-logos"
                   className="tech-logos"
                 />
@@ -338,7 +338,7 @@ const TopPage = () => {
         >
           <div className="subscribe-button" id="for-developer">
             <img
-              src="/photos/icon-user.png"
+              src="/image/icon-user.png"
               alt="icon-user"
               className="subscribe-user-icon"
             />
@@ -352,7 +352,7 @@ const TopPage = () => {
         >
           <div className="subscribe-button" id="for-recruiter">
             <img
-              src="/photos/users 1.png"
+              src="/image/users 1.png"
               alt="users"
               className="subscribe-user-icon"
             />
