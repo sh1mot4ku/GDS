@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { useLocation, useHistory, Link } from "react-router-dom";
+import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { useLocation, useHistory, Link } from 'react-router-dom';
 import {
   headerAndDrawerMenuItemsLogOut,
   headerMenuItemsLogIn,
-} from "../menuItems";
-import { auth } from "../../../firebase/firebase";
-import "./Header.scss";
+} from '../menuItems';
+import { auth } from '../../../firebase/firebase';
+import './Header.scss';
 
 const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
   const location = useLocation();
@@ -27,9 +27,9 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
     auth
       .signOut()
       .then(() => {
-        console.log("User logged out");
+        console.log('User logged out');
         handleClose();
-        history.push("/");
+        history.push('/');
       })
       .catch((e) => {
         console.error(e);
@@ -42,7 +42,9 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
       if (menuItem.isExternal) {
         return (
           <a
+            key={menuItem.title}
             href="https://note.com/lraough/m/m7b08a61f539c"
+            rel="noopener noreferrer"
             className={menuItem.className}
             target="_blank"
           >
@@ -55,7 +57,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
             key={menuItem.title}
             className={
               location.pathname === menuItem.to
-                ? [...menuItem.className, "activated-menu"].join(" ")
+                ? [...menuItem.className, 'activated-menu'].join(' ')
                 : menuItem.className
             }
             to={menuItem.to}
@@ -84,7 +86,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                   id="basic-button"
                   aria-controls="basic-menu"
                   aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
+                  aria-expanded={open ? 'true' : undefined}
                   onClick={handleClick}
                 >
                   <AccountCircleOutlinedIcon className="user-icon-no-img" />
@@ -110,7 +112,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{
-                  "aria-labelledby": "basic-button",
+                  'aria-labelledby': 'basic-button',
                 }}
               >
                 <div className="dropdown-menu">

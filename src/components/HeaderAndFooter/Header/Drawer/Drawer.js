@@ -1,17 +1,17 @@
-import React from "react";
-import { useLocation, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { startLogout } from "../../../../action/user";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Box from "@mui/material/Box";
-import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
+import React from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../../../action/user';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Box from '@mui/material/Box';
+import CloseIcon from '@mui/icons-material/Close';
+import Button from '@mui/material/Button';
 import {
   headerAndDrawerMenuItemsLogOut,
   drawerMenuItemsLogin,
-} from "../../menuItems";
-import { useSelector } from "react-redux";
-import "./Drawer.scss";
+} from '../../menuItems';
+import { useSelector } from 'react-redux';
+import './Drawer.scss';
 
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
@@ -23,7 +23,9 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
       if (menuItem.isExternal) {
         return (
           <a
+            key={menuItem.title}
             href="https://note.com/lraough/m/m7b08a61f539c"
+            rel="noopener noreferrer"
             className={menuItem.className}
             target="_blank"
           >
@@ -36,7 +38,7 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
             key={menuItem.title}
             className={
               location.pathname === menuItem.to
-                ? [...menuItem.className, "activated-menu"].join(" ")
+                ? [...menuItem.className, 'activated-menu'].join(' ')
                 : menuItem.className
             }
             to={menuItem.to}
@@ -53,19 +55,19 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   return (
     <div>
       <SwipeableDrawer
-        anchor={"top"}
+        anchor={'top'}
         open={isDrawerOpen}
         onClose={toggleDrawer}
         onOpen={toggleDrawer}
       >
         <Box
           sx={{
-            width: "100vw",
-            height: "100vh",
+            width: '100vw',
+            height: '100vh',
           }}
         >
           <div className="logo-closebtn-wrapper">
-            <Link to={uid ? "/joblistings" : "/"}>
+            <Link to={uid ? '/joblistings' : '/'}>
               <img
                 className="company-logo"
                 src="photos/lraoughLogo.png"

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
-import "./Footer.scss";
-import { Link, useLocation } from "react-router-dom";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import { footerMenuItemsLogOut, footerMenuItemsLogIn } from "../menuItems";
-import useMedia from "use-media";
-import { useSelector, useDispatch } from "react-redux";
-import { startLogout } from "../../../action/user";
+import React, { useState, useEffect } from 'react';
+import './Footer.scss';
+import { Link, useLocation } from 'react-router-dom';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { footerMenuItemsLogOut, footerMenuItemsLogIn } from '../menuItems';
+import useMedia from 'use-media';
+import { useSelector, useDispatch } from 'react-redux';
+import { startLogout } from '../../../action/user';
 
 export const Footer = () => {
   const { uid } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const isMobile = useMedia({ maxWidth: "768px" });
+  const isMobile = useMedia({ maxWidth: '768px' });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
@@ -30,7 +30,9 @@ export const Footer = () => {
       if (menuItem.isExternal) {
         return (
           <a
+            key={menuItem.title}
             href="https://note.com/lraough/m/m7b08a61f539c"
+            rel="noopener noreferrer"
             className={menuItem.className}
             target="_blank"
           >
@@ -55,14 +57,14 @@ export const Footer = () => {
 
   return (
     <>
-      {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ||
-      location.pathname === "/contact" ||
-      location.pathname === "/login" ? null : (
+      {location.pathname === '/apply-developer' ||
+      location.pathname === '/apply-recruiter' ||
+      location.pathname === '/contact' ||
+      location.pathname === '/login' ? null : (
         <footer className="footer">
           <div className="footer-container">
             {isMobile && (
-              <Link to={uid ? "/joblistings" : "/"}>
+              <Link to={uid ? '/joblistings' : '/'}>
                 <img
                   className="company-logo-bk-mb"
                   src="photos/lraoughLogoBk.png"
@@ -88,7 +90,7 @@ export const Footer = () => {
             <div className="logo-copyright-wrapper">
               {!isMobile && (
                 <Link
-                  to={uid ? "/joblistings" : "/"}
+                  to={uid ? '/joblistings' : '/'}
                   className="company-logo-bk-wrapper"
                 >
                   <img
