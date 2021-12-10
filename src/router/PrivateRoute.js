@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/Wrapper";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { uid } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    console.log(uid);
+  }, [uid]);
 
   return (
     <Route

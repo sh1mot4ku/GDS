@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import AppRouter, { history } from "./router/AppRouter";
-import database, { auth } from "./firebase/firebase";
+import database, { auth, firebase } from "./firebase/firebase";
 import { login, logout } from "./action/user";
 import configureStore from "./store/configureStore";
 import "./sass_config/reset.scss";
@@ -39,7 +39,7 @@ const renderApp = () => {
 
 // Add loading page
 
-auth.onAuthStateChanged((user) => {
+firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     const uid = user.uid;
     database
@@ -60,7 +60,6 @@ auth.onAuthStateChanged((user) => {
   } else {
     store.dispatch(logout());
     renderApp();
-    history.push("/");
   }
 });
 

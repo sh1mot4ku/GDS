@@ -6,7 +6,6 @@ import FaqsPage from "../components/FaqsPage/FaqsPage";
 import Apply from "../components/Apply/Apply";
 import ContactForm from "../components/Contact/ContactForm/ContactForm";
 import Login from "../components/Login/Login";
-import Wrapper from "../components/Wrapper/Wrapper";
 import { createBrowserHistory } from "history";
 import Recruiter from "../components/Recruiter/Recruiter";
 // import Profile from "../components/Edit/Profile"
