@@ -279,8 +279,22 @@ BLOG
       font-size: 14px;
       color: $gray;
       cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+
       @include mobile {
         font-size: 10px;
+
+      }
+
+      svg{
+        width: 24px;
+        height: 24px;
+
+        @include mobile {
+          width: 14px;
+          height: 14px;
+        }
       }
     }
   }

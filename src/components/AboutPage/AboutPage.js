@@ -222,14 +222,33 @@ const AboutPage = () => {
         <div className="border"></div>
       </div>
       <div className="blog">
-        <div　className="titleContainer">
+        <div className="titleContainer">
           <h2>Blog</h2>
-          <a
-            href="https://note.com/lraough"
-            target="_blank"
-            rel="noreferrer"
-          >すべて見る</a>
-
+          <a href="https://note.com/lraough" target="_blank" rel="noreferrer">
+            すべて見る
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M20 7V17C20 18.1046 19.1046 19 18 19H8"
+                stroke="#a0a0a0"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <rect
+                x="5.75"
+                y="4.75"
+                width="10.5"
+                height="10.5"
+                rx="1.25"
+                stroke="#a0a0a0"
+                stroke-width="1.5"
+              />
+            </svg>
+          </a>
         </div>
         <a
           href="https://note.com/lraough/n/n5cee60158410?magazine_key=m7b08a61f539c"
