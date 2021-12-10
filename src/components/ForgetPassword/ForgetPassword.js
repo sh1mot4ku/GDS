@@ -48,7 +48,7 @@ const ForgetPassword = () => {
       <BlueSidePart />
       <div className="rightBox">
         <h2 className="title">パスワードを忘れた方</h2>
-        <p>ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。</p>
+        <p className="subtitle">ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。</p>
         <form className="form">
           <InputTextAndLabel
             label="メールアドレス"
