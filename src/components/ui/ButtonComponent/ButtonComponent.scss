@@ -1,0 +1,76 @@
+@import "../../../sass_config/color.scss";
+@import "../../../sass_config/mixin.scss";
+
+@mixin button {
+	display: inline-flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+	text-align: center;
+	border-radius: 50px;
+	box-shadow: 0 2px 16px 0 rgb(0 0 0 / 8%);
+	cursor: pointer;
+}
+
+.btn-sm {
+	@include button;
+
+	font-size: 14px;
+	width: 160px;
+	height: 45px;
+	transition: 0.3s;
+}
+/* Largeボタンの記述 */
+.btn-lg {
+	@include button;
+
+	font-size: 16px;
+	width: 250px;
+	height: 64px;
+	transition: 0.3s;
+}
+.btn-line-sm,
+.btn-line-lg {
+	color: $color_primary;
+	border: 2px solid $color_primary;
+	background-color: $white;
+	&:hover {
+		color: $white;
+		border: 2px solid $color_primary;
+		background-color: $color_primary;
+	}
+}
+.btn-fill-sm,
+.btn-fill-lg {
+	color: $white;
+	border: 2px solid $color_primary;
+	background-color: $color_primary;
+	&:hover {
+		color: $color_primary;
+		border: 2px solid $color_primary;
+		background-color: $white;
+	}
+}
+
+.btn-sp {
+	display: none;
+}
+
+.btn-shadow {
+	box-shadow: 0px 2px 16px 0px rgb(0 0 0 / 8%);
+}
+/* Btns responsive CSS */
+@include mobile {
+	.btn-line-lg,
+	.btn-fill-lg {
+		@include button;
+
+		margin-bottom: 20px;
+		font-size: 16px;
+		width: 100%;
+		height: 55px;
+	}
+}

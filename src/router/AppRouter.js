@@ -16,6 +16,7 @@ import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
 import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
 import EditJobListing from "../components/PostJobListings/EditJobListing";
+import ButtonComponent from "../components/ui/ButtonComponent/ButtonComponent";
 
 const history = createBrowserHistory();
 
@@ -23,7 +24,8 @@ const AppRouter = () => (
   <Router history={history}>
     <Wrapper>
       <Switch>
-        <Route path="/" component={TopPage} exact={true} />
+        {/* <Route path="/" component={TopPage} exact={true} /> */}
+        <Route path="/" component={ButtonComponent}  />
         <Route path="/about" component={AboutPage} />
         <Route path="/faqs" component={FaqsPage} />
         <Route path="/apply-developer" component={Apply} />
