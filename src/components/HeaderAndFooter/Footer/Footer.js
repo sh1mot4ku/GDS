@@ -44,6 +44,7 @@ export const Footer = () => {
       {location.pathname === "/apply-developer" ||
       location.pathname === "/apply-recruiter" ||
       location.pathname === "/contact" ||
+      location.pathname === "/forget-password" ||
       location.pathname === "/login" ? null : (
         <footer className="footer">
           <div className="footer-container">
