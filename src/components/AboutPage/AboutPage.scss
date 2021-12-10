@@ -1,16 +1,16 @@
-@import '../../sass_config/color.scss';
-@import '../../sass_config/mixin.scss';
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
 
 .main-about {
   margin: 72px auto;
   width: 45%;
   color: #000;
   font-size: 16px;
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
 
   // mobile
   @include mobile {
-      width: 90%;
+    width: 90%;
   }
 }
 
@@ -24,7 +24,7 @@
     color: $color_primary;
     // mobile
     @include mobile {
-        font-size: 32px;
+      font-size: 32px;
     }
   }
 
@@ -41,7 +41,9 @@ table {
   text-align: left;
   line-height: 68px;
 
-  table, td, th {
+  table,
+  td,
+  th {
     border-bottom: 1px solid $light-gray;
   }
   th {
@@ -50,10 +52,10 @@ table {
     color: $gray;
     // mobile
     @include mobile {
-        width: 100px;
+      width: 100px;
     }
   }
-  th>span {
+  th > span {
     margin-right: 36px;
   }
   td {
@@ -75,7 +77,7 @@ table {
     border-radius: 8px;
     // mobile
     @include mobile {
-        height: 140px;
+      height: 140px;
     }
   }
 }
@@ -87,11 +89,11 @@ table {
   h2 {
     font-weight: bold;
     font-size: 26px;
-      // mobile
-      @include mobile {
-        font-size: 20px;
-        line-height: 30px;
-      }
+    // mobile
+    @include mobile {
+      font-size: 20px;
+      line-height: 30px;
+    }
   }
 
   &_detail {
@@ -111,7 +113,8 @@ table {
     }
   }
 
-  &_skills, &_links {
+  &_skills,
+  &_links {
     margin-top: 40px;
     // mobile
     @include mobile {
@@ -258,12 +261,27 @@ INTERVIEWS
 BLOG
 ----------------*/
 .blog {
-  h2 {
+  .titleContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     margin: 100px auto 28px;
-    // mobile
-    @include mobile {
-      font-size: 20px;
-      line-height: 30px;
+
+
+    h2 {
+      font-size: 28px;
+      // mobile
+      @include mobile {
+        font-size: 20px;
+      }
+    }
+    a {
+      font-size: 14px;
+      color: $gray;
+      cursor: pointer;
+      @include mobile {
+        font-size: 10px;
+      }
     }
   }
 
