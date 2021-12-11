@@ -16,6 +16,7 @@ import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
 import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
 import EditJobListing from "../components/PostJobListings/EditJobListing";
+import NotFoundPage from "../components/notFoundPage/NotFoundPage";
 
 const history = createBrowserHistory();
 
@@ -39,6 +40,7 @@ const AppRouter = () => (
         <Route path="/contact" component={ContactForm} />
         <Route path="/login" component={Login} />
         <Route path="/edit" component={Edit} />
+        <Route path="*" component={NotFoundPage} />
       </Switch>
     </Wrapper>
   </Router>

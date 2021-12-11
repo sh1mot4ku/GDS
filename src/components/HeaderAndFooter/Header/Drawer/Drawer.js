@@ -8,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import { headerMenuItemsLogOut, drawerMenuItemsLogin } from "../../menuItems";
 import "./Drawer.scss";
+import { isMobile } from "react-device-detect";
 
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
@@ -66,17 +67,19 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
                   createMenuList(headerMenuItemsLogOut)}
             </div>
             {isUserLoggedIn ? (
-              <div className="post-button">
-                <a
-                  href="/joblistings_management"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="post-button-anchor"
-                >
-                  <span>求人投稿・管理</span>
-                  <img src="/photos/chevron-right 2.svg" alt="chevron" />
-                </a>
-              </div>
+              isMobile ? null : (
+                <div className="post-button">
+                  <a
+                    href="/joblistings_management"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="post-button-anchor"
+                  >
+                    <span>求人投稿・管理</span>
+                    <img src="/photos/chevron-right 2.svg" alt="chevron" />
+                  </a>
+                </div>
+              )
             ) : (
               <>
                 <Link className="login" to="/login">
