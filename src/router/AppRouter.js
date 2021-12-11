@@ -17,6 +17,8 @@ import JobListingsManagement from "../components/PostJobListings/JobListingsMana
 import EditJobListing from "../components/PostJobListings/EditJobListing";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
+import LogoutRoute from "./LogoutRoute";
+import ForgetPassword from "../components/ForgetPassword/ForgetPassword";
 
 const history = createBrowserHistory();
 
@@ -26,8 +28,8 @@ const AppRouter = () => (
       <PublicRoute path="/" component={TopPage} exact={true} />
       <PublicRoute path="/about" component={AboutPage} />
       <PublicRoute path="/faqs" component={FaqsPage} />
-      <PublicRoute path="/apply-developer" component={Apply} />
-      <PublicRoute path="/apply-recruiter" component={Recruiter} />
+      <LogoutRoute path="/apply-developer" component={Apply} />
+      <LogoutRoute path="/apply-recruiter" component={Recruiter} />
       <PrivateRoute path="/post_joblistings" component={PostJobListings} />
       <PrivateRoute
         path="/joblistings_management"
@@ -37,8 +39,9 @@ const AppRouter = () => (
       <PublicRoute path="/joblistings" component={JobListings} />
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />
       <PublicRoute path="/contact" component={ContactForm} />
-      <PublicRoute path="/login" component={Login} />
+      <LogoutRoute path="/login" component={Login} />
       <PrivateRoute path="/edit" component={Edit} />
+      <LogoutRoute path="/forget-password" component={ForgetPassword} />
     </Switch>
   </Router>
 );

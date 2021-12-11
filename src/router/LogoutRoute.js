@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import Wrapper from "../components/Wrapper/Wrapper";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const LogoutRoute = ({ component: Component, ...rest }) => {
   const { uid } = useSelector((state) => state.user);
 
   return (
@@ -11,15 +11,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       component={(props) =>
         uid ? (
+          <Redirect to="/joblistings" />
+        ) : (
           <Wrapper>
             <Component {...props} />
           </Wrapper>
-        ) : (
-          <Redirect to="/" />
         )
       }
     />
   );
 };
 
-export default PrivateRoute;
+export default LogoutRoute;

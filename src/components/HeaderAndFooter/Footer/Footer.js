@@ -44,6 +44,7 @@ export const Footer = () => {
       {location.pathname === "/apply-developer" ||
       location.pathname === "/apply-recruiter" ||
       location.pathname === "/contact" ||
+      location.pathname === "/forget-password" ||
       location.pathname === "/login" ? null : (
         <footer className="footer">
           <div className="footer-container">
@@ -51,7 +52,7 @@ export const Footer = () => {
               <Link to="/">
                 <img
                   className="company-logo-bk-mb"
-                  src="photos/lraoughLogoBk.png"
+                  src="image/lraoughLogoBk.png"
                   alt="Lraough-logo"
                 />
               </Link>
@@ -76,7 +77,7 @@ export const Footer = () => {
                 <Link to="/" className="company-logo-bk-wrapper">
                   <img
                     className="company-logo-bk"
-                    src="photos/lraoughLogoBk.png"
+                    src="image/lraoughLogoBk.png"
                     alt="Lraough-logo"
                   />
                 </Link>
