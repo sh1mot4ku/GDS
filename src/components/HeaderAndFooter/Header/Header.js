@@ -30,6 +30,7 @@ const Header = () => {
       location.pathname === "/apply-recruiter" ||
       location.pathname === "/contact" ||
       location.pathname === "/login" ||
+      location.pathname === "/forget-password" ||
       location.pathname === "/post_joblistings" ||
       location.pathname === "/joblistings_management" ||
       location.pathname.includes("/edit_joblisting/") ? null : (
@@ -38,7 +39,7 @@ const Header = () => {
             <Link to={uid ? "/joblistings" : "/"}>
               <img
                 className="company-logo"
-                src="photos/lraoughLogo.png"
+                src="image/lraoughLogo.png"
                 alt="Lraough-logo"
               />
             </Link>
