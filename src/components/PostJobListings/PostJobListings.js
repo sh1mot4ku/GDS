@@ -143,6 +143,7 @@ const PostJobListings = (props) => {
         annualSalaly,
         workingHours,
         postedTimeStamp,
+        id: jobId,
       };
       database
         .ref(`/jobListings/${uid}/${jobId}`)
