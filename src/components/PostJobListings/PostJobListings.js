@@ -15,6 +15,8 @@ import {
   addUsersJobListings,
   editUsersJobListings,
 } from "../../action/usersJobListings";
+import employmentTypeOptions from "../../data/radioButtonOptions/PostJobListings";
+import RadioForm from "../ui/RadioForm";
 import "./PostJobListings.scss";
 
 const MIN_ROWS_LARGE_INPUT = 6;
@@ -143,6 +145,7 @@ const PostJobListings = (props) => {
         annualSalaly,
         workingHours,
         postedTimeStamp,
+        id: jobId,
       };
       database
         .ref(`/jobListings/${uid}/${jobId}`)
@@ -300,16 +303,12 @@ const PostJobListings = (props) => {
               maxRows={MAX_ROWS_LARGE_INPUT}
             />
           </div>
-          <div className="input-block">
-            <InputTextAndLabel
+          <div className="input-block input-block--radio">
+            <RadioForm
               label="雇用形態"
-              placeholder="雇用形態を記入してください"
-              inputProps={{ maxLength: 100 }}
-              value={employmentType}
+              options={employmentTypeOptions}
               onChange={(e) => setEmploymentType(e.target.value)}
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
+              value={employmentType}
             />
           </div>
           <div className="input-block">
