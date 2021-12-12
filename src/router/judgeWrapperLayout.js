@@ -4,6 +4,7 @@ import {
   pathnamesWithContactSection,
   pathnamesWithSideBar,
 } from "../data/pathnames/pathnames";
+import { isMobile } from "react-device-detect";
 
 // return object that contains how layout should be
 const judgeWrapperLayout = (currentPath) => {
@@ -20,6 +21,7 @@ const judgeWrapperLayout = (currentPath) => {
     contactSection: false,
     sideBar: false,
   };
+  if (isMobile) return layout;
 
   const isExactMatchHeader = pathnamesExactMatchHeader.includes(currentPath);
   let isPartialMatchHeader = false;

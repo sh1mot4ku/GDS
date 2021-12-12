@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -10,7 +10,6 @@ import "./PostAndManageSideBar.scss";
 
 const PostAndManageSideBar = () => {
   const history = useHistory();
-  const location = useLocation();
   const user = useSelector((state) => state.user);
 
   const onLogOut = () => {

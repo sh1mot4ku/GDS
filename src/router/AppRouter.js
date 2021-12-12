@@ -20,6 +20,7 @@ import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import LogoutRoute from "./LogoutRoute";
 import ForgetPassword from "../components/ForgetPassword/ForgetPassword";
+import { isMobile } from "react-device-detect";
 
 const history = createBrowserHistory();
 
@@ -32,10 +33,12 @@ const AppRouter = () => (
       <LogoutRoute path="/apply-developer" component={Apply} />
       <LogoutRoute path="/apply-recruiter" component={Recruiter} />
       <PrivateRoute path="/post_joblistings" component={PostJobListings} />
-      <PrivateRoute
-        path="/joblistings_management"
-        component={JobListingsManagement}
-      />
+      {!isMobile && (
+        <PrivateRoute
+          path="/joblistings_management"
+          component={JobListingsManagement}
+        />
+      )}
       <PrivateRoute path="/edit_joblisting/:jobId" component={EditJobListing} />
       <PublicRoute path="/joblistings" component={JobListings} />
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Footer.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -14,7 +14,6 @@ export const Footer = () => {
   const { uid } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const isMobile = useMedia({ maxWidth: "768px" });
-  const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
   useEffect(() => {
