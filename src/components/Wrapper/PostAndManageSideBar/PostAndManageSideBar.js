@@ -27,48 +27,45 @@ const PostAndManageSideBar = () => {
 
   return (
     <React.Fragment>
-      {(location.pathname === "/post_joblistings" ||
-        location.pathname === "/joblistings_management" ||
-        location.pathname.includes("/edit_joblisting/")) &&
-        user.userInfo && (
-          <div className="sb-wrapper">
-            <div className="sb-container">
-              <div className="sb-top">
-                <div className="sb-user-wrapper">
-                  <AccountCircleOutlinedIcon className="sb-user-icon" />
-                  <div className="sb-user-name">
-                    {user.userInfo?.profile.fullName}
-                  </div>
-                  <ArrowForwardIosIcon className="right-arrow" />
+      {user.userInfo && (
+        <div className="sb-wrapper">
+          <div className="sb-container">
+            <div className="sb-top">
+              <div className="sb-user-wrapper">
+                <AccountCircleOutlinedIcon className="sb-user-icon" />
+                <div className="sb-user-name">
+                  {user.userInfo?.profile.fullName}
                 </div>
-                <div onClick={onLogOut} className="sb-logout">
-                  ログアウト
-                </div>
+                <ArrowForwardIosIcon className="right-arrow" />
               </div>
-              <div className="sb-list">
-                <Link to="/joblistings_management">
-                  <span className="sb-post-and-manage">求人投稿・管理</span>
-                </Link>
+              <div onClick={onLogOut} className="sb-logout">
+                ログアウト
               </div>
-              <div className="sb-list">
-                <a
-                  href="/joblistings"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="joblistings-anchor"
-                >
-                  <span>求人一覧</span>
-                  <img src="/photos/chevron-right 2.svg" alt="chevron" />
-                </a>
-              </div>
-              <Link to="/post_joblistings">
-                <Button variant="contained" className="button-post-joblisting">
-                  求人投稿
-                </Button>
+            </div>
+            <div className="sb-list">
+              <Link to="/joblistings_management">
+                <span className="sb-post-and-manage">求人投稿・管理</span>
               </Link>
             </div>
+            <div className="sb-list">
+              <a
+                href="/joblistings"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="joblistings-anchor"
+              >
+                <span>求人一覧</span>
+                <img src="/photos/chevron-right 2.svg" alt="chevron" />
+              </a>
+            </div>
+            <Link to="/post_joblistings">
+              <Button variant="contained" className="button-post-joblisting">
+                求人投稿
+              </Button>
+            </Link>
           </div>
-        )}
+        </div>
+      )}
     </React.Fragment>
   );
 };
