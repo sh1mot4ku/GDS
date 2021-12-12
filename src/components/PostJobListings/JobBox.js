@@ -27,7 +27,7 @@ const JobBox = ({
           <div className="job-box-content">
             <span className="location">{employeeLocation}</span>
           </div>
-          <div className="job-box-content">
+          <div className="job-box-skill-tags">
             {Array.isArray(tags) &&
               tags.length !== 0 &&
               tags.map((skill) => (
