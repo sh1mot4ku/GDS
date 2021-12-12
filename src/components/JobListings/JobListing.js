@@ -50,7 +50,7 @@ const JobListing = () => {
     }
   };
 
-  useEffect(async () => {
+  const setFullJobListingToJob = async () => {
     if (jobId) {
       const snapshot = await setFullJobListing(jobId);
       setJob({
@@ -58,6 +58,10 @@ const JobListing = () => {
         id: jobId,
       });
     }
+  };
+
+  useEffect(() => {
+    setFullJobListingToJob();
   }, [jobId]);
 
   useEffect(() => {
