@@ -7,7 +7,7 @@ const EditJobListing = () => {
   const { jobId } = useParams();
   const [usersJobListing, setUsersJobListing] = useState(null);
 
-  useEffect(async () => {
+  const setFullJobListingToJob = async () => {
     if (jobId) {
       const snapshot = await setFullJobListing(jobId);
       setUsersJobListing({
@@ -15,6 +15,10 @@ const EditJobListing = () => {
         id: jobId,
       });
     }
+  };
+
+  useEffect(() => {
+    setFullJobListingToJob();
   }, [jobId]);
 
   return (
