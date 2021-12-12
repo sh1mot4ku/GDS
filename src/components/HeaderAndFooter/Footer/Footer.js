@@ -26,29 +26,46 @@ export const Footer = () => {
   }, [uid]);
 
   const createMenuList = (menuItems) =>
-    menuItems.map((menuItem) => (
-      <Link
-        key={menuItem.title}
-        to={menuItem.to}
-        className={menuItem.className}
-        onClick={() => {
-          menuItem.logOut && dispatch(startLogout());
-        }}
-      >
-        {menuItem.title}
-      </Link>
-    ));
+    menuItems.map((menuItem) => {
+      if (menuItem.isExternal) {
+        return (
+          <a
+            key={menuItem.title}
+            href="https://note.com/lraough/m/m7b08a61f539c"
+            rel="noopener noreferrer"
+            className={menuItem.className}
+            target="_blank"
+          >
+            {menuItem.title}
+          </a>
+        );
+      } else {
+        return (
+          <Link
+            key={menuItem.title}
+            to={menuItem.to}
+            className={menuItem.className}
+            onClick={() => {
+              menuItem.logOut && dispatch(startLogout());
+            }}
+          >
+            {menuItem.title}
+          </Link>
+        );
+      }
+    });
 
   return (
     <>
       {location.pathname === "/apply-developer" ||
       location.pathname === "/apply-recruiter" ||
       location.pathname === "/contact" ||
+      location.pathname === "/forget-password" ||
       location.pathname === "/login" ? null : (
         <footer className="footer">
           <div className="footer-container">
             {isMobile && (
-              <Link to="/">
+              <Link to={uid ? "/joblistings" : "/"}>
                 <img
                   className="company-logo-bk-mb"
                   src="image/lraoughLogoBk.png"
@@ -73,7 +90,10 @@ export const Footer = () => {
             </div>
             <div className="logo-copyright-wrapper">
               {!isMobile && (
-                <Link to="/" className="company-logo-bk-wrapper">
+                <Link
+                  to={uid ? "/joblistings" : "/"}
+                  className="company-logo-bk-wrapper"
+                >
                   <img
                     className="company-logo-bk"
                     src="image/lraoughLogoBk.png"
