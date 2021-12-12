@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import database, { firebase, storage } from "../../firebase/firebase";
+import { firebase, storage } from "../../firebase/firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import TrimModal from "../ui/TrimModal";
@@ -12,8 +12,8 @@ import InputTextAndLabel from "../ui/InputTextAndLabel";
 import skillsSuggestion from "../../data/skills/integration";
 import moment from "moment";
 import {
-  addUsersJobListings,
-  editUsersJobListings,
+  startAddUsersJobListings,
+  startEditUsersJobListings,
 } from "../../action/usersJobListings";
 import employmentTypeOptions from "../../data/radioButtonOptions/PostJobListings";
 import RadioForm from "../ui/RadioForm";
@@ -145,21 +145,17 @@ const PostJobListings = (props) => {
         annualSalaly,
         workingHours,
         postedTimeStamp,
-        id: jobId,
       };
-      database
-        .ref(`/jobListings/${uid}/${jobId}`)
-        .set(postingInfo)
-        .then(() => {
-          if (!props.edit) {
-            dispatch(addUsersJobListings(postingInfo));
-            console.log("Posted successfully!");
-          } else {
-            dispatch(editUsersJobListings(postingInfo));
-            console.log("Editted Successfully!");
-          }
-          history.push("/joblistings_management");
-        });
+      if (!props.edit) {
+        // when adding job posting
+        dispatch(startAddUsersJobListings(jobId, postingInfo));
+        console.log("Posted successfully!");
+      } else {
+        // when editing job posting
+        dispatch(startEditUsersJobListings(jobId, postingInfo));
+        console.log("Editted Successfully!");
+      }
+      history.push("/joblistings_management");
     } else {
       if (tags.length === 0) setSkillTagsError(true);
     }

@@ -1,6 +1,7 @@
 const developerSkills = [
   "React.js",
   "Node.js",
+  "GraphQL",
   "Sass",
   "C",
   "C++",
@@ -776,7 +777,7 @@ const developerSkills = [
   "Zig",
   "ZOPL",
   "ZPL",
-  "Z++"
+  "Z++",
 ];
 
 export default developerSkills;

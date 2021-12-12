@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobBox from "./JobBox";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import ChipInputAutosuggest from "../ui/SkillInput";
 import skillsSuggestion from "../../data/skills/integration";
@@ -121,12 +120,12 @@ const JobListings = () => {
     } else if (jobListings.length === 0) {
       dispatch(startSetJobListings());
     }
-    console.log(jobListings);
+    // console.log(jobListings);
   }, [jobListings]);
 
-  useEffect(() => {
-    console.log(jobListingsArr);
-  }, [jobListingsArr]);
+  // useEffect(() => {
+  //   console.log(jobListingsArr);
+  // }, [jobListingsArr]);
 
   return (
     <>
@@ -148,7 +147,6 @@ const JobListings = () => {
           maxTags={10}
           maxInputLength={30}
           placeholder="スキルタグ検索"
-          // onKeyPress={(e) => e.key === "Enter" && filterJobListingsWithTags()}
         />
         <button
           variant="contained"
