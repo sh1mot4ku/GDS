@@ -21,7 +21,7 @@ const judgeWrapperLayout = (currentPath) => {
     contactSection: false,
     sideBar: false,
   };
-  if (isMobile) return layout;
+  if (isMobile && currentPath === "/joblistings_management") return layout;
 
   const isExactMatchHeader = pathnamesExactMatchHeader.includes(currentPath);
   let isPartialMatchHeader = false;
