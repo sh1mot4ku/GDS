@@ -27,5 +27,7 @@ export const getUser = (authId) => {
   });
 };
 
-export const setFullJobListing = (jobId) =>
-  database.ref(`fullJobListings/${jobId}`).once("value");
+export const setFullJobListing = (jobId) => {
+  console.log("setFullJobListing will run");
+  return database.ref(`fullJobListings/${jobId}`).once("value");
+};

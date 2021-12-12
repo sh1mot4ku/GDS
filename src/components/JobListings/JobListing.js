@@ -5,18 +5,15 @@ import { useParams } from "react-router-dom";
 import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
 import Button from "@material-ui/core/Button";
-import "./JobListing.scss";
 import UrgeApplyModal from "../ui/UrgeApplyModal";
 import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
 import ThankYouForApplying from "./ThankYouForApplying";
-// import { startSetJobListings } from "../../action/jobListings";
 import { setFullJobListing } from "../../API/dbutils";
 import "./ThankYouForApplying.scss";
+import "./JobListing.scss";
 
 const JobListing = () => {
-  // const dispatch = useDispatch();
-  // const jobListings = useSelector((state) => state.jobListings);
   const { uid } = useSelector((state) => state.user);
   const { userInfo } = useSelector((state) => state.user);
   const { jobId } = useParams();
@@ -24,7 +21,6 @@ const JobListing = () => {
   const [overview, setOverview] = useState(null);
   const [isReadMoreClicked, setIsReadMoreClicked] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
-  // const [loaded, setLoaded] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
 
   const onClose = () => {
