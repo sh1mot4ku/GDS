@@ -1,6 +1,6 @@
 export const pathnamesWithHeader = {
   pathnamesExactMatchHeader: ["/", "/about", "/joblistings", "/faqs", "edit"],
-  pathnamesPartialMatchHeader: ["/joblisting"],
+  pathnamesPartialMatchHeader: ["/joblisting/"],
 };
 
 export const pathnamesWithFooter = {
@@ -13,7 +13,7 @@ export const pathnamesWithFooter = {
     "/post_joblistings",
     "/joblistings_management",
   ],
-  pathnamesPartialMatchFooter: ["/joblisting", "/edit_joblisting"],
+  pathnamesPartialMatchFooter: ["/joblisting/", "/edit_joblisting/"],
 };
 
 export const pathnamesWithContactSection = {
