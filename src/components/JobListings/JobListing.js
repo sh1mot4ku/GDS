@@ -58,20 +58,11 @@ const JobListing = () => {
     if (jobId) {
       const snapshot = await setFullJobListing(jobId);
       setJob({
-        ...snapshot,
+        ...snapshot.val(),
         id: jobId,
       });
     }
   }, [jobId]);
-  // if (loaded || jobListings.length !== 0 && jobId) {
-  //   const matchedJob = jobListings.find((job) => job.id === jobId);
-  //   setJob(matchedJob);
-  //   !loaded && setLoaded(true);
-  // } else if (jobListings.length === 0) {
-  //   dispatch(startSetJobListings());
-  //   setLoaded(true);
-  // }
-  // }, [jobListings, jobId]);
 
   useEffect(() => {
     if (job) {
