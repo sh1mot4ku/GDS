@@ -2,6 +2,7 @@ const developerSkills = [
   "React.js",
   "Node.js",
   "GraphQL",
+  "Shell Script",
   "Sass",
   "C",
   "C++",

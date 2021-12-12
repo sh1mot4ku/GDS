@@ -29,6 +29,7 @@ const JobListings = () => {
   const [searchInput, setSearchInput] = useState("");
   const [jobListingsArr, setJobListingsArr] = useState([]);
   const [tags, setTags] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   const filterJobListings = () => {
     console.log("filter func");
@@ -115,17 +116,14 @@ const JobListings = () => {
   };
 
   useEffect(() => {
-    if (jobListings.length !== 0) {
+    if (jobListings.length !== 0 || loaded) {
       setJobListingsArr(jobListings);
+      !loaded && setLoaded(true);
     } else if (jobListings.length === 0) {
       dispatch(startSetJobListings());
+      setLoaded(true);
     }
-    // console.log(jobListings);
   }, [jobListings]);
-
-  // useEffect(() => {
-  //   console.log(jobListingsArr);
-  // }, [jobListingsArr]);
 
   return (
     <>
@@ -174,7 +172,7 @@ const JobListings = () => {
             </React.Fragment>
           ))
         ) : (
-          <div>Loading...</div>
+          <div>Loading...</div> // add loaading animation here
         )}
       </div>
     </>

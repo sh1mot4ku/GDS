@@ -24,6 +24,10 @@ const JobListingsManagement = () => {
     }
   }, [usersJobListings]);
 
+  useEffect(() => {
+    console.log(jobListingsArr);
+  }, [jobListingsArr]);
+
   return (
     <div className="users-joblistings-wrapper">
       <h2 className="users-joblistings-header">求人一覧</h2>

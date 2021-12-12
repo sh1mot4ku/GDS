@@ -26,3 +26,6 @@ export const getUser = (authId) => {
     console.log(changedPost);
   });
 };
+
+export const setFullJobListing = (jobId) =>
+  database.ref(`fullJobListings/${jobId}`).once("value");
