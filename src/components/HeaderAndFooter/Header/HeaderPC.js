@@ -4,7 +4,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useLocation, Link } from "react-router-dom";
-import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
+import {
+  headerAndDrawerMenuItemsLogOut,
+  headerMenuItemsLogIn,
+} from "../menuItems";
 import { auth } from "../../../firebase/firebase";
 import "./Header.scss";
 
@@ -33,19 +36,35 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
   };
 
   const createMenuList = (menuItems) =>
-    menuItems.map((menuItem) => (
-      <Link
-        key={menuItem.title}
-        className={
-          location.pathname === menuItem.to
-            ? [...menuItem.className, "activated-menu"].join(" ")
-            : menuItem.className
-        }
-        to={menuItem.to}
-      >
-        {menuItem.title}
-      </Link>
-    ));
+    menuItems.map((menuItem) => {
+      if (menuItem.isExternal) {
+        return (
+          <a
+            key={menuItem.title}
+            href="https://note.com/lraough/m/m7b08a61f539c"
+            rel="noopener noreferrer"
+            className={menuItem.className}
+            target="_blank"
+          >
+            {menuItem.title}
+          </a>
+        );
+      } else {
+        return (
+          <Link
+            key={menuItem.title}
+            className={
+              location.pathname === menuItem.to
+                ? [...menuItem.className, "activated-menu"].join(" ")
+                : menuItem.className
+            }
+            to={menuItem.to}
+          >
+            {menuItem.title}
+          </Link>
+        );
+      }
+    });
 
   return (
     <div>
@@ -54,8 +73,8 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
           {isUserLoggedIn
             ? headerMenuItemsLogIn.length !== 0 &&
               createMenuList(headerMenuItemsLogIn)
-            : headerMenuItemsLogOut.length !== 0 &&
-              createMenuList(headerMenuItemsLogOut)}
+            : headerAndDrawerMenuItemsLogOut.length !== 0 &&
+              createMenuList(headerAndDrawerMenuItemsLogOut)}
         </div>
         <div className="nav-right">
           {isUserLoggedIn ? (

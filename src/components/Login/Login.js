@@ -17,7 +17,7 @@ const Login = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        history.push("/");
+        history.push("/joblistings");
       })
       .catch((error) => {
         switch (error.code) {

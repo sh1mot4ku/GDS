@@ -7,22 +7,22 @@ import "./Header.scss";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { userInfo } = useSelector((state) => state.user);
+  const { uid } = useSelector((state) => state.user);
   const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isRecruiter, setIsRecruiter] = useState(false);
 
   useEffect(() => {
-    if (userInfo) {
+    if (uid) {
       setIsUserLoggedIn(true);
-      userInfo.userType === "recruiter"
+      uid.userType === "recruiter"
         ? setIsRecruiter(true)
         : setIsRecruiter(false);
     } else {
       setIsUserLoggedIn(false);
     }
-  }, [userInfo]);
+  }, [uid]);
 
   return (
     <>
@@ -36,7 +36,7 @@ const Header = () => {
       location.pathname.includes("/edit_joblisting/") ? null : (
         <header className="header">
           <div className="header-container">
-            <Link to="/">
+            <Link to={uid ? "/joblistings" : "/"}>
               <img
                 className="company-logo"
                 src="image/lraoughLogo.png"
