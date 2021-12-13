@@ -117,21 +117,18 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                 ログイン
               </Link>
               <Link to="/apply-developer">
-                <Button
-                  variant="contained"
-                  className="round-button background-white"
+                <button
+                  className="btn-sm btn-line-opacity"
                 >
                   無料会員登録
-                </Button>
+                </button>
               </Link>
               <Link to="/apply-recruiter">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="round-button"
+                <button
+                  className="btn-sm btn-fill-opacity"
                 >
                   採用担当者の方
-                </Button>
+                </button>
               </Link>
             </>
           )}

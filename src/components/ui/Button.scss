@@ -1,5 +1,5 @@
-@import "../../../sass_config/color.scss";
-@import "../../../sass_config/mixin.scss";
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
 
 @mixin button {
 	display: inline-flex;
@@ -31,46 +31,62 @@
 	width: 250px;
 	height: 64px;
 	transition: 0.3s;
-}
-.btn-line-sm,
-.btn-line-lg {
-	color: $color_primary;
-	border: 2px solid $color_primary;
-	background-color: $white;
-	&:hover {
-		color: $white;
-		border: 2px solid $color_primary;
-		background-color: $color_primary;
-	}
-}
-.btn-fill-sm,
-.btn-fill-lg {
-	color: $white;
-	border: 2px solid $color_primary;
-	background-color: $color_primary;
-	&:hover {
-		color: $color_primary;
-		border: 2px solid $color_primary;
-		background-color: $white;
-	}
-}
 
-.btn-sp {
-	display: none;
-}
-
-.btn-shadow {
-	box-shadow: 0px 2px 16px 0px rgb(0 0 0 / 8%);
-}
-/* Btns responsive CSS */
-@include mobile {
-	.btn-line-lg,
-	.btn-fill-lg {
-		@include button;
-
+	@include mobile {
 		margin-bottom: 20px;
 		font-size: 16px;
 		width: 100%;
 		height: 55px;
 	}
+}
+
+@mixin line {
+	color: $color_primary;
+	border: 2px solid $color_primary;
+	background-color: $white;
+}
+@mixin fill {
+	color: $white;
+	border: 2px solid $color_primary;
+	background-color: $color_primary;
+}
+
+// 白 -> 青のhover
+.btn-line {
+	@include line;
+	&:hover {
+		@include fill;
+	}
+}
+// 青 -> 白のhover
+.btn-fill {
+	@include fill;
+	&:hover {
+		@include line;
+	}
+}
+
+.btn-line-opacity {
+	@include line;
+	&:hover {
+		opacity: 0.6;
+	}
+}
+.btn-fill-opacity {
+	@include fill;
+	&:hover {
+		opacity: 0.6;
+	}
+}
+
+.btn-contact {
+	@include line;
+	&:hover{
+		box-shadow: 0 15px 30px -5px rgba(0,0,0,.15), 0 0 5px rgba(0,0,0,.1);
+		transform: translateY(-4px);
+	}
+}
+
+.btn-sp {
+	display: none;
 }

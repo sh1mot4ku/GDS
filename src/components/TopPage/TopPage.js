@@ -1,6 +1,7 @@
 import React from "react";
 import "./TopPage.scss";
 import Button from "@material-ui/core/Button";
+import "../ui/Button.scss";
 import { Link } from "react-router-dom";
 import useMedia from "use-media";
 
@@ -26,22 +27,19 @@ const TopPage = () => {
           </div>
           <div className="subscribe-buttons-top">
             <Link to="/apply-developer">
-              <Button
-                variant="contained"
-                className="round-button background-white"
+              <button
+                className="btn-lg btn-line-opacity"
               >
                 無料会員登録
-              </Button>
+              </button>
             </Link>
             <Link to="/apply-recruiter">
-              <Button
+              <button
                 // onClick={recruiterSubscribe}
-                variant="contained"
-                color="primary"
-                className="round-button"
+                className="btn-lg btn-fill-opacity"
               >
                 採用担当者の方
-              </Button>
+              </button>
             </Link>
           </div>
         </div>

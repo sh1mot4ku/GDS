@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import "../ui/Button.scss"
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
@@ -81,14 +81,12 @@ const Login = () => {
             {firebaseError}
           </p>
           <div className="login-buttons">
-            <Button
+            <button
               onClick={onLogin}
-              variant="contained"
-              color="primary"
-              className="round-button"
+              className="btn-lg btn-fill"
             >
               Login
-            </Button>
+            </button>
             <button variant="contained" color="primary" className="sub-button">
               新規登録はこちら
             </button>
