@@ -245,7 +245,7 @@ const AboutPage = () => {
                 height="10.5"
                 rx="1.25"
                 stroke="#a0a0a0"
-                stroke-width="1.5"
+                strokeWidth="1.5"
               />
             </svg>
           </a>
