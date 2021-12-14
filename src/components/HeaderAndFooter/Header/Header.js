@@ -7,22 +7,22 @@ import "./Header.scss";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { uid } = useSelector((state) => state.user);
+  const { uid, userInfo } = useSelector((state) => state.user);
   const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [isRecruiter, setIsRecruiter] = useState(false);
 
   useEffect(() => {
-    if (uid) {
+    if (userInfo) {
       setIsUserLoggedIn(true);
-      uid.userType === "recruiter"
+      userInfo.userType === "recruiter"
         ? setIsRecruiter(true)
         : setIsRecruiter(false);
     } else {
       setIsUserLoggedIn(false);
     }
-  }, [uid]);
+  }, [userInfo]);
 
   return (
     <>
