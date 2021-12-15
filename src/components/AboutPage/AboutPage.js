@@ -234,9 +234,9 @@ const AboutPage = () => {
               <path
                 d="M20 7V17C20 18.1046 19.1046 19 18 19H8"
                 stroke="#a0a0a0"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <rect
                 x="5.75"
@@ -245,7 +245,7 @@ const AboutPage = () => {
                 height="10.5"
                 rx="1.25"
                 stroke="#a0a0a0"
-                stroke-width="1.5"
+                strokeWidth="1.5"
               />
             </svg>
           </a>
