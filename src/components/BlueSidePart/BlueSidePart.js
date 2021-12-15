@@ -1,9 +1,12 @@
 import React from "react";
 import "./BlueSidePart.scss";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const BlueSidePart = () => {
   const location = useLocation();
+  const { uid } = useSelector((state) => state.user);
   return (
     <>
       <div
@@ -13,7 +16,7 @@ const BlueSidePart = () => {
         ].join(" ")}
       >
         <div className="box"></div>
-        <Link to="/joblistings">
+        <Link to={uid ? "/joblistings" : "/"}>
           <img alt="" src="/image/logo-white 1.png" className="logo" />
         </Link>
         <img alt="" src="/image/remoteStack.png" className="remoteStack" />

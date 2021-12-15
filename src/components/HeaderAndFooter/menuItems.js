@@ -1,4 +1,4 @@
-export const headerMenuItemsLogOut = [
+export const headerAndDrawerMenuItemsLogOut = [
   {
     title: "ホーム",
     className: ["menu-item"],
@@ -22,7 +22,7 @@ export const headerMenuItemsLogOut = [
   {
     title: "ブログ",
     className: ["menu-item"],
-    to: "/blog",
+    isExternal: true,
   },
 ];
 
@@ -45,7 +45,7 @@ export const headerMenuItemsLogIn = [
   {
     title: "ブログ",
     className: ["menu-item"],
-    to: "/blog",
+    isExternal: true,
   },
 ];
 
@@ -68,7 +68,7 @@ export const drawerMenuItemsLogin = [
   {
     title: "ブログ",
     className: ["menu-item"],
-    to: "/blog",
+    isExternal: true,
   },
   {
     title: "プロフィール",
@@ -117,7 +117,7 @@ export const footerMenuItemsLogOut = [
   {
     title: "ブログ",
     className: ["menu-item"],
-    to: "/blog",
+    isExternal: true,
   },
   {
     title: "ログイン",
@@ -155,7 +155,7 @@ export const footerMenuItemsLogIn = [
   {
     title: "ブログ",
     className: ["menu-item"],
-    to: "/blog",
+    isExternal: true,
   },
   {
     title: "プロフィール",

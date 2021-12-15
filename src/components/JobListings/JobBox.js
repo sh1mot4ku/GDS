@@ -4,20 +4,17 @@ import moment from "moment";
 import "moment/locale/ja";
 import "./JobBox.scss";
 
-const MAX_LENGTH_OF_JD = 100;
-
 const JobBox = ({
   photoUrl,
   jobTitle,
   companyName,
   employeeLocation,
-  jobDescription,
+  jobListing,
   tags,
   id,
   postedTimeStamp,
   details,
 }) => {
-  const [shortJd, setShortJD] = useState("");
   const [timeLag, setTimeLag] = useState(null);
 
   useEffect(() => {
@@ -30,10 +27,6 @@ const JobBox = ({
       setTimeLag(lag);
     }
   }, [details, postedTimeStamp]);
-
-  useEffect(() => {
-    jobDescription && setShortJD(jobDescription.substr(0, MAX_LENGTH_OF_JD));
-  }, [jobDescription]);
 
   return (
     <div className="job-box">
@@ -63,7 +56,7 @@ const JobBox = ({
           <div className="timestamp">{timeLag}に掲載</div>
         ) : (
           <div className="job-box-content">
-            <span className="short-jd">{shortJd}</span>
+            <span className="short-jd">{jobListing}</span>
           </div>
         )}
       </Link>

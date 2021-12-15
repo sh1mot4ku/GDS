@@ -8,7 +8,7 @@ export const setJobListings = (jobListings) => ({
 export const startSetJobListings = () => {
   return (dispatch) => {
     return database
-      .ref(`/jobListings`)
+      .ref(`/shortJobListings`)
       .once("value")
       .then((snapshot) => {
         const jobListingsArray = [];
@@ -21,11 +21,16 @@ export const startSetJobListings = () => {
           });
         });
         dispatch(setJobListings(jobListingsArray));
+        console.log("startSetJobListings finished");
       });
   };
 };
 
-export const addJobInfo = (jobinfo) => ({
-  type: "ADD_JOB_INFO",
-  jobinfo,
+export const addJobListing = (jobListing) => ({
+  type: "ADD_JOB_LISTING",
+  jobListing,
+});
+export const editJobListing = (jobListing) => ({
+  type: "EDIT_JOB_LISTING",
+  jobListing,
 });
