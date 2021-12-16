@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobBox from "./JobBox";
-import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
-import ChipInputAutosuggest from "../ui/SkillInput";
-import skillsSuggestion from "../../data/skills/integration";
 import { startSetJobListings } from "../../action/jobListings";
+import options from "../../data/radioButtonOptions/PostJobListings";
 import "./JobListings.scss";
 
 const replaceLetters = (searchInput) =>
@@ -28,89 +27,43 @@ const JobListings = () => {
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
   const [jobListingsArr, setJobListingsArr] = useState([]);
-  const [tags, setTags] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  console.log(jobListingsArr);
 
-  const filterJobListings = () => {
-    console.log("filter func");
+  const filterJobListings2 = () => {
     let totalfilteredJobListings = [];
-    if (searchInput.length !== 0) {
-      let convertSearchInput = searchInput;
-      let searchKeywordsArr =
-        replaceLettersAndCreateKeywordsArr(convertSearchInput);
-      let filteredJoblistingsbyTitles;
-      let filteredJoblistingsbyDescriptions;
-      let filteredJoblistingsbyCompanyName;
-      let filteredJoblistingsbyPlace;
-      for (let i = 0; i < searchKeywordsArr.length; i++) {
-        filteredJoblistingsbyTitles = jobListings.filter((jobListing) => {
-          if (jobListing.jobTitle) {
-            return (
-              replaceLetters(jobListing.jobTitle).search(
-                searchKeywordsArr[i]
-              ) !== -1
-            );
-          }
-        });
-        filteredJoblistingsbyDescriptions = jobListings.filter((jobListing) => {
-          if (jobListing.jobDescription) {
-            return (
-              replaceLetters(jobListing.jobDescription).search(
-                searchKeywordsArr[i]
-              ) !== -1
-            );
-          }
-        });
-        filteredJoblistingsbyCompanyName = jobListings.filter((jobListing) => {
-          if (jobListing.companyName) {
-            return (
-              replaceLetters(jobListing.companyName).search(
-                searchKeywordsArr[i]
-              ) !== -1
-            );
-          }
-        });
-        filteredJoblistingsbyPlace = jobListings.filter((jobListing) => {
-          if (jobListing.companyAddress) {
-            return (
-              replaceLetters(jobListing.companyAddress).search(
-                searchKeywordsArr[i]
-              ) !== -1
-            );
-          }
-        });
-        totalfilteredJobListings.push(
-          ...filteredJoblistingsbyTitles,
-          ...filteredJoblistingsbyDescriptions,
-          ...filteredJoblistingsbyCompanyName,
-          ...filteredJoblistingsbyPlace
-        );
-      }
+    if (searchInput.length === 0) {
+      setJobListingsArr(jobListings);
     }
+    let convertSearchInput = searchInput;
+    let searchKeywordsArr =
+      replaceLettersAndCreateKeywordsArr(convertSearchInput);
 
-    if (tags.length !== 0) {
-      for (let i = 0; i < tags.length; i++) {
-        for (let j = 0; j < jobListings.length; j++) {
-          if (jobListings[j].tags) {
-            if (!Array.isArray(jobListings[j].tags)) {
-              continue;
-            } else {
-              for (let k = 0; k < jobListings[j].tags.length; k++) {
-                const filterResultsArr = jobListings.filter((jobListing) => {
-                  if (jobListing.tags) {
-                    return jobListing.tags[k] === tags[i];
-                  }
-                });
-                totalfilteredJobListings.push(...filterResultsArr);
-              }
-            }
-          }
+    jobListings.forEach((joblisting) => {
+      let isAllMatched = [];
+      searchKeywordsArr.forEach((searchKeyword) => {
+        const { jobTitle, companyName, employeeLocation, jobListing, tags } =
+          joblisting;
+        if (
+          replaceLetters(jobTitle).includes(searchKeyword) ||
+          replaceLetters(companyName).includes(searchKeyword) ||
+          replaceLetters(employeeLocation).includes(searchKeyword) ||
+          replaceLetters(jobListing).includes(searchKeyword) ||
+          // tags.find(searchKeyword) !== undefined
+          tags.map((tag) => replaceLetters(tag)).includes(searchKeyword)
+        ) {
+          isAllMatched.push(true);
+        } else {
+          isAllMatched.push(false);
         }
+      });
+      if (!isAllMatched.includes(false)) {
+        totalfilteredJobListings.push(joblisting);
       }
-    }
+    });
     setJobListingsArr(
       totalfilteredJobListings.length !== 0
-        ? [...new Set(totalfilteredJobListings)]
+        ? totalfilteredJobListings
         : ["no result"]
     );
   };
@@ -127,32 +80,42 @@ const JobListings = () => {
 
   return (
     <>
-      <div className="search-input-container">
-        <TextField
-          id="outlined-basic"
-          variant="outlined"
-          placeholder="キーワード検索"
-          className="search-input"
-          onChange={(e) => setSearchInput(e.target.value)}
-          value={searchInput}
-          onKeyPress={(e) => e.key === "Enter" && filterJobListings()}
-        />
-        <ChipInputAutosuggest
-          data={skillsSuggestion}
-          tags={tags}
-          setTags={setTags}
-          maxSuggestions={20}
-          maxTags={10}
-          maxInputLength={30}
-          placeholder="スキルタグ検索"
-        />
-        <button
-          variant="contained"
-          className="submit-btn"
-          onClick={() => filterJobListings()}
-        >
-          検索
-        </button>
+      <div className="search-sort-container">
+        <div className="search-input-wrap">
+          <input
+            type="text"
+            placeholder="タイトル、会社名、勤務地、スキルなど"
+            onChange={(e) => setSearchInput(e.target.value)}
+            value={searchInput}
+            className="search-input"
+            onKeyPress={(e) => e.key === "Enter" && filterJobListings2()}
+          />
+          <SearchIcon
+            className="search-icon"
+            onClick={() => filterJobListings2()}
+          />
+        </div>
+        <div className="sort-wrap">
+          <select
+            name="day-of-posting"
+            id="day-of-posting"
+            className="sort-dropdown"
+          >
+            <option value="掲載日">掲載日</option>
+            <option value="24時間以内">24時間以内</option>
+            <option value="7日以内">7日以内</option>
+            <option value="１ヶ月以内">１ヶ月以内</option>
+          </select>
+          <select
+            name="contract-type"
+            id="contract-type"
+            className="sort-dropdown"
+          >
+            <option value="雇用形態">雇用形態</option>
+            {options.length !== 0 &&
+              options.map((option) => <option value={option}>{option}</option>)}
+          </select>
+        </div>
       </div>
       <div className="joblisting-wrapper">
         {jobListingsArr[0] === "no result" ? (

@@ -1,16 +1,64 @@
-@import '../../sass_config/color';
+@import "../../sass_config/color";
 
-.search-input-container {
-  margin-top: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.search-sort-container {
   width: 600px;
-  margin: 36px auto;
+  margin: 80px auto;
 
-  .search-input {
-    width: 500px !important;
-    padding: 12px 0 12px 0 !important;
+  .search-input-wrap {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    position: relative;
+    margin-bottom: 20px;
+    .search-icon {
+      font-size: 32px;
+      color: $color_primary;
+      position: absolute;
+      top: 9%;
+      right: 0;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 100%;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid $light-gray;
+      padding-right: 60px;
+    }
+  }
+
+  .sort-wrap {
+    .sort-dropdown {
+      width: 148px;
+      height: 40px;
+      border-radius: 60px;
+      margin-right: 20px;
+      font-size: 12px;
+      text-align: center;
+      background-color: $light-gray;
+      border: 1px solid $light-gray;
+      cursor: pointer;
+    }
+  }
+
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: $color-sub-text;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: $color-sub-text;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    color: $color-sub-text;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    color: $color-sub-text;
   }
   .submit-btn {
     background: $color_primary;
@@ -32,7 +80,6 @@
 
 .joblisting-wrapper {
   width: 600px;
-  // margin: 60px auto;
   margin: 0 auto;
   word-break: break-word;
   padding-bottom: 200px;
