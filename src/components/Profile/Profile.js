@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { turnOffProfileEdited } from "../../action/user";
 import "./Profile.scss";
 
 const DEFAULT_PHOTO = "/image/icon-user.png";
 
 const Profile = () => {
   const { uid, userInfo } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // delete an indicator to let user know profile edited when this component unmounted
+    return () => {
+      dispatch(turnOffProfileEdited());
+    };
+  }, []);
 
   return (
     <>
       {uid ? (
         <div className="main-profile">
-          <div className="pf-container">
+          {userInfo?.profileEdited && (
+            <div className="pf-edited-indicator">
+              プロフィールの変更が完了しました！
+            </div>
+          )}
+          <div className="pf-container pf-container--top">
             <img
               alt="user-icon"
               src={userInfo.profile.photoUrl || DEFAULT_PHOTO}

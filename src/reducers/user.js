@@ -9,6 +9,14 @@ const userReducer = (state = {}, action) => {
         ...state,
         userInfo: action.userInfo,
       };
+    // case "TURN_ON_PROFILE_EDITED":
+    //   const editedState = { ...state };
+    //   editedState.userInfo.profileEdited = true;
+    //   return editedState;
+    case "TURN_OFF_PROFILE_EDITED":
+      const newState = { ...state };
+      newState.userInfo.profileEdited = false;
+      return newState;
     default:
       return state;
   }

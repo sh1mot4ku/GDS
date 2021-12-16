@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TrimModal from "../ui/TrimModal";
 import { readFile } from "../../readImage/cropImage";
 import database, { firebase, storage, auth } from "../../firebase/firebase";
-import { editUserInfo } from "../../action/user";
+import { editUserInfo, turnOnProfileEdited } from "../../action/user";
 import "./ProfileEdit.scss";
 import ProfileEditClient from "./ProfileEditClient";
 import ProfileEditRecruiter from "./ProfileEditRecruiter";
@@ -191,19 +191,22 @@ const ProfileEdit = () => {
       .ref(`/user/${uid}`)
       .set(postingInfo)
       .then(() => {
+        // add flag to indicate profile edited only to Redux
+        postingInfo.profileEdited = true;
         dispatch(editUserInfo(postingInfo));
         console.log("Editted Successfully!");
+        // dispatch(turnOnProfileEdited());
         history.push("/profile");
       });
   };
 
   return (
     <div className="main-edit">
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="edit-form">
         <div className="pf-container">
           <img alt="user-icon" src={photoUrl} className="user-icon" />
           <div>
-            <div className="pf-name">{fullName}</div>
+            <div className="pf-name">{userInfo?.profile.fullName}</div>
             <div className="pf-country">{userInfo.profile.location || ""}</div>
             <div className="pf-photo-buttons">
               {photoUrl !== DEFAULT_PHOTO && (

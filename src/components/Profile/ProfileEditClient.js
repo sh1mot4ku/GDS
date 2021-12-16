@@ -20,9 +20,9 @@ const ProfileEditClient = ({
 }) => {
   const [location, setLocation] = useState(originalLocation || "Japan");
   const [lookingFor, setLookingFor] = useState(originalLookingFor || "");
-  const [link1, setLink1] = useState(originalLinks.link1 || "");
-  const [link2, setLink2] = useState(originalLinks.link2 || "");
-  const [link3, setLink3] = useState(originalLinks.link3 || "");
+  const [link1, setLink1] = useState(originalLinks?.link1 || "");
+  const [link2, setLink2] = useState(originalLinks?.link2 || "");
+  const [link3, setLink3] = useState(originalLinks?.link3 || "");
   const [englishLevel, setEnglishLevel] = useState(originalEnglishLevel || "");
   const [description, setDescription] = useState(originalDescription || "");
   const [linkError, setLinkError] = useState(null);
@@ -35,9 +35,7 @@ const ProfileEditClient = ({
     setLastHalfForm({
       location,
       lookingFor,
-      link1,
-      link2,
-      link3,
+      links: { link1, link2, link3 },
       englishLevel,
       description,
     });
@@ -125,7 +123,7 @@ const ProfileEditClient = ({
           label="英語レベル"
           placeholder="ご自身の英語レベルについて教えてください"
           type="text"
-          onChange={(e) => setEnglishLevel(e)}
+          onChange={(e) => setEnglishLevel(e.target.value)}
           value={englishLevel}
           options={levelOfEnglish}
         />
