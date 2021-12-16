@@ -3,8 +3,7 @@
 
 .top-wrapper {
   width: 1070px;
-  margin: 30px auto;
-  font-family: "Roboto";
+  margin: 30px auto 200px auto;
 
   @include mobile {
     width: 90vw;
@@ -53,7 +52,6 @@
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
-        align-items: center;
         flex-direction: row;
 
         @include mobile {
@@ -117,6 +115,8 @@
     .d-demo__wrap {
       display: flex;
       overflow: hidden;
+      border-top: solid 1.5px $line;
+      border-bottom: solid 1.5px $line;
     }
 
     .d-demo__list {
@@ -124,18 +124,18 @@
       list-style: none;
     }
 
-    .d-demo__list--left{
-    animation :infinity-scroll-left 30s infinite linear 0.5s both;
+    .d-demo__list--left {
+      animation: infinity-scroll-left 30s infinite linear 0.5s both;
     }
 
     .d-demo__item {
       width: calc(100vw / 10);
-      
+
       @include mobile {
         width: calc(100vw / 4);
       }
     }
-    .d-demo__item > img{
+    .d-demo__item > img {
       width: 100%;
     }
   }
@@ -151,6 +151,7 @@
       font-weight: bold;
       color: #1e40f6;
       font-size: 56px;
+      margin-bottom: 16px;
 
       @include mobile {
         font-size: 30px;
@@ -167,7 +168,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 150px;
+      margin-bottom: 200px;
 
       @include mobile {
         flex-direction: column;
@@ -255,6 +256,7 @@
     .subscribe-button-wrapper {
       border-radius: 12px;
       padding: 25px 9%;
+      min-height: 200px;
 
       @include mobile {
         padding: 25px 0;

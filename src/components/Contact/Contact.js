@@ -13,6 +13,7 @@ const Contact = (props) => {
       location.pathname === '/user-profile' ||
       location.pathname === '/contact' ||
       location.pathname === '/login' ||
+      location.pathname === "/forget-password" ||
       location.pathname === '/post_joblistings' ||
       location.pathname === '/joblistings_management' ||
       location.pathname.includes('/edit_joblisting/') ||

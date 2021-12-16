@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobBox from "./JobBox";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import ChipInputAutosuggest from "../ui/SkillInput";
 import skillsSuggestion from "../../data/skills/integration";
@@ -30,6 +29,7 @@ const JobListings = () => {
   const [searchInput, setSearchInput] = useState("");
   const [jobListingsArr, setJobListingsArr] = useState([]);
   const [tags, setTags] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   const filterJobListings = () => {
     console.log("filter func");
@@ -116,17 +116,14 @@ const JobListings = () => {
   };
 
   useEffect(() => {
-    if (jobListings.length !== 0) {
+    if (jobListings.length !== 0 || loaded) {
       setJobListingsArr(jobListings);
+      !loaded && setLoaded(true);
     } else if (jobListings.length === 0) {
       dispatch(startSetJobListings());
+      setLoaded(true);
     }
-    console.log(jobListings);
   }, [jobListings]);
-
-  useEffect(() => {
-    console.log(jobListingsArr);
-  }, [jobListingsArr]);
 
   return (
     <>
@@ -148,7 +145,6 @@ const JobListings = () => {
           maxTags={10}
           maxInputLength={30}
           placeholder="スキルタグ検索"
-          // onKeyPress={(e) => e.key === "Enter" && filterJobListingsWithTags()}
         />
         <button
           variant="contained"
@@ -176,7 +172,7 @@ const JobListings = () => {
             </React.Fragment>
           ))
         ) : (
-          <div>Loading...</div>
+          <div>Loading...</div> // add loaading animation here
         )}
       </div>
     </>

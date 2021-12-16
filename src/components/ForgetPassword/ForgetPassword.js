@@ -1,37 +1,28 @@
 import React, { useState } from "react";
-import "../ui/Button.scss";
+// import { Button } from "@material-ui/core";
+import "../ui/Button.scss"
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
-import { Link, useHistory } from "react-router-dom";
-import "./Login.scss";
+import { useHistory } from "react-router-dom";
+import "./ForgetPassword.scss";
 
-const Login = () => {
+const ForgetPassword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [firebaseError, setFirebaseError] = useState("");
   const history = useHistory();
 
-  const onLogin = (e) => {
+  const onForgetPassword = (e) => {
     e.preventDefault();
     auth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(email)
       .then(() => {
-        history.push("/joblistings");
+        history.push("/");
       })
       .catch((error) => {
         switch (error.code) {
           case "auth/invalid-email":
             setFirebaseError("メールアドレスの形式が無効です");
-            break;
-          case "auth/user-disabled":
-            setFirebaseError("登録情報が無効です");
-            break;
-          case "auth/user-not-found":
-            setFirebaseError("登録情報が存在しません");
-            break;
-          case "auth/wrong-password":
-            setFirebaseError("パスワードが正しくありません");
             break;
           case "auth/too-many-requests":
             setFirebaseError(
@@ -49,17 +40,16 @@ const Login = () => {
   const onHandleInputs = (input, inputValue) => {
     if (input === "email") {
       setEmail(inputValue);
-    } else if (input === "password") {
-      setPassword(inputValue);
     }
     setFirebaseError("");
   };
 
   return (
-    <div className="main-login">
+    <div className="main-ForgetPassword">
       <BlueSidePart />
       <div className="rightBox">
-        <h2 className="title">Login</h2>
+        <h2 className="title">パスワードを忘れた方</h2>
+        <p className="subtitle">ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。</p>
         <form className="form">
           <InputTextAndLabel
             label="メールアドレス"
@@ -69,30 +59,16 @@ const Login = () => {
             value={email}
             name="email"
           />
-          <InputTextAndLabel
-            label="パスワード"
-            placeholder="7文字以上の半角英数字"
-            type="password"
-            onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
-            value={password}
-            name="password"
-          />
           <p className={firebaseError !== "" ? "error-text" : "empty-box"}>
             {firebaseError}
           </p>
-          <div className="login-buttons">
-            <button onClick={onLogin} className="btn-lg btn-fill">
-              Login
+          <div className="ForgetPassword-buttons">
+            <button
+              onClick={onForgetPassword}
+              className="btn-lg btn-fill"
+            >
+              SEND
             </button>
-            <Link to="/">
-              <button
-                variant="contained"
-                color="primary"
-                className="sub-button"
-              >
-                新規登録はこちら
-              </button>
-            </Link>
           </div>
         </form>
       </div>
@@ -100,4 +76,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgetPassword;

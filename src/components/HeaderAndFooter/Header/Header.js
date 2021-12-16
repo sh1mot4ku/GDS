@@ -7,7 +7,7 @@ import "./Header.scss";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const { userInfo } = useSelector((state) => state.user);
+  const { uid, userInfo } = useSelector((state) => state.user);
   const isTablet = useMedia({ maxWidth: "1024px" });
   const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
@@ -30,12 +30,13 @@ const Header = () => {
       location.pathname === "/apply-recruiter" ||
       location.pathname === "/contact" ||
       location.pathname === "/login" ||
+      location.pathname === "/forget-password" ||
       location.pathname === "/post_joblistings" ||
       location.pathname === "/joblistings_management" ||
       location.pathname.includes("/edit_joblisting/") ? null : (
         <header className="header">
           <div className="header-container">
-            <Link to="/">
+            <Link to={uid ? "/joblistings" : "/"}>
               <img
                 className="company-logo"
                 src="image/lraoughLogo.png"

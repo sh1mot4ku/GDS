@@ -51,7 +51,7 @@
 	background-color: $color_primary;
 }
 
-// 白 -> 青のhover
+// 白 -> 青のhover 
 .btn-line {
 	@include line;
 	&:hover {
