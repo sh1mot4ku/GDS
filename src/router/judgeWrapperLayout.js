@@ -23,36 +23,30 @@ const judgeWrapperLayout = (currentPath) => {
   };
   if (isMobile && currentPath === "/joblistings_management") return layout;
 
-  const isExactMatchHeader = pathnamesExactMatchHeader.includes(currentPath);
-  let isPartialMatchHeader = false;
-  pathnamesPartialMatchHeader.forEach((pathname) => {
-    if (currentPath.includes(pathname)) {
-      isPartialMatchHeader = true;
-    }
-  });
+  const isPathnamePartialMatch = (pathnames) => {
+    let isPathPartialMatch = false;
+    pathnames.forEach((pathname) => {
+      if (currentPath.includes(pathname)) {
+        isPathPartialMatch = true;
+      }
+    });
+    return isPathPartialMatch;
+  };
 
-  layout["header"] = isExactMatchHeader || isPartialMatchHeader;
+  const isExactMatchHeader = pathnamesExactMatchHeader.includes(currentPath);
+  layout["header"] =
+    isExactMatchHeader || isPathnamePartialMatch(pathnamesPartialMatchHeader);
 
   const isExactMatchFooter = pathnamesExactMatchFooter.includes(currentPath);
-  let isPartialMatchFooter = false;
-  pathnamesPartialMatchFooter.forEach((pathname) => {
-    if (currentPath.includes(pathname)) {
-      isPartialMatchFooter = true;
-    }
-  });
-  layout["footer"] = isExactMatchFooter || isPartialMatchFooter;
+  layout["footer"] =
+    isExactMatchFooter || isPathnamePartialMatch(pathnamesPartialMatchFooter);
 
   const isExactMatchContact = pathnamesExactMatchContact.includes(currentPath);
   layout["contactSection"] = isExactMatchContact;
 
   const isExactMatchSideBar = pathnamesExactMatchSideBar.includes(currentPath);
-  let isPartialMatchSideBar = false;
-  pathnamesPartialMatchSideBar.forEach((pathname) => {
-    if (currentPath.includes(pathname)) {
-      isPartialMatchSideBar = true;
-    }
-  });
-  layout["sideBar"] = isExactMatchSideBar || isPartialMatchSideBar;
+  layout["sideBar"] =
+    isExactMatchSideBar || isPathnamePartialMatch(pathnamesPartialMatchSideBar);
 
   return layout;
 };
