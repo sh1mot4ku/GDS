@@ -144,6 +144,7 @@ const PostJobListings = (props) => {
         jobTitle,
         jobListing: shortJobListing, // shorten length of job listing
         tags,
+        postedTimeStamp,
         employeeLocation: shortEmployeeLocation, // shorten length of employee location
       };
 
