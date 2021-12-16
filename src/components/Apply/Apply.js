@@ -268,7 +268,7 @@ function Apply() {
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          insertUser(postingInfo, userCredential.user.uid);
+          insertUser(postingInfo, userCredential.user.uid); // should wait async process here
           setStep(step + 1);
           console.log("sent to firebase");
           setIsSubmitted(true);

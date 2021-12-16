@@ -14,9 +14,11 @@ const Contact = (props) => {
       location.pathname === "/contact" ||
       location.pathname === "/login" ||
       location.pathname === "/post_joblistings" ||
-      location.pathname === "/joblistings_management" ||
       location.pathname === "/profile_edit" ||
       location.pathname === "/profile" ||
+      location.pathname === "/forget-password" ||
+      location.pathname === "/post_joblistings" ||
+      location.pathname === "/joblistings_management" ||
       location.pathname.includes("/edit_joblisting/") ||
       location.pathname.includes("/joblisting/") ? null : (
         <section className="contact-section">

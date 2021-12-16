@@ -26,7 +26,7 @@ const RadioForm = ({ value, onChange, label, options }) => {
             value={item}
             control={<Radio color="primary" required />}
             label={item}
-            key={index}
+            key={item}
           />
         ))}
       </RadioGroup>

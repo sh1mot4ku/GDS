@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TrimModal from "../ui/TrimModal";
 import { readFile } from "../../readImage/cropImage";
 import database, { firebase, storage, auth } from "../../firebase/firebase";
-import { editUserInfo, turnOnProfileEdited } from "../../action/user";
+import { editUserInfo } from "../../action/user";
 import "./ProfileEdit.scss";
 import ProfileEditClient from "./ProfileEditClient";
 import ProfileEditRecruiter from "./ProfileEditRecruiter";
@@ -195,7 +195,6 @@ const ProfileEdit = () => {
         postingInfo.profileEdited = true;
         dispatch(editUserInfo(postingInfo));
         console.log("Editted Successfully!");
-        // dispatch(turnOnProfileEdited());
         history.push("/profile");
       });
   };

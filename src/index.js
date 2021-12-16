@@ -7,8 +7,8 @@ import AppRouter, { history } from "./router/AppRouter";
 import database, { auth } from "./firebase/firebase";
 import { login, logout } from "./action/user";
 import configureStore from "./store/configureStore";
-import "./sass_config/common_style.scss";
 import "./sass_config/reset.scss";
+import "./sass_config/common_style.scss";
 
 const theme = createTheme({
   palette: {
@@ -55,14 +55,13 @@ auth.onAuthStateChanged((user) => {
           })
         );
         renderApp();
-        // if (history.location.pathname === '/') {
-        //   history.push('/job_listings'); // push it to job listings page after merging
-        // }
+        if (history.location.pathname === "/") {
+          history.push("/joblistings");
+        }
       });
   } else {
     store.dispatch(logout());
     renderApp();
-    history.push("/");
   }
 });
 

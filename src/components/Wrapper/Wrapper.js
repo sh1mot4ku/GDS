@@ -23,7 +23,8 @@ const Wrapper = ({ children }) => {
             location.pathname === "/apply-developer" ||
             location.pathname === "/apply-recruiter" ||
             location.pathname === "/contact" ||
-            location.pathname === "/login"
+            location.pathname === "/login" ||
+            location.pathname === "/forget-password"
               ? ["main-parent", "no-padding-top"].join(" ")
               : location.pathname === "/joblistings_management" ||
                 location.pathname === "/post_joblistings" ||

@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Login.scss";
 
 const Login = () => {
@@ -17,7 +17,7 @@ const Login = () => {
     auth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        history.push("/");
+        history.push("/joblistings");
       })
       .catch((error) => {
         switch (error.code) {
@@ -89,9 +89,15 @@ const Login = () => {
             >
               Login
             </Button>
-            <button variant="contained" color="primary" className="sub-button">
-              新規登録はこちら
-            </button>
+            <Link to="/">
+              <button
+                variant="contained"
+                color="primary"
+                className="sub-button"
+              >
+                新規登録はこちら
+              </button>
+            </Link>
           </div>
         </form>
       </div>

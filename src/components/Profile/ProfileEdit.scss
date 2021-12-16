@@ -7,22 +7,30 @@
   padding: 40.5px 0 200px;
 
   @include mobile {
-    font-size: 0.5rem;
+    width: 100vw;
+    padding: 0 20px !important;
+    box-sizing: border-box;
   }
 
   .pf-container {
     display: flex;
     justify-content: left;
     width: 100%;
-    padding: 40px 0;
+    padding: 40px 0 20px;
     border-bottom: solid 1px #e5e5e5;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 
     .user-icon {
       width: 100px;
       height: 100px;
       margin-right: 20px;
       border-radius: 100px;
+
+      @include mobile {
+        width: 56px;
+        height: 56px;
+        margin-right: 16px;
+      }
     }
 
     .pf-photo-buttons {
@@ -80,6 +88,10 @@
     width: 100%;
     margin-bottom: 16px;
 
+    @include mobile {
+      // margin-bottom: 0;
+    }
+
     .input {
       width: 100%;
     }
@@ -92,6 +104,11 @@
     align-items: center;
     flex-direction: column;
     margin-top: 80px;
+
+    @include mobile {
+      margin-top: 0;
+      margin-bottom: 80px;
+    }
 
     .save-button {
       width: 214px;

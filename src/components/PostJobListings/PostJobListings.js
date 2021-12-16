@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
-import database, { firebase, storage } from "../../firebase/firebase";
+import { firebase, storage } from "../../firebase/firebase";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import TrimModal from "../ui/TrimModal";
@@ -12,16 +12,20 @@ import InputTextAndLabel from "../ui/InputTextAndLabel";
 import skillsSuggestion from "../../data/skills/integration";
 import moment from "moment";
 import {
-  addUsersJobListings,
-  editUsersJobListings,
+  startAddUsersJobListings,
+  startEditUsersJobListings,
 } from "../../action/usersJobListings";
 import { readFile } from "../../readImage/cropImage";
+import employmentTypeOptions from "../../data/radioButtonOptions/PostJobListings";
+import RadioForm from "../ui/RadioForm";
 import "./PostJobListings.scss";
 
 const MIN_ROWS_LARGE_INPUT = 6;
 const MAX_ROWS_LARGE_INPUT = 12;
 let jobId = ""; // unique posting ID
 const DEFAULT_PHOTO = "/photos/img-empty.jpg";
+const SHORT_JOB_LISTINGS_LENGTH = 100; // the length of short job listings
+const SHORT_EMPLOYEE_LOCATION_LENGTH = 50; // the length of short employee location
 
 const PostJobListings = (props) => {
   const history = useHistory();
@@ -106,7 +110,7 @@ const PostJobListings = (props) => {
     setOriginPhotoSrc(null);
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (
       companyName &&
@@ -124,7 +128,23 @@ const PostJobListings = (props) => {
       workingHours
     ) {
       const postedTimeStamp = moment().utc().valueOf();
-      const postingInfo = {
+      const shortJobListing = jobListing.slice(0, SHORT_JOB_LISTINGS_LENGTH);
+      const shortEmployeeLocation = employeeLocation.slice(
+        0,
+        SHORT_EMPLOYEE_LOCATION_LENGTH
+      );
+
+      // small posting information to show user
+      const shortPostingInfo = {
+        photoUrl,
+        companyName,
+        jobTitle,
+        jobListing: shortJobListing, // shorten length of job listing
+        tags,
+        employeeLocation: shortEmployeeLocation, // shorten length of employee location
+      };
+
+      const fullPostingInfo = {
         photoUrl,
         companyName,
         companyAddress,
@@ -141,19 +161,22 @@ const PostJobListings = (props) => {
         workingHours,
         postedTimeStamp,
       };
-      database
-        .ref(`/jobListings/${uid}/${jobId}`)
-        .set(postingInfo)
-        .then(() => {
-          if (!props.edit) {
-            dispatch(addUsersJobListings(postingInfo));
-            console.log("Posted successfully!");
-          } else {
-            dispatch(editUsersJobListings(postingInfo));
-            console.log("Editted Successfully!");
-          }
-          history.push("/joblistings_management");
-        });
+
+      if (!props.edit) {
+        // when adding job posting
+        await dispatch(
+          startAddUsersJobListings(jobId, shortPostingInfo, fullPostingInfo)
+        ); // should write it with async/await here?
+        console.log("Posted successfully!");
+      } else {
+        // when editing job posting
+        await dispatch(
+          startEditUsersJobListings(jobId, shortPostingInfo, fullPostingInfo)
+        );
+        console.log("Editted Successfully!");
+      }
+      console.log("Will push to /joblistings_management");
+      history.push("/joblistings_management");
     } else {
       if (tags.length === 0) setSkillTagsError(true);
     }
@@ -297,16 +320,12 @@ const PostJobListings = (props) => {
               maxRows={MAX_ROWS_LARGE_INPUT}
             />
           </div>
-          <div className="input-block">
-            <InputTextAndLabel
+          <div className="input-block input-block--radio">
+            <RadioForm
               label="雇用形態"
-              placeholder="雇用形態を記入してください"
-              inputProps={{ maxLength: 100 }}
-              value={employmentType}
+              options={employmentTypeOptions}
               onChange={(e) => setEmploymentType(e.target.value)}
-              multiline
-              minRows={MIN_ROWS_LARGE_INPUT}
-              maxRows={MAX_ROWS_LARGE_INPUT}
+              value={employmentType}
             />
           </div>
           <div className="input-block">
