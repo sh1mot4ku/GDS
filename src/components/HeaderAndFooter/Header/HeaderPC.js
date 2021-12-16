@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
@@ -9,6 +10,11 @@ import { auth } from "../../../firebase/firebase";
 import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
+  const {
+    userInfo: {
+      profile: { photoUrl },
+    },
+  } = useSelector((state) => state.user);
   const location = useLocation();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -70,8 +76,11 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                   aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
                 >
-                  <AccountCircleOutlinedIcon className="user-icon-no-img" />
-                  {/* change this after user img func is implemented            */}
+                  {photoUrl ? (
+                    <img alt="user-icon" src={photoUrl} className="user-icon" />
+                  ) : (
+                    <AccountCircleOutlinedIcon className="user-icon-no-img" />
+                  )}
                 </Button>
                 {isRecruiter && (
                   <div className="post-button">
