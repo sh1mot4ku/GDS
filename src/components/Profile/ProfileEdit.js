@@ -2,53 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Button } from "@material-ui/core";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
-import InputText from "../ui/InputText";
-import InputSelect from "../ui/InputSelect";
-import RadioForm from "../ui/RadioForm";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  optionData,
-  countries,
-  levelOfEnglish,
-} from "../../data/applyingInfo/client";
 import TrimModal from "../ui/TrimModal";
 import { readFile } from "../../readImage/cropImage";
 import database, { firebase, storage, auth } from "../../firebase/firebase";
 import { editUserInfo } from "../../action/user";
 import "./ProfileEdit.scss";
+import ProfileEditClient from "./ProfileEditClient";
+import ProfileEditRecruiter from "./ProfileEditRecruiter";
+import validator from "validator";
 
 const DEFAULT_PHOTO = "/image/icon-user.png";
-const USER_TYPE = "client";
 
 const ProfileEdit = () => {
   const history = useHistory();
   const { uid, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(
-    userInfo.profile.photoUrl || DEFAULT_PHOTO
-  );
-  const [fullName, setFullName] = useState(userInfo.profile.fullName || "");
-  const [email, setEmail] = useState(userInfo.profile.email || "");
-  const [password, setPassword] = useState("");
-  const [changedPassword, setChangedPassword] = useState("");
-  const [location, setLocation] = useState(
-    userInfo.profile.location || "Japan"
-  );
-  const [lookingFor, setLookingFor] = useState(
-    userInfo.profile.lookingFor || ""
-  );
-  const [link1, setLink1] = useState(userInfo.profile.links.link1 || "");
-  const [link2, setLink2] = useState(userInfo.profile.links.link2 || "");
-  const [link3, setLink3] = useState(userInfo.profile.links.link3 || "");
-  const [englishLevel, setEnglishLevel] = useState(
-    userInfo.profile.englishLevel || ""
-  );
-  const [description, setDescription] = useState(
-    userInfo.profile.description || ""
+    userInfo?.profile.photoUrl || DEFAULT_PHOTO
   );
   const [storageRef, setStorageRef] = useState("");
+  const [fullName, setFullName] = useState(userInfo?.profile.fullName || "");
+  const [email, setEmail] = useState(userInfo?.profile.email || "");
+  const [password, setPassword] = useState("");
+  const [changedPassword, setChangedPassword] = useState("");
+  const [lastHalfForm, setLastHalfForm] = useState({});
+  const [nameError, setNameError] = useState(null);
+  const [emailInvalidError, setEmailInvalidError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
+  const [passwordInvalidError, setPasswordInvalidError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+  const [firebaseErrorMessage, setFirebaseErrorMessage] = useState("");
 
   useEffect(() => {
     if (uid) {
@@ -94,8 +81,62 @@ const ProfileEdit = () => {
     setOriginPhotoSrc(null);
   };
 
+  const onHandleInputs = (e) => {
+    firebaseErrorMessage.length !== 0 && setFirebaseErrorMessage("");
+    switch (e.target.name) {
+      case "fullname":
+        validator.isLength(e.target.value, 0, 50) &&
+          setFullName(e.target.value);
+        (nameError || nameError === null) && setNameError(false);
+        break;
+      case "email":
+        validator.isLength(e.target.value, 0, 254) && setEmail(e.target.value);
+        (emailInvalidError || emailInvalidError === null) &&
+          setEmailInvalidError(false);
+        (emailError || emailError === null) && setEmailError(false);
+        break;
+      case "password":
+        validator.isLength(e.target.value, 0, 32) &&
+          setChangedPassword(e.target.value);
+        (passwordInvalidError || passwordInvalidError === null) &&
+          setPasswordInvalidError(false);
+        (passwordError || passwordError === null) && setPasswordError(false);
+        break;
+    }
+  };
+
+  const validateAndTailorInput = (input, whatInput) => {
+    if (!input.match(/\S/g)) {
+      switch (whatInput) {
+        case "fullname":
+          setFullName("");
+          setNameError(true);
+          break;
+      }
+    }
+  };
+
+  const validatePassword = (inputPassword) => {
+    const regex =
+      // /^(?=.*[a-z])(?=.*[!@#$%^&*])(?=.*[0-9])[a-zA-Z0-9!@#$%^&*]{8,32}$/;
+      /^(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9~`! @#\$%\^&*()_\-\+=\{\[\}\]\|\\:;"'<,>\.\?/]{7,32}$/;
+    if (!regex.test(inputPassword) || inputPassword.length < 7) {
+      setPasswordInvalidError(true);
+      return false;
+    } else {
+      setPasswordInvalidError(
+        (prevState) => (prevState || prevState === null) && false
+      );
+      return true;
+    }
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    // validate changed password
+    if (!validatePassword(changedPassword)) return;
+
     // reauthenticate with Firebase Auth
     const user = auth.currentUser;
     const isEmailSame = user.email === email;
@@ -112,22 +153,39 @@ const ProfileEdit = () => {
         if (!isEmailSame) await user.updateEmail(email);
       } catch (e) {
         console.error(e);
-        return; // set Error message here
+        switch (e.code) {
+          case "auth/user-mismatch":
+            setFirebaseErrorMessage("アカウントが見つかりませんでした");
+            break;
+          case "auth/user-not-found":
+            setFirebaseErrorMessage("一致するアカウントが見つかりませんでした");
+            break;
+          case "auth/invalid-credential":
+            setFirebaseErrorMessage("無効な認証情報です");
+            break;
+          case "auth/invalid-email":
+            setFirebaseErrorMessage("無効なEメールアドレスです");
+            break;
+          case "auth/wrong-password":
+            setFirebaseErrorMessage("パスワードが間違っています");
+            break;
+          default:
+            setFirebaseErrorMessage(
+              "予期しないエラーが発生しました。再度登録してください。"
+            );
+        }
+        return; // don't proceed to posting process if user can't login
       }
     }
     const postingInfo = {
       profile: {
         fullName,
         email,
-        location,
-        lookingFor,
-        links: { link1, link2, link3 },
-        englishLevel,
-        description,
         pl: changedPassword.length,
         photoUrl,
+        ...lastHalfForm,
       },
-      userType: USER_TYPE,
+      userType: userInfo.userType,
     };
     database
       .ref(`/user/${uid}`)
@@ -146,7 +204,7 @@ const ProfileEdit = () => {
           <img alt="user-icon" src={photoUrl} className="user-icon" />
           <div>
             <div className="pf-name">{fullName}</div>
-            <div className="pf-country">{location}</div>
+            <div className="pf-country">{userInfo.profile.location || ""}</div>
             <div className="pf-photo-buttons">
               {photoUrl !== DEFAULT_PHOTO && (
                 <div
@@ -176,21 +234,31 @@ const ProfileEdit = () => {
         <div className="edit-container">
           <InputTextAndLabel
             label="お名前"
-            placeholder="お名前"
+            placeholder="例)山田 太郎"
             type="text"
-            onChange={(e) => setFullName(e.target.value)}
+            onChange={(e) => onHandleInputs(e)}
             value={fullName}
-            className="input"
+            name="fullname"
           />
+          {nameError && (
+            <p className="error-message">お名前が記入されていません</p>
+          )}
         </div>
         <div className="edit-container">
           <InputTextAndLabel
             label="メールアドレス"
-            placeholder="メールアドレス"
+            placeholder="example@example.com"
             type="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => onHandleInputs(e)}
             value={email}
+            name="email"
           />
+          {emailError && (
+            <p className="error-message">メールアドレスが記入されていません</p>
+          )}
+          {emailInvalidError && (
+            <p className="error-message">メールアドレスが無効です</p>
+          )}
         </div>
         <div className="edit-container">
           <InputTextAndLabel
@@ -206,69 +274,38 @@ const ProfileEdit = () => {
             label="変更後のパスワード"
             placeholder="変更後のパスワードを入力してください"
             type="password"
-            x
-            onChange={(e) => setChangedPassword(e.target.value)}
+            onChange={(e) => onHandleInputs(e)}
             value={changedPassword}
+            name="password"
           />
+          {passwordInvalidError && (
+            <p className="error-message">
+              7文字以上、文字と数字を組み合わせて入力してください
+            </p>
+          )}
+          {passwordError && (
+            <p className="error-message">パスワードを入力してください</p>
+          )}
         </div>
-        <div className="edit-container">
-          <InputSelect
-            label="ロケーション"
-            placeholder="ロケーション"
-            onChange={(e) => setLocation(e.target.value)}
-            value={location}
-            options={countries}
+        {userInfo.userType === "client" && (
+          <ProfileEditClient
+            setLastHalfForm={setLastHalfForm}
+            {...userInfo.profile}
           />
-        </div>
-        <div className="edit-container">
-          <RadioForm
-            label="求める雇用形態"
-            options={optionData.userLookingFor}
-            onChange={(e) => setLookingFor(e.target.value)}
-            value={lookingFor}
+        )}
+        {userInfo.userType === "recruiter" && (
+          <ProfileEditRecruiter
+            setLastHalfForm={setLastHalfForm}
+            {...userInfo.profile}
           />
-        </div>
-        <div className="edit-container">
-          <InputTextAndLabel
-            label="プロフィールリンク (LinkedIn / GitHub / Website)"
-            placeholder="https://www.linkedin.com/in/example"
-            type="text"
-            onChange={(e) => setLink1(e.target.value)}
-            value={link1}
-          />
+        )}
 
-          <InputText
-            placeholder="https://github.com/example"
-            type="text"
-            onChange={(e) => setLink2(e.target.value)}
-            value={link2}
-          />
+        {firebaseErrorMessage.length !== 0 && (
+          <p className="error-message firebase-err-message">
+            {firebaseErrorMessage}
+          </p>
+        )}
 
-          <InputText
-            placeholder="https://lraough.com/"
-            type="text"
-            onChange={(e) => setLink3(e.target.value)}
-            value={link3}
-          />
-        </div>
-        <div className="edit-container">
-          <InputSelect
-            label="英語レベル"
-            placeholder="ご自身の英語レベルについて教えてください"
-            type="text"
-            onChange={(e) => setEnglishLevel(e.target.value)}
-            value={englishLevel}
-            options={levelOfEnglish}
-          />
-        </div>
-        <div className="edit-container">
-          <RadioForm
-            label="ご自身の職種"
-            options={optionData.userDescription}
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-          />
-        </div>
         <div className="buttonContainer">
           <Button variant="contained" className="save-button" type="submit">
             保存する

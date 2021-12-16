@@ -7,6 +7,7 @@ import AppRouter, { history } from "./router/AppRouter";
 import database, { auth } from "./firebase/firebase";
 import { login, logout } from "./action/user";
 import configureStore from "./store/configureStore";
+import "./sass_config/common_style.scss";
 import "./sass_config/reset.scss";
 
 const theme = createTheme({
