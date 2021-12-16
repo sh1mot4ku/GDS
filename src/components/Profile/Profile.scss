@@ -15,10 +15,13 @@
   .pf-edited-indicator {
     position: absolute;
     top: 0;
+    left: 50%;
     background-color: $color_primary;
+    color: white;
     text-align: center;
     padding: 8px 0;
-    width: 100%;
+    width: 100vw;
+    transform: translateX(-50%);
     font-size: 14px;
     font-weight: bold;
     animation: fadeOut 1.5s ease forwards 1s 1 normal;
