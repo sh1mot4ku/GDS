@@ -1,41 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
-import JobBox from './JobBox';
-import OverviewList from './OverviewList';
-import Button from '@material-ui/core/Button';
-import './JobListing.scss';
-import UrgeApplyModal from '../ui/UrgeApplyModal';
-import momentTimezone from 'moment-timezone';
-import { functions } from '../../firebase/firebase';
-import ThankYouForApplying from './ThankYouForApplying';
-import { startSetJobListings } from '../../action/jobListings';
-import './ThankYouForApplying.scss';
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import JobBox from "./JobBox";
+import OverviewList from "./OverviewList";
+import Button from "@material-ui/core/Button";
+import UrgeApplyModal from "../ui/UrgeApplyModal";
+import momentTimezone from "moment-timezone";
+import { functions } from "../../firebase/firebase";
+import ThankYouForApplying from "./ThankYouForApplying";
+import { setFullJobListing } from "../../API/dbutils";
+import "./ThankYouForApplying.scss";
+import "./JobListing.scss";
 
 const JobListing = () => {
-  const dispatch = useDispatch();
-  const jobListings = useSelector((state) => state.jobListings);
+  const { uid } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
+  const { jobId } = useParams();
   const [job, setJob] = useState(null);
   const [overview, setOverview] = useState(null);
   const [isReadMoreClicked, setIsReadMoreClicked] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
-  const { id } = useParams();
-  const { uid } = useSelector((state) => state.user);
-  console.log(uid);
+  const [isApplied, setIsApplied] = useState(false);
 
   const onClose = () => {
     setIsReadMoreClicked(false);
   };
-  const { jobId } = useParams();
-  const { userInfo } = useSelector((state) => state.user);
-  const [isApplied, setIsApplied] = useState(false);
 
   const sendApplicationEmail = (e) => {
     e.preventDefault();
     const currentPacificTime = momentTimezone()
-      .tz('America/Los_Angeles')
-      .format('MMMM Do YYYY, h:mm a z');
+      .tz("America/Los_Angeles")
+      .format("MMMM Do YYYY, h:mm a z");
     if (userInfo) {
       const userInfoForApplication = {
         applicant: userInfo.profile.fullName,
@@ -46,22 +42,27 @@ const JobListing = () => {
         jobListingId: job.id,
       };
       const sendApplicationMail = functions.httpsCallable(
-        'sendApplicationMail'
+        "sendApplicationMail"
       );
       sendApplicationMail(userInfoForApplication);
-      console.log('submitted');
+      console.log("submitted");
       setIsApplied(true);
     }
   };
 
-  useEffect(() => {
-    if (jobListings.length !== 0 && jobId) {
-      const matchedJob = jobListings.find((job) => job.id === jobId);
-      setJob(matchedJob);
-    } else if (jobListings.length === 0) {
-      dispatch(startSetJobListings());
+  const setFullJobListingToJob = async () => {
+    if (jobId) {
+      const snapshot = await setFullJobListing(jobId);
+      setJob({
+        ...snapshot.val(),
+        id: jobId,
+      });
     }
-  }, [jobListings, jobId]);
+  };
+
+  useEffect(() => {
+    setFullJobListingToJob();
+  }, [jobId]);
 
   useEffect(() => {
     if (job) {
@@ -77,35 +78,35 @@ const JobListing = () => {
       } = job;
       setOverview([
         {
-          key: '業務内容',
+          key: "業務内容",
           value: jobDescription,
         },
         {
-          key: '必須条件',
+          key: "必須条件",
           value: must,
         },
         {
-          key: '歓迎条件',
+          key: "歓迎条件",
           value: welcome,
         },
         {
-          key: '勤務地',
+          key: "勤務地",
           value: employeeLocation,
         },
         {
-          key: '雇用形態',
+          key: "雇用形態",
           value: employmentType,
         },
         {
-          key: '想定年収',
+          key: "想定年収",
           value: annualSalaly,
         },
         {
-          key: '勤務時間',
+          key: "勤務時間",
           value: workingHours,
         },
         {
-          key: '休日休暇',
+          key: "休日休暇",
           value: leaves,
         },
       ]);
@@ -128,9 +129,9 @@ const JobListing = () => {
         ) : (
           <div
             className={[
-              'joblisting-details-wrapper',
-              isUserLoggedIn === false && 'joblisting-details-wrapper-logout',
-            ].join(' ')}
+              "joblisting-details-wrapper",
+              isUserLoggedIn === false && "joblisting-details-wrapper-logout",
+            ].join(" ")}
           >
             {job ? (
               <>

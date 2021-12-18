@@ -34,7 +34,7 @@ const AccordionSummary = styled((props) => (
       : 'rgba(0, 0, 0, .0)',
   flexDirection: 'row',
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-    transform: 'rotate(90deg)',
+    transform: 'rotate(-90deg)',
   },
   '& .MuiAccordionSummary-content': {
     marginLeft: theme.spacing(1),

@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import "./Drawer.scss";
 import { isMobile } from "react-device-detect";
 
+
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -103,9 +104,6 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
               )
             ) : (
               <>
-                <Link className="login" to="/login">
-                  ログイン
-                </Link>
                 <Link to="/apply-developer">
                   <Button className="round-button-drawer background-white-drawer">
                     無料会員登録

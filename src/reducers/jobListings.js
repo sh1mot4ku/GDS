@@ -2,8 +2,16 @@ const jobListingsReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_JOB_LISTINGS":
       return action.jobListings;
-    case "ADD_JOB_INFO":
-      return [...state, action.jobinfo];
+    case "ADD_JOB_LISTING":
+      return [...state, action.jobListing];
+    case "EDIT_JOB_LISTING":
+      return state.map((jobListing) => {
+        if (jobListing.id === action.jobListing.id) {
+          return action.jobListing;
+        } else {
+          return jobListing;
+        }
+      });
     default:
       return state;
   }
