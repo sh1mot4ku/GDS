@@ -1,6 +1,5 @@
 import React from "react";
 import "./TopPage.scss";
-import Button from "@material-ui/core/Button";
 import "../ui/Button.scss";
 import { Link } from "react-router-dom";
 import useMedia from "use-media";
@@ -329,10 +328,8 @@ const TopPage = () => {
         </div>
       </div>
       <div className="subscribe-buttons-buttom">
-        <Button
-          variant="outlined"
-          color="primary"
-          className="subscribe-button-wrapper"
+        <button
+          className="subscribe-button-wrapper btn-line-opacity"
         >
           <div className="subscribe-button" id="for-developer">
             <img
@@ -342,11 +339,9 @@ const TopPage = () => {
             />
             <span className="subscribe-text">求人をお探しの方はコチラ</span>
           </div>
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          className="subscribe-button-wrapper"
+        </button>
+        <button
+          className="subscribe-button-wrapper btn-fill-opacity"
         >
           <div className="subscribe-button" id="for-recruiter">
             <img
@@ -356,7 +351,7 @@ const TopPage = () => {
             />
             <span className="subscribe-text">求職者をお探しの方はコチラ</span>
           </div>
-        </Button>
+        </button>
       </div>
     </div>
   );

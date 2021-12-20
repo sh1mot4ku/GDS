@@ -48,7 +48,7 @@
       }
 
       .subscribe-buttons-top {
-        width: 500px;
+        width: 512px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
@@ -257,9 +257,15 @@
       border-radius: 12px;
       padding: 25px 9%;
       min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+
 
       @include mobile {
         padding: 25px 0;
+        align-items: center;
         margin-bottom: 20px;
         width: 100%;
       }
