@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Switch } from "react-router-dom";
 import TopPage from "../components/TopPage/TopPage";
 import AboutPage from "../components/AboutPage/AboutPage";
 import FaqsPage from "../components/FaqsPage/FaqsPage";
@@ -15,10 +15,12 @@ import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
 import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
 import EditJobListing from "../components/PostJobListings/EditJobListing";
+import NotFoundPage from "../components/notFoundPage/NotFoundPage";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import LogoutRoute from "./LogoutRoute";
 import ForgetPassword from "../components/ForgetPassword/ForgetPassword";
+import { isMobile } from "react-device-detect";
 
 const history = createBrowserHistory();
 
@@ -31,10 +33,12 @@ const AppRouter = () => (
       <LogoutRoute path="/apply-developer" component={Apply} />
       <LogoutRoute path="/apply-recruiter" component={Recruiter} />
       <PrivateRoute path="/post_joblistings" component={PostJobListings} />
-      <PrivateRoute
-        path="/joblistings_management"
-        component={JobListingsManagement}
-      />
+      {!isMobile && (
+        <PrivateRoute
+          path="/joblistings_management"
+          component={JobListingsManagement}
+        />
+      )}
       <PrivateRoute path="/edit_joblisting/:jobId" component={EditJobListing} />
       <PublicRoute path="/joblistings" component={JobListings} />
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />
@@ -42,6 +46,7 @@ const AppRouter = () => (
       <LogoutRoute path="/login" component={Login} />
       <PrivateRoute path="/edit" component={Edit} />
       <LogoutRoute path="/forget-password" component={ForgetPassword} />
+      <PublicRoute path="*" component={NotFoundPage} />
     </Switch>
   </Router>
 );

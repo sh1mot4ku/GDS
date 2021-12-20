@@ -51,14 +51,14 @@
 	background-color: $color_primary;
 }
 
-// 白 -> 青のhover 
+// 白 -> 青のhover
 .btn-line {
 	@include line;
 	&:hover {
 		@include fill;
 	}
 }
-// 青 -> 白のhover
+// 青 -> 白のhover btn-lg btn-fill
 .btn-fill {
 	@include fill;
 	&:hover {
