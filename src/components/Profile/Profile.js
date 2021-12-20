@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { turnOffProfileEdited } from "../../action/user";
 import "./Profile.scss";
 
-const DEFAULT_PHOTO = "/image/icon-user.png";
+const DEFAULT_PHOTO = "/image/icon-login-lg-user.svg";
 
 const Profile = () => {
   const { uid, userInfo } = useSelector((state) => state.user);
