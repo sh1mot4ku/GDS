@@ -10,6 +10,8 @@ import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
 import ThankYouForApplying from "./ThankYouForApplying";
 import { setFullJobListing } from "../../API/dbutils";
+import moment from "moment";
+import "moment/locale/ja";
 import "./ThankYouForApplying.scss";
 import "./JobListing.scss";
 

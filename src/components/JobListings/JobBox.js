@@ -22,7 +22,7 @@ const JobBox = ({
   }, []);
 
   useEffect(() => {
-    if (details && postedTimeStamp) {
+    if (postedTimeStamp) {
       const lag = moment(postedTimeStamp).fromNow();
       setTimeLag(lag);
     }
@@ -52,13 +52,19 @@ const JobBox = ({
               </div>
             ))}
         </div>
-        {details && timeLag ? (
+        {timeLag && <div className="timestamp">{timeLag}に掲載</div>}
+        {!details && (
+          <div className="job-box-content">
+            <span className="short-jd">{jobListing}</span>
+          </div>
+        )}
+        {/* {details && timeLag ? (
           <div className="timestamp">{timeLag}に掲載</div>
         ) : (
           <div className="job-box-content">
             <span className="short-jd">{jobListing}</span>
           </div>
-        )}
+        )} */}
       </Link>
     </div>
   );
