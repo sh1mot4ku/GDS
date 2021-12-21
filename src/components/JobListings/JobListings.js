@@ -20,7 +20,7 @@ const JobListings = () => {
   const history = useHistory();
   console.log(jobListingsArr);
   console.log(search);
-  console.log(pathname);
+  // console.log(pathname);
 
   const params = new URLSearchParams(search);
   const searchKeywordQuery = params.get('search-keyword');
@@ -28,19 +28,58 @@ const JobListings = () => {
   const sortByContractTypeQuery = params.get('sort-contract-type');
   const hasSearchKeywordQuery = params.has('search-keyword');
   const hasByPostingDateQuery = params.has('sort-posting-date');
-  const HasortByContractTypeQuery = params.has('sort-contract-type');
-  console.log(hasSearchKeywordQuery);
+  const hasortByContractTypeQuery = params.has('sort-contract-type');
+  console.log(params.toString());
 
-  const createSearchParams = () => {
+  const createSearchParamsForSearchKeyword = () => {
     console.log(searchInput);
+    // history.push({
+    //   search: `${
+    //     hasByPostingDateQuery || hasortByContractTypeQuery ? '&' : '?'
+    //   }search-keyword=${searchInput}`,
+    // });
+    if (params.toString().length !== 0)
+      params.append('search-keyword', searchInput);
+
     history.push({
-      search: `${
-        hasByPostingDateQuery || HasortByContractTypeQuery ? '&' : '?'
-      }search-keyword=${searchInput}`,
+      search:
+        params.toString().length !== 0
+          ? params.toString()
+          : `?search-keyword=${searchInput}`,
+    });
+  };
+
+  const createSearchParamsForSortPostingDate = (e) => {
+    // history.push({
+    //   search: `${
+    //     hasSearchKeywordQuery || hasortByContractTypeQuery ? '&' : '?'
+    //   }sort-posting-date=${e.target.value}`,
+    // });
+    if (params.toString().length !== 0)
+      params.append('sort-posting-date', e.target.value);
+
+    history.push({
+      search:
+        params.toString().length !== 0
+          ? params.toString()
+          : `?sort-posting-date=${e.target.value}`,
+    });
+  };
+
+  const createSearchParamsForContractType = (e) => {
+    if (params.toString().length !== 0)
+      params.append('sort-contract-type', e.target.value);
+
+    history.push({
+      search:
+        params.toString().length !== 0
+          ? params.toString()
+          : `?sort-contract-type=${e.target.value}`,
     });
   };
 
   const filterJobListings = () => {
+    console.log('filterJobListings');
     if (searchInput.length === 0) setJobListingsArr(jobListings);
     if (hasSearchKeywordQuery) {
       const searchKeywordsArr = searchKeywordQuery
@@ -90,15 +129,40 @@ const JobListings = () => {
     }
   };
 
-  const sortByPostingDate = (e) => {
+  const sortByPostingDate = () => {
     let sortedJobListingsByPostingDate = [];
-
+    sortedJobListingsByPostingDate = jobListingsArr.filter((joblisting) => {
+      const { employmentType } = joblisting;
+      if (employmentType) {
+        return employmentType === sortByPostingDateQuery;
+      }
+    });
+    setJobListingsArr(
+      sortedJobListingsByPostingDate.length !== 0
+        ? sortedJobListingsByPostingDate
+        : ['no result']
+    );
     console.log('sortbypostingdate');
   };
 
-  const sortByContractType = (e) => {
-    // e.preventDefault();
-    console.log('sortbycontract' + e.target.value);
+  const sortByContractType = () => {
+    console.log(sortByContractTypeQuery);
+    let sortedJobListingsByContractType = [];
+    sortedJobListingsByContractType = jobListingsArr.filter(
+      (joblisting) =>
+        // {
+        //   const { employmentType } = joblisting;
+        //   console.log(employmentType);
+        //   return employmentType && employmentType === sortByContractTypeQuery;
+        // }
+        joblisting.employmentType === sortByContractTypeQuery
+    );
+    console.log(sortedJobListingsByContractType);
+    setJobListingsArr(
+      sortedJobListingsByContractType.length !== 0
+        ? sortedJobListingsByContractType
+        : ['no result']
+    );
   };
 
   useEffect(() => {
@@ -110,7 +174,9 @@ const JobListings = () => {
       setLoaded(true);
     }
 
-    hasSearchKeywordQuery !== 0 && filterJobListings();
+    hasSearchKeywordQuery && filterJobListings();
+    hasByPostingDateQuery && sortByPostingDate();
+    hasortByContractTypeQuery && sortByContractType();
   }, [jobListings, search]);
 
   return (
@@ -124,17 +190,22 @@ const JobListings = () => {
             value={searchInput}
             className="search-input"
             // onKeyPress={(e) => e.key === 'Enter' && filterJobListings()}
-            onKeyPress={(e) => e.key === 'Enter' && createSearchParams()}
+            onKeyPress={(e) =>
+              e.key === 'Enter' && createSearchParamsForSearchKeyword()
+            }
           />
           {/* <SearchIcon className="search-icon" onClick={filterJobListings} /> */}
-          <SearchIcon className="search-icon" onClick={createSearchParams} />
+          <SearchIcon
+            className="search-icon"
+            onClick={createSearchParamsForSearchKeyword}
+          />
         </div>
         <div className="sort-wrap">
           <select
             name="day-of-posting"
             id="day-of-posting"
             className="sort-dropdown"
-            onChange={sortByPostingDate}
+            onChange={createSearchParamsForSortPostingDate}
           >
             <option value="掲載日">掲載日</option>
             <option value="1日以内">1日以内</option>
@@ -145,7 +216,7 @@ const JobListings = () => {
             name="contract-type"
             id="contract-type"
             className="sort-dropdown"
-            onChange={sortByContractType}
+            onChange={createSearchParamsForContractType}
           >
             <option value="雇用形態">雇用形態</option>
             {options.length !== 0 &&
