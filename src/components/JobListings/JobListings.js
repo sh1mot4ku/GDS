@@ -10,98 +10,95 @@ import './JobListings.scss';
 const replaceLetters = (searchInput) =>
   searchInput.replace(/\s+/g, '').replace(/-/g, '').toLowerCase();
 
-const replaceLettersAndCreateKeywordsArr = (searchInput) => {
-  let keywordsArr = searchInput.toLowerCase().replace(/　/g, ' ').split(' ');
-  // let params = '';
-  // keywordsArr.forEach((keyword) => {
-  //   history.push(params + keyword);
-  // });
-
-  // console.log(keywordsArr);
-  return keywordsArr;
-};
-
 const JobListings = () => {
   const jobListings = useSelector((state) => state.jobListings);
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState('');
   const [jobListingsArr, setJobListingsArr] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const search = useLocation().search;
+  const { pathname, search } = useLocation();
   const history = useHistory();
+  console.log(jobListingsArr);
   console.log(search);
+  console.log(pathname);
 
   const params = new URLSearchParams(search);
   const searchKeywordQuery = params.get('search-keyword');
   const sortByPostingDateQuery = params.get('sort-posting-date');
   const sortByContractTypeQuery = params.get('sort-contract-type');
-  const hasSearchKeyword = params.has('search-keyword');
-  console.log(hasSearchKeyword);
+  const hasSearchKeywordQuery = params.has('search-keyword');
+  const hasByPostingDateQuery = params.has('sort-posting-date');
+  const HasortByContractTypeQuery = params.has('sort-contract-type');
+  console.log(hasSearchKeywordQuery);
 
-  // const replaceLettersAndCreateKeywordsArr = (searchInput) => {
-  //   history.push({
-  //     // pathname: '/joblistings',
-  //     search: `?search-keyword=${searchInput}`,
-  //   });
-  //   if (hasSearchKeyword) {
-  //     console.log('hasSearchKeyword');
-  //     let keywordsArr = params
-  //       .get('search-keyword')
-  //       .toLowerCase()
-  //       .replace(/　/g, ' ')
-  //       .split(' ');
-  //     // searchInput.toLowerCase().replace(/　/g, ' ').split(' ');
-  //     console.log(keywordsArr);
-  //     return keywordsArr;
-  //   }
-  //   return [];
-  // };
+  const createSearchParams = () => {
+    console.log(searchInput);
+    history.push({
+      search: `${
+        hasByPostingDateQuery || HasortByContractTypeQuery ? '&' : '?'
+      }search-keyword=${searchInput}`,
+    });
+  };
 
   const filterJobListings = () => {
     if (searchInput.length === 0) setJobListingsArr(jobListings);
+    if (hasSearchKeywordQuery) {
+      const searchKeywordsArr = searchKeywordQuery
+        .toLowerCase()
+        .replace(/　/g, ' ')
+        .split(' ');
+      console.log(searchKeywordsArr);
 
-    let totalfilteredJobListings = [];
-    let searchKeywordsArr = replaceLettersAndCreateKeywordsArr(searchInput);
+      let totalfilteredJobListings = [];
 
-    jobListings.forEach((joblisting) => {
-      let isAllMatched = [];
-      const { jobTitle, companyName, employeeLocation, jobListing, tags, id } =
-        joblisting;
-      searchKeywordsArr.forEach((searchKeyword) => {
-        if (
-          replaceLetters(jobTitle).includes(searchKeyword) ||
-          replaceLetters(companyName).includes(searchKeyword) ||
-          replaceLetters(employeeLocation).includes(searchKeyword) ||
-          replaceLetters(jobListing).includes(searchKeyword) ||
-          tags.map((tag) => replaceLetters(tag)).includes(searchKeyword)
-        ) {
-          isAllMatched.push(true);
-        } else {
-          isAllMatched.push(false);
+      jobListings.forEach((joblisting) => {
+        let isAllMatched = [];
+        const {
+          jobTitle,
+          companyName,
+          employeeLocation,
+          jobListing,
+          tags,
+          id,
+        } = joblisting;
+        searchKeywordsArr.forEach((searchKeyword) => {
+          if (
+            replaceLetters(jobTitle).includes(searchKeyword) ||
+            replaceLetters(companyName).includes(searchKeyword) ||
+            replaceLetters(employeeLocation).includes(searchKeyword) ||
+            replaceLetters(jobListing).includes(searchKeyword) ||
+            tags.map((tag) => replaceLetters(tag)).includes(searchKeyword)
+          ) {
+            isAllMatched.push(true);
+          } else {
+            isAllMatched.push(false);
+          }
+        });
+        if (!isAllMatched.includes(false)) {
+          // avoid duplicate
+          // !totalfilteredJobListings.some(
+          //   (filteredJobListing) => filteredJobListing.id === id
+          // ) &&
+          totalfilteredJobListings.push(joblisting);
         }
       });
-      if (!isAllMatched.includes(false)) {
-        // avoid duplicate
-        !totalfilteredJobListings.some(
-          (filteredJobListing) => filteredJobListing.id === id
-        ) && totalfilteredJobListings.push(joblisting);
-      }
-    });
-    setJobListingsArr(
-      totalfilteredJobListings.length !== 0
-        ? totalfilteredJobListings
-        : ['no result']
-    );
+      setJobListingsArr(
+        totalfilteredJobListings.length !== 0
+          ? totalfilteredJobListings
+          : ['no result']
+      );
+    }
   };
 
   const sortByPostingDate = (e) => {
-    // e.preventDefault();
+    let sortedJobListingsByPostingDate = [];
+
     console.log('sortbypostingdate');
   };
 
   const sortByContractType = (e) => {
     // e.preventDefault();
-    console.log('sortbycontract');
+    console.log('sortbycontract' + e.target.value);
   };
 
   useEffect(() => {
@@ -112,7 +109,9 @@ const JobListings = () => {
       dispatch(startSetJobListings());
       setLoaded(true);
     }
-  }, [jobListings]);
+
+    hasSearchKeywordQuery !== 0 && filterJobListings();
+  }, [jobListings, search]);
 
   return (
     <>
@@ -124,9 +123,11 @@ const JobListings = () => {
             onChange={(e) => setSearchInput(e.target.value)}
             value={searchInput}
             className="search-input"
-            onKeyPress={(e) => e.key === 'Enter' && filterJobListings()}
+            // onKeyPress={(e) => e.key === 'Enter' && filterJobListings()}
+            onKeyPress={(e) => e.key === 'Enter' && createSearchParams()}
           />
-          <SearchIcon className="search-icon" onClick={filterJobListings} />
+          {/* <SearchIcon className="search-icon" onClick={filterJobListings} /> */}
+          <SearchIcon className="search-icon" onClick={createSearchParams} />
         </div>
         <div className="sort-wrap">
           <select
