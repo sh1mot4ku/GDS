@@ -6,7 +6,7 @@
   margin: 0 auto;
   padding: 40.5px 0 200px;
 
-  @include mobile {
+  @include tablet {
     width: 100vw;
     padding: 0 20px !important;
     box-sizing: border-box;
@@ -16,9 +16,14 @@
     display: flex;
     justify-content: left;
     width: 100%;
-    padding: 40px 0 20px;
+    padding: 40px 0;
     border-bottom: solid 1px #e5e5e5;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+
+    @include tablet {
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
 
     .user-icon {
       width: 100px;
@@ -26,7 +31,7 @@
       margin-right: 20px;
       border-radius: 100px;
 
-      @include mobile {
+      @include tablet {
         width: 56px;
         height: 56px;
         margin-right: 16px;
@@ -35,10 +40,10 @@
 
     .pf-photo-buttons {
       display: flex;
-      justify-content: space-between;
+      justify-content: left;
       align-items: center;
 
-      .pf-photo-buttons {
+      .pf-photo-button {
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -88,8 +93,8 @@
     width: 100%;
     margin-bottom: 16px;
 
-    @include mobile {
-      // margin-bottom: 0;
+    @include tablet {
+      margin-bottom: 0;
     }
 
     .input {
@@ -103,9 +108,9 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 80px;
+    margin-top: 60px;
 
-    @include mobile {
+    @include tablet {
       margin-top: 0;
       margin-bottom: 80px;
     }

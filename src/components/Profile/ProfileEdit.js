@@ -12,7 +12,7 @@ import ProfileEditClient from "./ProfileEditClient";
 import ProfileEditRecruiter from "./ProfileEditRecruiter";
 import validator from "validator";
 
-const DEFAULT_PHOTO = "/image/icon-user.png";
+const DEFAULT_PHOTO = "/image/icon-login-lg-user.svg";
 
 const ProfileEdit = () => {
   const history = useHistory();
@@ -21,9 +21,7 @@ const ProfileEdit = () => {
 
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
-  const [photoUrl, setPhotoUrl] = useState(
-    userInfo?.profile.photoUrl || DEFAULT_PHOTO
-  );
+  const [photoUrl, setPhotoUrl] = useState(userInfo?.profile.photoUrl || "");
   const [storageRef, setStorageRef] = useState("");
   const [fullName, setFullName] = useState(userInfo?.profile.fullName || "");
   const [email, setEmail] = useState(userInfo?.profile.email || "");
@@ -203,24 +201,28 @@ const ProfileEdit = () => {
     <div className="main-edit">
       <form onSubmit={onSubmit} className="edit-form">
         <div className="pf-container">
-          <img alt="user-icon" src={photoUrl} className="user-icon" />
+          <img
+            alt="user-icon"
+            src={photoUrl || DEFAULT_PHOTO}
+            className="user-icon"
+          />
           <div>
             <div className="pf-name">{userInfo?.profile.fullName}</div>
             <div className="pf-country">{userInfo.profile.location || ""}</div>
             <div className="pf-photo-buttons">
-              {photoUrl !== DEFAULT_PHOTO && (
+              {photoUrl && (
                 <div
                   onClick={(e) => {
                     e.preventDefault();
                     setPhotoUrl(DEFAULT_PHOTO);
                   }}
-                  className="pf-photo-delete-button pf-photo-buttons"
+                  className="pf-photo-delete-button pf-photo-button"
                 >
                   <span>削除</span>
                 </div>
               )}
               <label>
-                <div className="pf-photo-add-button pf-photo-buttons">
+                <div className="pf-photo-add-button pf-photo-button">
                   画像追加
                 </div>
                 <input
