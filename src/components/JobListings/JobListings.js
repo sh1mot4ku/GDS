@@ -9,12 +9,15 @@ import "./JobListings.scss";
 import moment from "moment";
 import Loading from "../ui/Loading";
 
+// replace letters to lowercase, remove space and dash
 const replaceLetters = (searchInput) =>
   searchInput.replace(/\s+/g, "").replace(/-/g, "").toLowerCase();
+// create search keyword arr
+const createSearchKeywordsArr = (searchKeywordQuery) =>
+  searchKeywordQuery.toLowerCase().replace(/　/g, " ").split(" ");
 
 const JobListings = () => {
   const jobListings = useSelector((state) => state.jobListings);
-  console.log(jobListings);
   const dispatch = useDispatch();
   const [searchInput, setSearchInput] = useState("");
   const [jobListingsArr, setJobListingsArr] = useState(null);
@@ -62,11 +65,9 @@ const JobListings = () => {
 
   const filterJobListings = () => {
     let totalfilteredJobListings = [];
+    // ================= filter func for search input ===================
     if (hasSearchKeywordQuery) {
-      const searchKeywordsArr = searchKeywordQuery
-        .toLowerCase()
-        .replace(/　/g, " ")
-        .split(" ");
+      const searchKeywordsArr = createSearchKeywordsArr(searchKeywordQuery);
       console.log(searchKeywordsArr);
 
       jobListings.forEach((joblisting) => {
@@ -92,6 +93,7 @@ const JobListings = () => {
           totalfilteredJobListings.push(joblisting);
       });
     }
+    // ================= filter func for posting date sort (掲載日) ===================
     if (hasSortPostingDateQuery) {
       const currentTimeAtUtc = moment().utc().valueOf();
       // if there is no search keyword query set, then we want to sort from jobListings
@@ -101,6 +103,7 @@ const JobListings = () => {
           currentTimeAtUtc - joblisting.postedTimeStamp <= sortPostingDateQuery
       );
     }
+    // ================= filter func for employment type sort (雇用形態) ===================
     if (hasSortEmploymentTypeQuery) {
       // if there are no search keyword and posting date query set, then we want to sort from jobListings
       if (!hasSearchKeywordQuery && !hasSortPostingDateQuery)
@@ -109,6 +112,7 @@ const JobListings = () => {
         (joblisting) => joblisting.employmentType === sortEmploymentTypeQuery
       );
     }
+    // =========== then set result(totalfilteredJobListings) to setJobListingsArr() =============
     setJobListingsArr(
       totalfilteredJobListings.length !== 0
         ? totalfilteredJobListings
