@@ -29,6 +29,7 @@ const JobListings = () => {
   const hasSortPostingDateQuery = params.has("sort-posting-date");
   const hasSortEmploymentTypeQuery = params.has("sort-employment-type");
 
+  // params will be changed and the useEffect gets executed to run filterJobListings()
   const onHandleSearchParamsForSearchKeyword = () => {
     if (hasSearchKeywordQuery) {
       params.set("search-keyword", searchInput);
@@ -40,6 +41,7 @@ const JobListings = () => {
     });
   };
 
+  // params will be changed and the useEffect gets executed to run filterJobListings()
   const onHandleSearchParamsForSortOptions = (e, hasQuery) => {
     const { value, name } = e.target;
 
@@ -73,6 +75,7 @@ const JobListings = () => {
           joblisting;
         searchKeywordsArr.forEach((searchKeyword) => {
           if (
+            // see if each joblisting is matched with all of the search keywords (& search)
             replaceLetters(jobTitle).includes(searchKeyword) ||
             replaceLetters(companyName).includes(searchKeyword) ||
             replaceLetters(employeeLocation).includes(searchKeyword) ||
@@ -84,12 +87,14 @@ const JobListings = () => {
             isAllMatched.push(false);
           }
         });
+        // if false includes the joblisting is not matched with & search
         if (!isAllMatched.includes(false))
           totalfilteredJobListings.push(joblisting);
       });
     }
     if (hasSortPostingDateQuery) {
       const currentTimeAtUtc = moment().utc().valueOf();
+      // if there is no search keyword query set, then we want to sort from jobListings
       if (!hasSearchKeywordQuery) totalfilteredJobListings = jobListings;
       totalfilteredJobListings = totalfilteredJobListings.filter(
         (joblisting) =>
@@ -97,6 +102,7 @@ const JobListings = () => {
       );
     }
     if (hasSortEmploymentTypeQuery) {
+      // if there are no search keyword and posting date query set, then we want to sort from jobListings
       if (!hasSearchKeywordQuery && !hasSortPostingDateQuery)
         totalfilteredJobListings = jobListings;
       totalfilteredJobListings = totalfilteredJobListings.filter(
