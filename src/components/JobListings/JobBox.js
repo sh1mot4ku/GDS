@@ -13,6 +13,7 @@ const JobBox = ({
   tags,
   id,
   postedTimeStamp,
+  employmentType,
   details,
 }) => {
   const [timeLag, setTimeLag] = useState(null);
@@ -42,6 +43,11 @@ const JobBox = ({
         </div>
         <div className="job-box-content">
           <span className="location">{employeeLocation}</span>
+        </div>
+        <div className="job-box-content">
+          <span className="employment-type">
+            {employmentType && employmentType}
+          </span>
         </div>
         <div className="job-box-skill-tags">
           {Array.isArray(tags) &&

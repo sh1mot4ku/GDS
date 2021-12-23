@@ -1,4 +1,4 @@
-@import "../../sass_config/color";
+@import '../../sass_config/color';
 
 // =========== Input ===========
 .input {
@@ -143,5 +143,19 @@
     margin-bottom: 80px;
   }
 }
-
 // ======================================
+
+// =============== Loading ==================
+.loading-container {
+  height: 90vh;
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loading-icon {
+    width: 150px;
+  }
+}
+// ==========================================

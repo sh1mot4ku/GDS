@@ -1,12 +1,19 @@
 @import "../../sass_config/color";
+@import "../../sass_config/mixin.scss";
 
 .job-box {
   padding-bottom: 24px;
   margin-bottom: 24px;
   border-bottom: 1px $color-line solid;
+  @include mobile {
+    margin-bottom: 20px;
+  }
 
   .job-img-wrapper {
     margin-bottom: 16px;
+    @include mobile {
+      margin-bottom: 12px;
+    }
 
     .job-img {
       width: 100%;
@@ -20,23 +27,47 @@
     .job-title {
       font-size: 20px;
       font-weight: bold;
+      @include mobile {
+        font-size: 16px;
+      }
     }
-
+    .company-name {
+      @include mobile {
+        font-size: 14px;
+      }
+    }
+    .location,
+    .employment-type {
+      @include mobile {
+        font-size: 12px;
+      }
+    }
     .short-jd {
       color: $color-sub-text;
+      @include mobile {
+        font-size: 14px !important;
+      }
     }
   }
   .job-box-skill-tags {
     margin: 16px 0;
+    display: flex;
+    flex-wrap: wrap;
 
     .skill-tag-wrapper {
       margin-right: 2px;
       display: inline;
 
       .skill-tag {
+        font-weight: bolder;
         padding: 4px 12px;
         border: 1px solid $color-line;
         border-radius: 4px;
+        @include mobile {
+          padding: 4px 10px;
+          font-size: 14px;
+          margin-top: 12px;
+        }
       }
     }
   }
