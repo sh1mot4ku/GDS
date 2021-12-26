@@ -6,10 +6,14 @@
   width: 600px;
   position: relative;
   margin: 0 auto;
-  padding: 40.5px 0 200px;
+  padding: 80.5px 0 200px;
 
   @include tablet {
-    font-size: 0.5rem;
+    font-size: 16px;
+    width: 100vw;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
   }
 
   .pf-edited-indicator {
@@ -25,6 +29,10 @@
     font-size: 14px;
     font-weight: bold;
     animation: fadeOut 1.5s ease forwards 1s 1 normal;
+
+    @include tablet {
+      font-size: 12px;
+    }
   }
 
   .pf-container {
@@ -35,15 +43,16 @@
     border-bottom: solid 1px #e5e5e5;
 
     @include tablet {
-      width: 80%;
+      width: 100%;
+      padding: 32px 0;
     }
 
     &--top {
       padding-top: 0;
-    }
 
-    &:first-child {
-      // height: 200px;
+      @include tablet {
+        padding-bottom: 20px;
+      }
     }
 
     .user-icon {
@@ -51,6 +60,11 @@
       height: 100px;
       margin-right: 20px;
       border-radius: 100px;
+
+      @include tablet {
+        width: 56px;
+        height: 56px;
+      }
     }
 
     .pf-button {
@@ -72,10 +86,12 @@
     .pf-title {
       width: 160px;
       color: #999999;
-    }
 
-    .pf-data {
-      width: 70%;
+      @include tablet {
+        width: 120px;
+        font-size: 14px;
+        margin-right: 22px;
+      }
     }
   }
 }

@@ -4,6 +4,7 @@ import InputTextAndLabel from "../ui/InputTextAndLabel";
 import RadioForm from "../ui/RadioForm";
 import { optionData } from "../../data/applyingInfo/recruiter";
 import validator from "validator";
+import "./ProfileEditRecruiter.scss";
 
 const ProfileEditRecruiter = ({
   companyAddress: originalCompanyAddress,
@@ -92,7 +93,7 @@ const ProfileEditRecruiter = ({
           <p className="error-message">会社所在地をご記入ください</p>
         )}
       </div>
-      <div className="edit-container">
+      <div className="edit-container" id="looking-for">
         <RadioForm
           label="募集職種"
           options={optionData.businessLookingFor}
@@ -100,7 +101,7 @@ const ProfileEditRecruiter = ({
           value={lookingFor}
         />
       </div>
-      <div className="edit-container">
+      <div className="edit-container" id="commitment">
         <RadioForm
           label="コミット時間"
           options={optionData.businessCommitment}

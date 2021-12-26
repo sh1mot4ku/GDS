@@ -318,7 +318,7 @@ const ProfileEdit = () => {
             className="cancel-button"
             onClick={() => history.push("/profile")}
           >
-            <span>キャンセル</span>
+            <span className="cancel-button-underline">キャンセル</span>
           </div>
         </div>
       </form>

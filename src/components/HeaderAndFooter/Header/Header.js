@@ -36,7 +36,7 @@ const Header = () => {
       location.pathname.includes("/edit_joblisting/") ? null : (
         <header className="header">
           <div className="header-container">
-            <Link to={uid ? "/joblistings" : "/"}>
+            <Link to={uid ? "/joblistings" : "/"} className="logo-wrapper">
               <img
                 className="company-logo"
                 src="image/lraoughLogo.png"
