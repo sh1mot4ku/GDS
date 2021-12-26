@@ -28,7 +28,7 @@
     transform: translateX(-50%);
     font-size: 14px;
     font-weight: bold;
-    animation: fadeOut 1.5s ease forwards 1s 1 normal;
+    animation: fadeOut 5s ease forwards 1s 1 normal;
 
     @include tablet {
       font-size: 12px;

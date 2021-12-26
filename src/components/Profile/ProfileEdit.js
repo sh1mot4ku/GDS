@@ -291,7 +291,7 @@ const ProfileEdit = () => {
             <p className="error-message">パスワードを入力してください</p>
           )}
         </div>
-        {userInfo.userType === "client" && (
+        {userInfo.userType === "developer" && (
           <ProfileEditClient
             setLastHalfForm={setLastHalfForm}
             {...userInfo.profile}

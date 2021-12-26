@@ -9,6 +9,7 @@ import {
   levelOfEnglish,
 } from "../../data/applyingInfo/client";
 import validator from "validator";
+import "./ProfileEditClient.scss";
 
 const ProfileEditClient = ({
   location: originalLocation,
@@ -72,7 +73,7 @@ const ProfileEditClient = ({
           options={countries}
         />
       </div>
-      <div className="edit-container">
+      <div className="edit-container" id="looking-for">
         <RadioForm
           label="求める雇用形態"
           options={optionData.userLookingFor}

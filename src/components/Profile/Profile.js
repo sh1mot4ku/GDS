@@ -52,7 +52,7 @@ const Profile = () => {
             <div className="pf-title">パスワード</div>
             <div className="pf-data">{"*".repeat(userInfo.profile.pl)}</div>
           </div>
-          {userInfo.userType === "client" && (
+          {userInfo.userType === "developer" && (
             <React.Fragment>
               <div className="pf-container">
                 <div className="pf-title">求める雇用形態</div>
