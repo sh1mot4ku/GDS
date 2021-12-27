@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import JobBox from "./JobBox";
 import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { startSetJobListings } from "../../action/jobListings";
 import options from "../../data/radioButtonOptions/PostJobListings";
@@ -17,11 +18,6 @@ const createSearchKeywordsArr = (searchKeywordQuery) =>
   searchKeywordQuery.toLowerCase().replace(/　/g, " ").split(" ");
 
 const JobListings = () => {
-  const jobListings = useSelector((state) => state.jobListings);
-  const dispatch = useDispatch();
-  const [searchInput, setSearchInput] = useState("");
-  const [jobListingsArr, setJobListingsArr] = useState(null);
-  const [loaded, setLoaded] = useState(false);
   const { search } = useLocation();
   const history = useHistory();
   const params = new URLSearchParams(search);
@@ -31,6 +27,13 @@ const JobListings = () => {
   const hasSearchKeywordQuery = params.has("search-keyword");
   const hasSortPostingDateQuery = params.has("sort-posting-date");
   const hasSortEmploymentTypeQuery = params.has("sort-employment-type");
+  const jobListings = useSelector((state) => state.jobListings);
+  const dispatch = useDispatch();
+  const [searchInput, setSearchInput] = useState(
+    searchKeywordQuery ? searchKeywordQuery : ""
+  );
+  const [jobListingsArr, setJobListingsArr] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   // params will be changed and the useEffect gets executed to run filterJobListings()
   const onHandleSearchParamsForSearchKeyword = () => {
@@ -158,10 +161,19 @@ const JobListings = () => {
                   e.key === "Enter" && onHandleSearchParamsForSearchKeyword(e)
                 }
               />
-              <SearchIcon
-                className="search-icon"
-                onClick={onHandleSearchParamsForSearchKeyword}
-              />
+              <div className="icons-wrapper">
+                <CloseIcon
+                  className={[
+                    "close-icon",
+                    searchInput === "" && "display-none",
+                  ].join(" ")}
+                  onClick={() => setSearchInput("")}
+                />
+                <SearchIcon
+                  className="search-icon"
+                  onClick={onHandleSearchParamsForSearchKeyword}
+                />
+              </div>
             </div>
             <div className="sort-wrap">
               <select
