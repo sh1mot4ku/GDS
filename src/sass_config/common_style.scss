@@ -1,0 +1,11 @@
+@import "./color";
+
+.error-message {
+  color: $warning;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+.firebase-err-message {
+  font-size: 15px;
+  text-align: center;
+}
