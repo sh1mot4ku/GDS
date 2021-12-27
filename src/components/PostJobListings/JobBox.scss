@@ -2,6 +2,8 @@
 @import "../JobListings/JobBox";
 
 .job-box {
+  position: relative;
+
   .job-wrapper {
     display: flex;
     justify-content: left;
@@ -16,6 +18,48 @@
         width: 208px !important;
         height: 127px !important;
         object-fit: cover;
+      }
+    }
+  }
+  .meatballs-menu-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .meatballs-menu {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .meatballs-menu-list-wrapper {
+      font-size: 14px;
+      position: absolute;
+      top: -15px;
+      right: 0;
+      box-shadow: (0px 4px 4px 0 rgba(0, 0, 0, 0.25));
+      border-radius: 8px;
+      padding: 10px 20px;
+      width: 220px;
+
+      & > div:last-child {
+        border-bottom: none !important;
+      }
+
+      .meatballs-menu-list {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid $color-line;
+        cursor: pointer;
+
+        &#delete {
+          color: $warning;
+        }
+
+        .list-icon {
+          margin-right: 12px;
+        }
       }
     }
   }
