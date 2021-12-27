@@ -16,14 +16,8 @@ const JobBox = ({
   const menuRef = useRef(null);
 
   useEffect(() => {
-    if (isOpenMenu) {
-      menuRef.current.focus();
-    }
+    isOpenMenu && menuRef.current.focus();
   }, [isOpenMenu]);
-
-  const onBlur = () => {
-    setIsOpenMenu(false);
-  };
 
   return (
     <div className="job-box">
@@ -57,7 +51,12 @@ const JobBox = ({
           </div>
         </div>
       </Link>
-      <div className="meatballs-menu-wrapper" ref={menuRef} onBlur={onBlur}>
+      <div
+        className="meatballs-menu-wrapper"
+        ref={menuRef}
+        onBlur={() => setIsOpenMenu(false)}
+        tabIndex={1}
+      >
         {!isOpenMenu ? (
           <div className="meatballs-menu" onClick={() => setIsOpenMenu(true)}>
             …
