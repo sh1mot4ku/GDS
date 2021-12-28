@@ -32,6 +32,8 @@ const JobBox = ({
     handleClose();
   };
 
+  const onDelete = () => {};
+
   return (
     <React.Fragment>
       <div className="job-box">
@@ -119,7 +121,7 @@ const JobBox = ({
             <div>
               この操作は取り消せません。求人一覧の検索結果から投稿が削除されます。
             </div>
-            <button>削除</button>
+            <button onClick={onDelete}>削除</button>
             <button>キャンセル</button>
           </div>
         </Modal>

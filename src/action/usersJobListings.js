@@ -109,3 +109,39 @@ export const startEditUsersJobListings = (jobId, shortUpdates, fullUpdates) => {
     }
   };
 };
+
+export const deleteUsersJobListings = (id) => ({
+  type: "DELETE_USERS_JOB_LISTING",
+  id,
+});
+
+export const startDeleteUsersJobListings = (
+  jobId,
+  shortUpdates,
+  fullUpdates
+) => {
+  return async (dispatch, getState) => {
+    const uid = getState().user.uid;
+
+    try {
+      // update short posting information to database
+      await database
+        .ref(`shortJobListings/${uid}/${jobId}`)
+        .remove(shortUpdates);
+      console.log("remove short posting information from database");
+
+      // update full posting information to database
+      await database.ref(`fullJobListings/${jobId}`).remove(fullUpdates);
+      console.log("remove full posting information from database");
+
+      // delete short posting information from Redux
+
+      dispatch(editUsersJobListings(jobId));
+      dispatch(editJobListing(jobId));
+
+      console.log("startEditUsersJobListings finished");
+    } catch (err) {
+      throw err;
+    }
+  };
+};
