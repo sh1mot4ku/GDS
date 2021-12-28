@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from './Modal';
-import Button from '@mui/material/Button';
+import "../ui/Button.scss"
 import './ui.scss';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
@@ -17,9 +17,9 @@ const UrgeApplyModal = (props) => {
           ></img>
           <p className="text">続きを見るには会員登録が必要です</p>
           <Link to="/apply-developer" className="apply-link">
-            <Button variant="contained" className="apply-button">
+            <button  className="btn-lg btn-fill">
               無料会員登録
-            </Button>
+            </button>
           </Link>
           <Link to="/login" className="login-link">
             ログインはこちら

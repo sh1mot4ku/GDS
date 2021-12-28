@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@material-ui/core";
+import "../ui/Button.scss"
 import InputText from "../ui/InputText";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputLabel from "@mui/material/InputLabel";
@@ -416,9 +416,9 @@ function Apply() {
             value={lookingFor}
           />
           <div className="buttonContainer">
-            <Button variant="contained" className="button" type="submit">
+            <button className="btn-lg btn-fill" type="submit">
               next
-            </Button>
+            </button>
           </div>
         </>
       );
@@ -482,9 +482,9 @@ function Apply() {
                 {firebaseErrorMessage}
               </p>
             )}
-            <Button variant="contained" className="button" type="submit">
+            <button className="btn-lg btn-fill" type="submit">
               REGISTER
-            </Button>
+            </button>
             <button
               className="previousButton"
               onClick={(e) => handleClick(e, step - 1, contents)}
@@ -517,9 +517,9 @@ function Apply() {
               本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。
             </p>
             <Link to="/">
-              <Button variant="contained" className="button">
+              <button className="btn-lg btn-fill">
                 ホームへ戻る
-              </Button>
+              </button>
             </Link>
           </div>
         </>

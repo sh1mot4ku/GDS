@@ -1,7 +1,7 @@
 import React from "react";
 // import "./ThankYou.scss";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import "../ui/Button.scss"
 
 const ThankYouForApplying = () => {
   return (
@@ -10,9 +10,9 @@ const ThankYouForApplying = () => {
       <p className="text ">ご応募ありがとうございました！</p>
       <p className="text second-text">担当から直ぐに連絡致します。</p>
       <Link to="/">
-        <Button variant="contained" className="back-btn">
+        <button  className="btn-lg btn-fill">
           ホームへ戻る
-        </Button>
+        </button>
       </Link>
     </div>
   );

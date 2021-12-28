@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
+import "../ui/Button.scss"
 import CancelIcon from "@mui/icons-material/Cancel";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { firebase, storage } from "../../firebase/firebase";
@@ -365,14 +365,12 @@ const PostJobListings = (props) => {
             />
           </div>
           <div className="save-button-wrapper">
-            <Button
-              variant="contained"
-              color="primary"
+            <button
               type="submit"
-              className="save-button"
+              className="btn-lg btn-fill"
             >
               保存する
-            </Button>
+            </button>
           </div>
           <div className="cancel-wrapper">
             <span

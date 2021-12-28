@@ -5,7 +5,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { auth } from "../../../firebase/firebase";
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
+import "../../ui/Button.scss";
 import "./PostAndManageSideBar.scss";
 
 const PostAndManageSideBar = () => {
@@ -58,9 +58,9 @@ const PostAndManageSideBar = () => {
               </a>
             </div>
             <Link to="/post_joblistings">
-              <Button variant="contained" className="button-post-joblisting">
+              <button className="btn-lg btn-fill">
                 求人投稿
-              </Button>
+              </button>
             </Link>
           </div>
         </div>

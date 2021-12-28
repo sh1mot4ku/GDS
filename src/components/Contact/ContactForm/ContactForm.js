@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import BlueSidePart from "../../BlueSidePart/BlueSidePart";
 import ThankYou from "./ThankYou";
-import { FormLabel, TextField, Button } from "@mui/material";
+import { FormLabel, TextField } from "@mui/material";
+import "../../ui/Button.scss"
 import validator from "validator";
 import "./ContactForm.scss";
 import { useState } from "react";
@@ -188,14 +189,13 @@ const ContactForm = () => {
               {content.length} / 1000
             </p>
           </div>
-          <Button
-            variant="contained"
-            className="submit-btn"
+          <button
+            className="btn-lg btn-fill"
             type="submit"
             onClick={(e) => onSubmit(e)}
           >
             SUBMIT
-          </Button>
+          </button>
         </div>
       ) : (
         <ThankYou />
