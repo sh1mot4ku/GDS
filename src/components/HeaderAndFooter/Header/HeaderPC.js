@@ -137,7 +137,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
               </Link>
               <Link to="/apply-developer">
                 <button
-                  className="btn-sm btn-line-opacity"
+                  className="btn-sm btn-line-opacity btn-margin"
                 >
                   無料会員登録
                 </button>
