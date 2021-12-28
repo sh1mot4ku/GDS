@@ -1,6 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import "./JobBox.scss";
 
 const JobBox = ({
@@ -12,12 +16,14 @@ const JobBox = ({
   tags,
   id,
 }) => {
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const menuRef = useRef(null);
-
-  useEffect(() => {
-    isOpenMenu && menuRef.current.focus();
-  }, [isOpenMenu]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className="job-box">
@@ -51,34 +57,52 @@ const JobBox = ({
           </div>
         </div>
       </Link>
-      <div
-        className="meatballs-menu-wrapper"
-        ref={menuRef}
-        onBlur={() => setIsOpenMenu(false)}
-        // tabIndex={1}
-      >
-        {!isOpenMenu ? (
-          <div className="meatballs-menu" onClick={() => setIsOpenMenu(true)}>
-            …
-          </div>
-        ) : (
+      <div className="meatballs-menu-wrapper">
+        <IconButton
+          aria-label="more"
+          id="long-button"
+          aria-controls={open ? "long-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
+          aria-haspopup="true"
+          onClick={handleClick}
+          className="meatballs-menu"
+        >
+          <MoreHorizIcon />
+        </IconButton>
+        <Menu
+          id="long-menu"
+          MenuListProps={{
+            "aria-labelledby": "long-button",
+          }}
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            style: {
+              // maxHeight: ITEM_HEIGHT * 4.5,
+              width: "220px",
+            },
+          }}
+        >
           <div className="meatballs-menu-list-wrapper">
             <Link to={`copy_joblisting/${id}`}>
-              <div className="meatballs-menu-list">
+              <MenuItem className="meatballs-menu-list">
                 <img
                   src="/photos/chevron-right 2.svg"
                   alt="chevron"
                   className="list-icon"
                 />
                 <span>複製</span>
-              </div>
+              </MenuItem>
             </Link>
-            <div className="meatballs-menu-list" id="delete">
-              <DeleteIcon className="list-icon" />
-              <span>削除</span>
-            </div>
+            <Link to="/">
+              <MenuItem className="meatballs-menu-list" id="delete">
+                <DeleteIcon className="list-icon" />
+                <span>削除</span>
+              </MenuItem>
+            </Link>
           </div>
-        )}
+        </Menu>
       </div>
     </div>
   );
