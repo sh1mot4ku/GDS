@@ -18,6 +18,8 @@ export const pathnamesWithFooter = {
     "/faqs",
     "/profile",
     "/profile_edit",
+    "/profile-recruiter-page",
+    "/profile-edit-recruiter-page",
     "/post_joblistings",
     "/joblistings_management",
   ],
@@ -29,6 +31,11 @@ export const pathnamesWithContactSection = {
 };
 
 export const pathnamesWithSideBar = {
-  pathnamesExactMatchSideBar: ["/post_joblistings", "/joblistings_management"],
+  pathnamesExactMatchSideBar: [
+    "/post_joblistings",
+    "/joblistings_management",
+    "/profile-recruiter-page",
+    "/profile-edit-recruiter-page",
+  ],
   pathnamesPartialMatchSideBar: ["/edit_joblisting/"],
 };

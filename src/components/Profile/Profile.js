@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { turnOffProfileEdited } from "../../action/user";
 import "./Profile.scss";
@@ -9,6 +9,8 @@ const DEFAULT_PHOTO = "/image/icon-login-lg-user.svg";
 const Profile = () => {
   const { uid, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+  console.log(userInfo);
 
   useEffect(() => {
     // delete an indicator to let user know profile edited when this component unmounted
@@ -20,9 +22,21 @@ const Profile = () => {
   return (
     <>
       {uid ? (
-        <div className="main-profile">
+        <div
+          className={[
+            "main-profile",
+            pathname === "/profile" && "padding-top",
+          ].join(" ")}
+        >
           {userInfo?.profileEdited && (
-            <div className="pf-edited-indicator">
+            <div
+              className={[
+                "pf-edited-indicator",
+                pathname === "/profile"
+                  ? "pf-edited-indicator-top-0"
+                  : "pf-edited-indicator-top",
+              ].join(" ")}
+            >
               プロフィールの変更が完了しました！
             </div>
           )}
@@ -35,7 +49,13 @@ const Profile = () => {
             <div>
               <div className="pf-name">{userInfo.profile.fullName}</div>
               <div className="pf-country">{userInfo.profile.location}</div>
-              <Link to="/profile_edit">
+              <Link
+                to={
+                  pathname === "/profile"
+                    ? "/profile_edit"
+                    : "/profile-edit-recruiter-page"
+                }
+              >
                 <button className="pf-button">プロフィール編集</button>
               </Link>
             </div>

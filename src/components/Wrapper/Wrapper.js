@@ -11,7 +11,7 @@ import ScrollTop from "./ScrollTop";
 const Wrapper = ({ children }) => {
   const { pathname } = useLocation();
   const [wrapperLayout, setWrapperLayout] = useState(null);
-  console.log(wrapperLayout);
+  // console.log(wrapperLayout);
 
   useEffect(() => {
     const layout = judgeWrapperLayout(pathname);
