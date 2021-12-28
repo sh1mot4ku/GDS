@@ -3,7 +3,7 @@ import PostJobListings from "./PostJobListings";
 import { useParams } from "react-router-dom";
 import { setFullJobListing } from "../../API/dbutils";
 
-const EditJobListing = () => {
+const EditJobListing = ({ copyId = null, copy = false }) => {
   const { jobId } = useParams();
   const [usersJobListing, setUsersJobListing] = useState(null);
 
@@ -12,7 +12,7 @@ const EditJobListing = () => {
       const snapshot = await setFullJobListing(jobId);
       setUsersJobListing({
         ...snapshot.val(),
-        id: jobId,
+        id: copyId || jobId, // if user want to copy job listings, set id as ID for copying
       });
     }
   };
@@ -24,7 +24,7 @@ const EditJobListing = () => {
   return (
     <div>
       {usersJobListing ? (
-        <PostJobListings {...usersJobListing} edit />
+        <PostJobListings {...usersJobListing} edit={!copy} copy={copy} />
       ) : (
         <div>Loading...</div>
       )}

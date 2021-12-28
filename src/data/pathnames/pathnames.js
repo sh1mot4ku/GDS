@@ -22,5 +22,5 @@ export const pathnamesWithContactSection = {
 
 export const pathnamesWithSideBar = {
   pathnamesExactMatchSideBar: ["/post_joblistings", "/joblistings_management"],
-  pathnamesPartialMatchSideBar: ["/edit_joblisting/"],
+  pathnamesPartialMatchSideBar: ["/edit_joblisting/", "/copy_joblisting"],
 };

@@ -68,7 +68,7 @@ const PostJobListings = (props) => {
     if (!props.id) {
       jobId = uuid(); // set posting ID just once after component loaded
     } else {
-      jobId = props.id; // assign previous job ID when user edit job listing
+      jobId = props.id; // assign previous job ID when user edit job listing, and copy ID when user copy it
     }
   }, [props.id]);
 
@@ -188,7 +188,9 @@ const PostJobListings = (props) => {
   return (
     <div className="form-wrapper">
       <div className="form-container">
-        <h2 className="form-header">{!props.edit ? "求人投稿" : "求人編集"}</h2>
+        <h2 className="form-header">
+          {props.edit ? "求人編集" : props.copy ? "求人複製" : "求人投稿"}
+        </h2>
         <form onSubmit={onSubmit} className="joblist-form">
           <div className="input-block">
             <div className="photo-buttons">

@@ -55,7 +55,7 @@ const JobBox = ({
         className="meatballs-menu-wrapper"
         ref={menuRef}
         onBlur={() => setIsOpenMenu(false)}
-        tabIndex={1}
+        // tabIndex={1}
       >
         {!isOpenMenu ? (
           <div className="meatballs-menu" onClick={() => setIsOpenMenu(true)}>
@@ -63,14 +63,16 @@ const JobBox = ({
           </div>
         ) : (
           <div className="meatballs-menu-list-wrapper">
-            <div className="meatballs-menu-list">
-              <img
-                src="/photos/chevron-right 2.svg"
-                alt="chevron"
-                className="list-icon"
-              />
-              <span>複製</span>
-            </div>
+            <Link to={`copy_joblisting/${id}`}>
+              <div className="meatballs-menu-list">
+                <img
+                  src="/photos/chevron-right 2.svg"
+                  alt="chevron"
+                  className="list-icon"
+                />
+                <span>複製</span>
+              </div>
+            </Link>
             <div className="meatballs-menu-list" id="delete">
               <DeleteIcon className="list-icon" />
               <span>削除</span>
