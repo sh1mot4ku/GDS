@@ -38,15 +38,15 @@ const TrimModal = (props) => {
 
   return (
     <React.Fragment>
-      <Modal onClose={props.onClose}>
+      <Modal onClose={props.onClose} imgCrop>
         <div className="crop-container">
           <Cropper
             image={props.originPhotoSrc}
             crop={crop}
             onCropChange={setCrop}
             zoom={zoom}
-            // cropShape="round"
-            aspect={5 / 2}
+            cropShape={props.cropShape || "rect"}
+            aspect={props.aspect}
             onCropComplete={onCropComplete}
           />
         </div>

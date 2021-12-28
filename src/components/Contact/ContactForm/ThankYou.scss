@@ -7,7 +7,7 @@
   align-items: center;
   margin: auto;
   width: 50%;
-  @include mobile {
+  @include tablet {
     width: 90%;
   }
   .title {
@@ -19,7 +19,7 @@
   }
   .first-text {
     margin-bottom: 40px;
-    @include mobile {
+    @include tablet {
       text-align: justify;
     }
   }
@@ -30,7 +30,7 @@
     border-radius: 30px;
     background-color: $color_primary;
     color: #fff;
-    @include mobile {
+    @include tablet {
       width: 100%;
     }
   }

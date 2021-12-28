@@ -1,8 +1,14 @@
+@import "../../sass_config/mixin";
+
 .main-parent {
   box-sizing: border-box;
   margin: auto;
-  padding-top: 100px;
+  padding-top: 85.5px;
   width: 100vw;
+
+  @include tablet {
+    padding-top: 57.5px;
+  }
 }
 
 .no-padding-top {
