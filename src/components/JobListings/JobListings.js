@@ -9,6 +9,8 @@ import options from "../../data/radioButtonOptions/PostJobListings";
 import "./JobListings.scss";
 import moment from "moment";
 import Loading from "../ui/Loading";
+import { Pagination, Stack } from "@mui/material";
+// import Pagenation from "../ui/Pagenation";
 
 // replace letters to lowercase, remove space and dash
 const replaceLetters = (searchInput) =>
@@ -34,6 +36,18 @@ const JobListings = () => {
   );
   const [jobListingsArr, setJobListingsArr] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [joblistingsCount, setJoblistingsCount] = useState(10);
+  const [joblistingsSlice, setJoblistingsSlice] = useState(0);
+  const [page, setPage] = useState(1);
+  const [numOfJoblistings, setNumOfJoblistings] = useState(0);
+  console.log(page);
+  console.log(joblistingsSlice);
+  // handle pagenation
+  const onHandlePage = (_, val) => {
+    setPage(val);
+    setJoblistingsSlice((prevState) => prevState + 10);
+    window.scroll(0, 0);
+  };
 
   // params will be changed and the useEffect gets executed to run filterJobListings()
   const onHandleSearchParamsForSearchKeyword = () => {
@@ -125,7 +139,11 @@ const JobListings = () => {
 
   useEffect(() => {
     if (jobListings || loaded) {
-      setJobListingsArr(jobListings);
+      console.log("in useeffect");
+      setNumOfJoblistings(jobListings.length);
+      const aaa = jobListings.slice(joblistingsSlice, joblistingsCount * page);
+      console.log(aaa, joblistingsSlice, joblistingsCount * page);
+      setJobListingsArr(aaa);
       !loaded && setLoaded(true);
     } else if (jobListings === null) {
       dispatch(startSetJobListings());
@@ -140,7 +158,7 @@ const JobListings = () => {
         filterJobListings();
       }
     }
-  }, [jobListings, search]);
+  }, [jobListings, search, page]);
 
   return (
     <>
@@ -229,7 +247,18 @@ const JobListings = () => {
                     </React.Fragment>
                   ))
                 )}
+                <Pagination
+                  count={
+                    numOfJoblistings % 10 === 0
+                      ? numOfJoblistings / 10
+                      : Math.ceil(numOfJoblistings / 10)
+                  }
+                  page={page}
+                  color="primary"
+                  onChange={onHandlePage}
+                />
               </div>
+              ;
             </>
           ) : (
             <div className="no-joblisting-wrapper">
