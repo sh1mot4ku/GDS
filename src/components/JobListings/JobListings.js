@@ -9,8 +9,7 @@ import options from "../../data/radioButtonOptions/PostJobListings";
 import "./JobListings.scss";
 import moment from "moment";
 import Loading from "../ui/Loading";
-import { Pagination, Stack } from "@mui/material";
-// import Pagenation from "../ui/Pagenation";
+import { Pagination } from "@mui/material";
 
 // replace letters to lowercase, remove space and dash
 const replaceLetters = (searchInput) =>
@@ -37,16 +36,14 @@ const JobListings = () => {
   const [jobListingsArr, setJobListingsArr] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [joblistingsCount, setJoblistingsCount] = useState(10);
-  const [joblistingsSlice, setJoblistingsSlice] = useState(0);
   const [page, setPage] = useState(1);
-  const [numOfJoblistings, setNumOfJoblistings] = useState(0);
-  console.log(page);
-  console.log(joblistingsSlice);
+  const [numOfJoblistingsResult, setNumOfJoblistingsResult] = useState(0);
+  console.log(`page ${page}`);
+
   // handle pagenation
   const onHandlePage = (_, val) => {
-    setPage(val);
-    setJoblistingsSlice((prevState) => prevState + 10);
     window.scroll(0, 0);
+    setPage(val);
   };
 
   // params will be changed and the useEffect gets executed to run filterJobListings()
@@ -130,20 +127,33 @@ const JobListings = () => {
       );
     }
     // =========== then set result(totalfilteredJobListings) to setJobListingsArr() =============
-    setJobListingsArr(
-      totalfilteredJobListings.length !== 0
-        ? totalfilteredJobListings
-        : ["no result"]
-    );
+    setNumOfJoblistingsResult(totalfilteredJobListings.length);
+    if (totalfilteredJobListings.length !== 0) {
+      const jobListingsOnAPage = totalfilteredJobListings.slice(
+        joblistingsCount * page - 10,
+        joblistingsCount * page
+      );
+      setJobListingsArr(jobListingsOnAPage);
+    } else {
+      setJobListingsArr(["no result"]);
+    }
   };
 
   useEffect(() => {
+    console.log("in useeffect");
     if (jobListings || loaded) {
       console.log("in useeffect");
-      setNumOfJoblistings(jobListings.length);
-      const aaa = jobListings.slice(joblistingsSlice, joblistingsCount * page);
-      console.log(aaa, joblistingsSlice, joblistingsCount * page);
-      setJobListingsArr(aaa);
+      setNumOfJoblistingsResult(jobListings.length);
+      const jobListingsOnAPage = jobListings.slice(
+        joblistingsCount * page - 10,
+        joblistingsCount * page
+      );
+      // console.log(
+      //   jobListingsOnAPage,
+      //   joblistingsCount * page - 10,
+      //   joblistingsCount * page
+      // );
+      setJobListingsArr(jobListingsOnAPage);
       !loaded && setLoaded(true);
     } else if (jobListings === null) {
       dispatch(startSetJobListings());
@@ -247,16 +257,18 @@ const JobListings = () => {
                     </React.Fragment>
                   ))
                 )}
-                <Pagination
-                  count={
-                    numOfJoblistings % 10 === 0
-                      ? numOfJoblistings / 10
-                      : Math.ceil(numOfJoblistings / 10)
-                  }
-                  page={page}
-                  color="primary"
-                  onChange={onHandlePage}
-                />
+                <div className="pagenation-wrapper">
+                  <Pagination
+                    count={
+                      numOfJoblistingsResult % 10 === 0
+                        ? numOfJoblistingsResult / 10
+                        : Math.ceil(numOfJoblistingsResult / 10)
+                    }
+                    page={page}
+                    color="primary"
+                    onChange={onHandlePage}
+                  />
+                </div>
               </div>
               ;
             </>

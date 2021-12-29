@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppRouter, { history } from "./router/AppRouter";
 import database, { auth } from "./firebase/firebase";
 import { login, logout } from "./action/user";
@@ -13,6 +13,9 @@ import "./sass_config/common_style.scss";
 const theme = createTheme({
   palette: {
     primary: {
+      main: "#1E40F6",
+    },
+    primaryPagenation: {
       main: "#1E40F6",
     },
   },
