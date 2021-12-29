@@ -1,11 +1,11 @@
-import React from "react";
-import { useLocation, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { startLogout } from "../../../../action/user";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Box from "@mui/material/Box";
-import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
+import React from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../../../action/user';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Box from '@mui/material/Box';
+import CloseIcon from '@mui/icons-material/Close';
+import "../../../ui/Button.scss"
 import {
   headerAndDrawerMenuItemsLogOut,
   drawerMenuItemsLogin,
@@ -103,22 +103,22 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
                 </div>
               )
             ) : (
-              <>
+              <div>
                 <Link to="/apply-developer">
-                  <Button className="round-button-drawer background-white-drawer">
+                  <button className="btn-lg btn-line-opacity">
                     無料会員登録
-                  </Button>
+                  </button>
                 </Link>
                 <Link to="/apply-recruiter">
-                  <Button
+                  <button
                     variant="contained"
                     color="primary"
-                    className="round-button-drawer"
+                    className="btn-lg btn-fill-opacity"
                   >
                     採用担当者の方
-                  </Button>
+                  </button>
                 </Link>
-              </>
+              </div>
             )}
           </nav>
         </Box>

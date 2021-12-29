@@ -1,5 +1,12 @@
 export const pathnamesWithHeader = {
-  pathnamesExactMatchHeader: ["/", "/about", "/joblistings", "/faqs", "edit"],
+  pathnamesExactMatchHeader: [
+    "/",
+    "/about",
+    "/joblistings",
+    "/faqs",
+    "/profile",
+    "/profile_edit",
+  ],
   pathnamesPartialMatchHeader: ["/joblisting/"],
 };
 
@@ -9,7 +16,10 @@ export const pathnamesWithFooter = {
     "/about",
     "/joblistings",
     "/faqs",
-    "edit",
+    "/profile",
+    "/profile_edit",
+    "/profile-recruiter-page",
+    "/profile-edit-recruiter-page",
     "/post_joblistings",
     "/joblistings_management",
   ],
@@ -21,6 +31,11 @@ export const pathnamesWithContactSection = {
 };
 
 export const pathnamesWithSideBar = {
-  pathnamesExactMatchSideBar: ["/post_joblistings", "/joblistings_management"],
+  pathnamesExactMatchSideBar: [
+    "/post_joblistings",
+    "/joblistings_management",
+    "/profile-recruiter-page",
+    "/profile-edit-recruiter-page",
+  ],
   pathnamesPartialMatchSideBar: ["/edit_joblisting/", "/copy_joblisting"],
 };

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import "../ui/Button.scss"
 import InputTextAreaAndLabel from "../ui/InputTextAreaAndLabel";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import RadioForm from "../ui/RadioForm";
 import { auth } from "../../firebase/firebase";
 import { insertUser } from "../../API/dbutils";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
+import { optionData } from "../../data/applyingInfo/recruiter";
 import "./Recruiter.scss";
 import validator from "validator";
 
@@ -233,6 +234,7 @@ function Recruiter() {
           mustHave,
           niceToHave,
           projectDetail,
+          photoUrl: "",
         },
         userType: USER_TYPE,
       };
@@ -330,15 +332,6 @@ function Recruiter() {
     isTyping,
   ]);
 
-  const optionData = {
-    businessLookingFor: ["エンジニア", "デザイナー", "ビジネスサイド"],
-    businessCommitment: [
-      "正社員 (週40時間以上)",
-      "副業・フリーランサー",
-      "未定",
-    ],
-  };
-
   let contents = <></>;
   switch (step) {
     case 0:
@@ -409,9 +402,9 @@ function Recruiter() {
             value={commitment}
           />
           <div className="buttonContainer">
-            <Button variant="contained" className="button" type="submit">
+            <button className="btn-lg btn-fill" type="submit">
               next
-            </Button>
+            </button>
           </div>
         </>
       );
@@ -460,9 +453,9 @@ function Recruiter() {
             </p>
           )}
           <div className="buttonContainer">
-            <Button variant="contained" className="button" type="submit">
+            <button className="btn-lg btn-fill" type="submit">
               REGISTER
-            </Button>
+            </button>
           </div>
           <div className="link-line">
             <button
@@ -491,9 +484,9 @@ function Recruiter() {
               <br />
             </p>
             <div className="buttonContainer">
-              <Button variant="contained" className="button" type="button">
+              <button className="btn-lg btn-fill" type="button">
                 面談を予約する
-              </Button>
+              </button>
             </div>
             <div className="link-line">
               <Link to="/" className="previousButton">

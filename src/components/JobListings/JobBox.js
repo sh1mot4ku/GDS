@@ -13,6 +13,7 @@ const JobBox = ({
   tags,
   id,
   postedTimeStamp,
+  employmentType,
   details,
 }) => {
   const [timeLag, setTimeLag] = useState(null);
@@ -22,7 +23,7 @@ const JobBox = ({
   }, []);
 
   useEffect(() => {
-    if (details && postedTimeStamp) {
+    if (postedTimeStamp) {
       const lag = moment(postedTimeStamp).fromNow();
       setTimeLag(lag);
     }
@@ -43,6 +44,11 @@ const JobBox = ({
         <div className="job-box-content">
           <span className="location">{employeeLocation}</span>
         </div>
+        <div className="job-box-content">
+          <span className="employment-type">
+            {employmentType && employmentType}
+          </span>
+        </div>
         <div className="job-box-skill-tags">
           {Array.isArray(tags) &&
             tags.length !== 0 &&
@@ -52,13 +58,19 @@ const JobBox = ({
               </div>
             ))}
         </div>
-        {details && timeLag ? (
+        {timeLag && <div className="timestamp">{timeLag}に掲載</div>}
+        {!details && (
+          <div className="job-box-content">
+            <span className="short-jd">{jobListing}</span>
+          </div>
+        )}
+        {/* {details && timeLag ? (
           <div className="timestamp">{timeLag}に掲載</div>
         ) : (
           <div className="job-box-content">
             <span className="short-jd">{jobListing}</span>
           </div>
-        )}
+        )} */}
       </Link>
     </div>
   );

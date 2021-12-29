@@ -8,7 +8,10 @@ import ContactForm from "../components/Contact/ContactForm/ContactForm";
 import Login from "../components/Login/Login";
 import { createBrowserHistory } from "history";
 import Recruiter from "../components/Recruiter/Recruiter";
-import Edit from "../components/Edit/Edit";
+import Profile from "../components/Profile/Profile";
+import ProfileEdit from "../components/Profile/ProfileEdit";
+import ProfileEditRecruiterPage from "../components/Profile/ProfileEditRecruiterPage";
+import ProfileRecruiterPage from "../components/Profile/ProfileRecruiterPage";
 import PostJobListings from "../components/PostJobListings/PostJobListings";
 import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
@@ -32,6 +35,16 @@ const AppRouter = () => (
       <PublicRoute path="/faqs" component={FaqsPage} />
       <LogoutRoute path="/apply-developer" component={Apply} />
       <LogoutRoute path="/apply-recruiter" component={Recruiter} />
+      <PrivateRoute path="/profile" component={Profile} />
+      <PrivateRoute path="/profile_edit" component={ProfileEdit} />
+      <PrivateRoute
+        path="/profile-recruiter-page"
+        component={ProfileRecruiterPage}
+      />
+      <PrivateRoute
+        path="/profile-edit-recruiter-page"
+        component={ProfileEditRecruiterPage}
+      />
       <PrivateRoute path="/post_joblistings" component={PostJobListings} />
       {!isMobile && (
         <PrivateRoute
@@ -45,7 +58,6 @@ const AppRouter = () => (
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />
       <PublicRoute path="/contact" component={ContactForm} />
       <LogoutRoute path="/login" component={Login} />
-      <PrivateRoute path="/edit" component={Edit} />
       <LogoutRoute path="/forget-password" component={ForgetPassword} />
       <PublicRoute path="*" component={NotFoundPage} />
     </Switch>

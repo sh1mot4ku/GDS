@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
+import '../ui/Button.scss';
 import UrgeApplyModal from "../ui/UrgeApplyModal";
 import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
 import ThankYouForApplying from "./ThankYouForApplying";
 import { setFullJobListing } from "../../API/dbutils";
+import moment from "moment";
+import "moment/locale/ja";
 import "./ThankYouForApplying.scss";
 import "./JobListing.scss";
 
@@ -138,13 +141,12 @@ const JobListing = () => {
                 {isUserLoggedIn === false && (
                   <>
                     <div className="joblisting-details-mask"></div>
-                    <Button
-                      variant="contained"
-                      className="round-button"
+                    <button
+                      className="btn-lg btn-fill"
                       onClick={(e) => setIsReadMoreClicked(true)}
                     >
                       続きを読む
-                    </Button>
+                    </button>
                   </>
                 )}
                 <div className="bread-list">
@@ -177,13 +179,12 @@ const JobListing = () => {
                     ))}
                 </div>
                 <div className="oubo-wrapper">
-                  <Button
-                    variant="contained"
-                    color="primary"
+                  <button
+                    className="btn-lg btn-fill"
                     onClick={(e) => sendApplicationEmail(e)}
                   >
                     応募する
-                  </Button>
+                  </button>
                 </div>
                 {isReadMoreClicked && <UrgeApplyModal onClose={onClose} />}
               </>

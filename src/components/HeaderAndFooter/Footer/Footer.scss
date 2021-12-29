@@ -1,6 +1,6 @@
 @import "../../../sass_config/mixin.scss";
 .footer {
-  width: 100%;
+  width: 100vw;
   background: black;
   z-index: 30;
   position: relative;
@@ -16,7 +16,7 @@
     @include tablet {
       padding: 40px;
     }
-    @include mobile {
+    @include tablet {
       flex-direction: column;
     }
     .menu-sns-wrapper {
@@ -63,10 +63,10 @@
       align-items: center;
       .company-logo-bk-wrapper {
         align-self: flex-end;
-        &:hover{
+        &:hover {
           opacity: 0.6;
         }
-        @include mobile {
+        @include tablet {
           align-self: flex-start;
         }
         .company-logo-bk {
@@ -76,7 +76,7 @@
         }
       }
       .copy-right {
-        @include mobile {
+        @include tablet {
           margin-top: 12px;
           align-self: flex-start;
         }

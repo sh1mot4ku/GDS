@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import "./Contact.scss";
+import '../ui/Button.scss'
 
 const Contact = () => (
   <>
@@ -11,9 +11,9 @@ const Contact = () => (
         取材/お仕事のご依頼・お問い合わせはこちら
       </p>
       <Link to="/contact">
-        <Button variant="contained" className="round-button">
+        <button className="btn-lg btn-contact" >
           お問い合わせ
-        </Button>
+        </button>
       </Link>
     </section>
   </>

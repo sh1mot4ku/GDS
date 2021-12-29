@@ -5,14 +5,14 @@
   width: 1070px;
   margin: 30px auto 200px auto;
 
-  @include mobile {
+  @include tablet {
     width: 90vw;
   }
 
   .subscribe-wrapper {
     margin-bottom: 120px;
 
-    @include mobile {
+    @include tablet {
       margin-bottom: 30vw;
     }
 
@@ -23,7 +23,7 @@
       padding: 150px 0 127px;
       text-align: center;
 
-      @include mobile {
+      @include tablet {
         padding: 18vw 0;
         background-position: center 14vw;
       }
@@ -32,7 +32,7 @@
         margin: 0 auto 20px;
         font-size: 56px;
 
-        @include mobile {
+        @include tablet {
           font-size: 30px;
         }
       }
@@ -41,21 +41,20 @@
         font-size: 20px;
         margin-bottom: 72px;
 
-        @include mobile {
+        @include tablet {
           width: 78vw;
           margin: 0 auto 49px;
         }
       }
 
       .subscribe-buttons-top {
-        width: 500px;
+        width: 512px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
-        align-items: center;
         flex-direction: row;
 
-        @include mobile {
+        @include tablet {
           flex-direction: column;
           width: 100%;
         }
@@ -66,7 +65,7 @@
           padding: 16px 74px;
           font-weight: 700;
 
-          @include mobile {
+          @include tablet {
             padding: 12px 74px;
             width: 100%;
             margin-bottom: 16px;
@@ -84,7 +83,7 @@
         max-width: 240px;
         height: auto;
 
-        @include mobile {
+        @include tablet {
           width: 100%;
           object-fit: cover;
           height: 12vw;
@@ -132,7 +131,7 @@
     .d-demo__item {
       width: calc(100vw / 10);
 
-      @include mobile {
+      @include tablet {
         width: calc(100vw / 4);
       }
     }
@@ -154,7 +153,7 @@
       font-size: 56px;
       margin-bottom: 16px;
 
-      @include mobile {
+      @include tablet {
         font-size: 30px;
         margin-bottom: 4vw;
       }
@@ -171,7 +170,7 @@
       align-items: center;
       margin-bottom: 200px;
 
-      @include mobile {
+      @include tablet {
         flex-direction: column;
         margin-bottom: 10vw;
       }
@@ -180,7 +179,7 @@
     #describe-reverse {
       flex-direction: row-reverse;
 
-      @include mobile {
+      @include tablet {
         flex-direction: column;
       }
 
@@ -191,14 +190,14 @@
 
     .describe-photo {
       margin-left: 25px;
-      @include mobile {
+      @include tablet {
         margin: 0 0 5vw !important;
       }
 
       .describe-photo-content {
         width: 500px;
 
-        @include mobile {
+        @include tablet {
           width: 100%;
         }
       }
@@ -208,7 +207,7 @@
       text-align: left;
       width: 480px;
 
-      @include mobile {
+      @include tablet {
         width: 100%;
       }
 
@@ -217,7 +216,7 @@
         font-weight: 700px;
         font-size: 28px;
 
-        @include mobile {
+        @include tablet {
           font-size: 20px;
         }
       }
@@ -234,7 +233,7 @@
         font-size: 16px;
 
         & > li {
-          @include mobile {
+          @include tablet {
             margin-bottom: 1vw;
           }
         }
@@ -249,7 +248,7 @@
     width: 100%;
     margin: 0 auto;
 
-    @include mobile {
+    @include tablet {
       flex-direction: column;
       width: 100%;
     }
@@ -258,9 +257,15 @@
       border-radius: 12px;
       padding: 25px 9%;
       min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      @include mobile {
+
+
+      @include tablet {
         padding: 25px 0;
+        align-items: center;
         margin-bottom: 20px;
         width: 100%;
       }
@@ -273,7 +278,7 @@
         width: 325px;
         font-weight: 700;
 
-        @include mobile {
+        @include tablet {
           padding: 0;
         }
 
@@ -286,7 +291,7 @@
         .subscribe-text {
           font-size: 23px;
 
-          @include mobile {
+          @include tablet {
             font-size: 20px;
           }
         }

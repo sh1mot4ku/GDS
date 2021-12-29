@@ -11,7 +11,7 @@
     align-items: center;
     margin: auto;
     width: 50%;
-    @include mobile {
+    @include tablet {
       width: 90%;
     }
     .title {
@@ -40,7 +40,7 @@
 
       .email-errs {
         margin-right: 16px;
-        @include mobile {
+        @include tablet {
           margin-bottom: 4px;
         }
       }
@@ -65,7 +65,7 @@
       background-color: $color_primary;
       color: #fff;
       margin-top: 12px;
-      @include mobile {
+      @include tablet {
         width: 100%;
       }
     }
