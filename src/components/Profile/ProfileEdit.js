@@ -11,6 +11,7 @@ import "./ProfileEdit.scss";
 import ProfileEditClient from "./ProfileEditClient";
 import ProfileEditRecruiter from "./ProfileEditRecruiter";
 import validator from "validator";
+import { useLocation } from "react-router-dom";
 
 const DEFAULT_PHOTO = "/image/icon-login-lg-user.svg";
 
@@ -18,6 +19,7 @@ const ProfileEdit = () => {
   const history = useHistory();
   const { uid, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   const [photoBlob, setPhotoBlob] = useState(null);
   const [originPhotoSrc, setOriginPhotoSrc] = useState(null);
@@ -193,12 +195,19 @@ const ProfileEdit = () => {
         postingInfo.profileEdited = true;
         dispatch(editUserInfo(postingInfo));
         console.log("Editted Successfully!");
-        history.push("/profile");
+        history.push(
+          pathname === "/profile_edit" ? "/profile" : "/profile-recruiter-page"
+        );
       });
   };
 
   return (
-    <div className="main-edit">
+    <div
+      className={[
+        "main-edit",
+        pathname === "/profile_edit" && "padding-top",
+      ].join(" ")}
+    >
       <form onSubmit={onSubmit} className="edit-form">
         <div className="pf-container">
           <img
@@ -316,7 +325,13 @@ const ProfileEdit = () => {
           </Button>
           <div
             className="cancel-button"
-            onClick={() => history.push("/profile")}
+            onClick={() =>
+              history.push(
+                pathname === "/profile_edit"
+                  ? "/profile"
+                  : "/profile-recruiter-page"
+              )
+            }
           >
             <span className="cancel-button-underline">キャンセル</span>
           </div>

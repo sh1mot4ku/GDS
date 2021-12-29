@@ -15,7 +15,7 @@ const userReducer = (state = {}, action) => {
     //   return editedState;
     case "TURN_OFF_PROFILE_EDITED":
       const newState = { ...state };
-      newState.userInfo.profileEdited = false;
+      if (newState.userInfo) newState.userInfo.profileEdited = false;
       return newState;
     default:
       return state;

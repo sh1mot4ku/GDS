@@ -12,16 +12,18 @@ const PostAndManageSideBar = () => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
 
-  const onLogOut = () => {
+  const onLogOut = (e) => {
+    e.preventDefault();
     auth
       .signOut()
       .then(() => {
         console.log("User logged out");
         history.push("/");
       })
-      .catch((e) => {
-        console.error(e);
+      .catch((error) => {
+        console.error(error);
       });
+    e.stopPropagation();
   };
 
   return (
@@ -29,18 +31,20 @@ const PostAndManageSideBar = () => {
       {user.userInfo && (
         <div className="sb-wrapper">
           <div className="sb-container">
-            <div className="sb-top">
-              <div className="sb-user-wrapper">
-                <AccountCircleOutlinedIcon className="sb-user-icon" />
-                <div className="sb-user-name">
-                  {user.userInfo?.profile.fullName}
+            <Link to="/profile-recruiter-page">
+              <div className="sb-top">
+                <div className="sb-user-wrapper">
+                  <AccountCircleOutlinedIcon className="sb-user-icon" />
+                  <div className="sb-user-name">
+                    {user.userInfo?.profile.fullName}
+                  </div>
+                  <ArrowForwardIosIcon className="right-arrow" />
                 </div>
-                <ArrowForwardIosIcon className="right-arrow" />
+                <div onClick={onLogOut} className="sb-logout">
+                  ログアウト
+                </div>
               </div>
-              <div onClick={onLogOut} className="sb-logout">
-                ログアウト
-              </div>
-            </div>
+            </Link>
             <div className="sb-list">
               <Link to="/joblistings_management">
                 <span className="sb-post-and-manage">求人投稿・管理</span>
