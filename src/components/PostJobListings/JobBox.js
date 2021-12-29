@@ -122,13 +122,13 @@ const JobBox = ({
       </div>
       {isOpenModal && (
         <Modal onClose={() => setIsOpenModal(false)}>
-          <div>
-            <div>投稿を削除しますか？</div>
-            <div>
+          <div className="delete-modal">
+            <div className="delete-modal-header">投稿を削除しますか？</div>
+            <div className="delete-modal-description">
               この操作は取り消せません。求人一覧の検索結果から投稿が削除されます。
             </div>
-            <button onClick={onDelete}>削除</button>
-            <button onClick={() => setIsOpenModal(false)}>キャンセル</button>
+            <div onClick={onDelete}>削除</div>
+            <div onClick={() => setIsOpenModal(false)}>キャンセル</div>
           </div>
         </Modal>
       )}

@@ -62,3 +62,17 @@
 #delete {
   color: $warning;
 }
+
+.delete-modal {
+  padding: 80px 48px;
+  text-align: center;
+
+  &-header {
+    font-size: 28px;
+    margin-bottom: 40px;
+  }
+  &-description {
+    font-size: 20px;
+    text-align: left;
+  }
+}
