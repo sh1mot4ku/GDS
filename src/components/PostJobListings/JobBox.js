@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startDeleteUsersJobListings } from "../../action/usersJobListings";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import IconButton from "@mui/material/IconButton";
@@ -17,6 +19,7 @@ const JobBox = ({
   tags,
   id,
 }) => {
+  const dispatch = useDispatch();
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -32,7 +35,10 @@ const JobBox = ({
     handleClose();
   };
 
-  const onDelete = () => {};
+  const onDelete = async () => {
+    await dispatch(startDeleteUsersJobListings(id));
+    setIsOpenModal(false);
+  };
 
   return (
     <React.Fragment>
@@ -122,7 +128,7 @@ const JobBox = ({
               この操作は取り消せません。求人一覧の検索結果から投稿が削除されます。
             </div>
             <button onClick={onDelete}>削除</button>
-            <button>キャンセル</button>
+            <button onClick={() => setIsOpenModal(false)}>キャンセル</button>
           </div>
         </Modal>
       )}
