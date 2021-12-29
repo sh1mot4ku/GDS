@@ -11,7 +11,7 @@
     align-items: center;
     flex-direction: column;
     margin: 0 auto;
-    @include mobile {
+    @include tablet {
       width: 80%;
     }
 
@@ -22,7 +22,7 @@
     .form {
       justify-content: center;
       width: 40vw;
-      @include mobile {
+      @include tablet {
         width: 100%;
       }
 
@@ -54,7 +54,7 @@
           border-radius: 30px;
           background-color: $color_primary;
           color: #fff;
-          @include mobile {
+          @include tablet {
             width: 100%;
           }
         }

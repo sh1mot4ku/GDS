@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useSelector } from "react-redux";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useLocation, Link } from "react-router-dom";
 import {
@@ -12,6 +13,7 @@ import { auth } from "../../../firebase/firebase";
 import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
+  const { userInfo } = useSelector((state) => state.user);
   const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -87,8 +89,15 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                   aria-expanded={open ? "true" : undefined}
                   onClick={handleClick}
                 >
-                  <AccountCircleOutlinedIcon className="user-icon-no-img" />
-                  {/* change this after user img func is implemented            */}
+                  {userInfo?.profile?.photoUrl ? (
+                    <img
+                      alt="user-icon"
+                      src={userInfo?.profile?.photoUrl}
+                      className="user-icon"
+                    />
+                  ) : (
+                    <AccountCircleOutlinedIcon className="user-icon-no-img" />
+                  )}
                 </Button>
                 {isRecruiter && (
                   <div className="post-button">
@@ -114,7 +123,7 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                 }}
               >
                 <div className="dropdown-menu">
-                  <Link to="/user-profile">
+                  <Link to="/profile">
                     <MenuItem
                       className="dropdown-menuitem"
                       onClick={handleClose}
@@ -136,21 +145,18 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
                 ログイン
               </Link>
               <Link to="/apply-developer">
-                <Button
-                  variant="contained"
-                  className="round-button background-white"
+                <button
+                  className="btn-sm btn-line-opacity btn-margin"
                 >
                   無料会員登録
-                </Button>
+                </button>
               </Link>
               <Link to="/apply-recruiter">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className="round-button"
+                <button
+                  className="btn-sm btn-fill-opacity"
                 >
                   採用担当者の方
-                </Button>
+                </button>
               </Link>
             </>
           )}

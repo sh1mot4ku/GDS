@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "globaldevelopers-5c20b"
+    "default": "globaldevelopers-5c20b",
+    "prod": "globaldevelopers-production"
   },
   "targets": {
     "globaldevelopers-5c20b": {
@@ -10,6 +11,16 @@
         ],
         "staging": [
           "globaldevelopers-staging"
+        ]
+      }
+    },
+    "globaldevelopers-production": {
+      "hosting": {
+        "prod": [
+          "globaldevelopers-production"
+        ],
+        "staging": [
+          "globaldevelopers-production"
         ]
       }
     }

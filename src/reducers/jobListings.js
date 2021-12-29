@@ -9,6 +9,7 @@ const jobListingsReducer = (state = null, action) => {
         return [action.jobListing];
       }
     case "EDIT_JOB_LISTING":
+      if (state === null) return state;
       return state?.map((jobListing) => {
         if (jobListing.id === action.jobListing.id) {
           return action.jobListing;

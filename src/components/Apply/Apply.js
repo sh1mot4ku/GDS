@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@material-ui/core";
+import "../ui/Button.scss"
 import InputText from "../ui/InputText";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputLabel from "@mui/material/InputLabel";
@@ -9,6 +9,11 @@ import RadioForm from "../ui/RadioForm";
 import { insertUser } from "../../API/dbutils";
 import { Link } from "react-router-dom";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
+import {
+  optionData,
+  countries,
+  levelOfEnglish,
+} from "../../data/applyingInfo/client";
 import "./Apply.scss";
 import validator from "validator";
 
@@ -215,13 +220,13 @@ function Apply() {
   };
 
   useEffect(() => {
-    console.log(
-      link1Error,
-      link2Error,
-      link3Error,
-      englishLevelError,
-      isTyping
-    );
+    // console.log(
+    //   link1Error,
+    //   link2Error,
+    //   link3Error,
+    //   englishLevelError,
+    //   isTyping
+    // );
     if (
       link1Error === false &&
       link2Error === false &&
@@ -255,6 +260,8 @@ function Apply() {
           links: { link1, link2, link3 },
           englishLevel,
           description,
+          pl: password.length,
+          photoUrl: "",
         },
         userType: USER_TYPE,
       };
@@ -297,7 +304,7 @@ function Apply() {
           // setLink1Error(null);
         });
     }
-    console.log(isSubmitted);
+    // console.log(isSubmitted);
   }, [isClientValidationPassed]);
 
   // fired when the next or previous button is clicked
@@ -316,14 +323,14 @@ function Apply() {
 
   // rendered after next or previous button is clicked, and when inputting
   useEffect(() => {
-    console.log(
-      nameError,
-      emailInvalidError,
-      emailError,
-      passwordInvalidError,
-      passwordError,
-      isTyping
-    );
+    // console.log(
+    //   nameError,
+    //   emailInvalidError,
+    //   emailError,
+    //   passwordInvalidError,
+    //   passwordError,
+    //   isTyping
+    // );
     if (
       nameError === false &&
       emailInvalidError === false &&
@@ -346,55 +353,8 @@ function Apply() {
     isTyping,
   ]);
 
-  const optionData = {
-    userLookingFor: [
-      "正社員",
-      "副業・フリーランス",
-      "正社員と副業・フリーランスの両方",
-    ],
-    userDescription: [
-      "ソフトウェアエンジニア",
-      "プロダクトデザイナー",
-      "プロダクトマネージャー",
-      "グロースハッカー",
-      "ビジネスオペレーションズ",
-    ],
-  };
-
-  const countries = [
-    {
-      value: "Japan",
-    },
-    {
-      value: "USA",
-    },
-    {
-      value: "Canada",
-    },
-    {
-      value: "Korea",
-    },
-    {
-      value: "China",
-    },
-  ];
-
-  const levelOfEnglish = [
-    {
-      value: "日常会話、旅行トラブル対応レベル",
-    },
-    {
-      value: "ビジネス会話、プレゼンレベル",
-    },
-    {
-      value: "簡単通訳、ディスカッションレベル",
-    },
-    {
-      value: "ネイティブレベル",
-    },
-  ];
-
   let contents = <></>;
+
   switch (step) {
     case 0:
       contents = (
@@ -456,9 +416,9 @@ function Apply() {
             value={lookingFor}
           />
           <div className="buttonContainer">
-            <Button variant="contained" className="button" type="submit">
+            <button className="btn-lg btn-fill" type="submit">
               next
-            </Button>
+            </button>
           </div>
         </>
       );
@@ -522,9 +482,9 @@ function Apply() {
                 {firebaseErrorMessage}
               </p>
             )}
-            <Button variant="contained" className="button" type="submit">
+            <button className="btn-lg btn-fill" type="submit">
               REGISTER
-            </Button>
+            </button>
             <button
               className="previousButton"
               onClick={(e) => handleClick(e, step - 1, contents)}
@@ -557,9 +517,9 @@ function Apply() {
               本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。
             </p>
             <Link to="/">
-              <Button variant="contained" className="button">
+              <button className="btn-lg btn-fill">
                 ホームへ戻る
-              </Button>
+              </button>
             </Link>
           </div>
         </>

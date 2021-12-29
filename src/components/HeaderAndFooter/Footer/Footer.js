@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Footer.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -14,7 +14,6 @@ export const Footer = () => {
   const { uid } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const isMobile = useMedia({ maxWidth: "768px" });
-  const location = useLocation();
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
 
   useEffect(() => {
@@ -57,55 +56,49 @@ export const Footer = () => {
 
   return (
     <>
-      {location.pathname === "/apply-developer" ||
-      location.pathname === "/apply-recruiter" ||
-      location.pathname === "/contact" ||
-      location.pathname === "/forget-password" ||
-      location.pathname === "/login" ? null : (
-        <footer className="footer">
-          <div className="footer-container">
-            {isMobile && (
-              <Link to={uid ? "/joblistings" : "/"}>
+      <footer className="footer">
+        <div className="footer-container">
+          {isMobile && (
+            <Link to={uid ? "/joblistings" : "/"}>
+              <img
+                className="company-logo-bk-mb"
+                src="image/lraoughLogoBk.png"
+                alt="Lraough-logo"
+              />
+            </Link>
+          )}
+          <div className="menu-sns-wrapper">
+            <div className="menu">
+              {isUserLoggedIn !== null && isUserLoggedIn
+                ? footerMenuItemsLogIn.length !== 0 &&
+                  createMenuList(footerMenuItemsLogIn)
+                : footerMenuItemsLogOut.length !== 0 &&
+                  createMenuList(footerMenuItemsLogOut)}
+            </div>
+            <div className="sns-wrapper">
+              <FacebookIcon className="icon" />
+              <LinkedInIcon className="icon" />
+              <TwitterIcon className="icon" />
+              <YouTubeIcon className="icon" />
+            </div>
+          </div>
+          <div className="logo-copyright-wrapper">
+            {!isMobile && (
+              <Link
+                to={uid ? "/joblistings" : "/"}
+                className="company-logo-bk-wrapper"
+              >
                 <img
-                  className="company-logo-bk-mb"
+                  className="company-logo-bk"
                   src="image/lraoughLogoBk.png"
                   alt="Lraough-logo"
                 />
               </Link>
             )}
-            <div className="menu-sns-wrapper">
-              <div className="menu">
-                {isUserLoggedIn !== null && isUserLoggedIn
-                  ? footerMenuItemsLogIn.length !== 0 &&
-                    createMenuList(footerMenuItemsLogIn)
-                  : footerMenuItemsLogOut.length !== 0 &&
-                    createMenuList(footerMenuItemsLogOut)}
-              </div>
-              <div className="sns-wrapper">
-                <FacebookIcon className="icon" />
-                <LinkedInIcon className="icon" />
-                <TwitterIcon className="icon" />
-                <YouTubeIcon className="icon" />
-              </div>
-            </div>
-            <div className="logo-copyright-wrapper">
-              {!isMobile && (
-                <Link
-                  to={uid ? "/joblistings" : "/"}
-                  className="company-logo-bk-wrapper"
-                >
-                  <img
-                    className="company-logo-bk"
-                    src="image/lraoughLogoBk.png"
-                    alt="Lraough-logo"
-                  />
-                </Link>
-              )}
-              <div className="copy-right">Lraough LLC All Right Reserved. </div>
-            </div>
+            <div className="copy-right">Lraough LLC All Right Reserved. </div>
           </div>
-        </footer>
-      )}
+        </div>
+      </footer>
     </>
   );
 };

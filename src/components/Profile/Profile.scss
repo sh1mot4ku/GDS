@@ -1,0 +1,107 @@
+@import "../../sass_config/color";
+@import "../../sass_config/mixin";
+@import "../../sass_config/keyFlames";
+
+.main-profile {
+  width: 600px;
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 200px;
+
+  @include tablet {
+    font-size: 16px;
+    width: 100vw;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 80px;
+  }
+
+  .pf-edited-indicator {
+    position: absolute;
+    // top: 0;
+    left: 50%;
+    background-color: $color_primary;
+    color: white;
+    text-align: center;
+    padding: 8px 0;
+    width: 100vw;
+    transform: translateX(-50%);
+    font-size: 14px;
+    font-weight: bold;
+    animation: fadeOut 5s ease forwards 1s 1 normal;
+
+    @include tablet {
+      font-size: 12px;
+    }
+  }
+
+  .pf-container {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    padding: 40px 0;
+    border-bottom: solid 1px #e5e5e5;
+
+    @include tablet {
+      width: 100%;
+      padding: 32px 0;
+    }
+
+    &--top {
+      padding-top: 0;
+
+      @include tablet {
+        padding-bottom: 20px;
+      }
+    }
+
+    .user-icon {
+      width: 100px;
+      height: 100px;
+      margin-right: 20px;
+      border-radius: 100px;
+
+      @include tablet {
+        width: 56px;
+        height: 56px;
+      }
+    }
+
+    .pf-button {
+      border: 1px solid #e5e5e5;
+      outline: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .pf-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .pf-country {
+      margin-bottom: 16px;
+    }
+
+    .pf-title {
+      width: 160px;
+      color: #999999;
+
+      @include tablet {
+        width: 120px;
+        font-size: 14px;
+        margin-right: 22px;
+      }
+    }
+  }
+}
+.padding-top {
+  padding-top: 80.5px;
+}
+
+.pf-edited-indicator-top-0 {
+  top: 0;
+}
+.pf-edited-indicator-top {
+  top: -3.15%;
+}

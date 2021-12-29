@@ -21,8 +21,8 @@ const JobListingsManagement = () => {
       console.log(
         "Dispatch startSetUsersJobListings from JobListingsManagement"
       );
-      setLoaded(true);
     }
+    setLoaded(true);
   }, [usersJobListings]);
 
   return (

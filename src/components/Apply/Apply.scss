@@ -12,7 +12,6 @@
     flex-direction: column;
     margin: 0 auto;
 
-
     .title {
       margin: 32px;
       text-align: center;
@@ -102,7 +101,7 @@
     .sentence {
       line-height: 2;
 
-      @include mobile {
+      @include tablet {
         text-align: left;
       }
     }

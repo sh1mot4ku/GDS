@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "@material-ui/core";
+import "../ui/Button.scss"
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputText from "../ui/InputText";
 import InputSelect from "../ui/InputSelect";
@@ -184,9 +184,9 @@ function Edit() {
           />
         </div>
         <div className="buttonContainer">
-          <Button variant="contained" className="button" type="submit">
+          <button className="btn-lg btn-fill" type="submit">
             保存する
-          </Button>
+          </button>
         </div>
       </form>
     </div>
