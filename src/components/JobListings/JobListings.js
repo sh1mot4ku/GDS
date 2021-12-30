@@ -38,13 +38,15 @@ const JobListings = () => {
   const [joblistingsCount, setJoblistingsCount] = useState(10);
   const [page, setPage] = useState(1);
   const [numOfJoblistingsResult, setNumOfJoblistingsResult] = useState(0);
-  console.log(`page ${page}`);
 
   // handle pagenation
   const onHandlePage = (_, val) => {
     window.scroll(0, 0);
     setPage(val);
   };
+
+  const sliceJobListings = (jobListings) =>
+    jobListings.slice(joblistingsCount * page - 10, joblistingsCount * page);
 
   // params will be changed and the useEffect gets executed to run filterJobListings()
   const onHandleSearchParamsForSearchKeyword = () => {
@@ -129,10 +131,7 @@ const JobListings = () => {
     // =========== then set result(totalfilteredJobListings) to setJobListingsArr() =============
     setNumOfJoblistingsResult(totalfilteredJobListings.length);
     if (totalfilteredJobListings.length !== 0) {
-      const jobListingsOnAPage = totalfilteredJobListings.slice(
-        joblistingsCount * page - 10,
-        joblistingsCount * page
-      );
+      const jobListingsOnAPage = sliceJobListings(totalfilteredJobListings);
       setJobListingsArr(jobListingsOnAPage);
     } else {
       setJobListingsArr(["no result"]);
@@ -140,19 +139,9 @@ const JobListings = () => {
   };
 
   useEffect(() => {
-    console.log("in useeffect");
     if (jobListings || loaded) {
-      console.log("in useeffect");
       setNumOfJoblistingsResult(jobListings.length);
-      const jobListingsOnAPage = jobListings.slice(
-        joblistingsCount * page - 10,
-        joblistingsCount * page
-      );
-      // console.log(
-      //   jobListingsOnAPage,
-      //   joblistingsCount * page - 10,
-      //   joblistingsCount * page
-      // );
+      const jobListingsOnAPage = sliceJobListings(jobListings);
       setJobListingsArr(jobListingsOnAPage);
       !loaded && setLoaded(true);
     } else if (jobListings === null) {
@@ -251,24 +240,26 @@ const JobListings = () => {
                     </p>
                   </>
                 ) : (
-                  jobListingsArr.map((job) => (
-                    <React.Fragment key={job.id}>
-                      <JobBox {...job} />
-                    </React.Fragment>
-                  ))
+                  <>
+                    {jobListingsArr.map((job) => (
+                      <React.Fragment key={job.id}>
+                        <JobBox {...job} />
+                      </React.Fragment>
+                    ))}
+                    <div className="pagenation-wrapper">
+                      <Pagination
+                        count={
+                          numOfJoblistingsResult % 10 === 0
+                            ? numOfJoblistingsResult / 10
+                            : Math.ceil(numOfJoblistingsResult / 10)
+                        }
+                        page={page}
+                        color="primary"
+                        onChange={onHandlePage}
+                      />
+                    </div>
+                  </>
                 )}
-                <div className="pagenation-wrapper">
-                  <Pagination
-                    count={
-                      numOfJoblistingsResult % 10 === 0
-                        ? numOfJoblistingsResult / 10
-                        : Math.ceil(numOfJoblistingsResult / 10)
-                    }
-                    page={page}
-                    color="primary"
-                    onChange={onHandlePage}
-                  />
-                </div>
               </div>
               ;
             </>
