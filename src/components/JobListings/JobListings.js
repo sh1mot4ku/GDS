@@ -39,12 +39,12 @@ const JobListings = () => {
   const [page, setPage] = useState(1);
   const [numOfJoblistingsResult, setNumOfJoblistingsResult] = useState(0);
 
-  // handle pagenation
+  // handle pagination
   const onHandlePage = (_, val) => {
     window.scroll(0, 0);
     setPage(val);
   };
-
+  // extract 10 joblistings on each page
   const sliceJobListings = (jobListings) =>
     jobListings.slice(joblistingsCount * page - 10, joblistingsCount * page);
 
@@ -246,7 +246,7 @@ const JobListings = () => {
                         <JobBox {...job} />
                       </React.Fragment>
                     ))}
-                    <div className="pagenation-wrapper">
+                    <div className="pagination-wrapper">
                       <Pagination
                         count={
                           numOfJoblistingsResult % 10 === 0

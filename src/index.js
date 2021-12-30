@@ -15,9 +15,6 @@ const theme = createTheme({
     primary: {
       main: "#1E40F6",
     },
-    primaryPagenation: {
-      main: "#1E40F6",
-    },
   },
 });
 
