@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
 // import Button from "@material-ui/core/Button";
-import '../ui/Button.scss';
+import "../ui/Button.scss";
 import UrgeApplyModal from "../ui/UrgeApplyModal";
 import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
@@ -165,7 +165,9 @@ const JobListing = () => {
                 <JobBox {...job} details={true} />
                 <div className="job-description">
                   <h2 className="job-description-header">求人内容</h2>
-                  <span>{job.jobListing}</span>
+                  <span className="job-description-content">
+                    {job.jobListing}
+                  </span>
                 </div>
                 <div className="overview">
                   <h2 className="overview-header">概要</h2>
