@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// import { Button } from "@material-ui/core";
-import "../ui/Button.scss"
+import "../ui/Button.scss";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import { auth } from "../../firebase/firebase";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
@@ -15,7 +14,7 @@ const ForgetPassword = () => {
   const onForgetPassword = (e) => {
     e.preventDefault();
     auth
-      .signInWithEmailAndPassword(email)
+      .sendPasswordResetEmail(email)
       .then(() => {
         history.push("/");
       })
@@ -24,9 +23,15 @@ const ForgetPassword = () => {
           case "auth/invalid-email":
             setFirebaseError("メールアドレスの形式が無効です");
             break;
-          case "auth/too-many-requests":
+          case "auth/missing-continue-uri":
+            setFirebaseError("作業継続用のURLが発行されませんでした。");
+            break;
+          case "auth/invalid-continue-uri":
+            setFirebaseError("作業継続用のURLが正しくありません。");
+            break;
+          case "auth/user-not-found":
             setFirebaseError(
-              "ログインの試行が何度も行われたため、セキュリティ上ユーザーアカウントを一時的にロックしています。しばらく経ってから再度お試しください。"
+              "Eメールに対応するアカウントが見つかりませんでした。"
             );
             break;
           default:
@@ -48,29 +53,30 @@ const ForgetPassword = () => {
     <div className="main-ForgetPassword">
       <BlueSidePart />
       <div className="rightBox">
-        <h2 className="title">パスワードを忘れた方</h2>
-        <p className="subtitle">ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。</p>
-        <form className="form">
-          <InputTextAndLabel
-            label="メールアドレス"
-            placeholder="example@example.com"
-            type="text"
-            onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
-            value={email}
-            name="email"
-          />
-          <p className={firebaseError !== "" ? "error-text" : "empty-box"}>
-            {firebaseError}
+        <div className="rightBox-container">
+          <h2 className="title">パスワードを忘れた方</h2>
+          <p className="subtitle">
+            ご登録されたメールアドレスにパスワード再設定のご案内が送信されます。
           </p>
-          <div className="ForgetPassword-buttons">
-            <button
-              onClick={onForgetPassword}
-              className="btn-lg btn-fill"
-            >
-              SEND
-            </button>
-          </div>
-        </form>
+          <form className="form">
+            <InputTextAndLabel
+              label="メールアドレス"
+              placeholder="example@example.com"
+              type="text"
+              onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
+              value={email}
+              name="email"
+            />
+            <p className={firebaseError !== "" ? "error-text" : "empty-box"}>
+              {firebaseError}
+            </p>
+            <div className="ForgetPassword-buttons">
+              <button onClick={onForgetPassword} className="btn-lg btn-fill">
+                SEND
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

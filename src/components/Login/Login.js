@@ -77,6 +77,13 @@ const Login = () => {
             value={password}
             name="password"
           />
+          <div className="forget-password-link-wrapper">
+            <Link to="/forget-password">
+              <span className="forget-password-link">
+                パスワードを忘れた方はこちら
+              </span>
+            </Link>
+          </div>
           <p className={firebaseError !== "" ? "error-text" : "empty-box"}>
             {firebaseError}
           </p>
