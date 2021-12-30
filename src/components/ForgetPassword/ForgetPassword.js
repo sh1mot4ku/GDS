@@ -14,9 +14,12 @@ const ForgetPassword = () => {
   const onForgetPassword = (e) => {
     e.preventDefault();
     auth
-      .sendPasswordResetEmail(email)
+      .sendPasswordResetEmail(email, { url: window.location.origin })
       .then(() => {
-        history.push("/");
+        history.push({
+          pathname: "/forget-password-confirm",
+          state: { email },
+        });
       })
       .catch((error) => {
         switch (error.code) {
