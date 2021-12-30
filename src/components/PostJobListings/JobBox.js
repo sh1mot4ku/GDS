@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Modal from "../ui/Modal";
+import CloseIcon from "@mui/icons-material/Close";
 import "./JobBox.scss";
 
 const JobBox = ({
@@ -123,12 +124,28 @@ const JobBox = ({
       {isOpenModal && (
         <Modal onClose={() => setIsOpenModal(false)}>
           <div className="delete-modal">
+            <CloseIcon
+              className="close-icon"
+              onClick={() => setIsOpenModal(false)}
+            />
             <div className="delete-modal-header">投稿を削除しますか？</div>
             <div className="delete-modal-description">
               この操作は取り消せません。求人一覧の検索結果から投稿が削除されます。
             </div>
-            <div onClick={onDelete}>削除</div>
-            <div onClick={() => setIsOpenModal(false)}>キャンセル</div>
+            <div className="buttons-wrapper">
+              <div
+                onClick={onDelete}
+                className="btn-lg btn-fill-warning btn-delete"
+              >
+                削除
+              </div>
+              <div
+                onClick={() => setIsOpenModal(false)}
+                className="btn-lg btn-line-plane btn-line-opacity"
+              >
+                キャンセル
+              </div>
+            </div>
           </div>
         </Modal>
       )}

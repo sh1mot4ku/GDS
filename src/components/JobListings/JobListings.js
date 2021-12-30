@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import JobBox from "./JobBox";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { startSetJobListings } from "../../action/jobListings";
 import options from "../../data/radioButtonOptions/PostJobListings";
 import "./JobListings.scss";

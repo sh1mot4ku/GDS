@@ -66,6 +66,7 @@
 .delete-modal {
   padding: 80px 48px;
   text-align: center;
+  position: relative;
 
   &-header {
     font-size: 28px;
@@ -74,5 +75,16 @@
   &-description {
     font-size: 20px;
     text-align: left;
+    margin-bottom: 40px;
+  }
+
+  .buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .btn-delete {
+    margin-bottom: 12px;
   }
 }
