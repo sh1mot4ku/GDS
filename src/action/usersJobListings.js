@@ -1,5 +1,9 @@
 import database from "../firebase/firebase";
-import { addJobListing, editJobListing } from "../action/jobListings";
+import {
+  addJobListing,
+  editJobListing,
+  deleteJobListing,
+} from "../action/jobListings";
 
 export const setUsersJobListings = (jobListings) => ({
   type: "SET_USERS_JOB_LISTINGS",
@@ -104,6 +108,35 @@ export const startEditUsersJobListings = (jobId, shortUpdates, fullUpdates) => {
       dispatch(editJobListing(shortUpdatesRedux));
 
       console.log("startEditUsersJobListings finished");
+    } catch (err) {
+      throw err;
+    }
+  };
+};
+
+export const deleteUsersJobListings = (id) => ({
+  type: "DELETE_USERS_JOB_LISTING",
+  id,
+});
+
+export const startDeleteUsersJobListings = (jobId) => {
+  return async (dispatch, getState) => {
+    const uid = getState().user.uid;
+
+    try {
+      // delete short posting information from database
+      await database.ref(`shortJobListings/${uid}/${jobId}`).remove();
+      console.log("remove short posting information from database");
+
+      // delete full posting information from database
+      await database.ref(`fullJobListings/${jobId}`).remove();
+      console.log("remove full posting information from database");
+
+      // delete short posting information from Redux
+      dispatch(deleteUsersJobListings(jobId));
+      dispatch(deleteJobListing(jobId));
+
+      console.log("startDeleteUsersJobListings finished");
     } catch (err) {
       throw err;
     }

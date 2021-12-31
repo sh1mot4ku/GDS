@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import JobBox from "./JobBox";
 import { startSetUsersJobListings } from "../../action/usersJobListings";
+import Loading from "../ui/Loading";
 import "./JobListingsManagement.scss";
 
 const JobListingsManagement = () => {
@@ -30,7 +31,7 @@ const JobListingsManagement = () => {
       <h2 className="users-joblistings-header">求人一覧</h2>
       {/* I changed here since the default state is now null, pls check if everything works ok */}
       {jobListingsArr === null ? (
-        <div>Loading...</div> // Change here to loading animation
+        <Loading />
       ) : jobListingsArr.length !== 0 && loaded ? (
         jobListingsArr.map((job) => (
           <React.Fragment key={job.id}>
@@ -38,7 +39,9 @@ const JobListingsManagement = () => {
           </React.Fragment>
         ))
       ) : (
-        <div>求人投稿はまだありません</div>
+        <div className="no-result-wrapper">
+          <span>求人がまだありません</span>
+        </div>
       )}
     </div>
   );

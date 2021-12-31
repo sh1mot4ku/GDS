@@ -1,4 +1,4 @@
-@import '../../sass_config/color';
+@import "../../sass_config/color";
 
 // =========== Input ===========
 .input {
@@ -104,14 +104,6 @@
   border-radius: 20px;
   width: 100%;
   position: relative;
-  .close-icon {
-    position: absolute;
-    font-size: 24px;
-    cursor: pointer;
-    color: $color-sub-text;
-    top: 16px;
-    left: 564px;
-  }
 
   .img-joblists-detail {
     width: 400px;
@@ -146,6 +138,15 @@
     text-decoration: underline;
     margin-bottom: 80px;
   }
+}
+
+.close-icon {
+  position: absolute;
+  font-size: 24px;
+  cursor: pointer;
+  color: $color-sub-text;
+  top: 16px;
+  left: 564px;
 }
 // ======================================
 
