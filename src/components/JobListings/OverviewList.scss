@@ -13,8 +13,8 @@
   .overview-title {
     color: $color-sub-text;
     width: 160px;
-  }
-  .overview-text {
-    width: 440px;
+    @include tablet {
+      width: 120px;
+    }
   }
 }

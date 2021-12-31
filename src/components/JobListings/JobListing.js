@@ -142,7 +142,7 @@ const JobListing = () => {
                   <>
                     <div className="joblisting-details-mask"></div>
                     <button
-                      className="btn-lg btn-fill"
+                      className="btn-lg btn-fill read-more-btn"
                       onClick={(e) => setIsReadMoreClicked(true)}
                     >
                       続きを読む

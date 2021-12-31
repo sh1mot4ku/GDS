@@ -56,17 +56,18 @@
 
     .skill-tag-wrapper {
       margin-right: 2px;
-      display: inline;
+      margin-bottom: 2px;
+      border: 1px solid $color-line;
+      border-radius: 4px;
+      padding: 4px 12px;
+      @include tablet {
+        padding: 4px 10px;
+      }
 
       .skill-tag {
         font-weight: bolder;
-        padding: 4px 12px;
-        border: 1px solid $color-line;
-        border-radius: 4px;
         @include tablet {
-          padding: 4px 10px;
           font-size: 14px;
-          margin-top: 12px;
         }
       }
     }

@@ -70,8 +70,7 @@
   height: 1000px;
   overflow: hidden;
   position: relative;
-  // margin: 100px auto;
-  margin: 0 auto;
+  margin-bottom: 200px;
   .joblisting-details-mask {
     height: 700px;
     @extend .joblisting-wrapper;
@@ -82,5 +81,10 @@
     );
     position: absolute;
     top: 300px;
+  }
+  .read-more-btn {
+    position: absolute;
+    left: 170px;
+    top: 936px;
   }
 }
