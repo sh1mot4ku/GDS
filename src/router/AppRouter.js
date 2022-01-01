@@ -22,7 +22,8 @@ import NotFoundPage from "../components/notFoundPage/NotFoundPage";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import LogoutRoute from "./LogoutRoute";
-import ForgetPassword from "../components/ForgetPassword/ForgetPassword";
+import ForgetPassword from "../components/ResetPassword/ResetPassword";
+import ConfirmSentMail from "../components/ResetPassword/ConfirmSentMail";
 import { isMobile } from "react-device-detect";
 
 const history = createBrowserHistory();
@@ -58,7 +59,8 @@ const AppRouter = () => (
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />
       <PublicRoute path="/contact" component={ContactForm} />
       <LogoutRoute path="/login" component={Login} />
-      <LogoutRoute path="/forget-password" component={ForgetPassword} />
+      <LogoutRoute path="/reset-password" component={ForgetPassword} />
+      <LogoutRoute path="/reset-password-confirm" component={ConfirmSentMail} />
       <PublicRoute path="*" component={NotFoundPage} />
     </Switch>
   </Router>
