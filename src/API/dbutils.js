@@ -1,7 +1,7 @@
 import database from "../firebase/firebase";
 
 export const insertUser = (postingInfo, authId) => {
-  database
+  return database
     .ref(`/user/${authId}`)
     .set(postingInfo)
     .then(() => {

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
-import { createTheme, ThemeProvider } from "@material-ui/core/styles";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AppRouter, { history } from "./router/AppRouter";
 import database, { auth } from "./firebase/firebase";
 import { login, logout } from "./action/user";
@@ -44,6 +44,7 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     // console.log(user);
     const uid = user.uid;
+    const emailVerified = user.emailVerified;
     database
       .ref(`user/${uid}`)
       .once("value")
@@ -51,6 +52,7 @@ auth.onAuthStateChanged((user) => {
         store.dispatch(
           login({
             uid,
+            emailVerified,
             userInfo: snapshot.val(),
           })
         );

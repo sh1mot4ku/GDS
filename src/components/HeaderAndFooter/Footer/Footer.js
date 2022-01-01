@@ -90,7 +90,7 @@ export const Footer = () => {
               >
                 <img
                   className="company-logo-bk"
-                  src="image/lraoughLogoBk.png"
+                  src="/image/lraoughLogoBk.png"
                   alt="Lraough-logo"
                 />
               </Link>

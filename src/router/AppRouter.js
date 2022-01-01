@@ -17,12 +17,16 @@ import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
 import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
 import EditJobListing from "../components/PostJobListings/EditJobListing";
+import CopyJobListing from "../components/PostJobListings/CopyJobListing";
 import NotFoundPage from "../components/notFoundPage/NotFoundPage";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import LogoutRoute from "./LogoutRoute";
-import ForgetPassword from "../components/ForgetPassword/ForgetPassword";
+import SendMailConfirm from "../components/Apply/SendMailConfirm";
+import ResetPassword from "../components/ResetPassword/ResetPassword";
+import ConfirmSentMail from "../components/ResetPassword/ConfirmSentMail";
 import { isMobile } from "react-device-detect";
+import ThankYou from "../components/Apply/ThankYou";
 
 const history = createBrowserHistory();
 
@@ -32,8 +36,10 @@ const AppRouter = () => (
       <PublicRoute path="/" component={TopPage} exact={true} />
       <PublicRoute path="/about" component={AboutPage} />
       <PublicRoute path="/faqs" component={FaqsPage} />
-      <LogoutRoute path="/apply-developer" component={Apply} />
-      <LogoutRoute path="/apply-recruiter" component={Recruiter} />
+      <PublicRoute path="/apply-developer" component={Apply} />
+      <PublicRoute path="/apply-recruiter" component={Recruiter} />
+      <PrivateRoute path="/send-mail-confirm" component={SendMailConfirm} />
+      <PrivateRoute path="/thank-you" component={ThankYou} />
       <PrivateRoute path="/profile" component={Profile} />
       <PrivateRoute path="/profile_edit" component={ProfileEdit} />
       <PrivateRoute
@@ -52,11 +58,13 @@ const AppRouter = () => (
         />
       )}
       <PrivateRoute path="/edit_joblisting/:jobId" component={EditJobListing} />
+      <PrivateRoute path="/copy_joblisting/:jobId" component={CopyJobListing} />
       <PublicRoute path="/joblistings" component={JobListings} />
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />
       <PublicRoute path="/contact" component={ContactForm} />
       <LogoutRoute path="/login" component={Login} />
-      <LogoutRoute path="/forget-password" component={ForgetPassword} />
+      <LogoutRoute path="/reset-password" component={ResetPassword} />
+      <LogoutRoute path="/reset-password-confirm" component={ConfirmSentMail} />
       <PublicRoute path="*" component={NotFoundPage} />
     </Switch>
   </Router>

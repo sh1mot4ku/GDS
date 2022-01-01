@@ -4,26 +4,25 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import JobBox from "./JobBox";
 import OverviewList from "./OverviewList";
-// import Button from "@material-ui/core/Button";
 import "../ui/Button.scss";
 import UrgeApplyModal from "../ui/UrgeApplyModal";
 import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
 import ThankYouForApplying from "./ThankYouForApplying";
 import { setFullJobListing } from "../../API/dbutils";
-import moment from "moment";
 import "moment/locale/ja";
 import "./ThankYouForApplying.scss";
 import "./JobListing.scss";
 
 const JobListing = () => {
-  const { uid } = useSelector((state) => state.user);
+  const { uid, emailVerified } = useSelector((state) => state.user);
   const { userInfo } = useSelector((state) => state.user);
   const { jobId } = useParams();
   const [job, setJob] = useState(null);
   const [overview, setOverview] = useState(null);
   const [isReadMoreClicked, setIsReadMoreClicked] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(null);
+  const [isEmailVerified, setIsEmailVerified] = useState(null);
   const [isApplied, setIsApplied] = useState(false);
 
   const onClose = () => {
@@ -124,6 +123,14 @@ const JobListing = () => {
     }
   }, [uid]);
 
+  useEffect(() => {
+    if (emailVerified) {
+      setIsEmailVerified(true);
+    } else {
+      setIsEmailVerified(false);
+    }
+  }, [emailVerified]);
+
   return (
     <>
       {!isApplied ? (
@@ -138,7 +145,7 @@ const JobListing = () => {
           >
             {job ? (
               <>
-                {isUserLoggedIn === false && (
+                {(isUserLoggedIn === false || isEmailVerified === false) && (
                   <>
                     <div className="joblisting-details-mask"></div>
                     <button
@@ -188,7 +195,13 @@ const JobListing = () => {
                     応募する
                   </button>
                 </div>
-                {isReadMoreClicked && <UrgeApplyModal onClose={onClose} />}
+                {isReadMoreClicked && (
+                  <UrgeApplyModal
+                    onClose={onClose}
+                    isUserLoggedIn={isUserLoggedIn}
+                    isEmailVerified={isEmailVerified}
+                  />
+                )}
               </>
             ) : (
               <div>Loading....</div>
@@ -201,60 +214,5 @@ const JobListing = () => {
     </>
   );
 };
-
-//       {!isApplied ? (
-//         <div className="joblisting-details-wrapper">
-//           {job ? (
-//             <>
-//               <div className="bread-list">
-//                 <div className="bread-item">
-//                   <Link to="/joblistings" className="previous-link">
-//                     求人一覧
-//                   </Link>
-//                 </div>
-//                 <div className="bread-item">
-//                   <span>&gt;</span>
-//                 </div>
-//                 <div className="bread-item">
-//                   <span>{job.jobTitle}</span>
-//                 </div>
-//               </div>
-//               <JobBox {...job} details={true} />
-//               <div className="job-description">
-//                 <h2 className="job-description-header">求人内容</h2>
-//                 <span>{job.jobListing}</span>
-//               </div>
-//               <div className="overview">
-//                 <h2 className="overview-header">概要</h2>
-//                 {overview &&
-//                   overview.map((element) => (
-//                     <OverviewList
-//                       title={element.key}
-//                       text={element.value}
-//                       key={element.key}
-//                     />
-//                   ))}
-//               </div>
-//               <div className="oubo-wrapper">
-//                 <Button
-//                   variant="contained"
-//                   color="primary"
-//                   onClick={(e) => sendApplicationEmail(e)}
-//                 >
-//                   応募する
-//                 </Button>
-//               </div>
-//             </>
-//           ) : (
-//             <div>Loading....</div>
-//           )}
-//         </div>
-//       ) : (
-//         <ThankYouForApplying />
-// >>>>>>> feature-joblist
-//       )}
-//     </>
-//   );
-// };
 
 export default JobListing;

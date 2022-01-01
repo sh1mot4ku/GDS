@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../ui/Button.scss"
+import "../ui/Button.scss";
 import InputText from "../ui/InputText";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import InputLabel from "@mui/material/InputLabel";
@@ -7,7 +7,7 @@ import InputSelect from "../ui/InputSelect";
 import { auth } from "../../firebase/firebase";
 import RadioForm from "../ui/RadioForm";
 import { insertUser } from "../../API/dbutils";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
 import {
   optionData,
@@ -48,6 +48,7 @@ function Apply() {
   const [isClientValidationPassed, setIsClientValidationPassed] =
     useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const history = useHistory();
 
   const USER_TYPE = "developer";
 
@@ -220,13 +221,6 @@ function Apply() {
   };
 
   useEffect(() => {
-    // console.log(
-    //   link1Error,
-    //   link2Error,
-    //   link3Error,
-    //   englishLevelError,
-    //   isTyping
-    // );
     if (
       link1Error === false &&
       link2Error === false &&
@@ -240,72 +234,80 @@ function Apply() {
     }
   }, [link1Error, link2Error, link3Error, isTyping, isRegistering]);
 
+  useEffect(() => onSubscription(), [isClientValidationPassed]);
+
   // rendered after register button is pressed, when useEffect() above is run, and when firebase throuws an error
-  useEffect(() => {
-    // console.log(
-    //   "isClientValidationPassed" +
-    //     isClientValidationPassed +
-    //     ":" +
-    //     "issubmitted:" +
-    //     isSubmitted
-    // );
+  const onSubscription = async () => {
     if (isClientValidationPassed && !isSubmitted) {
-      console.log("firebase useeffect");
-      const postingInfo = {
-        profile: {
-          fullName,
+      try {
+        console.log("firebase useeffect");
+        const postingInfo = {
+          profile: {
+            fullName,
+            email,
+            location,
+            lookingFor,
+            links: { link1, link2, link3 },
+            englishLevel,
+            description,
+            pl: password.length,
+            photoUrl: "",
+          },
+          userType: USER_TYPE,
+        };
+        // create user at Firebase Authentication with email and password
+        const userCredential = await auth.createUserWithEmailAndPassword(
           email,
-          location,
-          lookingFor,
-          links: { link1, link2, link3 },
-          englishLevel,
-          description,
-          pl: password.length,
-          photoUrl: "",
-        },
-        userType: USER_TYPE,
-      };
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          insertUser(postingInfo, userCredential.user.uid); // should wait async process here
-          setStep(step + 1);
-          console.log("sent to firebase");
-          setIsSubmitted(true);
-        })
-        .catch((error) => {
-          console.error(`Error happened: ${error}`);
-          switch (error.code) {
-            case "auth/invalid-email":
-              setFirebaseErrorMessage("メールアドレスが無効です");
-              break;
-            case "auth/email-already-in-use":
-              setFirebaseErrorMessage(
-                "ご記入いただいたメールアドレスは既に使用されています"
-              );
-              break;
-            case "auth/operation-not-allowed":
-              setFirebaseErrorMessage(
-                "メールアドレスまたはパスワードが有効ではありません"
-              );
-              break;
-            case "auth/weak-password":
-              setFirebaseErrorMessage(
-                "パスワードは7文字以上、文字と数字を組み合わせて入力してください"
-              );
-              break;
-            default:
-              setFirebaseErrorMessage(
-                "予期しないエラーが発生しました。再度登録してください。"
-              );
-          }
-          setIsClientValidationPassed(false);
-          setIsRegistering(true);
-          // setLink1Error(null);
+          password
+        );
+
+        // add user to Firebase Real-time Database
+        await insertUser(postingInfo, userCredential.user.uid);
+        // setStep(step + 1);
+        console.log("sent to firebase");
+        setIsSubmitted(true);
+
+        // Send email for verificate user's email address
+        await auth.currentUser.sendEmailVerification({
+          url: `${window.location.origin}/thank-you`,
         });
+        history.push({
+          pathname: "/send-mail-confirm",
+          state: { email },
+        });
+      } catch (error) {
+        console.error(`Error happened: ${error}`);
+        switch (error.code) {
+          case "auth/invalid-email":
+            setFirebaseErrorMessage("メールアドレスが無効です");
+            break;
+          case "auth/email-already-in-use":
+            setFirebaseErrorMessage(
+              "ご記入いただいたメールアドレスは既に使用されています"
+            );
+            break;
+          case "auth/operation-not-allowed":
+            setFirebaseErrorMessage(
+              "メールアドレスまたはパスワードが有効ではありません"
+            );
+            break;
+          case "auth/weak-password":
+            setFirebaseErrorMessage(
+              "パスワードは7文字以上、文字と数字を組み合わせて入力してください"
+            );
+            break;
+          default:
+            setFirebaseErrorMessage(
+              "予期しないエラーが発生しました。再度登録してください。"
+            );
+        }
+        setIsClientValidationPassed(false);
+        setIsRegistering(true);
+        // setLink1Error(null);
+      }
     }
     // console.log(isSubmitted);
-  }, [isClientValidationPassed]);
+  };
 
   // fired when the next or previous button is clicked
   const handleClick = (e, newStep, userInfo) => {
@@ -323,14 +325,6 @@ function Apply() {
 
   // rendered after next or previous button is clicked, and when inputting
   useEffect(() => {
-    // console.log(
-    //   nameError,
-    //   emailInvalidError,
-    //   emailError,
-    //   passwordInvalidError,
-    //   passwordError,
-    //   isTyping
-    // );
     if (
       nameError === false &&
       emailInvalidError === false &&
@@ -495,37 +489,6 @@ function Apply() {
         </>
       );
       break;
-    case 2:
-      contents = (
-        <>
-          <div className="thxBox">
-            <h2 className="thxTitle">Thank you for Applying</h2>
-            <p className="sentence">
-              この度はGlobal
-              Developersへのご興味を頂き誠にありがとうございます。
-              <br />
-              <br />
-              ご応募頂いた皆様には、1週間以内にご連絡を改めさせて頂きます。
-              <br />
-              今後のプロセスについては、今までのご経験についてより詳しく知るための面談や面接が行われる予定です。
-              <br />
-              審査後に改めてメールにてお知らせ致します。
-              <br />
-              <br />
-              尚現在はα版として運用しており、β版ローンチは2022年1月を目指しております。
-              <br />
-              本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。
-            </p>
-            <Link to="/">
-              <button className="btn-lg btn-fill">
-                ホームへ戻る
-              </button>
-            </Link>
-          </div>
-        </>
-      );
-      break;
-
     default:
       contents = <p>Unknown stepIndex</p>;
   }
@@ -534,7 +497,7 @@ function Apply() {
     <div className="main-apply">
       <BlueSidePart />
       <div className="rightBox">
-        {step !== 2 && <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>}
+        <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>
         <form
           onSubmit={
             step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
