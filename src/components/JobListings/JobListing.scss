@@ -86,5 +86,10 @@
     position: absolute;
     left: 170px;
     top: 936px;
+
+    @include tablet {
+      width: calc(100vw - 40px) !important;
+      left: 20px;
+    }
   }
 }

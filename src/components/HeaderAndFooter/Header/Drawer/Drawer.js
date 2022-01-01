@@ -1,11 +1,11 @@
-import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { startLogout } from '../../../../action/user';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Box from '@mui/material/Box';
-import CloseIcon from '@mui/icons-material/Close';
-import "../../../ui/Button.scss"
+import React from "react";
+import { useLocation, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../../../action/user";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import Box from "@mui/material/Box";
+import CloseIcon from "@mui/icons-material/Close";
+import "../../../ui/Button.scss";
 import {
   headerAndDrawerMenuItemsLogOut,
   drawerMenuItemsLogin,
@@ -13,7 +13,6 @@ import {
 import { useSelector } from "react-redux";
 import "./Drawer.scss";
 import { isMobile } from "react-device-detect";
-
 
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
@@ -72,7 +71,7 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
             <Link to={uid ? "/joblistings" : "/"}>
               <img
                 className="company-logo"
-                src="image/lraoughLogo.png"
+                src="/image/lraoughLogo.png"
                 alt="Lraough-logo"
               />
             </Link>
