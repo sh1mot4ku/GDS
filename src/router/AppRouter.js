@@ -34,8 +34,8 @@ const AppRouter = () => (
       <PublicRoute path="/" component={TopPage} exact={true} />
       <PublicRoute path="/about" component={AboutPage} />
       <PublicRoute path="/faqs" component={FaqsPage} />
-      <LogoutRoute path="/apply-developer" component={Apply} />
-      <LogoutRoute path="/apply-recruiter" component={Recruiter} />
+      <PublicRoute path="/apply-developer" component={Apply} />
+      <PublicRoute path="/apply-recruiter" component={Recruiter} />
       <PrivateRoute path="/send-mail-confirm" component={SendMailConfirm} />
       <PrivateRoute path="/thank-you" component={ThankYou} />
       <PrivateRoute path="/profile" component={Profile} />
