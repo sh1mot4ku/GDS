@@ -14,10 +14,9 @@ const JobBox = ({
   id,
   postedTimeStamp,
   employmentType,
-  details,
+  details = false,
 }) => {
   const [timeLag, setTimeLag] = useState(null);
-
   useEffect(() => {
     moment.locale("ja");
   }, []);
@@ -30,7 +29,7 @@ const JobBox = ({
   }, [details, postedTimeStamp]);
 
   return (
-    <div className="job-box">
+    <div className={`job-box ${!details && "activate-hover"}`}>
       <Link to={`/joblisting/${id}`} className={details && "disabled-link"}>
         <div className="job-img-wrapper">
           <img src={photoUrl} className="job-img" alt="top-job"></img>

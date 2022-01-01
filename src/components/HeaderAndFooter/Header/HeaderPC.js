@@ -58,7 +58,9 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
           <Link
             key={menuItem.title}
             className={
-              location.pathname === menuItem.to
+              location.pathname === menuItem.to ||
+              (location.pathname.includes("joblisting/") &&
+                menuItem.to === "/joblistings")
                 ? [...menuItem.className, "activated-menu"].join(" ")
                 : menuItem.className
             }

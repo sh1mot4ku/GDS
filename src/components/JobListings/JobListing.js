@@ -170,7 +170,7 @@ const JobListing = () => {
                     <span>{job.jobTitle}</span>
                   </div>
                 </div>
-                <JobBox {...job} details={true} />
+                <JobBox {...job} details />
                 <div className="job-description">
                   <h2 className="job-description-header">求人内容</h2>
                   <span>{job.jobListing}</span>
