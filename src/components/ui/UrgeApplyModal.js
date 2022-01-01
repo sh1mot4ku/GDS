@@ -12,13 +12,17 @@ const UrgeApplyModal = ({ onClose, isUserLoggedIn, isEmailVerified }) => {
   const onVerificateMail = async () => {
     const user = auth.currentUser;
     if (user) {
-      await auth.currentUser.sendEmailVerification({
-        url: `${window.location.origin}/joblistings`,
-      });
-      history.push({
-        pathname: "/send-mail-confirm",
-        state: { email: user.email },
-      });
+      try {
+        await auth.currentUser.sendEmailVerification({
+          url: `${window.location.origin}/joblistings`,
+        });
+        history.push({
+          pathname: "/send-mail-confirm",
+          state: { email: user.email },
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
