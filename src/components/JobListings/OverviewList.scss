@@ -1,16 +1,20 @@
 @import "../../sass_config/color";
+@import "../../sass_config/mixin";
 
 .overview-wrapper {
   display: flex;
   justify-content: left;
   align-items: flex-start;
   width: 100%;
+  @include tablet {
+    font-size: 14px;
+  }
 
   .overview-title {
     color: $color-sub-text;
     width: 160px;
-  }
-  .overview-text {
-    width: 440px;
+    @include tablet {
+      width: 120px;
+    }
   }
 }

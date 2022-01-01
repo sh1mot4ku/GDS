@@ -62,7 +62,7 @@ export const Footer = () => {
             <Link to={uid ? "/joblistings" : "/"}>
               <img
                 className="company-logo-bk-mb"
-                src="image/lraoughLogoBk.png"
+                src="/image/lraoughLogoBk.png"
                 alt="Lraough-logo"
               />
             </Link>
@@ -114,7 +114,7 @@ export const Footer = () => {
               >
                 <img
                   className="company-logo-bk"
-                  src="image/lraoughLogoBk.png"
+                  src="/image/lraoughLogoBk.png"
                   alt="Lraough-logo"
                 />
               </Link>

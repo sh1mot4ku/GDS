@@ -81,7 +81,7 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
               <Link to={isUserLoggedIn ? "/joblistings" : "/"}>
                 <img
                   className="company-logo"
-                  src="image/lraoughLogo.png"
+                  src="/image/lraoughLogo.png"
                   alt="Lraough-logo"
                 />
               </Link>

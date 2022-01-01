@@ -1,5 +1,6 @@
-@import './JobListings';
-@import '../../sass_config/color';
+@import "./JobListings";
+@import "../../sass_config/color";
+@import "../../sass_config/mixin";
 
 .joblisting-details-wrapper {
   @extend .joblisting-wrapper;
@@ -11,6 +12,9 @@
     width: 100%;
     font-size: 12px;
     margin: 24.5px 0 40px;
+    @include tablet {
+      font-size: 11px;
+    }
 
     .bread-item {
       margin-right: 4px;
@@ -28,6 +32,14 @@
     .job-description-header {
       margin-bottom: 12px;
       font-size: 20px;
+      @include tablet {
+        font-size: 16px;
+      }
+    }
+    .job-description-content {
+      @include tablet {
+        font-size: 14px;
+      }
     }
   }
   .overview-wrapper {
@@ -36,12 +48,21 @@
   }
   .overview-header {
     font-size: 20px;
+    @include tablet {
+      font-size: 16px;
+    }
   }
   .oubo-wrapper {
     width: 33%;
     margin: 80px auto 0;
     border-radius: 16px;
     text-align: center;
+    @include tablet {
+      margin: 64px auto 0;
+    }
+    @include mobile {
+      width: 100%;
+    }
   }
 }
 
@@ -49,8 +70,7 @@
   height: 1000px;
   overflow: hidden;
   position: relative;
-  // margin: 100px auto;
-  margin: 0 auto;
+  margin-bottom: 200px;
   .joblisting-details-mask {
     height: 700px;
     @extend .joblisting-wrapper;
@@ -62,23 +82,14 @@
     position: absolute;
     top: 300px;
   }
-  .round-button {
-    border: 1.8px solid $color_primary;
-    background: $color_primary;
-    border-radius: 100px;
-    padding: 0;
-    height: 63px;
-    width: 250px;
-    margin: 0 4px;
-    font-weight: 700;
-    color: white;
-    font-size: 16px;
+  .read-more-btn {
     position: absolute;
     left: 170px;
-    top: 900px;
+    top: 936px;
 
-    &:hover {
-      background: $color_primary;
+    @include tablet {
+      width: calc(100vw - 40px) !important;
+      left: 20px;
     }
   }
 }

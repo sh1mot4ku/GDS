@@ -145,18 +145,17 @@ const JobListing = () => {
           >
             {job ? (
               <>
-                {isUserLoggedIn === false ||
-                  (isEmailVerified === false && (
-                    <>
-                      <div className="joblisting-details-mask"></div>
-                      <button
-                        className="btn-lg btn-fill"
-                        onClick={(e) => setIsReadMoreClicked(true)}
-                      >
-                        続きを読む
-                      </button>
-                    </>
-                  ))}
+                {(isUserLoggedIn === false || isEmailVerified === false) && (
+                  <>
+                    <div className="joblisting-details-mask"></div>
+                    <button
+                      className="btn-lg btn-fill read-more-btn"
+                      onClick={(e) => setIsReadMoreClicked(true)}
+                    >
+                      続きを読む
+                    </button>
+                  </>
+                )}
                 <div className="bread-list">
                   <div className="bread-item">
                     <Link to="/joblistings" className="previous-link">
@@ -173,7 +172,9 @@ const JobListing = () => {
                 <JobBox {...job} details />
                 <div className="job-description">
                   <h2 className="job-description-header">求人内容</h2>
-                  <span>{job.jobListing}</span>
+                  <span className="job-description-content">
+                    {job.jobListing}
+                  </span>
                 </div>
                 <div className="overview">
                   <h2 className="overview-header">概要</h2>
