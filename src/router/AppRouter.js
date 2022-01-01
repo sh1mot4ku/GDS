@@ -22,8 +22,9 @@ import NotFoundPage from "../components/notFoundPage/NotFoundPage";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
 import LogoutRoute from "./LogoutRoute";
-import ForgetPassword from "../components/ForgetPassword/ForgetPassword";
 import SendMailConfirm from "../components/Apply/SendMailConfirm";
+import ResetPassword from "../components/ResetPassword/ResetPassword";
+import ConfirmSentMail from "../components/ResetPassword/ConfirmSentMail";
 import { isMobile } from "react-device-detect";
 import ThankYou from "../components/Apply/ThankYou";
 
@@ -62,7 +63,8 @@ const AppRouter = () => (
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />
       <PublicRoute path="/contact" component={ContactForm} />
       <LogoutRoute path="/login" component={Login} />
-      <LogoutRoute path="/forget-password" component={ForgetPassword} />
+      <LogoutRoute path="/reset-password" component={ResetPassword} />
+      <LogoutRoute path="/reset-password-confirm" component={ConfirmSentMail} />
       <PublicRoute path="*" component={NotFoundPage} />
     </Switch>
   </Router>
