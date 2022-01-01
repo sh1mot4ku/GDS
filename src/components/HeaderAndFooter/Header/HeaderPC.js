@@ -10,11 +10,13 @@ import {
   headerMenuItemsLogIn,
 } from "../menuItems";
 import { auth } from "../../../firebase/firebase";
+import UrgeApplyModal from "../../ui/UrgeApplyModal";
 import "./Header.scss";
 
 const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
-  const { userInfo } = useSelector((state) => state.user);
+  const { userInfo, emailVerified } = useSelector((state) => state.user);
   const location = useLocation();
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -68,101 +70,121 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
       }
     });
 
+  const manageEl = (
+    <>
+      <span>求人投稿・管理</span>
+      <img src="/photos/chevron-right 2.svg" alt="chevron" />
+    </>
+  );
+
   return (
-    <div>
-      <nav className="nav-bar">
-        <div className="menu">
-          {isUserLoggedIn
-            ? headerMenuItemsLogIn.length !== 0 &&
-              createMenuList(headerMenuItemsLogIn)
-            : headerAndDrawerMenuItemsLogOut.length !== 0 &&
-              createMenuList(headerAndDrawerMenuItemsLogOut)}
-        </div>
-        <div className="nav-right">
-          {isUserLoggedIn ? (
-            <>
-              <div className="user-icon-post-button">
-                <Button
-                  id="basic-button"
-                  aria-controls="basic-menu"
-                  aria-haspopup="true"
-                  aria-expanded={open ? "true" : undefined}
-                  onClick={handleClick}
-                >
-                  {userInfo?.profile?.photoUrl ? (
-                    <img
-                      alt="user-icon"
-                      src={userInfo?.profile?.photoUrl}
-                      className="user-icon"
-                    />
-                  ) : (
-                    <AccountCircleOutlinedIcon className="user-icon-no-img" />
+    <>
+      <div>
+        <nav className="nav-bar">
+          <div className="menu">
+            {isUserLoggedIn
+              ? headerMenuItemsLogIn.length !== 0 &&
+                createMenuList(headerMenuItemsLogIn)
+              : headerAndDrawerMenuItemsLogOut.length !== 0 &&
+                createMenuList(headerAndDrawerMenuItemsLogOut)}
+          </div>
+          <div className="nav-right">
+            {isUserLoggedIn ? (
+              <>
+                <div className="user-icon-post-button">
+                  <Button
+                    id="basic-button"
+                    aria-controls="basic-menu"
+                    aria-haspopup="true"
+                    aria-expanded={open ? "true" : undefined}
+                    onClick={handleClick}
+                  >
+                    {userInfo?.profile?.photoUrl ? (
+                      <img
+                        alt="user-icon"
+                        src={userInfo?.profile?.photoUrl}
+                        className="user-icon"
+                      />
+                    ) : (
+                      <AccountCircleOutlinedIcon className="user-icon-no-img" />
+                    )}
+                  </Button>
+                  {isRecruiter && (
+                    <div className="post-button">
+                      {emailVerified ? (
+                        <a
+                          href="/joblistings_management"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="post-button-anchor"
+                        >
+                          {manageEl}
+                        </a>
+                      ) : (
+                        <div
+                          onClick={() => setIsOpenModal(true)}
+                          className="post-button-anchor"
+                        >
+                          {manageEl}
+                        </div>
+                      )}
+                    </div>
                   )}
-                </Button>
-                {isRecruiter && (
-                  <div className="post-button">
-                    <a
-                      href="/joblistings_management"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="post-button-anchor"
-                    >
-                      <span>求人投稿・管理</span>
-                      <img src="/photos/chevron-right 2.svg" alt="chevron" />
-                    </a>
-                  </div>
-                )}
-              </div>
-              <Menu
-                id="basic-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-              >
-                <div className="dropdown-menu">
-                  <Link to="/profile">
-                    <MenuItem
-                      className="dropdown-menuitem"
-                      onClick={handleClose}
-                    >
-                      プロフィール
-                    </MenuItem>
-                  </Link>
-                  <Link to="/" onClick={onLogOut}>
-                    <MenuItem className="dropdown-menuitem">
-                      ログアウト
-                    </MenuItem>
-                  </Link>
                 </div>
-              </Menu>
-            </>
-          ) : (
-            <>
-              <Link className="login" to="/login">
-                ログイン
-              </Link>
-              <Link to="/apply-developer">
-                <button
-                  className="btn-sm btn-line-opacity btn-margin"
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
                 >
-                  無料会員登録
-                </button>
-              </Link>
-              <Link to="/apply-recruiter">
-                <button
-                  className="btn-sm btn-fill-opacity"
-                >
-                  採用担当者の方
-                </button>
-              </Link>
-            </>
-          )}
-        </div>
-      </nav>
-    </div>
+                  <div className="dropdown-menu">
+                    <Link to="/profile">
+                      <MenuItem
+                        className="dropdown-menuitem"
+                        onClick={handleClose}
+                      >
+                        プロフィール
+                      </MenuItem>
+                    </Link>
+                    <Link to="/" onClick={onLogOut}>
+                      <MenuItem className="dropdown-menuitem">
+                        ログアウト
+                      </MenuItem>
+                    </Link>
+                  </div>
+                </Menu>
+              </>
+            ) : (
+              <>
+                <Link className="login" to="/login">
+                  ログイン
+                </Link>
+                <Link to="/apply-developer">
+                  <button className="btn-sm btn-line-opacity btn-margin">
+                    無料会員登録
+                  </button>
+                </Link>
+                <Link to="/apply-recruiter">
+                  <button className="btn-sm btn-fill-opacity">
+                    採用担当者の方
+                  </button>
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
+      </div>
+      {isOpenModal && (
+        <UrgeApplyModal
+          onClose={() => setIsOpenModal(false)}
+          isUserLoggedIn={isUserLoggedIn}
+          isEmailVerified={emailVerified}
+        />
+      )}
+    </>
   );
 };
 

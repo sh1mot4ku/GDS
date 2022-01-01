@@ -44,6 +44,7 @@ auth.onAuthStateChanged((user) => {
   if (user) {
     // console.log(user);
     const uid = user.uid;
+    const emailVerified = user.emailVerified;
     database
       .ref(`user/${uid}`)
       .once("value")
@@ -51,6 +52,7 @@ auth.onAuthStateChanged((user) => {
         store.dispatch(
           login({
             uid,
+            emailVerified,
             userInfo: snapshot.val(),
           })
         );

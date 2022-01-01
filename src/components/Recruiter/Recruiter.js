@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import "../ui/Button.scss"
+import { Link, useHistory } from "react-router-dom";
+import "../ui/Button.scss";
 import InputTextAreaAndLabel from "../ui/InputTextAreaAndLabel";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import RadioForm from "../ui/RadioForm";
@@ -41,6 +41,7 @@ function Recruiter() {
   const [isClientValidationPassed, setIsClientValidationPassed] =
     useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const history = useHistory();
 
   const USER_TYPE = "recruiter";
 
@@ -221,66 +222,77 @@ function Recruiter() {
   ]);
 
   // rendered after register button is pressed, when useEffect() above is run, and when firebase throuws an error
-  useEffect(() => {
+  useEffect(() => onSubscription(), [isClientValidationPassed]);
+
+  const onSubscription = async () => {
     if (isClientValidationPassed && !isSubmitted) {
-      console.log("firebase useeffect");
-      const postingInfo = {
-        profile: {
-          fullName,
+      try {
+        console.log("firebase useeffect");
+        const postingInfo = {
+          profile: {
+            fullName,
+            email,
+            companyAddress,
+            lookingFor,
+            commitment,
+            mustHave,
+            niceToHave,
+            projectDetail,
+            photoUrl: "",
+          },
+          userType: USER_TYPE,
+        };
+        const userCredential = await auth.createUserWithEmailAndPassword(
           email,
-          companyAddress,
-          lookingFor,
-          commitment,
-          mustHave,
-          niceToHave,
-          projectDetail,
-          photoUrl: "",
-        },
-        userType: USER_TYPE,
-      };
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          insertUser(postingInfo, userCredential.user.uid);
-          setStep(step + 1);
-          console.log("sent to firebase");
-          setIsSubmitted(true);
-        })
-        .catch((error) => {
-          console.error(`Error happened: ${error}`);
-          switch (error.code) {
-            case "auth/invalid-email":
-              setFirebaseErrorMessage("メールアドレスが無効です");
-              break;
-            case "auth/email-already-in-use":
-              setFirebaseErrorMessage(
-                "ご記入いただいたメールアドレスは既に使用されています"
-              );
-              break;
-            case "auth/operation-not-allowed":
-              setFirebaseErrorMessage(
-                "メールアドレスまたはパスワードが有効ではありません"
-              );
-              break;
-            case "auth/weak-password":
-              setFirebaseErrorMessage(
-                "パスワードは7文字以上、文字と数字を組み合わせて入力してください"
-              );
-              break;
-            default:
-              setFirebaseErrorMessage(
-                "予期しないエラーが発生しました。再度登録してください。"
-              );
-          }
-          setIsClientValidationPassed(false);
-          setIsRegistering(true);
-          // setMustHaveError(null);
-          // setNiceToHaveError(null);
-          // setProjectDetailError(null);
+          password
+        );
+
+        // add user to Firebase Real-time Database
+        await insertUser(postingInfo, userCredential.user.uid);
+        // setStep(step + 1);
+        console.log("sent to firebase");
+        setIsSubmitted(true);
+
+        // Send email for verificate user's email address
+        await auth.currentUser.sendEmailVerification({
+          url: `${window.location.origin}/thank-you`,
         });
+        history.push({
+          pathname: "/send-mail-confirm",
+          state: { email },
+        });
+      } catch (error) {
+        console.error(`Error happened: ${error}`);
+        switch (error.code) {
+          case "auth/invalid-email":
+            setFirebaseErrorMessage("メールアドレスが無効です");
+            break;
+          case "auth/email-already-in-use":
+            setFirebaseErrorMessage(
+              "ご記入いただいたメールアドレスは既に使用されています"
+            );
+            break;
+          case "auth/operation-not-allowed":
+            setFirebaseErrorMessage(
+              "メールアドレスまたはパスワードが有効ではありません"
+            );
+            break;
+          case "auth/weak-password":
+            setFirebaseErrorMessage(
+              "パスワードは7文字以上、文字と数字を組み合わせて入力してください"
+            );
+            break;
+          default:
+            setFirebaseErrorMessage(
+              "予期しないエラーが発生しました。再度登録してください。"
+            );
+        }
+        setIsClientValidationPassed(false);
+        setIsRegistering(true);
+      }
     }
     console.log(isSubmitted);
-  }, [isClientValidationPassed]);
+  };
 
   // fired when the next or previous button is clicked
   const handleClick = (e, newStep, userInfo) => {
