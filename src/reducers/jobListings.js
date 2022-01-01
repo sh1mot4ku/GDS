@@ -17,6 +17,9 @@ const jobListingsReducer = (state = null, action) => {
           return jobListing;
         }
       });
+    case "DELETE_JOB_LISTING":
+      if (state === null) return state;
+      return state?.filter(({ id }) => id !== action.id);
     default:
       return state;
   }

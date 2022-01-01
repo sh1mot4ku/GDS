@@ -3,12 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import JobBox from "./JobBox";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { startSetJobListings } from "../../action/jobListings";
 import options from "../../data/radioButtonOptions/PostJobListings";
 import "./JobListings.scss";
 import moment from "moment";
 import Loading from "../ui/Loading";
+import { Pagination } from "@mui/material";
 
 // replace letters to lowercase, remove space and dash
 const replaceLetters = (searchInput) =>
@@ -34,6 +35,18 @@ const JobListings = () => {
   );
   const [jobListingsArr, setJobListingsArr] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [joblistingsCount, setJoblistingsCount] = useState(10);
+  const [page, setPage] = useState(1);
+  const [numOfJoblistingsResult, setNumOfJoblistingsResult] = useState(0);
+
+  // handle pagination
+  const onHandlePage = (_, val) => {
+    window.scroll(0, 0);
+    setPage(val);
+  };
+  // extract 10 joblistings on each page
+  const sliceJobListings = (jobListings) =>
+    jobListings.slice(joblistingsCount * page - 10, joblistingsCount * page);
 
   // params will be changed and the useEffect gets executed to run filterJobListings()
   const onHandleSearchParamsForSearchKeyword = () => {
@@ -116,16 +129,20 @@ const JobListings = () => {
       );
     }
     // =========== then set result(totalfilteredJobListings) to setJobListingsArr() =============
-    setJobListingsArr(
-      totalfilteredJobListings.length !== 0
-        ? totalfilteredJobListings
-        : ["no result"]
-    );
+    setNumOfJoblistingsResult(totalfilteredJobListings.length);
+    if (totalfilteredJobListings.length !== 0) {
+      const jobListingsOnAPage = sliceJobListings(totalfilteredJobListings);
+      setJobListingsArr(jobListingsOnAPage);
+    } else {
+      setJobListingsArr(["no result"]);
+    }
   };
 
   useEffect(() => {
     if (jobListings || loaded) {
-      setJobListingsArr(jobListings);
+      setNumOfJoblistingsResult(jobListings.length);
+      const jobListingsOnAPage = sliceJobListings(jobListings);
+      setJobListingsArr(jobListingsOnAPage);
       !loaded && setLoaded(true);
     } else if (jobListings === null) {
       dispatch(startSetJobListings());
@@ -140,7 +157,7 @@ const JobListings = () => {
         filterJobListings();
       }
     }
-  }, [jobListings, search]);
+  }, [jobListings, search, page]);
 
   return (
     <>
@@ -223,13 +240,28 @@ const JobListings = () => {
                     </p>
                   </>
                 ) : (
-                  jobListingsArr.map((job) => (
-                    <React.Fragment key={job.id}>
-                      <JobBox {...job} />
-                    </React.Fragment>
-                  ))
+                  <>
+                    {jobListingsArr.map((job) => (
+                      <React.Fragment key={job.id}>
+                        <JobBox {...job} />
+                      </React.Fragment>
+                    ))}
+                    <div className="pagination-wrapper">
+                      <Pagination
+                        count={
+                          numOfJoblistingsResult % 10 === 0
+                            ? numOfJoblistingsResult / 10
+                            : Math.ceil(numOfJoblistingsResult / 10)
+                        }
+                        page={page}
+                        color="primary"
+                        onChange={onHandlePage}
+                      />
+                    </div>
+                  </>
                 )}
               </div>
+              ;
             </>
           ) : (
             <div className="no-joblisting-wrapper">

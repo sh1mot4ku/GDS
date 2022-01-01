@@ -35,3 +35,7 @@ export const editJobListing = (jobListing) => ({
   type: "EDIT_JOB_LISTING",
   jobListing,
 });
+export const deleteJobListing = (id) => ({
+  type: "DELETE_JOB_LISTING",
+  id,
+});

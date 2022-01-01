@@ -37,5 +37,5 @@ export const pathnamesWithSideBar = {
     "/profile-recruiter-page",
     "/profile-edit-recruiter-page",
   ],
-  pathnamesPartialMatchSideBar: ["/edit_joblisting/"],
+  pathnamesPartialMatchSideBar: ["/edit_joblisting/", "/copy_joblisting"],
 };

@@ -17,6 +17,7 @@ import JobListings from "../components/JobListings/JobListings";
 import JobListing from "../components/JobListings/JobListing";
 import JobListingsManagement from "../components/PostJobListings/JobListingsManagement";
 import EditJobListing from "../components/PostJobListings/EditJobListing";
+import CopyJobListing from "../components/PostJobListings/CopyJobListing";
 import NotFoundPage from "../components/notFoundPage/NotFoundPage";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
@@ -56,6 +57,7 @@ const AppRouter = () => (
         />
       )}
       <PrivateRoute path="/edit_joblisting/:jobId" component={EditJobListing} />
+      <PrivateRoute path="/copy_joblisting/:jobId" component={CopyJobListing} />
       <PublicRoute path="/joblistings" component={JobListings} />
       <PublicRoute path="/joblisting/:jobId" component={JobListing} />
       <PublicRoute path="/contact" component={ContactForm} />
