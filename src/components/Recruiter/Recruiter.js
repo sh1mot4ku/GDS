@@ -415,7 +415,7 @@ function Recruiter() {
           />
           <div className="buttonContainer">
             <button className="btn-lg btn-fill" type="submit">
-              next
+              NEXT
             </button>
           </div>
         </>
@@ -468,8 +468,6 @@ function Recruiter() {
             <button className="btn-lg btn-fill" type="submit">
               REGISTER
             </button>
-          </div>
-          <div className="link-line">
             <button
               className="previousButton"
               onClick={(e) => handleClick(e, step - 1, contents)}
@@ -480,36 +478,6 @@ function Recruiter() {
         </>
       );
       break;
-    case 2:
-      contents = (
-        <>
-          <div className="thxBox">
-            <h2 className="thxTitle">Thank you for Connecting</h2>
-            <p className="sentence">
-              この度はプロジェクトの詳細をご共有頂き有難うございました。
-              <br />
-              <br />
-              よりお客様のニーズを理解するため、専任のコンサルタントがプロセス全体を通してお客様をサポートします。以下のLinkよりプロジェクト・求人に関するMTGを予約してください。
-              <br />
-              <br />
-              尚現在はα版として稼働しております。β版ローンチは2022年1月を目指しておりますので、もうしばしお待ちいただけましたら幸いです。
-              <br />
-            </p>
-            <div className="buttonContainer">
-              <button className="btn-lg btn-fill" type="button">
-                面談を予約する
-              </button>
-            </div>
-            <div className="link-line">
-              <Link to="/" className="previousButton">
-                ホームへ戻る
-              </Link>
-            </div>
-          </div>
-        </>
-      );
-      break;
-
     default:
       contents = <p>Unknown stepIndex</p>;
   }
@@ -517,23 +485,29 @@ function Recruiter() {
   return (
     <div className="main-recruiter">
       <BlueSidePart />
-      <div className="rightBox">
-        {step !== 2 && (
-          <>
-            <h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
-            <p className="subtitle">
-              正確なマッチングの為に詳細な情報をお伝え下さい
-            </p>
-          </>
-        )}
-        <form
-          onSubmit={
-            step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
-          }
-          className="form"
-        >
-          {contents}
-        </form>
+      <div className="rightBox-wrapper">
+        <div className="rightBox">
+          {step !== 2 && (
+            <>
+              <h2 className="title">HIRE THE GLOBAL DEV TEAMS</h2>
+              <p className="subtitle">
+                {step === 0
+                  ? "正確なマッチングの為に詳細な情報をお伝え下さい"
+                  : step === 1
+                  ? "スキルや経験、プロジェクトの背景についてご共有ください"
+                  : ""}
+              </p>
+            </>
+          )}
+          <form
+            onSubmit={
+              step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
+            }
+            className="form"
+          >
+            {contents}
+          </form>
+        </div>
       </div>
     </div>
   );

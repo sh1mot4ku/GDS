@@ -5,14 +5,14 @@
   width: 1070px;
   margin: 30px auto 200px auto;
 
-  @include tablet {
+  @include mobile {
     width: 90vw;
   }
 
   .subscribe-wrapper {
     margin-bottom: 120px;
 
-    @include tablet {
+    @include mobile {
       margin-bottom: 30vw;
     }
 
@@ -23,7 +23,7 @@
       padding: 150px 0 127px;
       text-align: center;
 
-      @include tablet {
+      @include mobile {
         padding: 18vw 0;
         background-position: center 14vw;
       }
@@ -32,7 +32,7 @@
         margin: 0 auto 20px;
         font-size: 56px;
 
-        @include tablet {
+        @include mobile {
           font-size: 30px;
         }
       }
@@ -41,7 +41,7 @@
         font-size: 20px;
         margin-bottom: 72px;
 
-        @include tablet {
+        @include mobile {
           width: 78vw;
           margin: 0 auto 49px;
         }
@@ -54,7 +54,7 @@
         justify-content: space-between;
         flex-direction: row;
 
-        @include tablet {
+        @include mobile {
           flex-direction: column;
           width: 100%;
         }
@@ -65,7 +65,7 @@
           padding: 16px 74px;
           font-weight: 700;
 
-          @include tablet {
+          @include mobile {
             padding: 12px 74px;
             width: 100%;
             margin-bottom: 16px;
@@ -83,7 +83,7 @@
         max-width: 240px;
         height: auto;
 
-        @include tablet {
+        @include mobile {
           width: 100%;
           object-fit: cover;
           height: 12vw;
@@ -114,7 +114,7 @@
 
     .d-demo__wrap {
       display: flex;
-      overflow: hidden;
+      // overflow: hidden;
       border-top: solid 1.5px $line;
       border-bottom: solid 1.5px $line;
     }
@@ -131,7 +131,7 @@
     .d-demo__item {
       width: calc(100vw / 10);
 
-      @include tablet {
+      @include mobile {
         width: calc(100vw / 4);
       }
     }
@@ -153,7 +153,7 @@
       font-size: 56px;
       margin-bottom: 16px;
 
-      @include tablet {
+      @include mobile {
         font-size: 30px;
         margin-bottom: 4vw;
       }
@@ -170,7 +170,7 @@
       align-items: center;
       margin-bottom: 200px;
 
-      @include tablet {
+      @include mobile {
         flex-direction: column;
         margin-bottom: 10vw;
       }
@@ -179,7 +179,7 @@
     #describe-reverse {
       flex-direction: row-reverse;
 
-      @include tablet {
+      @include mobile {
         flex-direction: column;
       }
 
@@ -190,14 +190,14 @@
 
     .describe-photo {
       margin-left: 25px;
-      @include tablet {
+      @include mobile {
         margin: 0 0 5vw !important;
       }
 
       .describe-photo-content {
         width: 500px;
 
-        @include tablet {
+        @include mobile {
           width: 100%;
         }
       }
@@ -207,7 +207,7 @@
       text-align: left;
       width: 480px;
 
-      @include tablet {
+      @include mobile {
         width: 100%;
       }
 
@@ -216,7 +216,7 @@
         font-weight: 700px;
         font-size: 28px;
 
-        @include tablet {
+        @include mobile {
           font-size: 20px;
         }
       }
@@ -233,7 +233,7 @@
         font-size: 16px;
 
         & > li {
-          @include tablet {
+          @include mobile {
             margin-bottom: 1vw;
           }
         }
@@ -248,7 +248,7 @@
     width: 100%;
     margin: 0 auto;
 
-    @include tablet {
+    @include mobile {
       flex-direction: column;
       width: 100%;
     }
@@ -261,9 +261,7 @@
       align-items: center;
       justify-content: center;
 
-
-
-      @include tablet {
+      @include mobile {
         padding: 25px 0;
         align-items: center;
         margin-bottom: 20px;
@@ -278,7 +276,7 @@
         width: 325px;
         font-weight: 700;
 
-        @include tablet {
+        @include mobile {
           padding: 0;
         }
 
@@ -291,7 +289,7 @@
         .subscribe-text {
           font-size: 23px;
 
-          @include tablet {
+          @include mobile {
             font-size: 20px;
           }
         }

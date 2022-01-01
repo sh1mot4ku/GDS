@@ -6,7 +6,7 @@
   margin: 0 auto;
   padding-bottom: 200px;
 
-  @include tablet {
+  @include mobile {
     width: 100vw;
     padding: 0 20px !important;
     box-sizing: border-box;
@@ -20,7 +20,7 @@
     border-bottom: solid 1px #e5e5e5;
     margin-bottom: 40px;
 
-    @include tablet {
+    @include mobile {
       padding-bottom: 20px;
       margin-bottom: 20px;
     }
@@ -31,7 +31,7 @@
       margin-right: 20px;
       border-radius: 100px;
 
-      @include tablet {
+      @include mobile {
         width: 56px;
         height: 56px;
         margin-right: 16px;
@@ -93,7 +93,7 @@
     width: 100%;
     margin-bottom: 16px;
 
-    @include tablet {
+    @include mobile {
       margin-bottom: 0;
     }
 
@@ -110,7 +110,7 @@
     flex-direction: column;
     margin-top: 60px;
 
-    @include tablet {
+    @include mobile {
       margin-top: 40px;
       margin-bottom: 80px;
     }

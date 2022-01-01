@@ -411,7 +411,7 @@ function Apply() {
           />
           <div className="buttonContainer">
             <button className="btn-lg btn-fill" type="submit">
-              next
+              NEXT
             </button>
           </div>
         </>
@@ -496,16 +496,18 @@ function Apply() {
   return (
     <div className="main-apply">
       <BlueSidePart />
-      <div className="rightBox">
-        <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>
-        <form
-          onSubmit={
-            step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
-          }
-          className="form"
-        >
-          {contents}
-        </form>
+      <div className="rightBox-wrapper">
+        <div className="rightBox">
+          <h2 className="title">JOIN AS A GLOBAL DEVELOPER</h2>
+          <form
+            onSubmit={
+              step === 1 ? onSubmit : (e) => handleClick(e, step + 1, contents)
+            }
+            className="form"
+          >
+            {contents}
+          </form>
+        </div>
       </div>
     </div>
   );

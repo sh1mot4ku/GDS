@@ -5,13 +5,13 @@
   padding-bottom: 24px;
   margin-bottom: 24px;
   border-bottom: 1px $color-line solid;
-  @include tablet {
+  @include mobile {
     margin-bottom: 20px;
   }
 
   .job-img-wrapper {
     margin-bottom: 16px;
-    @include tablet {
+    @include mobile {
       margin-bottom: 12px;
     }
 
@@ -27,24 +27,24 @@
     .job-title {
       font-size: 20px;
       font-weight: bold;
-      @include tablet {
+      @include mobile {
         font-size: 16px;
       }
     }
     .company-name {
-      @include tablet {
+      @include mobile {
         font-size: 14px;
       }
     }
     .location,
     .employment-type {
-      @include tablet {
+      @include mobile {
         font-size: 12px;
       }
     }
     .short-jd {
       color: $color-sub-text;
-      @include tablet {
+      @include mobile {
         font-size: 14px !important;
       }
     }
@@ -63,7 +63,7 @@
         padding: 4px 12px;
         border: 1px solid $color-line;
         border-radius: 4px;
-        @include tablet {
+        @include mobile {
           padding: 4px 10px;
           font-size: 14px;
           margin-top: 12px;

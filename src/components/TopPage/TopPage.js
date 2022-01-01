@@ -20,23 +20,14 @@ const TopPage = () => {
             プロダクトやサービスを世界へ
           </h1>
           <div className="subscribe-header2">
-            想いに共感頂けた開拓者であるそこのあなた
-            {!isMobile && <br />}
-            一緒にけもの道を笑顔で歩んで行きましょう
+            グローバル/リモートでの開発案件に興味のある方はこちら
           </div>
           <div className="subscribe-buttons-top">
             <Link to="/apply-developer">
-              <button
-                className="btn-lg btn-line-opacity"
-              >
-                無料会員登録
-              </button>
+              <button className="btn-lg btn-line-opacity">無料会員登録</button>
             </Link>
             <Link to="/apply-recruiter">
-              <button
-                // onClick={recruiterSubscribe}
-                className="btn-lg btn-fill-opacity"
-              >
+              <button className="btn-lg btn-fill-opacity">
                 採用担当者の方
               </button>
             </Link>
@@ -328,9 +319,7 @@ const TopPage = () => {
         </div>
       </div>
       <div className="subscribe-buttons-buttom">
-        <button
-          className="subscribe-button-wrapper btn-line-opacity"
-        >
+        <button className="subscribe-button-wrapper btn-line-opacity">
           <div className="subscribe-button" id="for-developer">
             <img
               src="/image/icon-user.png"
@@ -340,9 +329,7 @@ const TopPage = () => {
             <span className="subscribe-text">求人をお探しの方はコチラ</span>
           </div>
         </button>
-        <button
-          className="subscribe-button-wrapper btn-fill-opacity"
-        >
+        <button className="subscribe-button-wrapper btn-fill-opacity">
           <div className="subscribe-button" id="for-recruiter">
             <img
               src="/image/users 1.png"
