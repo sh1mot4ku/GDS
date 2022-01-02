@@ -1,11 +1,12 @@
 import React from "react";
 import "./TopPage.scss";
 import "../ui/Button.scss";
-import { Link } from "react-router-dom";
-import useMedia from "use-media";
+import { Link, useHistory } from "react-router-dom";
+// import useMedia from "use-media";
 
 const TopPage = () => {
-  const isMobile = useMedia({ maxWidth: "768px" });
+  const history = useHistory();
+  // const isMobile = useMedia({ maxWidth: "768px" });
 
   return (
     <div className="top-wrapper">
@@ -319,7 +320,10 @@ const TopPage = () => {
         </div>
       </div>
       <div className="subscribe-buttons-buttom">
-        <button className="subscribe-button-wrapper btn-line-opacity">
+        <button
+          onClick={() => history.push("/apply-developer")}
+          className="subscribe-button-wrapper btn-line-opacity"
+        >
           <div className="subscribe-button" id="for-developer">
             <img
               src="/image/icon-user.png"
@@ -329,7 +333,10 @@ const TopPage = () => {
             <span className="subscribe-text">求人をお探しの方はコチラ</span>
           </div>
         </button>
-        <button className="subscribe-button-wrapper btn-fill-opacity">
+        <button
+          onClick={() => history.push("/apply-recruiter")}
+          className="subscribe-button-wrapper btn-fill-opacity"
+        >
           <div className="subscribe-button" id="for-recruiter">
             <img
               src="/image/users 1.png"
