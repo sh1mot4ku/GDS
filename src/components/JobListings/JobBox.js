@@ -4,6 +4,8 @@ import moment from "moment";
 import "moment/locale/ja";
 import "./JobBox.scss";
 
+const JOBLISTING_CHAR_LIMIT = 100;
+
 const JobBox = ({
   photoUrl,
   jobTitle,
@@ -60,7 +62,10 @@ const JobBox = ({
         {timeLag && <div className="timestamp">{timeLag}に掲載</div>}
         {!details && (
           <div className="job-box-content">
-            <span className="short-jd">{jobListing}</span>
+            <span className="short-jd">
+              {jobListing}
+              {jobListing.length === JOBLISTING_CHAR_LIMIT && "..."}
+            </span>
           </div>
         )}
         {/* {details && timeLag ? (
