@@ -6,10 +6,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Box from "@mui/material/Box";
 import CloseIcon from "@mui/icons-material/Close";
 import "../../../ui/Button.scss";
-import {
-  headerAndDrawerMenuItemsLogOut,
-  drawerMenuItemsLogin,
-} from "../../menuItems";
+import { drawerMenuItemsLogOut, drawerMenuItemsLogin } from "../../menuItems";
 import { useSelector } from "react-redux";
 import "./Drawer.scss";
 import { isMobile } from "react-device-detect";
@@ -18,7 +15,7 @@ import UrgeApplyModal from "../../../ui/UrgeApplyModal";
 function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
   const location = useLocation();
   const dispatch = useDispatch();
-  const { emailVerified } = useSelector((state) => state.user);
+  const { uid, emailVerified } = useSelector((state) => state.user);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const manageEl = (
@@ -94,8 +91,8 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
                 {isUserLoggedIn
                   ? drawerMenuItemsLogin.length !== 0 &&
                     createMenuList(drawerMenuItemsLogin)
-                  : headerAndDrawerMenuItemsLogOut.length !== 0 &&
-                    createMenuList(headerAndDrawerMenuItemsLogOut)}
+                  : drawerMenuItemsLogOut.length !== 0 &&
+                    createMenuList(drawerMenuItemsLogOut)}
               </div>
               {isUserLoggedIn ? (
                 isMobile ? null : (
@@ -120,7 +117,7 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
                   </div>
                 )
               ) : (
-                <div>
+                <div className="buttons-wrapper">
                   <Link to="/apply-developer">
                     <button className="btn-lg btn-line-opacity">
                       無料会員登録

@@ -5,10 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useSelector } from "react-redux";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useLocation, Link } from "react-router-dom";
-import {
-  headerAndDrawerMenuItemsLogOut,
-  headerMenuItemsLogIn,
-} from "../menuItems";
+import { headerMenuItemsLogOut, headerMenuItemsLogIn } from "../menuItems";
 import { auth } from "../../../firebase/firebase";
 import UrgeApplyModal from "../../ui/UrgeApplyModal";
 import "./Header.scss";
@@ -87,8 +84,8 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
             {isUserLoggedIn
               ? headerMenuItemsLogIn.length !== 0 &&
                 createMenuList(headerMenuItemsLogIn)
-              : headerAndDrawerMenuItemsLogOut.length !== 0 &&
-                createMenuList(headerAndDrawerMenuItemsLogOut)}
+              : headerMenuItemsLogOut.length !== 0 &&
+                createMenuList(headerMenuItemsLogOut)}
           </div>
           <div className="nav-right">
             {isUserLoggedIn ? (

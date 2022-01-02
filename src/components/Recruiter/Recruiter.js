@@ -12,7 +12,6 @@ import "./Recruiter.scss";
 import validator from "validator";
 
 const info = {};
-console.log(info);
 
 function Recruiter() {
   const [step, setStep] = useState(0);

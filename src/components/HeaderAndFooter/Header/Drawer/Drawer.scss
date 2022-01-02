@@ -54,6 +54,13 @@
     }
   }
 
+  .buttons-wrapper {
+    @include mobile {
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+
   .login {
     margin-bottom: 44px;
   }
