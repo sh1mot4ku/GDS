@@ -2,7 +2,7 @@
 @import "../../sass_config/mixin.scss";
 
 .main-about {
-  margin: 72px auto;
+  margin: 72px auto 200px;
   width: 45%;
   color: #000;
   font-size: 16px;
@@ -21,6 +21,7 @@
   h2 {
     font-size: 56px;
     color: $color_primary;
+    margin-bottom: 16px;
     // tablet
     @include mobile {
       font-size: 32px;
@@ -38,16 +39,19 @@ table {
 }
 .description_contents {
   text-align: left;
-  line-height: 68px;
 
   table,
   td,
   th {
     border-bottom: 1px solid $light-gray;
   }
+  td,
+  th {
+    padding: 24px 0;
+  }
   th {
     width: 180px;
-    font-weight: unset;
+    font-weight: normal;
     color: $gray;
     // tablet
     @include mobile {
@@ -59,9 +63,8 @@ table {
   }
   td {
     color: #000;
-    font-weight: bold;
+    font-weight: 500;
     margin-right: 30px;
-    line-height: 32px;
   }
 }
 

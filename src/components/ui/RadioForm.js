@@ -18,7 +18,7 @@ const RadioForm = ({ value, onChange, label, options }) => {
         className="radio"
         defaultValue={value}
       >
-        <FormLabel component="legend">
+        <FormLabel component="legend" className="radio-label">
           {label} <span className="required-star">*</span>
         </FormLabel>
         {options.map((item, index) => (
@@ -27,6 +27,7 @@ const RadioForm = ({ value, onChange, label, options }) => {
             control={<Radio color="primary" required />}
             label={item}
             key={item}
+            className="radio-option"
           />
         ))}
       </RadioGroup>

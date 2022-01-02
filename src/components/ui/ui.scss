@@ -20,6 +20,14 @@
 // =========== Radioform ===========
 .radio {
   margin: 8px 0 8px;
+
+  &-label {
+    margin-bottom: 24px;
+  }
+
+  // &-option {
+  //   margin-bottom: 40px;
+  // }
 }
 // =============================
 
@@ -105,6 +113,15 @@
   width: 100%;
   position: relative;
 
+  .close-icon {
+    position: absolute;
+    font-size: 24px;
+    cursor: pointer;
+    color: $color-sub-text;
+    top: 16px;
+    left: 564px;
+  }
+
   .img-joblists-detail {
     width: 400px;
     margin: 80px auto 32px auto;
@@ -140,14 +157,6 @@
   }
 }
 
-.close-icon {
-  position: absolute;
-  font-size: 24px;
-  cursor: pointer;
-  color: $color-sub-text;
-  top: 16px;
-  left: 564px;
-}
 // ======================================
 
 // =============== Loading ==================

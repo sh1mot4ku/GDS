@@ -24,6 +24,7 @@
     // padding-left: 471px;
 
     @include mobile {
+      width: 100%;
       margin: 28px auto;
       padding: 21px;
       padding-top: 4px;
@@ -65,7 +66,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        margin-top: 92px;
+        margin-top: 80px;
         margin-bottom: 140px;
 
         @include mobile {
@@ -87,12 +88,12 @@
       }
 
       .previousButton {
-        color: #e5e5e5;
+        color: $gray;
         border: none;
         outline: none;
         background: transparent;
         text-decoration: underline;
-        margin-top: 20px;
+        margin-top: 32px;
         cursor: pointer;
 
         &:hover {
@@ -125,50 +126,6 @@
   }
 }
 
-.thxBox {
-  display: flex;
-  align-items: center;
-  margin: 0 auto;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding-top: 60px;
-  // padding-bottom: 158px;
-  width: 643px;
-
-  @include mobile {
-    padding: 0;
-  }
-
-  .thxTitle {
-    color: $color_primary;
-    margin-bottom: 50px;
-    font-size: 30px;
-    @include mobile {
-      font-size: 21px;
-    }
-  }
-  .sentence {
-    line-height: 2;
-    margin-bottom: 60px;
-
-    @include mobile {
-      text-align: left;
-    }
-  }
-
-  .button {
-    width: 214px;
-    height: 54px;
-    border-radius: 30px;
-    background-color: $color_primary;
-    color: #fff;
-    margin-top: 50px;
-    @include mobile {
-      width: 100%;
-    }
-  }
-}
 // .error-message {
 //   color: $warning;
 //   font-size: 13px;

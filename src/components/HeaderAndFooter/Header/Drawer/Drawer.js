@@ -85,7 +85,7 @@ function Drawer({ isDrawerOpen, toggleDrawer, isUserLoggedIn }) {
                   alt="Lraough-logo"
                 />
               </Link>
-              <div onClick={toggleDrawer}>
+              <div>
                 <CloseIcon className="close-icon" />
               </div>
             </div>
