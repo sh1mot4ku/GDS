@@ -76,10 +76,34 @@ export const Footer = () => {
                   createMenuList(footerMenuItemsLogOut)}
             </div>
             <div className="sns-wrapper">
-              <FacebookIcon className="icon" />
-              <LinkedInIcon className="icon" />
-              <TwitterIcon className="icon" />
-              <YouTubeIcon className="icon" />
+              <a
+                href="https://www.facebook.com/takuya.shimomura"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FacebookIcon className="icon" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/shimotaku/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <LinkedInIcon className="icon" />
+              </a>
+              <a
+                href="https://twitter.com/lraough"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <TwitterIcon className="icon" />
+              </a>
+              <a
+                href="https://www.youtube.com/channel/UCldoAQ3qyeC8wsho-4DcUIw"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <YouTubeIcon className="icon" />
+              </a>
             </div>
           </div>
           <div className="logo-copyright-wrapper">

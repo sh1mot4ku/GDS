@@ -7,7 +7,7 @@
   align-items: center;
   margin: auto;
   width: 50%;
-  @include tablet {
+  @include mobile {
     width: 90%;
   }
   .title {
@@ -20,7 +20,7 @@
   }
   .second-text {
     margin-bottom: 40px;
-    @include tablet {
+    @include mobile {
       text-align: justify;
     }
   }
@@ -31,7 +31,7 @@
     border-radius: 30px;
     background-color: $color_primary;
     color: #fff;
-    @include tablet {
+    @include mobile {
       width: 100%;
     }
     &:hover {

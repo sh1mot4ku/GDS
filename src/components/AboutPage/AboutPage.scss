@@ -2,14 +2,15 @@
 @import "../../sass_config/mixin.scss";
 
 .main-about {
-  margin: 72px auto;
+  margin: 72px auto 200px;
   width: 45%;
   color: #000;
   font-size: 16px;
 
   // tablet
-  @include tablet {
+  @include mobile {
     width: 90%;
+    margin-top: 40.5px;
   }
 }
 
@@ -18,12 +19,18 @@
   text-align: center;
   font-weight: bold;
 
+  @include mobile {
+    margin-top: 0;
+  }
+
   h2 {
     font-size: 56px;
     color: $color_primary;
+    margin-bottom: 16px;
     // tablet
-    @include tablet {
+    @include mobile {
       font-size: 32px;
+      margin-bottom: 8px;
     }
   }
 
@@ -38,19 +45,22 @@ table {
 }
 .description_contents {
   text-align: left;
-  line-height: 68px;
 
   table,
   td,
   th {
     border-bottom: 1px solid $light-gray;
   }
+  td,
+  th {
+    padding: 24px 0;
+  }
   th {
     width: 180px;
-    font-weight: unset;
+    font-weight: normal;
     color: $gray;
     // tablet
-    @include tablet {
+    @include mobile {
       width: 100px;
     }
   }
@@ -59,9 +69,8 @@ table {
   }
   td {
     color: #000;
-    font-weight: bold;
+    font-weight: 500;
     margin-right: 30px;
-    line-height: 32px;
   }
 }
 
@@ -75,7 +84,7 @@ table {
     object-fit: cover;
     border-radius: 8px;
     // tablet
-    @include tablet {
+    @include mobile {
       height: 140px;
     }
   }
@@ -89,7 +98,7 @@ table {
     font-weight: bold;
     font-size: 26px;
     // tablet
-    @include tablet {
+    @include mobile {
       font-size: 20px;
       line-height: 30px;
     }
@@ -98,7 +107,7 @@ table {
   &_detail {
     margin-top: 20px;
     // tablet
-    @include tablet {
+    @include mobile {
       font-size: 16px;
       line-height: 24px;
     }
@@ -106,7 +115,7 @@ table {
     h3 {
       font-weight: bold;
       // tablet
-      @include tablet {
+      @include mobile {
         font-size: 16px;
       }
     }
@@ -116,7 +125,7 @@ table {
   &_links {
     margin-top: 40px;
     // tablet
-    @include tablet {
+    @include mobile {
       font-size: 14px;
       line-height: 16px;
       letter-spacing: 0.02em;
@@ -131,7 +140,7 @@ table {
       text-decoration-line: underline;
       margin-right: 10px;
       // tablet
-      @include tablet {
+      @include mobile {
         font-size: 16px;
         line-height: 19px;
         letter-spacing: 0.02em;
@@ -147,7 +156,7 @@ WORKS
   h2 {
     margin: 100px auto 28px;
     // tablet
-    @include tablet {
+    @include mobile {
       font-size: 20px;
       line-height: 30px;
     }
@@ -173,7 +182,7 @@ WORKS
         height: 127px;
         border-radius: 4px;
         // tablet
-        @include tablet {
+        @include mobile {
           width: 100px;
           height: 60px;
         }
@@ -183,14 +192,14 @@ WORKS
     h3 {
       font-size: 16px;
       margin-bottom: 8px;
-      @include tablet {
+      @include mobile {
         font-size: 14px;
         line-height: 21px;
       }
     }
     p {
       font-size: 14px;
-      @include tablet {
+      @include mobile {
         font-size: 12px;
         line-height: 18px;
       }
@@ -205,7 +214,7 @@ INTERVIEWS
   h2 {
     margin: 100px auto 28px;
     // tablet
-    @include tablet {
+    @include mobile {
       font-size: 20px;
       line-height: 30px;
     }
@@ -231,7 +240,7 @@ INTERVIEWS
         height: 127px;
         border-radius: 4px;
         // tablet
-        @include tablet {
+        @include mobile {
           width: 100px;
           height: 60px;
         }
@@ -241,14 +250,14 @@ INTERVIEWS
     h3 {
       font-size: 16px;
       margin-bottom: 8px;
-      @include tablet {
+      @include mobile {
         font-size: 14px;
         line-height: 21px;
       }
     }
     p {
       font-size: 14px;
-      @include tablet {
+      @include mobile {
         font-size: 12px;
         line-height: 18px;
       }
@@ -269,7 +278,7 @@ BLOG
     h2 {
       font-size: 28px;
       // tablet
-      @include tablet {
+      @include mobile {
         font-size: 20px;
       }
     }
@@ -280,7 +289,7 @@ BLOG
       display: flex;
       align-items: flex-end;
 
-      @include tablet {
+      @include mobile {
         font-size: 10px;
       }
 
@@ -288,7 +297,7 @@ BLOG
         width: 24px;
         height: 24px;
 
-        @include tablet {
+        @include mobile {
           width: 14px;
           height: 14px;
         }
@@ -316,7 +325,7 @@ BLOG
         height: 127px;
         border-radius: 4px;
         // tablet
-        @include tablet {
+        @include mobile {
           width: 100px;
           height: 60px;
         }
@@ -326,14 +335,14 @@ BLOG
     h3 {
       font-size: 16px;
       margin-bottom: 8px;
-      @include tablet {
+      @include mobile {
         font-size: 14px;
         line-height: 21px;
       }
     }
     p {
       font-size: 14px;
-      @include tablet {
+      @include mobile {
         font-size: 12px;
         line-height: 18px;
       }

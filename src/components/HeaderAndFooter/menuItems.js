@@ -1,4 +1,4 @@
-export const headerAndDrawerMenuItemsLogOut = [
+export const headerMenuItemsLogOut = [
   {
     title: "ホーム",
     className: ["menu-item"],
@@ -23,6 +23,15 @@ export const headerAndDrawerMenuItemsLogOut = [
     title: "ブログ",
     className: ["menu-item"],
     isExternal: true,
+  },
+];
+
+export const drawerMenuItemsLogOut = [
+  ...headerMenuItemsLogOut,
+  {
+    title: "ログイン",
+    className: ["menu-item"],
+    to: "/login",
   },
 ];
 
@@ -120,7 +129,7 @@ export const footerMenuItemsLogOut = [
     to: "/apply-developer",
   },
   {
-    title: "採用担当の方",
+    title: "採用担当者の方",
     className: ["menu-item"],
     to: "/apply-recruiter",
   },

@@ -8,7 +8,7 @@
   margin: 0 auto;
   padding-bottom: 200px;
 
-  @include tablet {
+  @include mobile {
     font-size: 16px;
     width: 100vw;
     padding-left: 20px;
@@ -30,7 +30,7 @@
     font-weight: bold;
     animation: fadeOut 5s ease forwards 1s 1 normal;
 
-    @include tablet {
+    @include mobile {
       font-size: 12px;
     }
   }
@@ -42,7 +42,7 @@
     padding: 40px 0;
     border-bottom: solid 1px #e5e5e5;
 
-    @include tablet {
+    @include mobile {
       width: 100%;
       padding: 32px 0;
     }
@@ -50,7 +50,7 @@
     &--top {
       padding-top: 0;
 
-      @include tablet {
+      @include mobile {
         padding-bottom: 20px;
       }
     }
@@ -61,7 +61,7 @@
       margin-right: 20px;
       border-radius: 100px;
 
-      @include tablet {
+      @include mobile {
         width: 56px;
         height: 56px;
       }
@@ -87,7 +87,7 @@
       width: 160px;
       color: #999999;
 
-      @include tablet {
+      @include mobile {
         width: 120px;
         font-size: 14px;
         margin-right: 22px;

@@ -91,13 +91,22 @@ const Login = () => {
             <button onClick={onLogin} className="btn-lg btn-fill">
               Login
             </button>
-            <Link to="/">
+            <Link to="/apply-developer">
               <button
                 variant="contained"
                 color="primary"
                 className="sub-button"
               >
                 新規登録はこちら
+              </button>
+            </Link>
+            <Link to="/apply-recruiter">
+              <button
+                variant="contained"
+                color="primary"
+                className="sub-button"
+              >
+                採用担当者の方はこちら
               </button>
             </Link>
           </div>

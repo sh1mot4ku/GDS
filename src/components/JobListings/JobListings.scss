@@ -4,7 +4,7 @@
 .search-sort-container {
   width: 600px;
   margin: 80px auto;
-  @include tablet {
+  @include mobile {
     width: 100vw;
     padding: 0 20px;
     margin: 40px auto;
@@ -16,7 +16,7 @@
     display: flex;
     position: relative;
     margin-bottom: 20px;
-    @include tablet {
+    @include mobile {
       height: 46px;
     }
 
@@ -29,7 +29,7 @@
         font-size: 32px;
         cursor: pointer;
         padding: 8px 4px;
-        @include tablet {
+        @include mobile {
           font-size: 26px;
         }
         @include mobile {
@@ -56,7 +56,7 @@
       border-radius: 4px;
       border: 1px solid $light-gray;
       padding-right: 84px;
-      @include tablet {
+      @include mobile {
         font-size: 12px;
         padding-right: 80px;
       }
@@ -77,7 +77,7 @@
       background-color: $light-gray;
       border: 1px solid $light-gray;
       cursor: pointer;
-      @include tablet {
+      @include mobile {
         width: 136px;
         margin-right: 12px;
         height: 34px;
@@ -126,7 +126,7 @@
   margin: 0 auto;
   word-break: break-word;
   padding-bottom: 200px;
-  @include tablet {
+  @include mobile {
     width: 100vw;
     padding: 0 20px 200px 20px;
   }
@@ -136,7 +136,7 @@
     text-align: center;
     font-weight: bold;
     font-size: 18px;
-    @include tablet {
+    @include mobile {
       font-size: 16px;
     }
   }

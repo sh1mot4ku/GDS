@@ -4,6 +4,8 @@ import moment from "moment";
 import "moment/locale/ja";
 import "./JobBox.scss";
 
+const JOBLISTING_CHAR_LIMIT = 100;
+
 const JobBox = ({
   photoUrl,
   jobTitle,
@@ -14,10 +16,9 @@ const JobBox = ({
   id,
   postedTimeStamp,
   employmentType,
-  details,
+  details = false,
 }) => {
   const [timeLag, setTimeLag] = useState(null);
-
   useEffect(() => {
     moment.locale("ja");
   }, []);
@@ -30,7 +31,7 @@ const JobBox = ({
   }, [details, postedTimeStamp]);
 
   return (
-    <div className="job-box">
+    <div className={`job-box ${!details && "activate-hover"}`}>
       <Link to={`/joblisting/${id}`} className={details && "disabled-link"}>
         <div className="job-img-wrapper">
           <img src={photoUrl} className="job-img" alt="top-job"></img>
@@ -61,7 +62,10 @@ const JobBox = ({
         {timeLag && <div className="timestamp">{timeLag}に掲載</div>}
         {!details && (
           <div className="job-box-content">
-            <span className="short-jd">{jobListing}</span>
+            <span className="short-jd">
+              {jobListing}
+              {jobListing.length === JOBLISTING_CHAR_LIMIT && "..."}
+            </span>
           </div>
         )}
         {/* {details && timeLag ? (

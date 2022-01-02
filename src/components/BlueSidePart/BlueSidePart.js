@@ -12,7 +12,11 @@ const BlueSidePart = () => {
       <div
         className={[
           "sidepart-container",
-          location.pathname === "/apply-recruiter" ? "position-fixed" : null,
+          location.pathname === "/apply-recruiter" ||
+          location.pathname === "/apply-developer" ||
+          location.pathname === "/thank-you"
+            ? "position-fixed"
+            : null,
         ].join(" ")}
       >
         <div className="box"></div>

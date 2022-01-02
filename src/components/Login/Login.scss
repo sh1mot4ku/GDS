@@ -11,7 +11,7 @@
     align-items: center;
     flex-direction: column;
     margin: 0 auto;
-    @include tablet {
+    @include mobile {
       width: 80%;
     }
 
@@ -22,7 +22,7 @@
     .form {
       justify-content: center;
       width: 40vw;
-      @include tablet {
+      @include mobile {
         width: 100%;
       }
 
@@ -54,7 +54,7 @@
           border-radius: 30px;
           background-color: $color_primary;
           color: #fff;
-          @include tablet {
+          @include mobile {
             width: 100%;
           }
         }
@@ -64,7 +64,8 @@
           border: none;
           outline: none;
           background: transparent;
-          text-decoration: none;
+          text-decoration: underline;
+          font-size: 16px;
           margin-top: 24px;
           cursor: pointer;
 
