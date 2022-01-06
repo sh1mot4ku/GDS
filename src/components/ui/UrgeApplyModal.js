@@ -14,7 +14,7 @@ const UrgeApplyModal = ({ onClose, isUserLoggedIn, isEmailVerified }) => {
     if (user) {
       try {
         await auth.currentUser.sendEmailVerification({
-          url: `${window.location.origin}/joblistings`,
+          url: `${window.location.origin}/thank-you`,
         });
         history.push({
           pathname: "/send-mail-confirm",

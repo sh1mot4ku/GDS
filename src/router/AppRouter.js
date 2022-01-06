@@ -33,7 +33,7 @@ const history = createBrowserHistory();
 const AppRouter = () => (
   <Router history={history}>
     <Switch>
-      <PublicRoute path="/" component={TopPage} exact={true} />
+      <LogoutRoute path="/" component={TopPage} exact={true} />
       <PublicRoute path="/about" component={AboutPage} />
       <PublicRoute path="/faqs" component={FaqsPage} />
       <PublicRoute path="/apply-developer" component={Apply} />
