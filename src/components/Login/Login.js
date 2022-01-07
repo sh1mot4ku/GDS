@@ -59,58 +59,60 @@ const Login = () => {
     <div className="main-login">
       <BlueSidePart />
       <div className="rightBox">
-        <h2 className="title">Login</h2>
-        <form className="form">
-          <InputTextAndLabel
-            label="メールアドレス"
-            placeholder="example@example.com"
-            type="text"
-            onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
-            value={email}
-            name="email"
-          />
-          <InputTextAndLabel
-            label="パスワード"
-            placeholder="7文字以上の半角英数字"
-            type="password"
-            onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
-            value={password}
-            name="password"
-          />
-          <div className="reset-password-link-wrapper">
-            <Link to="/reset-password">
-              <span className="reset-password-link">
-                パスワードを忘れた方はこちら
-              </span>
-            </Link>
-          </div>
-          <p className={firebaseError !== "" ? "error-text" : "empty-box"}>
-            {firebaseError}
-          </p>
-          <div className="login-buttons">
-            <button onClick={onLogin} className="btn-lg btn-fill">
-              Login
-            </button>
-            <Link to="/apply-developer">
-              <button
-                variant="contained"
-                color="primary"
-                className="sub-button"
-              >
-                新規登録はこちら
+        <div className="rightBox-container">
+          <h2 className="title">Login</h2>
+          <form className="form">
+            <InputTextAndLabel
+              label="メールアドレス"
+              placeholder="example@example.com"
+              type="text"
+              onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
+              value={email}
+              name="email"
+            />
+            <InputTextAndLabel
+              label="パスワード"
+              placeholder="7文字以上の半角英数字"
+              type="password"
+              onChange={(e) => onHandleInputs(e.target.name, e.target.value)}
+              value={password}
+              name="password"
+            />
+            <div className="reset-password-link-wrapper">
+              <Link to="/reset-password">
+                <span className="reset-password-link">
+                  パスワードを忘れた方はこちら
+                </span>
+              </Link>
+            </div>
+            <p className={firebaseError !== "" ? "error-text" : "empty-box"}>
+              {firebaseError}
+            </p>
+            <div className="login-buttons">
+              <button onClick={onLogin} className="btn-lg btn-fill">
+                Login
               </button>
-            </Link>
-            <Link to="/apply-recruiter">
-              <button
-                variant="contained"
-                color="primary"
-                className="sub-button"
-              >
-                採用担当者の方はこちら
-              </button>
-            </Link>
-          </div>
-        </form>
+              <Link to="/apply-developer">
+                <button
+                  variant="contained"
+                  color="primary"
+                  className="sub-button"
+                >
+                  新規登録はこちら
+                </button>
+              </Link>
+              <Link to="/apply-recruiter">
+                <button
+                  variant="contained"
+                  color="primary"
+                  className="sub-button"
+                >
+                  採用担当者の方はこちら
+                </button>
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

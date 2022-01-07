@@ -6,6 +6,8 @@ export const pathnamesWithHeader = {
     "/faqs",
     "/profile",
     "/profile_edit",
+    "/send-mail-confirm",
+    "/reset-password-confirm",
   ],
   pathnamesPartialMatchHeader: ["/joblisting/"],
 };

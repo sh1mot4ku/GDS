@@ -7,82 +7,91 @@
   display: flex;
 
   .rightBox {
-    width: calc(100vw - 471px - 100px);
-    max-width: 660px;
-    margin: 0 auto;
+    width: calc(100vw - 471px);
     @include mobile {
       width: 80%;
+      margin: 0 auto;
     }
 
-    .title {
-      margin: 80px auto 40px auto;
-    }
+    &-container {
+      width: 72%;
+      margin: 0 auto;
 
-    .form {
-      justify-content: center;
       @include mobile {
         width: 100%;
+        margin: 0;
       }
 
-      .input {
-        width: 100%;
+      .title {
+        margin: 80px auto 40px auto;
       }
-      .radio {
-        margin: 8px 0 8px;
-      }
-      .empty-box {
-        height: 24px;
-        width: 200px;
-      }
-      .error-text {
-        text-align: center;
-        color: $warning;
-      }
-      .login-buttons {
-        display: flex;
-        flex-direction: column;
+
+      .form {
         justify-content: center;
-        align-items: center;
-        margin-top: 54px;
-
-        .round-button {
-          display: block;
-          width: 214px;
-          height: 54px;
-          border-radius: 30px;
-          background-color: $color_primary;
-          color: #fff;
-          @include mobile {
-            width: 100%;
-          }
+        @include mobile {
+          width: 100%;
         }
-        .sub-button {
-          display: block;
-          color: $gray;
-          border: none;
-          outline: none;
-          background: transparent;
-          text-decoration: underline;
-          font-size: 16px;
-          margin-top: 24px;
-          cursor: pointer;
 
-          &:hover {
-            color: $color_primary;
+        .input {
+          width: 100%;
+        }
+        .radio {
+          margin: 8px 0 8px;
+        }
+        .empty-box {
+          height: 24px;
+          width: 200px;
+        }
+        .error-text {
+          text-align: center;
+          color: $warning;
+        }
+        .login-buttons {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-top: 54px;
+
+          .round-button {
+            display: block;
+            width: 214px;
+            height: 54px;
+            border-radius: 30px;
+            background-color: $color_primary;
+            color: #fff;
+            @include mobile {
+              width: 100%;
+            }
+          }
+          .sub-button {
+            display: block;
+            color: $gray;
+            border: none;
+            outline: none;
+            background: transparent;
             text-decoration: underline;
+            font-size: 16px;
+            margin-top: 24px;
+            cursor: pointer;
+
+            &:hover {
+              color: $color_primary;
+              text-decoration: underline;
+            }
           }
         }
       }
-    }
 
-    .reset-password-link-wrapper {
-      text-align: right;
-      margin-top: -12px;
+      .reset-password-link-wrapper {
+        text-align: right;
+        margin-top: -12px;
 
-      .reset-password-link {
-        font-size: 14px;
-        color: $color_primary;
-        text-decoration: underline;
+        .reset-password-link {
+          font-size: 14px;
+          color: $color_primary;
+          text-decoration: underline;
+        }
       }
     }
   }
