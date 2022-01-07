@@ -14,6 +14,7 @@ const InputTextAndLabel = ({
   maxRows = 1,
   name = "",
   error = false,
+  // required = false add later
 }) => {
   return (
     <React.Fragment>

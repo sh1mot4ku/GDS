@@ -2,7 +2,7 @@ import React from "react";
 import { FormLabel, TextField } from "@material-ui/core";
 import "./ui.scss";
 
-const InputTextAndLabel = ({
+const InputTextAreaAndLabel = ({
   label,
   placeholder,
   type,
@@ -21,7 +21,7 @@ const InputTextAndLabel = ({
         variant="outlined"
         margin="normal"
         className="text-area"
-        rows={4}
+        rows={6}
         size="small"
         placeholder={placeholder}
         type={type}
@@ -33,4 +33,4 @@ const InputTextAndLabel = ({
   );
 };
 
-export default InputTextAndLabel;
+export default InputTextAreaAndLabel;

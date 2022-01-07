@@ -35,6 +35,7 @@ const UrgeApplyModal = ({ onClose, isUserLoggedIn, isEmailVerified }) => {
             <img
               src="/photos/img-joblists-detail.png"
               className="img-joblists-detail"
+              alt="joblists-detail"
             ></img>
             {!isUserLoggedIn ? (
               <>
