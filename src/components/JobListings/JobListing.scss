@@ -87,7 +87,7 @@
     left: 170px;
     top: 936px;
 
-    @include tablet {
+    @include mobile {
       width: calc(100vw - 40px) !important;
       left: 20px;
     }
