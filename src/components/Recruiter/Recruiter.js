@@ -237,6 +237,7 @@ function Recruiter() {
             mustHave,
             niceToHave,
             projectDetail,
+            pl: password.length,
             photoUrl: "",
           },
           userType: USER_TYPE,
