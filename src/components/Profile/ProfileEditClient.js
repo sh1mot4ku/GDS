@@ -82,12 +82,15 @@ const ProfileEditClient = ({
         />
       </div>
       <div className="edit-container">
-        <InputLabel required>
-          プロフィールリンク (LinkedIn / GitHub / Website etc)
-        </InputLabel>
-        <InputLabel shrink={true} className="link-input-label-sm">
-          1つ以上のLinkを記載してください。出来るだけSimpleにする為、CVやResumeのアップロードは不要です！
-        </InputLabel>
+        <div className="labels-wrap">
+          <label required className="link-input-label">
+            プロフィールリンク (LinkedIn / GitHub / Website etc){" "}
+            <span className="required-star">*</span>
+          </label>
+          <label shrink={true} className="link-input-label-sm">
+            1つ以上のLinkを記載してください。出来るだけSimpleにする為、CVやResumeのアップロードは不要です！
+          </label>
+        </div>
         <InputText
           isRequired={true}
           placeholder="https://www.linkedin.com/in/example"

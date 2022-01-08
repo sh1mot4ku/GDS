@@ -10,10 +10,18 @@
   .title {
     margin-bottom: 40px !important;
   }
-
-  .link-input-label-sm {
-    margin: 8px 0;
-  }
+}
+.labels-wrap {
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.54);
+}
+.link-input-label {
+  margin-bottom: 4px;
+}
+.link-input-label-sm {
+  margin-bottom: 8px;
+  font-size: 12px;
 }
 //   .rightBox {
 //     display: flex;

@@ -18,7 +18,8 @@ const InputTextAndLabel = ({
   return (
     <React.Fragment>
       <FormLabel component="legend">
-        {label} <span className="required-star">*</span>
+        {label}
+        <span className="required-star">*</span>
       </FormLabel>
       <TextField
         required
