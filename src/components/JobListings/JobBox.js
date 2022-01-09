@@ -31,8 +31,11 @@ const JobBox = ({
   }, [details, postedTimeStamp]);
 
   return (
-    <div className={`job-box ${!details && "activate-hover"}`}>
-      <Link to={`/joblisting/${id}`} className={details && "disabled-link"}>
+    <div className={`job-box ${!details ? "activate-hover" : undefined}`}>
+      <Link
+        to={`/joblisting/${id}`}
+        className={details ? "disabled-link" : undefined}
+      >
         <div className="job-img-wrapper">
           <img src={photoUrl} className="job-img" alt="top-job"></img>
         </div>

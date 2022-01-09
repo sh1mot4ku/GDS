@@ -18,6 +18,10 @@ const replaceLetters = (searchInput) =>
 const createSearchKeywordsArr = (searchKeywordQuery) =>
   searchKeywordQuery.toLowerCase().replace(/　/g, " ").split(" ");
 
+// sort list new to old
+const sortJobListingsNewToOld = (jobListings) =>
+  jobListings.sort((a, b) => b.postedTimeStamp - a.postedTimeStamp);
+
 const JobListings = () => {
   const { search } = useLocation();
   const history = useHistory();
@@ -131,7 +135,10 @@ const JobListings = () => {
     // =========== then set result(totalfilteredJobListings) to setJobListingsArr() =============
     setNumOfJoblistingsResult(totalfilteredJobListings.length);
     if (totalfilteredJobListings.length !== 0) {
-      const jobListingsOnAPage = sliceJobListings(totalfilteredJobListings);
+      const sortedJobListingsNewToOld = sortJobListingsNewToOld(
+        totalfilteredJobListings
+      );
+      const jobListingsOnAPage = sliceJobListings(sortedJobListingsNewToOld);
       setJobListingsArr(jobListingsOnAPage);
     } else {
       setJobListingsArr(["no result"]);
@@ -141,7 +148,8 @@ const JobListings = () => {
   useEffect(() => {
     if (jobListings || loaded) {
       setNumOfJoblistingsResult(jobListings.length);
-      const jobListingsOnAPage = sliceJobListings(jobListings);
+      const sortedJobListingsNewToOld = sortJobListingsNewToOld(jobListings);
+      const jobListingsOnAPage = sliceJobListings(sortedJobListingsNewToOld);
       setJobListingsArr(jobListingsOnAPage);
       !loaded && setLoaded(true);
     } else if (jobListings === null) {
