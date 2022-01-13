@@ -8,7 +8,9 @@
 
   @include mobile {
     width: 100vw;
-    padding: 0 20px !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0;
     box-sizing: border-box;
   }
 
@@ -135,4 +137,8 @@
 }
 .padding-top {
   padding-top: 80.5px;
+
+  @include mobile {
+    padding-top: 40.5px;
+  }
 }
