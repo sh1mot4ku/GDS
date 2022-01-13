@@ -93,6 +93,14 @@
         margin-right: 22px;
       }
     }
+
+    .pf-data {
+      word-break: break-all;
+      width: calc(100% - 160px);
+      @include mobile {
+        width: calc(100% - 142px);
+      }
+    }
   }
 }
 .padding-top {
