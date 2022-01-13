@@ -10,6 +10,7 @@ import momentTimezone from "moment-timezone";
 import { functions } from "../../firebase/firebase";
 import ThankYouForApplying from "./ThankYouForApplying";
 import { setFullJobListing } from "../../API/dbutils";
+import Loading from "../ui/Loading";
 import "moment/locale/ja";
 import "./ThankYouForApplying.scss";
 import "./JobListing.scss";
@@ -140,7 +141,9 @@ const JobListing = () => {
           <div
             className={[
               "joblisting-details-wrapper",
-              isUserLoggedIn === false && "joblisting-details-wrapper-logout",
+              isUserLoggedIn === false || isEmailVerified === false
+                ? "joblisting-details-wrapper-logout"
+                : "",
             ].join(" ")}
           >
             {job ? (
@@ -204,7 +207,7 @@ const JobListing = () => {
                 )}
               </>
             ) : (
-              <div>Loading....</div>
+              <Loading />
             )}
           </div>
         )

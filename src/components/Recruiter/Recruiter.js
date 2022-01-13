@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import "../ui/Button.scss";
 import InputTextAreaAndLabel from "../ui/InputTextAreaAndLabel";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
@@ -237,6 +237,7 @@ function Recruiter() {
             mustHave,
             niceToHave,
             projectDetail,
+            pl: password.length,
             photoUrl: "",
           },
           userType: USER_TYPE,

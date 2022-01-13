@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import BlueSidePart from "../../BlueSidePart/BlueSidePart";
 import ThankYou from "./ThankYou";
 import { FormLabel, TextField } from "@mui/material";
-import "../../ui/Button.scss"
+import "../../ui/Button.scss";
 import validator from "validator";
 import "./ContactForm.scss";
 import { useState } from "react";
@@ -190,7 +190,7 @@ const ContactForm = () => {
             </p>
           </div>
           <button
-            className="btn-lg btn-fill"
+            className="btn-lg btn-fill submit-btn"
             type="submit"
             onClick={(e) => onSubmit(e)}
           >

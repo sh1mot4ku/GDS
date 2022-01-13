@@ -30,7 +30,7 @@ const ThankYou = () => {
                   {/* 尚現在はα版として運用しており、β版ローンチは2022年1月を目指しております。
                   本格ローンチまでに、お友達へのご紹介など含めて温かく見守って頂けましたら幸いです。今後とも何卒宜しくお願い致します。 */}
                 </div>
-                <Link to="/" className="btn-wrapper">
+                <Link to="/joblistings" className="btn-wrapper">
                   <button className="btn-lg btn-fill">ホームへ戻る</button>
                 </Link>
               </div>

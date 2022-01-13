@@ -8,6 +8,7 @@
   @include mobile {
     width: 90vw;
     margin-bottom: 80px;
+    padding: 12px 0;
   }
 
   .subscribe-wrapper {
@@ -15,6 +16,7 @@
 
     @include mobile {
       margin-bottom: 30vw;
+      padding: 12px 0;
     }
 
     .subscribe-container {
@@ -118,6 +120,10 @@
       overflow: hidden;
       border-top: solid 1.5px $line;
       border-bottom: solid 1.5px $line;
+
+      @include mobile {
+        padding: 12px 0;
+      }
     }
 
     .d-demo__list {

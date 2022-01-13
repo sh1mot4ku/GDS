@@ -16,7 +16,8 @@
   }
 
   .rightBox {
-    width: 660px;
+    width: 72%;
+    // width: calc(100vw - 471px - 100px);
     display: flex;
     align-items: center;
     flex-direction: column;

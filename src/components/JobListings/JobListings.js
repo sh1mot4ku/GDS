@@ -190,7 +190,7 @@ const JobListings = () => {
                 <CloseIcon
                   className={[
                     "close-icon",
-                    searchInput === "" && "display-none",
+                    searchInput === "" ? "display-none" : "",
                   ].join(" ")}
                   onClick={() => setSearchInput("")}
                 />

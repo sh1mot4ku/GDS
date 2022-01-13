@@ -14,7 +14,7 @@ const UrgeApplyModal = ({ onClose, isUserLoggedIn, isEmailVerified }) => {
     if (user) {
       try {
         await auth.currentUser.sendEmailVerification({
-          url: `${window.location.origin}/joblistings`,
+          url: `${window.location.origin}/thank-you`,
         });
         history.push({
           pathname: "/send-mail-confirm",
@@ -35,6 +35,7 @@ const UrgeApplyModal = ({ onClose, isUserLoggedIn, isEmailVerified }) => {
             <img
               src="/photos/img-joblists-detail.png"
               className="img-joblists-detail"
+              alt="joblists-detail"
             ></img>
             {!isUserLoggedIn ? (
               <>

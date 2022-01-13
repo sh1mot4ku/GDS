@@ -61,10 +61,8 @@ const PostAndManageSideBar = () => {
                 <img src="/photos/chevron-right 2.svg" alt="chevron" />
               </a>
             </div>
-            <Link to="/post_joblistings">
-              <button className="btn-lg btn-fill">
-                求人投稿
-              </button>
+            <Link to="/post_joblistings" className="post-btn-wrapper">
+              <button className="btn-lg btn-fill">求人投稿</button>
             </Link>
           </div>
         </div>
