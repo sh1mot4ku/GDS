@@ -1,0 +1,99 @@
+@import "../../../../sass_config/color.scss";
+@import "../../../../sass_config/mixin.scss";
+
+.logo-closebtn-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 108px;
+  padding: 0 8px;
+  .company-logo {
+    height: 60px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  .close-icon {
+    cursor: pointer;
+    font-size: 40px;
+    color: $gray;
+  }
+}
+.nav-bar-drawer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .menu-drawer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .menu-item {
+      margin: 16px;
+      padding: 8px 0;
+
+      &:hover {
+        color: $color_primary;
+        text-shadow: 0 0.015em $color_primary, 0 -0.015em$color_primary,
+          0.01em 0 $color_primary, -0.01em 0 $color_primary;
+      }
+    }
+    .menu-item-logout {
+      margin: 16px;
+      padding: 8px 0;
+
+      &:hover {
+        text-shadow: 0 0.015em black, 0 -0.015em black, 0.01em 0 black,
+          -0.01em 0 black;
+      }
+    }
+  }
+
+  .buttons-wrapper {
+    @include mobile {
+      width: 100%;
+      padding: 0 20px;
+    }
+  }
+
+  .login {
+    margin-bottom: 44px;
+  }
+  .round-button-drawer {
+    border: 1.8px solid $color_primary;
+    background: $color_primary;
+    border-radius: 100px;
+    padding: 8px 32px;
+    margin: 8px;
+    width: 90vw;
+    font-weight: 700;
+
+    &:hover {
+      background: rgb(33, 33, 226);
+    }
+  }
+  .background-white-drawer {
+    background-color: white;
+    color: $color_primary;
+
+    &:hover {
+      background: whitesmoke;
+    }
+  }
+
+  .post-button {
+    border-top: 1px solid $color-line;
+    padding-top: 32px;
+
+    .post-button-anchor {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}

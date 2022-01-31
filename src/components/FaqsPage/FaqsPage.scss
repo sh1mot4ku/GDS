@@ -1,0 +1,54 @@
+$color_primary: #2146f5;
+$color_black: #000000;
+$color_sub_text: #a0a0a0;
+$color_line: #f5f5f5;
+
+.main-faqs {
+  margin: 72px auto;
+  width: 45%;
+  color: $color_black;
+  font-size: 16px;
+
+  // tablet
+  @media screen and (max-width: 768px) {
+    width: 90%;
+  }
+}
+
+.title {
+  margin: 36px;
+  text-align: center;
+  font-weight: bold;
+
+  h2 {
+    font-size: 48px;
+    color: $color_primary;
+    // tablet
+    @media screen and (max-width: 768px) {
+      font-size: 32px;
+    }
+  }
+
+  p {
+    color: $color_sub_text;
+  }
+}
+
+.content {
+  text-align: left;
+  margin-bottom: 25px;
+
+  h3 {
+    line-height: 48px;
+  }
+
+  @media screen and (max-width: 768px) {
+    h3 {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+}

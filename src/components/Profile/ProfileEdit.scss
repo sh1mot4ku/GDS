@@ -1,0 +1,144 @@
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
+
+.main-edit {
+  width: 600px;
+  margin: 0 auto;
+  padding-bottom: 200px;
+
+  @include mobile {
+    width: 100vw;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 0;
+    box-sizing: border-box;
+  }
+
+  .pf-container {
+    display: flex;
+    justify-content: left;
+    width: 100%;
+    padding-bottom: 40px;
+    border-bottom: solid 1px #e5e5e5;
+    margin-bottom: 40px;
+
+    @include mobile {
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+
+    .user-icon {
+      width: 100px;
+      height: 100px;
+      margin-right: 20px;
+      border-radius: 100px;
+
+      @include mobile {
+        width: 56px;
+        height: 56px;
+        margin-right: 16px;
+      }
+    }
+
+    .pf-photo-buttons {
+      display: flex;
+      justify-content: left;
+      align-items: center;
+
+      .pf-photo-button {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .pf-photo-add-button {
+        width: 76px;
+        height: 24px;
+        border: 1px solid $color_primary;
+        color: $color_primary;
+      }
+
+      .pf-photo-delete-button {
+        width: 48px;
+        height: 24px;
+        border: 1px solid $color-sub-text;
+        color: $color-sub-text;
+        margin-right: 4px;
+      }
+    }
+
+    .pf-button {
+      border: 1px solid #e5e5e5;
+      outline: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .change-photo {
+      display: none;
+    }
+
+    .pf-name {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .pf-country {
+      margin-bottom: 16px;
+    }
+  }
+
+  .edit-container {
+    width: 100%;
+    margin-bottom: 16px;
+
+    @include mobile {
+      margin-bottom: 0;
+    }
+
+    .input {
+      width: 100%;
+    }
+  }
+
+  .buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 60px;
+
+    @include mobile {
+      margin-top: 40px;
+      margin-bottom: 80px;
+    }
+
+    .save-button {
+      width: 214px;
+      height: 54px;
+      border-radius: 30px;
+      background-color: $color_primary;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+    .cancel-button {
+      color: $color-sub-text;
+      cursor: pointer;
+
+      &-underline {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.padding-top {
+  padding-top: 80.5px;
+
+  @include mobile {
+    padding-top: 40.5px;
+  }
+}

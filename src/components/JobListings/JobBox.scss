@@ -1,0 +1,86 @@
+@import "../../sass_config/color";
+@import "../../sass_config/mixin.scss";
+
+.job-box {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px $color-line solid;
+  @include mobile {
+    margin-bottom: 20px;
+  }
+
+  .job-img-wrapper {
+    margin-bottom: 16px;
+    @include mobile {
+      margin-bottom: 12px;
+    }
+
+    .job-img {
+      width: 100%;
+      border-radius: 8px;
+    }
+  }
+
+  .job-box-content {
+    margin-bottom: 8px;
+
+    .job-title {
+      font-size: 20px;
+      font-weight: bold;
+      @include mobile {
+        font-size: 16px;
+      }
+    }
+    .company-name {
+      @include mobile {
+        font-size: 14px;
+      }
+    }
+    .location,
+    .employment-type {
+      @include mobile {
+        font-size: 12px;
+      }
+    }
+    .short-jd {
+      color: $color-sub-text;
+      font-size: 14px;
+      @include mobile {
+        font-size: 14px !important;
+      }
+    }
+  }
+  .job-box-skill-tags {
+    margin: 16px 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    .skill-tag-wrapper {
+      margin-right: 2px;
+      margin-bottom: 2px;
+      border: 1px solid $color-line;
+      border-radius: 4px;
+      padding: 4px 12px;
+      @include tablet {
+        padding: 4px 10px;
+      }
+
+      .skill-tag {
+        font-weight: bolder;
+        @include mobile {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .timestamp {
+    font-size: 12px;
+    color: $color-sub-text;
+  }
+  .disabled-link {
+    pointer-events: none;
+  }
+}
+.activate-hover:hover {
+  opacity: 0.6;
+}

@@ -1,0 +1,18 @@
+.confirm-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 85.5px);
+  text-align: center;
+
+  .confirm-container {
+    width: 600px;
+
+    .confirm-header {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 40px;
+    }
+  }
+}

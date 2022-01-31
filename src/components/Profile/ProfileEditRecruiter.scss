@@ -1,0 +1,18 @@
+@import "../../sass_config/mixin";
+
+#looking-for {
+  margin-top: 36px;
+  margin-bottom: 60px;
+
+  @include mobile {
+    margin-top: 0;
+    margin-bottom: 24px;
+  }
+}
+#commitment {
+  margin-bottom: 60px;
+
+  @include mobile {
+    margin-bottom: 24px;
+  }
+}

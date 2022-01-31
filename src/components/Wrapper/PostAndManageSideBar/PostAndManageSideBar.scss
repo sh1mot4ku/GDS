@@ -1,0 +1,71 @@
+@import "../../../sass_config/color.scss";
+
+.sb-wrapper {
+  width: 300px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  border-right: 1.5px solid $color-line;
+  z-index: 20;
+  background-color: white;
+
+  .sb-container {
+    padding: 0 20px;
+
+    .sb-top {
+      margin-top: 10px;
+      padding: 30px 0 20px;
+      border-bottom: 1.5px solid $color-line;
+
+      .sb-user-wrapper {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        .sb-user-icon {
+          width: 40px;
+          height: 40px;
+          margin-right: 12px;
+          color: $gray;
+        }
+        .sb-user-name {
+          margin-right: 76px;
+          font-weight: bold;
+        }
+        .right-arrow {
+          color: $gray;
+        }
+      }
+
+      .sb-logout {
+        margin-left: 52px;
+        color: $gray;
+        cursor: pointer;
+        z-index: 10;
+        width: 90px;
+      }
+    }
+    .sb-list {
+      border-bottom: 1.5px solid $color-line;
+      padding: 16px 0;
+      text-align: left;
+      font-size: 14px;
+
+      .sb-post-and-manage {
+        color: $color_primary;
+      }
+
+      .joblistings-anchor {
+        cursor: pointer;
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+    .post-btn-wrapper {
+      display: block;
+      margin-top: 40px;
+    }
+  }
+}

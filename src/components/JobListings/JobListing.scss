@@ -1,0 +1,95 @@
+@import "./JobListings";
+@import "../../sass_config/color";
+@import "../../sass_config/mixin";
+
+.joblisting-details-wrapper {
+  @extend .joblisting-wrapper;
+
+  .bread-list {
+    display: inline-flex;
+    justify-content: left;
+    align-items: center;
+    width: 100%;
+    font-size: 12px;
+    margin: 24.5px 0 40px;
+    @include tablet {
+      font-size: 11px;
+    }
+
+    .bread-item {
+      margin-right: 4px;
+
+      .previous-link {
+        color: $color_primary;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .job-description {
+    margin-bottom: 40px;
+
+    .job-description-header {
+      margin-bottom: 12px;
+      font-size: 20px;
+      @include tablet {
+        font-size: 16px;
+      }
+    }
+    .job-description-content {
+      @include tablet {
+        font-size: 14px;
+      }
+    }
+  }
+  .overview-wrapper {
+    padding: 24px 0;
+    border-bottom: 1px solid $color-line;
+  }
+  .overview-header {
+    font-size: 20px;
+    @include tablet {
+      font-size: 16px;
+    }
+  }
+  .oubo-wrapper {
+    width: 33%;
+    margin: 80px auto 0;
+    border-radius: 16px;
+    text-align: center;
+    @include tablet {
+      margin: 64px auto 0;
+    }
+    @include mobile {
+      width: 100%;
+    }
+  }
+}
+
+.joblisting-details-wrapper-logout {
+  height: 1000px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 200px;
+  .joblisting-details-mask {
+    height: 700px;
+    @extend .joblisting-wrapper;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 1)
+    );
+    position: absolute;
+    top: 300px;
+  }
+  .read-more-btn {
+    position: absolute;
+    left: 170px;
+    top: 936px;
+
+    @include mobile {
+      width: calc(100vw - 40px) !important;
+      left: 20px;
+    }
+  }
+}

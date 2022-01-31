@@ -1,0 +1,125 @@
+@import "../../sass_config/color.scss";
+@import "../../sass_config/mixin.scss";
+
+@mixin button {
+  display: inline-flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 50px;
+  box-shadow: 0 2px 16px 0 rgb(0 0 0 / 8%);
+  cursor: pointer;
+}
+
+.btn-sm {
+  @include button;
+
+  font-size: 14px;
+  width: 160px;
+  height: 45px;
+  transition: 0.3s;
+}
+/* Largeボタンの記述 */
+.btn-lg {
+  @include button;
+
+  font-size: 16px;
+  width: 250px;
+  height: 64px;
+  transition: 0.3s;
+
+  @include mobile {
+    margin-bottom: 20px;
+    font-size: 16px;
+    width: 100%;
+    height: 55px;
+  }
+}
+
+@mixin line($lineColor: $color_primary) {
+  color: $lineColor;
+  border: 2px solid $lineColor;
+  background-color: $white;
+}
+@mixin fill($fillColor: $color_primary) {
+  color: $white;
+  border: 2px solid $fillColor;
+  background-color: $fillColor;
+}
+
+// 白 -> 青のhover
+.btn-line {
+  @include line;
+  &:hover {
+    @include fill;
+  }
+}
+
+.btn-line-opacity {
+  @include line;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.btn-line-plane {
+  border: 2px solid $color-sub-text;
+  background-color: $white;
+  color: black;
+  &:hover {
+    opacity: 0.6;
+  }
+}
+// 青 -> 白のhover btn-lg btn-fill
+.btn-fill {
+  @include fill;
+  &:hover {
+    @include line;
+  }
+}
+// 赤 -> 白のhover btn-lg btn-fill
+.btn-fill-warning {
+  @include fill($warning);
+  &:hover {
+    @include line($warning);
+  }
+}
+
+.btn-fill-opacity {
+  @include fill;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.btn-contact {
+  @include line;
+  &:hover {
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15), 0 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+  }
+}
+
+.btn-sp {
+  display: none;
+}
+
+// .subscribe-button-wrapper {
+// 	border-radius: 12px;
+// 	padding: 25px 9%;
+// 	min-height: 200px;
+
+// 	@include mobile {
+// 		padding: 25px 0;
+// 		margin-bottom: 20px;
+// 		width: 100%;
+// 	}
+// }

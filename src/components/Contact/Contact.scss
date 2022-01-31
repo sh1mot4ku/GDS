@@ -1,0 +1,54 @@
+@import "../../sass_config/mixin.scss";
+@import "../../sass_config/color.scss";
+
+.contact-section {
+  color: white;
+  background: $color_primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 125px 0 120px;
+
+  @include mobile {
+    padding: 64px 20px;
+  }
+
+  .contact-title {
+    font-size: 56px;
+    font-weight: bold;
+    margin-bottom: 21px;
+
+    @include mobile {
+      font-size: 32px;
+      margin-bottom: 24px;
+    }
+  }
+
+  .contact-content {
+    margin-bottom: 48px;
+    font-size: 16px;
+
+    @include mobile {
+      margin-bottom: 40px;
+    }
+  }
+  .btn-contact-wrapper {
+    @include mobile {
+      width: 100%;
+    }
+  }
+  .round-button {
+    border: 1.8px solid $color_primary;
+    border-radius: 100px;
+    padding: 16px 74px;
+    font-weight: 700;
+    background-color: white !important;
+    color: black;
+    font-size: 16px;
+
+    // &:hover {
+    //   background: $light-gray;
+    // }
+  }
+}

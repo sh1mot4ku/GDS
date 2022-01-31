@@ -1,0 +1,149 @@
+@import "../../sass_config/color";
+@import "../../sass_config/mixin.scss";
+
+.search-sort-container {
+  width: 600px;
+  margin: 80px auto;
+  @include mobile {
+    width: 100vw;
+    padding: 0 20px;
+    margin: 40px auto;
+  }
+
+  .search-input-wrap {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    position: relative;
+    margin-bottom: 20px;
+    @include mobile {
+      height: 46px;
+    }
+
+    .icons-wrapper {
+      position: absolute;
+      top: 9%;
+      right: 1%;
+      .close-icon,
+      .search-icon {
+        font-size: 32px;
+        cursor: pointer;
+        padding: 8px 4px;
+        @include mobile {
+          font-size: 26px;
+        }
+        @include mobile {
+          font-size: 22px;
+          padding: 10px 2px;
+        }
+      }
+
+      .close-icon {
+        color: $gray;
+      }
+      .search-icon {
+        color: $color_primary;
+      }
+      .display-none {
+        display: none;
+      }
+    }
+
+    .search-input {
+      width: 100%;
+      height: 100%;
+      font-size: 16px;
+      border-radius: 4px;
+      border: 1px solid $light-gray;
+      padding-right: 84px;
+      padding-left: 24px;
+      @include mobile {
+        font-size: 12px;
+        padding-right: 80px;
+      }
+      @include mobile {
+        padding-right: 60px;
+      }
+    }
+  }
+
+  .sort-wrap {
+    .sort-dropdown {
+      width: 148px;
+      height: 40px;
+      border-radius: 60px;
+      margin-right: 20px;
+      font-size: 12px;
+      text-align: center;
+      background-color: $light-gray;
+      border: 1px solid $light-gray;
+      cursor: pointer;
+      @include mobile {
+        width: 136px;
+        margin-right: 12px;
+        height: 34px;
+        font-size: 9px;
+      }
+    }
+  }
+
+  ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: $color-sub-text;
+  }
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: $color-sub-text;
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    color: $color-sub-text;
+  }
+  :-moz-placeholder {
+    /* Firefox 18- */
+    color: $color-sub-text;
+  }
+  .submit-btn {
+    background: $color_primary;
+    padding: 0;
+    align-self: center;
+    height: 54px;
+    width: 100px;
+    color: white;
+    margin-bottom: 3px;
+    font-size: 12px;
+    border-radius: 0 10px 10px 0;
+    outline: none;
+
+    &:hover {
+      background: $color_primary;
+    }
+  }
+}
+
+.joblisting-wrapper,
+.no-joblisting-wrapper {
+  width: 600px;
+  margin: 0 auto;
+  word-break: break-word;
+  padding-bottom: 200px;
+  @include mobile {
+    width: 100vw;
+    padding: 0 20px 80px 20px;
+  }
+
+  .no-result-text,
+  .no-joblisting-text {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    @include mobile {
+      font-size: 16px;
+    }
+  }
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 56px;
+  }
+}
