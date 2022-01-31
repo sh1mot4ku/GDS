@@ -43,7 +43,7 @@ const JobBox = ({
 
   return (
     <React.Fragment>
-      <div className="job-box">
+      <div className="job-box-wrapper">
         <Link to={`/edit_joblisting/${id}`}>
           <div className="job-wrapper">
             <div className="job-img-wrapper">
