@@ -74,7 +74,7 @@ const ProfileEditRecruiter = ({
           setProjectDetailError(false);
         break;
       default:
-        console.log("unexpected error occured");
+        console.error("unexpected error occured");
     }
   };
 

@@ -58,7 +58,7 @@ const ProfileEditClient = ({
         (link3Error || link3Error === null) && setLink3Error(false);
         break;
       default:
-        console.log("unexpected error occured");
+        console.error("unexpected error occured");
     }
   };
 

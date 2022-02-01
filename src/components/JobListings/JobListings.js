@@ -88,7 +88,6 @@ const JobListings = () => {
     // ================= filter func for search input ===================
     if (hasSearchKeywordQuery) {
       const searchKeywordsArr = createSearchKeywordsArr(searchKeywordQuery);
-      console.log(searchKeywordsArr);
 
       jobListings.forEach((joblisting) => {
         let isAllMatched = [];

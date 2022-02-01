@@ -27,7 +27,6 @@ const HeaderPC = ({ isUserLoggedIn, isRecruiter }) => {
     auth
       .signOut()
       .then(() => {
-        console.log("User logged out");
         handleClose();
       })
       .catch((e) => {

@@ -17,7 +17,6 @@ const PostAndManageSideBar = () => {
     auth
       .signOut()
       .then(() => {
-        console.log("User logged out");
         history.push("/");
       })
       .catch((error) => {

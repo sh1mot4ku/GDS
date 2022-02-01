@@ -48,7 +48,6 @@ const JobListing = () => {
         "sendApplicationMail"
       );
       sendApplicationMail(userInfoForApplication);
-      console.log("submitted");
       setIsApplied(true);
     }
   };

@@ -20,9 +20,7 @@ export const startSetJobListings = () => {
             });
           });
         });
-        //dispatch(setJobListings([]));
         dispatch(setJobListings(jobListingsArray));
-        console.log("startSetJobListings finished");
       });
   };
 };

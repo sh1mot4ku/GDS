@@ -80,7 +80,6 @@ const ContactForm = () => {
     };
     const sendMail = functions.httpsCallable("sendMail");
     sendMail(inquiryInfo);
-    console.log("submitted");
   }, [canSubmit]);
 
   return (
