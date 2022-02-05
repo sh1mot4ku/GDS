@@ -4,7 +4,7 @@ import "../ui/Button.scss";
 import InputTextAreaAndLabel from "../ui/InputTextAreaAndLabel";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
 import RadioForm from "../ui/RadioForm";
-import { auth } from "../../firebase/firebase";
+import { auth, functions } from "../../firebase/firebase";
 import { insertUser } from "../../API/dbutils";
 import BlueSidePart from "../BlueSidePart/BlueSidePart";
 import { optionData } from "../../data/applyingInfo/recruiter";
@@ -90,7 +90,7 @@ function Recruiter() {
           setProjectDetailError(false);
         break;
       default:
-        console.log("unexpected error occured");
+        console.error("unexpected error occured");
     }
   };
   /* ------------------------ Validator for each input ------------------------ */
@@ -147,7 +147,7 @@ function Recruiter() {
           setProjectDetailError(true);
           break;
         default:
-          console.log("unexpected error occured");
+          console.error("unexpected error occured");
       }
     } else {
       const trimedInput = input.trim();
@@ -183,7 +183,7 @@ function Recruiter() {
           );
           break;
         default:
-          console.log("unexpected error occured");
+          console.error("unexpected error occured");
       }
     }
   };
@@ -192,7 +192,6 @@ function Recruiter() {
   // fired when register button is pressed
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("onsubmit clicked");
     validateAndTailorInput(mustHave, "must-have");
     validateAndTailorInput(niceToHave, "niceTo-have");
     validateAndTailorInput(projectDetail, "project-detail");
@@ -202,7 +201,6 @@ function Recruiter() {
 
   // rendered after register button is pressed, and when inputting
   useEffect(() => {
-    console.log(mustHaveError, niceToHaveError, projectDetailError, isTyping);
     if (
       mustHaveError === false &&
       niceToHaveError === false &&
@@ -226,7 +224,6 @@ function Recruiter() {
   const onSubscription = async () => {
     if (isClientValidationPassed && !isSubmitted) {
       try {
-        console.log("firebase useeffect");
         const postingInfo = {
           profile: {
             fullName,
@@ -249,14 +246,19 @@ function Recruiter() {
 
         // add user to Firebase Real-time Database
         await insertUser(postingInfo, userCredential.user.uid);
-        // setStep(step + 1);
-        console.log("sent to firebase");
         setIsSubmitted(true);
 
         // Send email for verificate user's email address
         await auth.currentUser.sendEmailVerification({
           url: `${window.location.origin}/thank-you`,
         });
+
+        // Send email to GDS
+        const sendSignUpNotification_Recruiter = functions.httpsCallable(
+          "sendSignUpNotification_Recruiter"
+        );
+        await sendSignUpNotification_Recruiter(postingInfo);
+
         history.push({
           pathname: "/send-mail-confirm",
           state: { email },
@@ -291,13 +293,11 @@ function Recruiter() {
         setIsRegistering(true);
       }
     }
-    console.log(isSubmitted);
   };
 
   // fired when the next or previous button is clicked
   const handleClick = (e, newStep, userInfo) => {
     e.preventDefault();
-    console.log("clicked");
     validateAndTailorInput(fullName, "fullname");
     validateAndTailorEmail(email);
     validatePassword(password);
@@ -311,15 +311,6 @@ function Recruiter() {
   };
   // rendered after next or previous button is clicked, and when inputting
   useEffect(() => {
-    console.log(
-      nameError,
-      emailInvalidError,
-      emailError,
-      passwordInvalidError,
-      passwordError,
-      companyAddressError,
-      isTyping
-    );
     if (
       nameError === false &&
       emailInvalidError === false &&
@@ -330,7 +321,6 @@ function Recruiter() {
       !isTyping
     ) {
       info[step] = contents;
-      console.log(info);
       setStep(newStep);
     }
   }, [

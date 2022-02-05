@@ -88,7 +88,7 @@ const PostJobListings = (props) => {
   }, [photoBlob]);
 
   const error = (error) => {
-    console.log(`Error occured : ${error}`);
+    console.error(`Error occured : ${error}`);
   };
 
   const complete = () => {
@@ -169,15 +169,12 @@ const PostJobListings = (props) => {
         await dispatch(
           startAddUsersJobListings(jobId, shortPostingInfo, fullPostingInfo)
         ); // should write it with async/await here?
-        console.log("Posted successfully!");
       } else {
         // when editing job posting
         await dispatch(
           startEditUsersJobListings(jobId, shortPostingInfo, fullPostingInfo)
         );
-        console.log("Editted Successfully!");
       }
-      console.log("Will push to /joblistings_management");
       history.push("/joblistings_management");
     } else {
       if (tags.length === 0) setSkillTagsError(true);

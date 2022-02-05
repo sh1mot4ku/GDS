@@ -10,7 +10,6 @@ const Profile = () => {
   const { uid, userInfo } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  console.log(userInfo);
 
   useEffect(() => {
     // delete an indicator to let user know profile edited when this component unmounted
