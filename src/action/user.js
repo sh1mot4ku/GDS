@@ -13,14 +13,9 @@ export const logout = () => ({
 
 export const startLogout = () => {
   return () => {
-    return auth
-      .signOut()
-      .then(() => {
-        console.log("User logged out");
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    return auth.signOut().catch((e) => {
+      throw e;
+    });
   };
 };
 

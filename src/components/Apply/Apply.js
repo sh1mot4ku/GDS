@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../ui/Button.scss";
 import InputText from "../ui/InputText";
 import InputTextAndLabel from "../ui/InputTextAndLabel";
-import InputLabel from "@mui/material/InputLabel";
 import InputSelect from "../ui/InputSelect";
-import { auth } from "../../firebase/firebase";
+import { auth, functions } from "../../firebase/firebase";
 import RadioForm from "../ui/RadioForm";
 import { insertUser } from "../../API/dbutils";
 import { useHistory } from "react-router-dom";
@@ -88,7 +87,7 @@ function Apply() {
         (link3Error || link3Error === null) && setLink3Error(false);
         break;
       default:
-        console.log("unexpected error occured");
+        console.error("unexpected error occured");
     }
   };
   const onHandleEnglishLevel = (e) => {
@@ -160,7 +159,7 @@ function Apply() {
           );
           break;
         default:
-          console.log("unexpected error occured");
+          console.error("unexpected error occured");
       }
     } else if (!url.match(/\S/g)) {
       switch (whatUrlInput) {
@@ -176,7 +175,7 @@ function Apply() {
           setLink3("");
           break;
         default:
-          console.log("unexpected error occured");
+          console.error("unexpected error occured");
       }
     } else if (!validator.isURL(url) && url !== "") {
       switch (whatUrlInput) {
@@ -190,7 +189,7 @@ function Apply() {
           setLink3Error(true);
           break;
         default:
-          console.log("unexpected error occured");
+          console.error("unexpected error occured");
       }
     }
     if (url === "") {
@@ -202,17 +201,15 @@ function Apply() {
           setLink3Error((prevInfo) => prevInfo && false);
           break;
         default:
-          console.log("unexpected error occured");
+          console.error("unexpected error occured");
       }
     }
-    // console.log(`this is in the validate links ${link1}, ${link2}, ${link3}`);
   };
   /* -------------------------------------------------------------------------- */
 
   // fired when register button is pressed
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log("onsubmit clicked");
     validateAndTailorUrl(link1, "link1");
     validateAndTailorUrl(link2, "link2");
     validateAndTailorUrl(link3, "link3");
@@ -229,7 +226,6 @@ function Apply() {
       !isTyping &&
       !isRegistering
     ) {
-      console.log("setIsClientValidationPassed(true);");
       setIsClientValidationPassed(true);
     }
   }, [link1Error, link2Error, link3Error, isTyping, isRegistering]);
@@ -240,7 +236,6 @@ function Apply() {
   const onSubscription = async () => {
     if (isClientValidationPassed && !isSubmitted) {
       try {
-        console.log("firebase useeffect");
         const postingInfo = {
           profile: {
             fullName,
@@ -263,14 +258,18 @@ function Apply() {
 
         // add user to Firebase Real-time Database
         await insertUser(postingInfo, userCredential.user.uid);
-        // setStep(step + 1);
-        console.log("sent to firebase");
         setIsSubmitted(true);
 
         // Send email for verificate user's email address
         await auth.currentUser.sendEmailVerification({
           url: `${window.location.origin}/thank-you`,
         });
+        // Send email to GDS
+        const sendSignUpNotification_Developer = functions.httpsCallable(
+          "sendSignUpNotification_Developer"
+        );
+        await sendSignUpNotification_Developer(postingInfo);
+
         history.push({
           pathname: "/send-mail-confirm",
           state: { email },
@@ -303,10 +302,8 @@ function Apply() {
         }
         setIsClientValidationPassed(false);
         setIsRegistering(true);
-        // setLink1Error(null);
       }
     }
-    // console.log(isSubmitted);
   };
 
   // fired when the next or previous button is clicked
@@ -334,7 +331,6 @@ function Apply() {
       !isTyping
     ) {
       info[step] = contents;
-      console.log(info);
       setStep(newStep);
     }
   }, [

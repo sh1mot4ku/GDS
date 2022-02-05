@@ -19,9 +19,6 @@ const JobListingsManagement = () => {
     } else if (usersJobListings === null) {
       // if there are not any users' joblistings information, fetch them from db
       dispatch(startSetUsersJobListings());
-      console.log(
-        "Dispatch startSetUsersJobListings from JobListingsManagement"
-      );
     }
     setLoaded(true);
   }, [usersJobListings]);

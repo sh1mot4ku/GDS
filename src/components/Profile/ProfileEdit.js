@@ -59,7 +59,7 @@ const ProfileEdit = () => {
   }, [photoBlob]);
 
   const error = (error) => {
-    console.log(`Error occured : ${error}`);
+    console.error(`Error occured : ${error}`);
   };
 
   const complete = () => {
@@ -194,7 +194,6 @@ const ProfileEdit = () => {
         // add flag to indicate profile edited only to Redux
         postingInfo.profileEdited = true;
         dispatch(editUserInfo(postingInfo));
-        console.log("Editted Successfully!");
         history.push(
           pathname === "/profile_edit" ? "/profile" : "/profile-recruiter-page"
         );

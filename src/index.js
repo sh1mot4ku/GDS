@@ -42,7 +42,6 @@ const renderApp = () => {
 
 auth.onAuthStateChanged((user) => {
   if (user) {
-    // console.log(user);
     const uid = user.uid;
     const emailVerified = user.emailVerified;
     database

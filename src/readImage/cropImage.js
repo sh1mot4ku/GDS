@@ -32,7 +32,6 @@ const compressImage = async (blob) => {
 
   return new Promise((resolve, reject) => {
     canvasData.image.toBlob((blob) => {
-      console.log("compressed blob.size", blob);
       blob.size <= MAX_IMG_SIZE ? resolve(blob) : reject(ERROR_TOO_BIG_IMG);
     }, "image/jpeg");
   });
@@ -58,7 +57,6 @@ const getCroppedImg = async (imageSrc, pixelCrop, rotation = 0) => {
 
   return new Promise((resolve) => {
     canvas.toBlob((blob) => {
-      console.log("original blob:", blob);
       blob.size <= MAX_IMG_SIZE ? resolve(blob) : resolve(compressImage(blob));
     }, "image/jpeg");
   });

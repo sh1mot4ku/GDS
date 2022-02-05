@@ -26,7 +26,6 @@ const TrimModal = (props) => {
         props.originPhotoSrc,
         croppedAreaPixels
       );
-      console.log("done", { croppedImage });
       props.setPhotoBlob(croppedImage); // Send blob of image to parent component
       props.onClose(); // Close modal
       setError(null);
